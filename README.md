@@ -8,18 +8,18 @@ Strona internetowa usługi **Inference Polska**: analiza dokumentów offline na 
 |---|---|
 | `index.html` | Cała strona: HTML, CSS i JavaScript w jednym pliku, bez zależności. |
 | `.nojekyll` | Wyłącza przetwarzanie Jekyll na GitHub Pages. |
+| `.github/workflows/deploy-pages.yml` | Akcja wdrażająca stronę na GitHub Pages. |
 | `README.md` | Ten plik. |
 
 Strona jest statyczna: bez cookies, bez zewnętrznych skryptów i czcionek. Jedyne połączenie z zewnętrzną usługą to opcjonalne wysłanie formularza.
 
-## Publikacja z brancha (GitHub Pages)
+## Publikacja (GitHub Pages + GitHub Actions)
 
-1. Wejdź w **Settings → Pages**.
-2. W **Build and deployment → Source** wybierz **Deploy from a branch**.
-3. Wybierz branch (np. `main`) i folder `/ (root)`, zapisz.
-4. Strona będzie dostępna pod `https://konradcinkusz.github.io/inference-polska/`.
+Workflow `.github/workflows/deploy-pages.yml` publikuje `index.html` przy każdym pushu do `main` (oraz ręcznie przez *Run workflow*).
 
-Każdy push do wybranego brancha publikuje nową wersję automatycznie.
+Jednorazowo: **Settings → Pages → Build and deployment → Source → GitHub Actions**.
+
+Strona będzie dostępna pod `https://konradcinkusz.github.io/inference-polska/`.
 
 ## Konfiguracja
 
