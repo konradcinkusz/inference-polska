@@ -9,135 +9,232 @@
 <meta property="og:title" content="Inference Polska: analiza dokumentów offline">
 <meta property="og:description" content="Dane i cały proces analizy zostają w moim biurze. Po wydruku usuwam wszystko, także ślady po analizie.">
 <meta property="og:type" content="website">
+<script>
+(function(){try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();
+</script>
 <style>
 :root{
-  --paper:#f7f2e8; --card:#fffdf8; --ink:#1c1b18; --muted:#5d5a52; --rule:#d9d1bf;
-  --accent:#1f3d66; --accent-ink:#ffffff; --warn:#9b2c2c; --ok:#2f6b3f;
+  color-scheme:light;
+  --paper:#f8f5ee; --card:#ffffff; --card-2:#f1ece1; --ink:#16171a; --text:#25262b; --muted:#4f5159; --rule:#d8d2c4; --rule-strong:#b9b1a0;
+  --accent:#1d4d8f; --accent-hover:#163d72; --accent-soft:#e6edf7; --accent-ink:#ffffff; --warn:#a12a2a; --warn-soft:#fbeaea; --ok:#26683a;
+  --shadow:0 1px 2px rgba(20,20,30,.05),0 4px 16px rgba(20,20,30,.05);
   --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
   --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
 }
 @media (prefers-color-scheme:dark){
-  :root{--paper:#15161a;--card:#1c1e23;--ink:#ece8dd;--muted:#a29e92;--rule:#33353b;--accent:#8fb4e8;--accent-ink:#0f1722;--warn:#e08585;--ok:#7fc08f}
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --paper:#121317; --card:#1b1d22; --card-2:#22252b; --ink:#f3f1ea; --text:#e3e1da; --muted:#b4b1a8; --rule:#30333a; --rule-strong:#4a4e57;
+    --accent:#8db8f2; --accent-hover:#a9caf6; --accent-soft:#1c2a3d; --accent-ink:#0d1522; --warn:#f09a9a; --warn-soft:#2e1d1f; --ok:#86c999;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 16px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --paper:#121317; --card:#1b1d22; --card-2:#22252b; --ink:#f3f1ea; --text:#e3e1da; --muted:#b4b1a8; --rule:#30333a; --rule-strong:#4a4e57;
+  --accent:#8db8f2; --accent-hover:#a9caf6; --accent-soft:#1c2a3d; --accent-ink:#0d1522; --warn:#f09a9a; --warn-soft:#2e1d1f; --ok:#86c999;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 16px rgba(0,0,0,.25);
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:1.125rem;line-height:1.65;-webkit-text-size-adjust:100%}
-a{color:var(--accent)}
-a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-.wrap{max-width:880px;margin:0 auto;padding:0 20px}
-header.top{border-bottom:1px solid var(--rule)}
-header.top .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;justify-content:space-between;padding-top:14px;padding-bottom:14px}
-.brand{font-family:var(--sans);font-weight:700;letter-spacing:.02em;text-decoration:none;color:var(--ink)}
-nav{display:flex;flex-wrap:wrap;gap:4px 18px;font-family:var(--sans);font-size:.9rem}
-nav a{color:var(--muted);text-decoration:none}
-nav a:hover{color:var(--accent);text-decoration:underline}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--text);font-family:var(--sans);font-size:1.125rem;line-height:1.7;-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility}
+a{color:var(--accent);text-underline-offset:.18em;text-decoration-thickness:1px}
+a:hover{color:var(--accent-hover);text-decoration-thickness:2px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:2px}
+.skip{position:absolute;left:-9999px;top:8px;z-index:100;background:var(--accent);color:var(--accent-ink);padding:10px 16px;border-radius:6px;font-weight:600}
+.skip:focus{left:16px}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px}
+.prose{max-width:42rem}
+strong{color:var(--ink)}
 
-.hero{padding:64px 0 40px}
-.eyebrow{font-family:var(--sans);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 18px}
-h1{font-size:clamp(1.9rem,5vw,3.2rem);line-height:1.1;letter-spacing:-.015em;margin:0 0 24px;font-weight:700}
-.lead{font-size:1.3rem;line-height:1.55;max-width:34em;margin:0 0 28px}
+/* header */
+header.top{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:saturate(1.4) blur(8px);-webkit-backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid var(--rule)}
+header.top .wrap{display:flex;gap:16px;align-items:center;justify-content:space-between;min-height:64px}
+.brand{font-weight:800;font-size:1.05rem;letter-spacing:.01em;text-decoration:none;color:var(--ink);white-space:nowrap;display:flex;align-items:center;gap:10px}
+.brand-mark{width:28px;height:28px;border-radius:6px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-size:.85rem;font-weight:800}
+.brand:hover{color:var(--ink);text-decoration:none}
+nav.main{display:flex;gap:2px;font-size:.92rem;overflow-x:auto;scrollbar-width:none}
+nav.main::-webkit-scrollbar{display:none}
+nav.main a{color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:6px;white-space:nowrap;font-weight:500}
+nav.main a:hover{color:var(--ink);background:var(--card-2)}
+.theme-btn{flex:none;display:inline-flex;align-items:center;gap:8px;font:inherit;font-size:.88rem;font-weight:600;padding:8px 12px;border:1px solid var(--rule-strong);border-radius:999px;background:var(--card);color:var(--ink);cursor:pointer}
+.theme-btn:hover{border-color:var(--accent)}
+.theme-btn svg{width:18px;height:18px}
+.theme-btn .i-sun{display:none}
+:root[data-theme="dark"] .theme-btn .i-sun{display:block}
+:root[data-theme="dark"] .theme-btn .i-moon{display:none}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .theme-btn .i-sun{display:block}
+  :root:not([data-theme="light"]) .theme-btn .i-moon{display:none}
+}
+@media (max-width:1360px){
+  header.top .wrap{flex-wrap:wrap;gap:0 12px;padding-top:10px}
+  nav.main{order:3;width:100%;margin:0 -10px;padding-bottom:6px}
+}
+
+/* hero */
+.hero{padding-top:72px;padding-bottom:56px}
+.eyebrow{display:inline-block;font-size:.82rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:6px 12px;border-radius:999px;margin:0 0 22px}
+h1,h2,h3{color:var(--ink);font-family:var(--serif)}
+h1{font-size:clamp(2rem,5.2vw,3.25rem);line-height:1.12;letter-spacing:-.01em;margin:0 0 24px;font-weight:700;max-width:22ch}
+.lead{font-size:clamp(1.15rem,2.2vw,1.3rem);line-height:1.6;max-width:40rem;margin:0 0 18px}
+.hero-points{list-style:none;padding:0;margin:28px 0 32px;display:grid;gap:10px;max-width:40rem}
+.hero-points li{display:flex;gap:12px;align-items:flex-start}
+.hero-points li::before{content:"✓";flex:none;width:24px;height:24px;margin-top:3px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-weight:800;font-size:.85rem;display:grid;place-items:center}
 .cta{display:flex;flex-wrap:wrap;gap:12px}
-.btn{display:inline-block;font-family:var(--sans);font-size:1rem;font-weight:600;padding:12px 20px;border-radius:4px;border:2px solid var(--accent);background:var(--accent);color:var(--accent-ink);text-decoration:none;cursor:pointer}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;font-family:var(--sans);font-size:1rem;font-weight:700;padding:12px 22px;border-radius:8px;border:2px solid var(--accent);background:var(--accent);color:var(--accent-ink);text-decoration:none;cursor:pointer}
+.btn:hover{background:var(--accent-hover);border-color:var(--accent-hover);color:var(--accent-ink);text-decoration:none}
 .btn.ghost{background:transparent;color:var(--accent)}
-.btn:hover{filter:brightness(1.08)}
+.btn.ghost:hover{background:var(--accent-soft);color:var(--accent)}
 .btn[disabled]{opacity:.6;cursor:wait}
-.fig{margin:44px 0 0}
-.fig svg{width:100%;height:auto;display:block}
-.fig figcaption{font-family:var(--sans);font-size:.85rem;color:var(--muted);margin-top:8px}
 
-section{padding:56px 0;border-top:1px solid var(--rule)}
-.chapter{font-family:var(--sans);font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
-h2{font-size:clamp(1.7rem,4.2vw,2.4rem);line-height:1.15;margin:0 0 20px;font-weight:700}
-h3{font-size:1.2rem;margin:0 0 6px}
-p{margin:0 0 16px}
+/* figure */
+.fig{margin:40px 0 0;background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:24px 20px 16px;box-shadow:var(--shadow)}
+.fig svg{width:100%;height:auto;display:block;color:var(--ink)}
+.fig .s-muted{stroke:var(--muted)} .fig .f-muted{fill:var(--muted)} .fig .s-warn{stroke:var(--warn)} .fig .s-accent{stroke:var(--accent)}
+.fig figcaption{font-size:.95rem;color:var(--muted);margin-top:12px;text-align:center}
+
+/* sections */
+section{padding:72px 0;border-top:1px solid var(--rule)}
+section.alt{background:var(--card-2)}
+.chapter{font-size:.8rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+h2{font-size:clamp(1.75rem,4vw,2.4rem);line-height:1.18;margin:0 0 24px;font-weight:700;max-width:28ch}
+h3{font-size:1.25rem;line-height:1.3;margin:0 0 8px}
+p{margin:0 0 18px}
 .muted{color:var(--muted)}
-.small{font-size:.95rem}
+.small{font-size:1rem}
 
-.epigraph{border-top:3px double var(--ink);border-bottom:3px double var(--ink);padding:30px 8px;margin:8px 0 32px;text-align:center}
-.epigraph p{font-size:clamp(1.5rem,3.8vw,2.1rem);line-height:1.3;margin:0;font-style:italic}
-.three{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:8px}
-.three>div{background:var(--card);border:1px solid var(--rule);border-radius:4px;padding:20px}
+.epigraph{border-left:4px solid var(--accent);background:var(--card);padding:24px 28px;margin:8px 0 32px;border-radius:0 10px 10px 0;box-shadow:var(--shadow)}
+.epigraph p{font-family:var(--serif);font-size:clamp(1.35rem,3.2vw,1.85rem);line-height:1.35;margin:0;color:var(--ink)}
+.three{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:28px}
+.card{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:24px;box-shadow:var(--shadow)}
+.card h3{font-family:var(--sans);font-size:1.1rem;font-weight:700}
+.card p{margin:0;color:var(--muted);font-size:1rem;line-height:1.6}
+.card .ic{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);margin-bottom:14px}
+.card .ic svg{width:22px;height:22px}
+.card.bad .ic{background:var(--warn-soft);color:var(--warn)}
+
 .steps{list-style:none;padding:0;margin:0;counter-reset:s;display:grid;gap:16px}
-.steps li{counter-increment:s;display:grid;grid-template-columns:48px 1fr;gap:4px 14px;align-items:start}
-.steps li::before{content:counter(s);font-family:var(--sans);font-weight:700;font-size:1.3rem;width:40px;height:40px;border:2px solid var(--ink);border-radius:50%;display:grid;place-items:center}
-.steps h3{margin-top:6px}
+.steps li{counter-increment:s;display:grid;grid-template-columns:56px 1fr;gap:4px 18px;align-items:start;background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:22px 24px;box-shadow:var(--shadow)}
+.steps li::before{content:counter(s);font-weight:800;font-size:1.25rem;width:48px;height:48px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center}
+.steps h3{font-family:var(--sans);font-weight:700;margin-top:8px}
 .steps p{margin:0}
-.toc{background:var(--card);border:1px solid var(--rule);border-radius:4px;padding:22px 26px;margin:20px 0}
-.toc ol{margin:0;padding-left:1.3em}
-.toc li{padding:3px 0}
-.badge{display:inline-block;font-family:var(--sans);font-size:.8rem;font-weight:600;padding:3px 10px;border:1px solid var(--accent);border-radius:99px;color:var(--accent)}
+.toc{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:24px 28px;margin:24px 0 32px;box-shadow:var(--shadow)}
+.toc strong{display:block;margin-bottom:10px;font-size:1.05rem}
+.toc ol{margin:0;padding-left:1.4em}
+.toc li{padding:5px 0}
+.toc li::marker{color:var(--accent);font-weight:700}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px}
+.badge{display:inline-block;font-size:.88rem;font-weight:700;padding:5px 12px;border-radius:999px;background:var(--accent-soft);color:var(--accent)}
 
-.price-hero{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;margin:0 0 8px}
-.price-hero .num{font-size:3rem;font-weight:700;line-height:1}
-.notice{font-family:var(--sans);font-size:.95rem;background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--accent);border-radius:4px;padding:12px 16px;margin:16px 0}
-.notice.warn{border-left-color:var(--warn)}
+/* about */
+.about{display:grid;grid-template-columns:minmax(0,280px) 1fr;gap:40px;align-items:start}
+.about figure{margin:0}
+.about img{width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--rule);box-shadow:var(--shadow);aspect-ratio:560/660;object-fit:cover;background:var(--card-2)}
+.about figcaption{font-size:.95rem;color:var(--muted);margin-top:10px}
+.about figcaption strong{display:block;font-size:1.05rem}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:24px 0}
+.fact{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:16px 18px}
+.fact b{display:block;font-family:var(--serif);font-size:1.6rem;color:var(--ink);line-height:1.2}
+.fact span{font-size:.95rem;color:var(--muted)}
+.pubs{list-style:none;padding:0;margin:0 0 20px;display:grid;gap:10px}
+.pubs li{border-left:3px solid var(--rule-strong);padding:2px 0 2px 14px;font-size:1rem;line-height:1.55}
+.pubs li span{display:block;color:var(--muted);font-size:.92rem}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.links a{display:inline-flex;align-items:center;min-height:40px;padding:6px 14px;border:1px solid var(--rule-strong);border-radius:8px;text-decoration:none;font-size:.95rem;font-weight:600;background:var(--card)}
+.links a:hover{border-color:var(--accent);background:var(--accent-soft)}
+@media (max-width:720px){
+  .about{grid-template-columns:1fr;gap:24px}
+  .about figure{max-width:240px}
+}
 
-.book-grid{display:grid;gap:28px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));align-items:start;margin-top:20px}
-.panel{background:var(--card);border:1px solid var(--rule);border-radius:4px;padding:20px}
-.panel h3{font-family:var(--sans);font-size:1rem;letter-spacing:.04em;text-transform:uppercase;margin-bottom:14px}
-.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;font-family:var(--sans)}
-.cal-head strong{text-transform:capitalize}
-.cal-nav{font-family:var(--sans);font-size:1rem;width:36px;height:36px;border:1px solid var(--rule);background:transparent;color:var(--ink);border-radius:4px;cursor:pointer}
-.cal-nav[disabled]{opacity:.3;cursor:default}
-.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;font-family:var(--sans)}
-.cal-dow{font-size:.72rem;text-align:center;color:var(--muted);padding:4px 0;text-transform:uppercase}
-.cal-day{aspect-ratio:1;border:1px solid var(--rule);background:transparent;color:var(--ink);border-radius:4px;font-family:var(--sans);font-size:.95rem;cursor:pointer;padding:0}
-.cal-day:hover:not([disabled]){border-color:var(--accent)}
-.cal-day[disabled]{opacity:.28;cursor:default}
+/* price */
+.price-hero{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;margin:0 0 16px}
+.price-hero .num{font-family:var(--serif);font-size:clamp(2.6rem,7vw,3.4rem);font-weight:700;line-height:1;color:var(--ink)}
+.notice{font-size:1rem;line-height:1.55;background:var(--accent-soft);border:1px solid var(--rule);border-left:4px solid var(--accent);border-radius:8px;padding:14px 16px;margin:16px 0;color:var(--text)}
+.notice.warn{background:var(--warn-soft);border-left-color:var(--warn)}
+
+.book-grid{display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));align-items:start;margin-top:28px}
+.panel{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:24px;box-shadow:var(--shadow)}
+.panel h3{font-family:var(--sans);font-size:1.1rem;font-weight:700;margin-bottom:16px}
+.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.cal-head strong{text-transform:capitalize;font-size:1.05rem}
+.cal-nav{font-size:1.1rem;width:44px;height:44px;border:1px solid var(--rule-strong);background:var(--card);color:var(--ink);border-radius:8px;cursor:pointer}
+.cal-nav:hover:not([disabled]){border-color:var(--accent)}
+.cal-nav[disabled]{opacity:.35;cursor:default}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.cal-dow{font-size:.78rem;font-weight:700;text-align:center;color:var(--muted);padding:4px 0;text-transform:uppercase}
+.cal-day{aspect-ratio:1;min-height:38px;border:1px solid var(--rule);background:var(--paper);color:var(--ink);border-radius:8px;font-family:var(--sans);font-size:1rem;font-weight:600;cursor:pointer;padding:0}
+.cal-day:hover:not([disabled]){border-color:var(--accent);background:var(--accent-soft)}
+.cal-day[disabled]{opacity:.35;cursor:default;background:transparent;border-color:transparent;font-weight:400}
 .cal-day[aria-pressed="true"],.slot[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
-.slots{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.slot{font-family:var(--sans);font-size:.95rem;padding:8px 14px;border:1px solid var(--rule);background:transparent;color:var(--ink);border-radius:4px;cursor:pointer}
+.slots{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.slot{font-family:var(--sans);font-size:1rem;font-weight:600;min-height:44px;padding:8px 16px;border:1px solid var(--rule-strong);background:var(--paper);color:var(--ink);border-radius:8px;cursor:pointer}
 .slot:hover{border-color:var(--accent)}
-.chosen{font-family:var(--sans);font-size:.95rem;margin:14px 0 0;min-height:1.5em}
-.cal-help{font-family:var(--sans);font-size:.85rem;color:var(--muted);margin:12px 0 0}
+.chosen{font-size:1rem;font-weight:600;margin:16px 0 0;min-height:1.5em;color:var(--ink)}
+.cal-help{font-size:.95rem;color:var(--muted);margin:12px 0 0;line-height:1.55}
 
-form{display:grid;gap:14px;font-family:var(--sans)}
-label{display:grid;gap:5px;font-size:.92rem;font-weight:600}
+form{display:grid;gap:16px}
+label{display:block;font-size:1rem;font-weight:600;color:var(--ink)}
+label>input:not([type=radio]):not([type=checkbox]),label>select,label>textarea{display:block;margin-top:6px}
 label .opt{font-weight:400;color:var(--muted)}
-input[type=email],input[type=tel],input[type=text],select,textarea{font:inherit;font-weight:400;font-size:1rem;padding:10px 12px;border:1px solid var(--rule);border-radius:4px;background:var(--paper);color:var(--ink);width:100%}
-textarea{min-height:96px;resize:vertical}
+input[type=email],input[type=tel],input[type=text],select,textarea{font:inherit;font-weight:400;font-size:1rem;min-height:48px;padding:10px 14px;border:1px solid var(--rule-strong);border-radius:8px;background:var(--paper);color:var(--ink);width:100%}
+input::placeholder,textarea::placeholder{color:var(--muted);opacity:.8}
+input:focus,select:focus,textarea:focus{border-color:var(--accent)}
+textarea{min-height:110px;resize:vertical}
 fieldset{border:0;padding:0;margin:0;display:grid;gap:6px}
-legend{font-size:.92rem;font-weight:600;padding:0;margin-bottom:4px}
-.radio{display:flex;gap:18px;flex-wrap:wrap}
+legend{font-size:1rem;font-weight:600;padding:0;margin-bottom:6px;color:var(--ink)}
+.radio{display:flex;gap:20px;flex-wrap:wrap}
 .radio label{display:flex;gap:8px;align-items:center;font-weight:400}
-.check{display:flex!important;gap:10px;align-items:flex-start;font-weight:400!important;font-size:.85rem!important;color:var(--muted)}
-.check input{margin-top:3px}
+input[type=radio],input[type=checkbox]{width:20px;height:20px;accent-color:var(--accent)}
+.check{display:flex!important;gap:10px;align-items:flex-start;font-weight:400!important;font-size:.95rem!important;color:var(--muted)!important;line-height:1.5}
+.check input{margin-top:2px;flex:none}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-#status{font-size:.95rem;min-height:1.4em;margin:0}
+#status{font-size:1rem;font-weight:600;min-height:1.4em;margin:0}
 #status.ok{color:var(--ok)}
 #status.err{color:var(--warn)}
 
-.mail-box{margin-top:32px;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between;border:2px solid var(--ink);border-radius:4px;padding:20px 22px;background:var(--card)}
-.mail-box .addr{font-size:1.5rem;font-weight:700;word-break:break-all}
-.mail-box .addr a{color:var(--ink)}
+.mail-box{margin-top:32px;display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between;border:2px solid var(--accent);border-radius:12px;padding:22px 24px;background:var(--card)}
+.mail-box .addr{font-size:clamp(1.2rem,3.5vw,1.5rem);font-weight:700;word-break:break-all}
 .mail-box p{margin:0}
-.copy{font-family:var(--sans);font-size:.9rem;padding:8px 14px;border:1px solid var(--ink);border-radius:4px;background:transparent;color:var(--ink);cursor:pointer}
+.copy{font:inherit;font-size:.95rem;font-weight:600;min-height:44px;padding:8px 16px;border:1px solid var(--rule-strong);border-radius:8px;background:var(--card);color:var(--ink);cursor:pointer}
+.copy:hover{border-color:var(--accent)}
 
-.plans{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin-top:16px}
-.plan{background:var(--card);border:1px solid var(--rule);border-radius:4px;padding:22px;display:flex;flex-direction:column}
+.plans{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:24px}
+.plan{position:relative;background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:26px 24px;display:flex;flex-direction:column;box-shadow:var(--shadow)}
 .plan.feat{border:2px solid var(--accent)}
-.plan .who{font-family:var(--sans);font-size:.85rem;color:var(--muted);margin:0 0 14px}
-.plan .cost{font-family:var(--sans);margin:0 0 4px}
-.plan .cost b{font-size:2rem;font-family:var(--serif)}
-.plan .once{font-family:var(--sans);font-size:.88rem;color:var(--muted);margin:0 0 14px}
-.plan ul{margin:0 0 6px;padding-left:1.1em;font-size:1rem}
-.plan li{padding:2px 0}
-table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:.95rem;margin-top:12px}
-th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--rule);vertical-align:top}
-th{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-td.r,th.r{text-align:right;white-space:nowrap}
+.plan .tag{position:absolute;top:-13px;left:22px;background:var(--accent);color:var(--accent-ink);font-size:.78rem;font-weight:700;letter-spacing:.04em;padding:4px 10px;border-radius:999px}
+.plan h3{font-family:var(--sans);font-weight:800}
+.plan .who{font-size:.95rem;color:var(--muted);margin:0 0 16px}
+.plan .cost{margin:0 0 4px;color:var(--muted)}
+.plan .cost b{font-size:2rem;font-family:var(--serif);color:var(--ink)}
+.plan .once{font-size:.95rem;color:var(--muted);margin:0 0 16px;padding-bottom:16px;border-bottom:1px solid var(--rule)}
+.plan ul{margin:0;padding:0;list-style:none;font-size:1rem}
+.plan li{padding:5px 0 5px 26px;position:relative;line-height:1.5}
+.plan li::before{content:"✓";position:absolute;left:0;top:5px;color:var(--accent);font-weight:800}
+.table-wrap{overflow-x:auto;margin-top:28px;background:var(--card);border:1px solid var(--rule);border-radius:12px}
+table{width:100%;border-collapse:collapse;font-size:1rem}
+th,td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--rule);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font-size:.82rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--card-2)}
+td.r,th.r{text-align:right;white-space:nowrap;font-weight:600;color:var(--ink)}
 
-footer{border-top:1px solid var(--rule);padding:32px 0 56px;font-family:var(--sans);font-size:.88rem;color:var(--muted)}
+footer{border-top:1px solid var(--rule);padding:40px 0 64px;font-size:.95rem;color:var(--muted)}
 footer p{margin:0 0 8px}
 
 @media (max-width:560px){
-  body{font-size:1.05rem}
-  .hero{padding-top:40px}
-  section{padding:40px 0}
-  .steps li{grid-template-columns:40px 1fr}
+  body{font-size:1.0625rem}
+  .wrap{padding:0 16px}
+  .hero{padding-top:44px;padding-bottom:40px}
+  section{padding:52px 0}
+  .steps li{grid-template-columns:1fr;padding:20px}
+  .steps li::before{width:40px;height:40px;font-size:1.1rem}
+  .panel,.card{padding:20px}
 }
 @media print{
-  header.top,.cta,#kontakt form,.cal-nav,.copy{display:none}
+  header.top,.cta,#contact,.cal-nav,.copy,.theme-btn{display:none}
   body{background:#fff;color:#000}
   section{break-inside:avoid}
 }
@@ -145,18 +242,25 @@ footer p{margin:0 0 8px}
 </head>
 <body>
 
+<a class="skip" href="#top">Przejdź do treści</a>
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#top">Inference Polska</a>
-    <nav aria-label="Nawigacja po stronie">
+    <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">IP</span>Inference Polska</a>
+    <nav class="main" aria-label="Nawigacja po stronie">
       <a href="#problem">Problem</a>
       <a href="#rozwiazanie">Rozwiązanie</a>
       <a href="#jak">Jak to działa</a>
       <a href="#raport">Raport</a>
+      <a href="#o-mnie">Kim jestem</a>
       <a href="#konsultacja">Konsultacja</a>
-      <a href="#firmy">Dla biur i gabinetów</a>
+      <a href="#firmy">Dla firm</a>
       <a href="#kontakt">Kontakt</a>
     </nav>
+    <button type="button" class="theme-btn" id="theme-btn" aria-label="Przełącz motyw jasny lub ciemny">
+      <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <span id="theme-label">Ciemny</span>
+    </button>
   </div>
 </header>
 
@@ -165,8 +269,13 @@ footer p{margin:0 0 8px}
 <div class="wrap hero">
   <p class="eyebrow">Analiza dokumentów offline</p>
   <h1>Ludzie mają problemy do rozwiązania, których treść nie powinna być nikomu udostępniana.</h1>
-  <p class="lead" style="margin-bottom:14px">Umowy, pisma urzędowe, dokumentacja medyczna, rozliczenia. Takie sprawy trzeba rozwiązać, ale nikt postronny nie powinien mieć wglądu w ich treść ani możliwości zapoznania się z nią.</p>
-  <p class="lead"><strong>Ja pomagam je rozwiązać:</strong> czytam Twoje dokumenty, sprawdzam przepisy i literaturę naukową i oddaję Ci wydrukowany raport z wnioskami i źródłami. Robię to z pomocą AI, ale wyłącznie u siebie w biurze, na komputerze bez dostępu do internetu.<span style="display:block;margin-top:10px">Jako inżynier po Politechnice Warszawskiej pracuję na własnej maszynie z lokalną AI, odłączonej od internetu, razem z drukarką i skanerem, na autorskim oprogramowaniu, w którym duże modele językowe przetwarzają Twoje dane w oparciu o oficjalne źródła wiedzy i przepisów.</span></p>
+  <p class="lead">Umowy, pisma urzędowe, dokumentacja medyczna, rozliczenia. Takie sprawy trzeba rozwiązać, ale nikt postronny nie powinien mieć wglądu w ich treść ani możliwości zapoznania się z nią.</p>
+  <p class="lead"><strong>Ja pomagam je rozwiązać:</strong> czytam Twoje dokumenty, sprawdzam przepisy i literaturę naukową i oddaję Ci wydrukowany raport z wnioskami i źródłami. Robię to z pomocą AI, ale wyłącznie u siebie w biurze, na komputerze bez dostępu do internetu.</p>
+  <ul class="hero-points">
+    <li>Własna maszyna z lokalną AI, odłączona od internetu, razem z drukarką i skanerem.</li>
+    <li>Autorskie oprogramowanie: duże modele językowe pracują w oparciu o oficjalne źródła wiedzy i przepisów.</li>
+    <li>Inżynier po Politechnice Warszawskiej. Wynik zawsze sprawdza człowiek.</li>
+  </ul>
   <div class="cta">
     <a class="btn" href="#konsultacja">Umów konsultację</a>
     <a class="btn ghost" href="#rozwiazanie">Zobacz, jak to rozwiązuję</a>
@@ -181,23 +290,26 @@ footer p{margin:0 0 8px}
     <p>Nie musisz wiedzieć, czym jest chmura ani jak działa model językowy. Wystarczy jedno pytanie: czy treść mojej sprawy powinna opuszczać kraj i trafiać do firmy, która nie ma z nią nic wspólnego?</p>
 
     <div class="three">
-      <div>
+      <div class="card bad">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3h7v7M21 3l-9 9M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg></div>
         <h3>Treść wyjeżdża</h3>
-        <p class="small muted">Dokument trafia na cudzy serwer, często w innym kraju niż Twój.</p>
+        <p>Dokument trafia na cudzy serwer, często w innym kraju niż Twój.</p>
       </div>
-      <div>
+      <div class="card bad">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div>
         <h3>Analiza dzieje się gdzie indziej</h3>
-        <p class="small muted">Nie tylko dane, ale i sam proces wnioskowania odbywa się poza Twoim krajem.</p>
+        <p>Nie tylko dane, ale i sam proces wnioskowania odbywa się poza Twoim krajem.</p>
       </div>
-      <div>
+      <div class="card bad">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><path d="M3 3l18 18"/></svg></div>
         <h3>Nie masz wglądu</h3>
-        <p class="small muted">Nie widzisz, gdzie dokładnie trafiła Twoja sprawa i jak długo tam zostaje.</p>
+        <p>Nie widzisz, gdzie dokładnie trafiła Twoja sprawa i jak długo tam zostaje.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section id="rozwiazanie">
+<section id="rozwiazanie" class="alt">
   <div class="wrap">
     <p class="chapter">Rozdział II</p>
     <h2>To samo, ale wszystko zostaje w moim biurze</h2>
@@ -209,17 +321,20 @@ footer p{margin:0 0 8px}
     <p>Analizuję Twoją sprawę na lokalnym modelu językowym. Analiza opiera się na aktualnych bazach aktów prawnych i literatury naukowej, a wynik sprawdza człowiek. Wszystkie dane i cały proces wnioskowania są przetwarzane na maszynie, która stoi u mnie i nie ma dostępu do sieci.</p>
 
     <div class="three">
-      <div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></div>
         <h3>Wszystko lokalnie</h3>
-        <p class="small muted">Dokumenty i cały proces wnioskowania zostają na jednym urządzeniu w moim biurze.</p>
+        <p>Dokumenty i cały proces wnioskowania zostają na jednym urządzeniu w moim biurze.</p>
       </div>
-      <div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8.8a15 15 0 0 1 20 0M5 12.6a10 10 0 0 1 14 0M8.5 16.1a5 5 0 0 1 7 0M12 20h.01M3 3l18 18"/></svg></div>
         <h3>Maszyna bez sieci</h3>
-        <p class="small muted">Bez Wi-Fi i bez kabla sieciowego. Pozostałe wejścia są odłączone, podłączona jest tylko drukarka ze skanerem.</p>
+        <p>Bez Wi-Fi i bez kabla sieciowego. Pozostałe wejścia są odłączone, podłączona jest tylko drukarka ze skanerem.</p>
       </div>
-      <div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 11v6M14 11v6"/></svg></div>
         <h3>Po wydruku nic nie zostaje</h3>
-        <p class="small muted">Gdy drukuję wynik i odsyłam go Tobie, usuwam z maszyny wszystko: skany, wynik analizy, historię i ślady po pracy.</p>
+        <p>Gdy drukuję wynik i odsyłam go Tobie, usuwam z maszyny wszystko: skany, wynik analizy, historię i ślady po pracy.</p>
       </div>
     </div>
 
@@ -230,24 +345,24 @@ footer p{margin:0 0 8px}
         <g fill="none" stroke="currentColor" stroke-width="2" font-family="system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif" font-size="15">
           <rect x="14" y="100" width="150" height="70" rx="4"/>
           <rect x="216" y="100" width="150" height="70" rx="4"/>
-          <rect x="418" y="100" width="150" height="70" rx="4" stroke-width="3"/>
+          <rect x="418" y="100" width="150" height="70" rx="4" stroke-width="3" class="s-accent"/>
           <rect x="620" y="100" width="146" height="70" rx="4"/>
           <path d="M164 135h52M366 135h52M568 135h52"/>
           <path d="M206 128l10 7-10 7M408 128l10 7-10 7M610 128l10 7-10 7" stroke-linejoin="round" stroke-linecap="round"/>
-          <rect x="438" y="16" width="110" height="38" rx="19" stroke-dasharray="5 5" stroke="var(--muted)"/>
-          <path d="M493 54v46" stroke="var(--muted)" stroke-dasharray="3 5"/>
-          <path d="M444 20l98 30" stroke="var(--warn)" stroke-width="3" stroke-linecap="round"/>
+          <rect x="438" y="16" width="110" height="38" rx="19" stroke-dasharray="5 5" class="s-muted"/>
+          <path d="M493 54v46" class="s-muted" stroke-dasharray="3 5"/>
+          <path d="M444 20l98 30" class="s-warn" stroke-width="3" stroke-linecap="round"/>
         </g>
         <g fill="currentColor" font-family="system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif" text-anchor="middle">
           <text x="89" y="141" font-size="17" font-weight="700">Papier A4</text>
           <text x="291" y="141" font-size="17" font-weight="700">Skaner</text>
           <text x="493" y="141" font-size="17" font-weight="700">Node offline</text>
           <text x="693" y="141" font-size="17" font-weight="700">Książka</text>
-          <text x="89" y="196" font-size="13" fill="var(--muted)">kopie dokumentów</text>
-          <text x="291" y="196" font-size="13" fill="var(--muted)">jedyne wejście</text>
-          <text x="493" y="196" font-size="13" fill="var(--muted)">lokalny LLM, bez sieci</text>
-          <text x="693" y="196" font-size="13" fill="var(--muted)">raport do ręki</text>
-          <text x="493" y="40" font-size="13" fill="var(--muted)">Obcy serwer AI</text>
+          <text x="89" y="196" font-size="13" class="f-muted">kopie dokumentów</text>
+          <text x="291" y="196" font-size="13" class="f-muted">jedyne wejście</text>
+          <text x="493" y="196" font-size="13" class="f-muted">lokalny LLM, bez sieci</text>
+          <text x="693" y="196" font-size="13" class="f-muted">raport do ręki</text>
+          <text x="493" y="40" font-size="13" class="f-muted">Obcy serwer AI</text>
         </g>
       </svg>
       <figcaption>Dokument wchodzi jako skan, wychodzi jako wydruk. Pomiędzy nimi nie ma sieci, a po wydruku nie zostaje nic.</figcaption>
@@ -285,11 +400,11 @@ footer p{margin:0 0 8px}
         </div>
       </li>
     </ol>
-    <p class="muted small" style="margin-top:20px">Pracuję jako inżynier augmentatywny: człowiek prowadzi rozmowę i odpowiada za wynik, a model przyspiesza przeszukiwanie i porządkowanie materiału.</p>
+    <p class="muted small" style="margin-top:24px">Pracuję jako inżynier augmentatywny: człowiek prowadzi rozmowę i odpowiada za wynik, a model przyspiesza przeszukiwanie i porządkowanie materiału.</p>
   </div>
 </section>
 
-<section id="raport">
+<section id="raport" class="alt">
   <div class="wrap">
     <p class="chapter">Rozdział IV</p>
     <h2>Wynik w formie książki</h2>
@@ -314,15 +429,54 @@ footer p{margin:0 0 8px}
   </div>
 </section>
 
-<section id="konsultacja">
+<section id="o-mnie">
   <div class="wrap">
     <p class="chapter">Rozdział V</p>
+    <h2>Kim jestem</h2>
+    <div class="about">
+      <figure>
+        <img src="assets/konrad-cinkusz.jpg" width="560" height="660" alt="Konrad Cinkusz, zdjęcie portretowe" decoding="async">
+        <figcaption><strong>Konrad Cinkusz</strong>mgr inż., Software Engineer</figcaption>
+      </figure>
+      <div class="prose">
+        <p>Nazywam się <strong>Konrad Cinkusz</strong>. Jestem inżynierem oprogramowania z ponad dziesięcioletnim doświadczeniem komercyjnym w C#, .NET i Azure. Budowałem systemy dla handlu, bankowości, SaaS i administracji publicznej, w tym system obiegu dokumentów dla Ministerstwa Obrony Narodowej.</p>
+        <p>Ukończyłem <strong>informatykę na Politechnice Warszawskiej</strong> (magisterium, specjalizacja: sztuczna inteligencja i systemy wieloagentowe) oraz na Politechnice Łódzkiej (inżynieria). Prowadzę badania nad <strong>systemami wieloagentowymi opartymi na dużych modelach językowych</strong>. Na nich opiera się system, którym analizuję Twoje dokumenty.</p>
+
+        <div class="facts">
+          <div class="fact"><b>10+ lat</b><span>w tworzeniu oprogramowania</span></div>
+          <div class="fact"><b>3</b><span>recenzowane publikacje naukowe o LLM i agentach</span></div>
+          <div class="fact"><b>mgr inż.</b><span>Politechnika Warszawska</span></div>
+        </div>
+
+        <h3>Publikacje</h3>
+        <ul class="pubs">
+          <li>Cognitive Agents Powered by Large Language Models for Agile Software Project Management<span>Electronics, vol. 14, nr 1, 2025</span></li>
+          <li>Towards LLM-augmented Multiagent Systems for Agile Software Engineering<span>IEEE/ACM ASE ’24, Sacramento, 2024</span></li>
+          <li>Communicative Agents for Software Project Management and System Development<span>MDAI 2024, Tokio, 2024</span></li>
+        </ul>
+
+        <p>Poza pracą: wspinaczka i trekkingi wysokogórskie, squash, łucznictwo, podróże koleją i dużo książek.</p>
+
+        <div class="links">
+          <a href="https://konradcinkusz.github.io" rel="noopener">Strona osobista</a>
+          <a href="https://www.linkedin.com/in/konrad-cinkusz-378127227/" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/konradcinkusz" rel="noopener">GitHub</a>
+          <a href="https://orcid.org/0009-0001-5709-1172" rel="noopener">ORCID</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="konsultacja">
+  <div class="wrap">
+    <p class="chapter">Rozdział VI</p>
     <h2>Konsultacja</h2>
     <div class="price-hero">
       <span class="num">150 zł</span>
       <span>brutto · konsultacja na miejscu plus analiza na lokalnym LLM</span>
     </div>
-    <p><span class="badge">Konsultacje od 1 grudnia 2026</span> <span class="badge">Stacjonarnie</span></p>
+    <p class="badges"><span class="badge">Konsultacje od 1 grudnia 2026</span> <span class="badge">Stacjonarnie</span></p>
     <p>Konsultacja odbywa się na miejscu: przekazujesz mi osobiście kopie dokumentów. Potem przygotowuję wydrukowany raport i odsyłam Ci go z powrotem razem z kopiami. Nic nie zostaje u mnie, a po wydruku usuwam dane cyfrowe z maszyny.</p>
     <p>Do tego czasu możesz już teraz zostawić swój adres e-mail i wybrać preferowany termin. Odezwę się mailowo lub telefonicznie.</p>
 
@@ -377,7 +531,7 @@ footer p{margin:0 0 8px}
           <input type="hidden" name="termin" id="f-slot" value="">
           <div class="hp" aria-hidden="true"><label>Nie wypełniaj <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
 
-          <div class="notice warn" style="margin:0">Nie wpisuj tu treści dokumentów ani danych wrażliwych (zdrowie, PESEL, numery spraw). Formularz przechodzi przez zewnętrzną usługę, a dokumenty analizuję dopiero na maszynie offline, po spotkaniu.</div>
+          <div class="notice warn" style="margin:0" role="note">Nie wpisuj tu treści dokumentów ani danych wrażliwych (zdrowie, PESEL, numery spraw). Formularz przechodzi przez zewnętrzną usługę, a dokumenty analizuję dopiero na maszynie offline, po spotkaniu.</div>
 
           <label class="check"><input type="checkbox" id="f-consent" required> <span>Zgadzam się, żeby podany adres e-mail i telefon zostały użyte wyłącznie do odpowiedzi w sprawie konsultacji.</span></label>
 
@@ -397,9 +551,9 @@ footer p{margin:0 0 8px}
   </div>
 </section>
 
-<section id="firmy">
+<section id="firmy" class="alt">
   <div class="wrap">
-    <p class="chapter">Rozdział VI</p>
+    <p class="chapter">Rozdział VII</p>
     <h2>Dla biur rachunkowych i gabinetów: Node u Ciebie</h2>
     <p>Jeżeli pracujesz na cudzych danych (księgi, dokumentacja pacjentów), nie możesz ich wysyłać do publicznych usług AI na cudzych serwerach. Wynajmuję i utrzymuję lokalne urządzenie z oprogramowaniem, które stoi w Twoim biurze, działa offline i uczy Twój zespół pracować lokalnie. Nie musisz mieć własnego działu IT.</p>
 
@@ -418,6 +572,7 @@ footer p{margin:0 0 8px}
         </ul>
       </article>
       <article class="plan feat">
+        <span class="tag">Dane wrażliwe</span>
         <h3>Node Gabinet</h3>
         <p class="who">Gabinety lekarskie i inne zawody zaufania</p>
         <p class="cost"><b>1 490 zł</b> netto / mies.</p>
@@ -444,7 +599,7 @@ footer p{margin:0 0 8px}
       </article>
     </div>
 
-    <table>
+    <div class="table-wrap"><table>
       <thead><tr><th>Usługa dodatkowa</th><th class="r">Cena netto</th></tr></thead>
       <tbody>
         <tr><td>Indeksowanie archiwum dokumentów firmy</td><td class="r">od 1 000 zł</td></tr>
@@ -452,15 +607,15 @@ footer p{margin:0 0 8px}
         <tr><td>Dodatkowe szkolenie zespołu (2 godziny)</td><td class="r">400 zł</td></tr>
         <tr><td>Wizyta serwisowa na miejscu</td><td class="r">250 zł</td></tr>
       </tbody>
-    </table>
-    <p class="muted small" style="margin-top:14px">Ceny netto, orientacyjne, plus 23% VAT. Umowa wynajmu na min. 24 miesiące. Zakup urządzenia zamiast wynajmu wyceniam indywidualnie. Dokładną ofertę przygotowuję po rozmowie.</p>
+    </table></div>
+    <p class="muted small" style="margin-top:16px">Ceny netto, orientacyjne, plus 23% VAT. Umowa wynajmu na min. 24 miesiące. Zakup urządzenia zamiast wynajmu wyceniam indywidualnie. Dokładną ofertę przygotowuję po rozmowie.</p>
     <p><a class="btn" href="#formularz" data-topic="Zapytaj o ofertę">Zapytaj o ofertę</a></p>
   </div>
 </section>
 
 <section id="granice">
   <div class="wrap">
-    <p class="chapter">Rozdział VII</p>
+    <p class="chapter">Rozdział VIII</p>
     <h2>Czym to jest, a czym nie jest</h2>
     <p>To analiza i uporządkowanie Twojego materiału z odwołaniem do źródeł. To <strong>nie</strong> jest porada prawna, medyczna ani podatkowa. Model językowy może się mylić, dlatego wynik sprawdza człowiek, a raport wskazuje, co zweryfikować w źródle.</p>
     <p>W sprawach, w których potrzebny jest prawnik, lekarz lub doradca podatkowy, raport ma ułatwić Ci rozmowę z nim: pokazać, o co pytać i na co się powołać. Po wydruku usuwam z maszyny wszystkie dane cyfrowe, a Ty dostajesz swoje kopie z powrotem. Zasady ustalamy na piśmie, zanim cokolwiek zeskanuję.</p>
@@ -491,6 +646,32 @@ const CONFIG = {
   BLOCKED_DATES: ["2026-12-24", "2026-12-25", "2026-12-26", "2027-01-01", "2027-01-06"]
 };
 /* ==================================== */
+
+(function () {
+  var root = document.documentElement;
+  var btn = document.getElementById("theme-btn");
+  var lbl = document.getElementById("theme-label");
+  var mq = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+  function current() {
+    var t = root.getAttribute("data-theme");
+    if (t === "light" || t === "dark") return t;
+    return mq && mq.matches ? "dark" : "light";
+  }
+  function sync() {
+    var dark = current() === "dark";
+    lbl.textContent = dark ? "Jasny" : "Ciemny";
+    btn.setAttribute("aria-pressed", dark ? "true" : "false");
+    btn.title = dark ? "Włącz jasny motyw" : "Włącz ciemny motyw";
+  }
+  btn.addEventListener("click", function () {
+    var next = current() === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("theme", next); } catch (e) {}
+    sync();
+  });
+  if (mq && mq.addEventListener) mq.addEventListener("change", sync);
+  sync();
+})();
 
 (function () {
   var pad = function (n) { return String(n).padStart(2, "0"); };
