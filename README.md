@@ -9,7 +9,10 @@ Strona internetowa usługi **Inference Polska**: analiza dokumentów offline na 
 | `index.html` | Cała strona: HTML, CSS i JavaScript w jednym pliku, bez zależności. |
 | `.nojekyll` | Wyłącza przetwarzanie Jekyll na GitHub Pages. |
 | `.github/workflows/deploy-pages.yml` | Akcja wdrażająca stronę na GitHub Pages. |
+| `assets/` | Zdjęcie do sekcji „Kim jestem”. |
 | `README.md` | Ten plik. |
+
+Strona ma jasny i ciemny motyw: domyślnie zgodny z ustawieniem systemu, z przełącznikiem w nagłówku (wybór zapamiętywany w przeglądarce).
 
 Strona jest statyczna: bez cookies, bez zewnętrznych skryptów i czcionek. Jedyne połączenie z zewnętrzną usługą to opcjonalne wysłanie formularza.
 
