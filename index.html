@@ -1,0 +1,680 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inference Polska: analiza dokumentów offline</title>
+<meta name="description" content="Ludzie mają problemy, których treść nie powinna być nikomu udostępniana. Analizuję dokumenty lokalnie, na maszynie bez sieci. Nic nie opuszcza mojego biura. Wynik w formie wydrukowanej książki.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:title" content="Inference Polska: analiza dokumentów offline">
+<meta property="og:description" content="Dane i cały proces analizy zostają w moim biurze. Po wydruku usuwam wszystko, także ślady po analizie.">
+<meta property="og:type" content="website">
+<style>
+:root{
+  --paper:#f7f2e8; --card:#fffdf8; --ink:#1c1b18; --muted:#5d5a52; --rule:#d9d1bf;
+  --accent:#1f3d66; --accent-ink:#ffffff; --warn:#9b2c2c; --ok:#2f6b3f;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--paper:#15161a;--card:#1c1e23;--ink:#ece8dd;--muted:#a29e92;--rule:#33353b;--accent:#8fb4e8;--accent-ink:#0f1722;--warn:#e08585;--ok:#7fc08f}
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:1.125rem;line-height:1.65;-webkit-text-size-adjust:100%}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px}
+header.top{border-bottom:1px solid var(--rule)}
+header.top .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;justify-content:space-between;padding-top:14px;padding-bottom:14px}
+.brand{font-family:var(--sans);font-weight:700;letter-spacing:.02em;text-decoration:none;color:var(--ink)}
+nav{display:flex;flex-wrap:wrap;gap:4px 18px;font-family:var(--sans);font-size:.9rem}
+nav a{color:var(--muted);text-decoration:none}
+nav a:hover{color:var(--accent);text-decoration:underline}
+
+.hero{padding:64px 0 40px}
+.eyebrow{font-family:var(--sans);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 18px}
+h1{font-size:clamp(1.9rem,5vw,3.2rem);line-height:1.1;letter-spacing:-.015em;margin:0 0 24px;font-weight:700}
+.lead{font-size:1.3rem;line-height:1.55;max-width:34em;margin:0 0 28px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;font-family:var(--sans);font-size:1rem;font-weight:600;padding:12px 20px;border-radius:4px;border:2px solid var(--accent);background:var(--accent);color:var(--accent-ink);text-decoration:none;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn:hover{filter:brightness(1.08)}
+.btn[disabled]{opacity:.6;cursor:wait}
+.fig{margin:44px 0 0}
+.fig svg{width:100%;height:auto;display:block}
+.fig figcaption{font-family:var(--sans);font-size:.85rem;color:var(--muted);margin-top:8px}
+
+section{padding:56px 0;border-top:1px solid var(--rule)}
+.chapter{font-family:var(--sans);font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+h2{font-size:clamp(1.7rem,4.2vw,2.4rem);line-height:1.15;margin:0 0 20px;font-weight:700}
+h3{font-size:1.2rem;margin:0 0 6px}
+p{margin:0 0 16px}
+.muted{color:var(--muted)}
+.small{font-size:.95rem}
+
+.epigraph{border-top:3px double var(--ink);border-bottom:3px double var(--ink);padding:30px 8px;margin:8px 0 32px;text-align:center}
+.epigraph p{font-size:clamp(1.5rem,3.8vw,2.1rem);line-height:1.3;margin:0;font-style:italic}
+.three{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:8px}
+.three>div{background:var(--card);border:1px solid var(--rule);border-radius:4px;padding:20px}
+.steps{list-style:none;padding:0;margin:0;counter-reset:s;display:grid;gap:16px}
+.steps li{counter-increment:s;display:grid;grid-template-columns:48px 1fr;gap:4px 14px;align-items:start}
+.steps li::before{content:counter(s);font-family:var(--sans);font-weight:700;font-size:1.3rem;width:40px;height:40px;border:2px solid var(--ink);border-radius:50%;display:grid;place-items:center}
+.steps h3{margin-top:6px}
+.steps p{margin:0}
+.toc{background:var(--card);border:1px solid var(--rule);border-radius:4px;padding:22px 26px;margin:20px 0}
+.toc ol{margin:0;padding-left:1.3em}
+.toc li{padding:3px 0}
+.badge{display:inline-block;font-family:var(--sans);font-size:.8rem;font-weight:600;padding:3px 10px;border:1px solid var(--accent);border-radius:99px;color:var(--accent)}
+
+.price-hero{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;margin:0 0 8px}
+.price-hero .num{font-size:3rem;font-weight:700;line-height:1}
+.notice{font-family:var(--sans);font-size:.95rem;background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--accent);border-radius:4px;padding:12px 16px;margin:16px 0}
+.notice.warn{border-left-color:var(--warn)}
+
+.book-grid{display:grid;gap:28px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));align-items:start;margin-top:20px}
+.panel{background:var(--card);border:1px solid var(--rule);border-radius:4px;padding:20px}
+.panel h3{font-family:var(--sans);font-size:1rem;letter-spacing:.04em;text-transform:uppercase;margin-bottom:14px}
+.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;font-family:var(--sans)}
+.cal-head strong{text-transform:capitalize}
+.cal-nav{font-family:var(--sans);font-size:1rem;width:36px;height:36px;border:1px solid var(--rule);background:transparent;color:var(--ink);border-radius:4px;cursor:pointer}
+.cal-nav[disabled]{opacity:.3;cursor:default}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;font-family:var(--sans)}
+.cal-dow{font-size:.72rem;text-align:center;color:var(--muted);padding:4px 0;text-transform:uppercase}
+.cal-day{aspect-ratio:1;border:1px solid var(--rule);background:transparent;color:var(--ink);border-radius:4px;font-family:var(--sans);font-size:.95rem;cursor:pointer;padding:0}
+.cal-day:hover:not([disabled]){border-color:var(--accent)}
+.cal-day[disabled]{opacity:.28;cursor:default}
+.cal-day[aria-pressed="true"],.slot[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.slots{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.slot{font-family:var(--sans);font-size:.95rem;padding:8px 14px;border:1px solid var(--rule);background:transparent;color:var(--ink);border-radius:4px;cursor:pointer}
+.slot:hover{border-color:var(--accent)}
+.chosen{font-family:var(--sans);font-size:.95rem;margin:14px 0 0;min-height:1.5em}
+.cal-help{font-family:var(--sans);font-size:.85rem;color:var(--muted);margin:12px 0 0}
+
+form{display:grid;gap:14px;font-family:var(--sans)}
+label{display:grid;gap:5px;font-size:.92rem;font-weight:600}
+label .opt{font-weight:400;color:var(--muted)}
+input[type=email],input[type=tel],input[type=text],select,textarea{font:inherit;font-weight:400;font-size:1rem;padding:10px 12px;border:1px solid var(--rule);border-radius:4px;background:var(--paper);color:var(--ink);width:100%}
+textarea{min-height:96px;resize:vertical}
+fieldset{border:0;padding:0;margin:0;display:grid;gap:6px}
+legend{font-size:.92rem;font-weight:600;padding:0;margin-bottom:4px}
+.radio{display:flex;gap:18px;flex-wrap:wrap}
+.radio label{display:flex;gap:8px;align-items:center;font-weight:400}
+.check{display:flex!important;gap:10px;align-items:flex-start;font-weight:400!important;font-size:.85rem!important;color:var(--muted)}
+.check input{margin-top:3px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+#status{font-size:.95rem;min-height:1.4em;margin:0}
+#status.ok{color:var(--ok)}
+#status.err{color:var(--warn)}
+
+.mail-box{margin-top:32px;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between;border:2px solid var(--ink);border-radius:4px;padding:20px 22px;background:var(--card)}
+.mail-box .addr{font-size:1.5rem;font-weight:700;word-break:break-all}
+.mail-box .addr a{color:var(--ink)}
+.mail-box p{margin:0}
+.copy{font-family:var(--sans);font-size:.9rem;padding:8px 14px;border:1px solid var(--ink);border-radius:4px;background:transparent;color:var(--ink);cursor:pointer}
+
+.plans{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin-top:16px}
+.plan{background:var(--card);border:1px solid var(--rule);border-radius:4px;padding:22px;display:flex;flex-direction:column}
+.plan.feat{border:2px solid var(--accent)}
+.plan .who{font-family:var(--sans);font-size:.85rem;color:var(--muted);margin:0 0 14px}
+.plan .cost{font-family:var(--sans);margin:0 0 4px}
+.plan .cost b{font-size:2rem;font-family:var(--serif)}
+.plan .once{font-family:var(--sans);font-size:.88rem;color:var(--muted);margin:0 0 14px}
+.plan ul{margin:0 0 6px;padding-left:1.1em;font-size:1rem}
+.plan li{padding:2px 0}
+table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:.95rem;margin-top:12px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+td.r,th.r{text-align:right;white-space:nowrap}
+
+footer{border-top:1px solid var(--rule);padding:32px 0 56px;font-family:var(--sans);font-size:.88rem;color:var(--muted)}
+footer p{margin:0 0 8px}
+
+@media (max-width:560px){
+  body{font-size:1.05rem}
+  .hero{padding-top:40px}
+  section{padding:40px 0}
+  .steps li{grid-template-columns:40px 1fr}
+}
+@media print{
+  header.top,.cta,#kontakt form,.cal-nav,.copy{display:none}
+  body{background:#fff;color:#000}
+  section{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top">Inference Polska</a>
+    <nav aria-label="Nawigacja po stronie">
+      <a href="#problem">Problem</a>
+      <a href="#rozwiazanie">Rozwiązanie</a>
+      <a href="#jak">Jak to działa</a>
+      <a href="#raport">Raport</a>
+      <a href="#konsultacja">Konsultacja</a>
+      <a href="#firmy">Dla biur i gabinetów</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<div class="wrap hero">
+  <p class="eyebrow">Analiza dokumentów offline</p>
+  <h1>Ludzie mają problemy do rozwiązania, których treść nie powinna być nikomu udostępniana.</h1>
+  <p class="lead" style="margin-bottom:14px">Umowy, pisma urzędowe, dokumentacja medyczna, rozliczenia. Takie sprawy trzeba rozwiązać, ale nikt postronny nie powinien mieć wglądu w ich treść ani możliwości zapoznania się z nią.</p>
+  <p class="lead"><strong>Ja pomagam je rozwiązać:</strong> czytam Twoje dokumenty, sprawdzam przepisy i literaturę naukową i oddaję Ci wydrukowany raport z wnioskami i źródłami. Robię to z pomocą AI, ale wyłącznie u siebie w biurze, na komputerze bez dostępu do internetu.<span style="display:block;margin-top:10px">Jako inżynier po Politechnice Warszawskiej pracuję na własnej maszynie z lokalną AI, odłączonej od internetu, razem z drukarką i skanerem, na autorskim oprogramowaniu, w którym duże modele językowe przetwarzają Twoje dane w oparciu o oficjalne źródła wiedzy i przepisów.</span></p>
+  <div class="cta">
+    <a class="btn" href="#konsultacja">Umów konsultację</a>
+    <a class="btn ghost" href="#rozwiazanie">Zobacz, jak to rozwiązuję</a>
+  </div>
+</div>
+
+<section id="problem">
+  <div class="wrap">
+    <p class="chapter">Rozdział I</p>
+    <h2>Gdzie trafia treść Twojej sprawy</h2>
+    <p>Popularne narzędzia AI, takie jak ChatGPT, przetwarzają to, co im wyślesz, na serwerach swojego dostawcy. Serwery te często stoją w USA. Razem z dokumentem poza kraj wyjeżdża więc cały proces wnioskowania, czyli samo czytanie i analiza Twojej sprawy.</p>
+    <p>Nie musisz wiedzieć, czym jest chmura ani jak działa model językowy. Wystarczy jedno pytanie: czy treść mojej sprawy powinna opuszczać kraj i trafiać do firmy, która nie ma z nią nic wspólnego?</p>
+
+    <div class="three">
+      <div>
+        <h3>Treść wyjeżdża</h3>
+        <p class="small muted">Dokument trafia na cudzy serwer, często w innym kraju niż Twój.</p>
+      </div>
+      <div>
+        <h3>Analiza dzieje się gdzie indziej</h3>
+        <p class="small muted">Nie tylko dane, ale i sam proces wnioskowania odbywa się poza Twoim krajem.</p>
+      </div>
+      <div>
+        <h3>Nie masz wglądu</h3>
+        <p class="small muted">Nie widzisz, gdzie dokładnie trafiła Twoja sprawa i jak długo tam zostaje.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="rozwiazanie">
+  <div class="wrap">
+    <p class="chapter">Rozdział II</p>
+    <h2>To samo, ale wszystko zostaje w moim biurze</h2>
+
+    <div class="epigraph">
+      <p>Dane i cały proces analizy nie opuszczają mojego biura.</p>
+    </div>
+
+    <p>Analizuję Twoją sprawę na lokalnym modelu językowym. Analiza opiera się na aktualnych bazach aktów prawnych i literatury naukowej, a wynik sprawdza człowiek. Wszystkie dane i cały proces wnioskowania są przetwarzane na maszynie, która stoi u mnie i nie ma dostępu do sieci.</p>
+
+    <div class="three">
+      <div>
+        <h3>Wszystko lokalnie</h3>
+        <p class="small muted">Dokumenty i cały proces wnioskowania zostają na jednym urządzeniu w moim biurze.</p>
+      </div>
+      <div>
+        <h3>Maszyna bez sieci</h3>
+        <p class="small muted">Bez Wi-Fi i bez kabla sieciowego. Pozostałe wejścia są odłączone, podłączona jest tylko drukarka ze skanerem.</p>
+      </div>
+      <div>
+        <h3>Po wydruku nic nie zostaje</h3>
+        <p class="small muted">Gdy drukuję wynik i odsyłam go Tobie, usuwam z maszyny wszystko: skany, wynik analizy, historię i ślady po pracy.</p>
+      </div>
+    </div>
+
+    <figure class="fig">
+      <svg viewBox="0 0 780 210" role="img" aria-labelledby="fig-t fig-d" xmlns="http://www.w3.org/2000/svg">
+        <title id="fig-t">Droga dokumentu</title>
+        <desc id="fig-d">Papier A4 trafia do skanera, potem do maszyny bez sieci, a wynik wraca jako wydrukowana książka. Połączenie z obcym serwerem AI jest przekreślone.</desc>
+        <g fill="none" stroke="currentColor" stroke-width="2" font-family="system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif" font-size="15">
+          <rect x="14" y="100" width="150" height="70" rx="4"/>
+          <rect x="216" y="100" width="150" height="70" rx="4"/>
+          <rect x="418" y="100" width="150" height="70" rx="4" stroke-width="3"/>
+          <rect x="620" y="100" width="146" height="70" rx="4"/>
+          <path d="M164 135h52M366 135h52M568 135h52"/>
+          <path d="M206 128l10 7-10 7M408 128l10 7-10 7M610 128l10 7-10 7" stroke-linejoin="round" stroke-linecap="round"/>
+          <rect x="438" y="16" width="110" height="38" rx="19" stroke-dasharray="5 5" stroke="var(--muted)"/>
+          <path d="M493 54v46" stroke="var(--muted)" stroke-dasharray="3 5"/>
+          <path d="M444 20l98 30" stroke="var(--warn)" stroke-width="3" stroke-linecap="round"/>
+        </g>
+        <g fill="currentColor" font-family="system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif" text-anchor="middle">
+          <text x="89" y="141" font-size="17" font-weight="700">Papier A4</text>
+          <text x="291" y="141" font-size="17" font-weight="700">Skaner</text>
+          <text x="493" y="141" font-size="17" font-weight="700">Node offline</text>
+          <text x="693" y="141" font-size="17" font-weight="700">Książka</text>
+          <text x="89" y="196" font-size="13" fill="var(--muted)">kopie dokumentów</text>
+          <text x="291" y="196" font-size="13" fill="var(--muted)">jedyne wejście</text>
+          <text x="493" y="196" font-size="13" fill="var(--muted)">lokalny LLM, bez sieci</text>
+          <text x="693" y="196" font-size="13" fill="var(--muted)">raport do ręki</text>
+          <text x="493" y="40" font-size="13" fill="var(--muted)">Obcy serwer AI</text>
+        </g>
+      </svg>
+      <figcaption>Dokument wchodzi jako skan, wychodzi jako wydruk. Pomiędzy nimi nie ma sieci, a po wydruku nie zostaje nic.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="jak">
+  <div class="wrap">
+    <p class="chapter">Rozdział III</p>
+    <h2>Jak to działa</h2>
+    <ol class="steps">
+      <li>
+        <div>
+          <h3>Wywiad</h3>
+          <p>Spotykamy się na konsultacji na miejscu. Rozmawiamy o Twoim problemie: co się stało, czego potrzebujesz, jakie są terminy i co już wiesz. Dobre pytania na początku oszczędzają godziny pracy później.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>Skan</h3>
+          <p>Przekazujesz mi osobiście kopie dokumentów (kartki A4), więc nie oddawaj oryginałów. Skanuję je na urządzeniu offline. Skany trafiają wyłącznie do maszyny, która nie ma dostępu do sieci.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>Analiza</h3>
+          <p>Przepuszczam materiał przez mój system wieloagentowy na lokalnym modelu. Przeszukuje on bazy: kodeksy i akty prawne oraz archiwum artykułów naukowych. Wynik sprawdzam ja, człowiek.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>Raport</h3>
+          <p>Przygotowuję wydrukowany raport w formie książkowej, ze spisem treści, wnioskami i źródłami, które możesz sprawdzić samodzielnie. Odsyłam Ci go z powrotem razem z kopiami dokumentów. Po wydruku usuwam z maszyny wszystkie dane cyfrowe: skany i wynik analizy. Nic nie zostaje u mnie.</p>
+        </div>
+      </li>
+    </ol>
+    <p class="muted small" style="margin-top:20px">Pracuję jako inżynier augmentatywny: człowiek prowadzi rozmowę i odpowiada za wynik, a model przyspiesza przeszukiwanie i porządkowanie materiału.</p>
+  </div>
+</section>
+
+<section id="raport">
+  <div class="wrap">
+    <p class="chapter">Rozdział IV</p>
+    <h2>Wynik w formie książki</h2>
+    <p>Raport nie jest zrzutem rozmowy z czatem. To złożony, wydrukowany dokument, który możesz położyć na biurku, podkreślić i pokazać swojemu prawnikowi lub lekarzowi. Forma jest taka sama jak w moich publikacjach:
+      <a href="https://github.com/konradcinkusz/chaos-theory-for-dummies" rel="noopener">Chaos from Zero</a> oraz
+      <a href="https://github.com/konradcinkusz/math-for-ai-engineers" rel="noopener">Mathematics from Zero for the AI Engineer</a>.</p>
+
+    <div class="toc">
+      <strong>Przykładowy układ raportu</strong>
+      <ol>
+        <li>Streszczenie problemu i pytania, na które odpowiadamy</li>
+        <li>Analiza dokumentów</li>
+        <li>Podstawy: przepisy i artykuły, z numerami i wskazaniem miejsca</li>
+        <li>Możliwe drogi postępowania</li>
+        <li>Czego nie udało się ustalić i co trzeba sprawdzić</li>
+        <li>Źródła oraz wersja i data baz, z których korzystano</li>
+      </ol>
+    </div>
+
+    <h3>Bazy da się aktualizować</h3>
+    <p>Maszyna nigdy nie łączy się z siecią, więc bazy wgrywam kontrolowanie, ze zweryfikowanych nośników: nowe i zmienione akty prawne oraz nowe publikacje naukowe. Każdy raport podaje, z jakiej wersji baz korzystał, żebyś wiedział, na jakim stanie prawnym opiera się analiza.</p>
+  </div>
+</section>
+
+<section id="konsultacja">
+  <div class="wrap">
+    <p class="chapter">Rozdział V</p>
+    <h2>Konsultacja</h2>
+    <div class="price-hero">
+      <span class="num">150 zł</span>
+      <span>brutto · konsultacja na miejscu plus analiza na lokalnym LLM</span>
+    </div>
+    <p><span class="badge">Konsultacje od 1 grudnia 2026</span> <span class="badge">Stacjonarnie</span></p>
+    <p>Konsultacja odbywa się na miejscu: przekazujesz mi osobiście kopie dokumentów. Potem przygotowuję wydrukowany raport i odsyłam Ci go z powrotem razem z kopiami. Nic nie zostaje u mnie, a po wydruku usuwam dane cyfrowe z maszyny.</p>
+    <p>Do tego czasu możesz już teraz zostawić swój adres e-mail i wybrać preferowany termin. Odezwę się mailowo lub telefonicznie.</p>
+
+    <div class="book-grid">
+      <div class="panel" aria-labelledby="cal-h">
+        <h3 id="cal-h">1. Wybierz termin</h3>
+        <div class="cal-head">
+          <button type="button" class="cal-nav" id="cal-prev" aria-label="Poprzedni miesiąc">&larr;</button>
+          <strong id="cal-label" aria-live="polite"></strong>
+          <button type="button" class="cal-nav" id="cal-next" aria-label="Następny miesiąc">&rarr;</button>
+        </div>
+        <div class="cal-grid" id="cal-grid"></div>
+        <div class="slots" id="slots" role="group" aria-label="Godziny"></div>
+        <p class="chosen" id="chosen" aria-live="polite">Nie wybrano terminu.</p>
+        <p class="cal-help">To prośba o termin, a nie automatyczna rezerwacja. Potwierdzam go mailowo lub telefonicznie i wtedy podaję miejsce spotkania. Dni robocze, od 1 grudnia 2026.</p>
+      </div>
+
+      <div class="panel" id="formularz" aria-labelledby="form-h">
+        <h3 id="form-h">2. Zostaw kontakt</h3>
+        <form id="contact" novalidate>
+          <label>Twój e-mail
+            <input type="email" name="email" id="f-email" autocomplete="email" required placeholder="adres@example.com">
+          </label>
+          <label>Imię <span class="opt">(opcjonalnie)</span>
+            <input type="text" name="imie" autocomplete="given-name">
+          </label>
+          <fieldset>
+            <legend>Jak mam się z Tobą skontaktować?</legend>
+            <div class="radio">
+              <label><input type="radio" name="kontakt" value="e-mail" checked> E-mailem</label>
+              <label><input type="radio" name="kontakt" value="telefon"> Telefonicznie</label>
+            </div>
+          </fieldset>
+          <label id="phone-wrap" hidden>Numer telefonu
+            <input type="tel" name="telefon" id="f-phone" autocomplete="tel" placeholder="+48 ...">
+          </label>
+          <label>Czego dotyczy sprawa? <span class="opt">(ogólnie)</span>
+            <select name="temat">
+              <option value="">Wybierz</option>
+              <option value="Zapytaj o ofertę">Zapytaj o ofertę</option>
+              <option>Sprawa prawna lub urzędowa</option>
+              <option>Umowy i dokumenty</option>
+              <option>Podatki i księgowość</option>
+              <option>Dokumentacja medyczna</option>
+              <option>Dokumentacja techniczna lub naukowa</option>
+              <option>Inne</option>
+            </select>
+          </label>
+          <label>Wiadomość <span class="opt">(opcjonalnie)</span>
+            <textarea name="wiadomosc" placeholder="Jedno–dwa zdania o tym, czego potrzebujesz."></textarea>
+          </label>
+          <input type="hidden" name="termin" id="f-slot" value="">
+          <div class="hp" aria-hidden="true"><label>Nie wypełniaj <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
+
+          <div class="notice warn" style="margin:0">Nie wpisuj tu treści dokumentów ani danych wrażliwych (zdrowie, PESEL, numery spraw). Formularz przechodzi przez zewnętrzną usługę, a dokumenty analizuję dopiero na maszynie offline, po spotkaniu.</div>
+
+          <label class="check"><input type="checkbox" id="f-consent" required> <span>Zgadzam się, żeby podany adres e-mail i telefon zostały użyte wyłącznie do odpowiedzi w sprawie konsultacji.</span></label>
+
+          <button class="btn" type="submit" id="send">Wyślij prośbę o konsultację</button>
+          <p id="status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+
+    <div class="mail-box" id="kontakt">
+      <div>
+        <p class="muted small" style="font-family:var(--sans)">Formularz nie działa? Napisz bezpośrednio:</p>
+        <p class="addr"><a href="mailto:konradcinkusz@gmail.com">konradcinkusz@gmail.com</a></p>
+      </div>
+      <button class="copy" type="button" id="copy-mail">Kopiuj adres</button>
+    </div>
+  </div>
+</section>
+
+<section id="firmy">
+  <div class="wrap">
+    <p class="chapter">Rozdział VI</p>
+    <h2>Dla biur rachunkowych i gabinetów: Node u Ciebie</h2>
+    <p>Jeżeli pracujesz na cudzych danych (księgi, dokumentacja pacjentów), nie możesz ich wysyłać do publicznych usług AI na cudzych serwerach. Wynajmuję i utrzymuję lokalne urządzenie z oprogramowaniem, które stoi w Twoim biurze, działa offline i uczy Twój zespół pracować lokalnie. Nie musisz mieć własnego działu IT.</p>
+
+    <div class="plans">
+      <article class="plan">
+        <h3>Node Biuro</h3>
+        <p class="who">Biura rachunkowe, małe firmy</p>
+        <p class="cost"><b>1 290 zł</b> netto / mies.</p>
+        <p class="once">+ instalacja 1 500 zł netto, jednorazowo</p>
+        <ul>
+          <li>Urządzenie u Ciebie, bez dostępu do sieci</li>
+          <li>Instalacja i konfiguracja</li>
+          <li>Aktualizacje oprogramowania i baz</li>
+          <li>Serwis i wymiana sprzętu</li>
+          <li>Szkolenie zespołu, 2 godziny</li>
+        </ul>
+      </article>
+      <article class="plan feat">
+        <h3>Node Gabinet</h3>
+        <p class="who">Gabinety lekarskie i inne zawody zaufania</p>
+        <p class="cost"><b>1 490 zł</b> netto / mies.</p>
+        <p class="once">+ instalacja 1 900 zł netto, jednorazowo</p>
+        <ul>
+          <li>Wszystko z Node Biuro</li>
+          <li>Konfiguracja pod dokumentację wrażliwą</li>
+          <li>Umowa powierzenia przetwarzania danych</li>
+          <li>Szkolenie zespołu, 2 godziny</li>
+          <li>Procedura czyszczenia danych po sprawie</li>
+        </ul>
+      </article>
+      <article class="plan">
+        <h3>Node Pro</h3>
+        <p class="who">Więcej użytkowników, większe modele</p>
+        <p class="cost"><b>od 2 900 zł</b> netto / mies.</p>
+        <p class="once">Instalacja według wyceny</p>
+        <ul>
+          <li>Mocniejsza maszyna</li>
+          <li>Wielu użytkowników naraz</li>
+          <li>Integracja z Twoimi dokumentami</li>
+          <li>Zakres ustalamy po rozmowie</li>
+        </ul>
+      </article>
+    </div>
+
+    <table>
+      <thead><tr><th>Usługa dodatkowa</th><th class="r">Cena netto</th></tr></thead>
+      <tbody>
+        <tr><td>Indeksowanie archiwum dokumentów firmy</td><td class="r">od 1 000 zł</td></tr>
+        <tr><td>Dodatkowa baza branżowa</td><td class="r">od 500 zł</td></tr>
+        <tr><td>Dodatkowe szkolenie zespołu (2 godziny)</td><td class="r">400 zł</td></tr>
+        <tr><td>Wizyta serwisowa na miejscu</td><td class="r">250 zł</td></tr>
+      </tbody>
+    </table>
+    <p class="muted small" style="margin-top:14px">Ceny netto, orientacyjne, plus 23% VAT. Umowa wynajmu na min. 24 miesiące. Zakup urządzenia zamiast wynajmu wyceniam indywidualnie. Dokładną ofertę przygotowuję po rozmowie.</p>
+    <p><a class="btn" href="#formularz" data-topic="Zapytaj o ofertę">Zapytaj o ofertę</a></p>
+  </div>
+</section>
+
+<section id="granice">
+  <div class="wrap">
+    <p class="chapter">Rozdział VII</p>
+    <h2>Czym to jest, a czym nie jest</h2>
+    <p>To analiza i uporządkowanie Twojego materiału z odwołaniem do źródeł. To <strong>nie</strong> jest porada prawna, medyczna ani podatkowa. Model językowy może się mylić, dlatego wynik sprawdza człowiek, a raport wskazuje, co zweryfikować w źródle.</p>
+    <p>W sprawach, w których potrzebny jest prawnik, lekarz lub doradca podatkowy, raport ma ułatwić Ci rozmowę z nim: pokazać, o co pytać i na co się powołać. Po wydruku usuwam z maszyny wszystkie dane cyfrowe, a Ty dostajesz swoje kopie z powrotem. Zasady ustalamy na piśmie, zanim cokolwiek zeskanuję.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong>Konrad Cinkusz</strong> · <a href="mailto:konradcinkusz@gmail.com">konradcinkusz@gmail.com</a></p>
+    <p>Strona jest statyczna: bez cookies, bez zewnętrznych skryptów i czcionek. Jedyne połączenie z zewnętrzną usługą to wysłanie formularza.</p>
+    <p>© 2026 Konrad Cinkusz</p>
+  </div>
+</footer>
+
+<script>
+/* ===== USTAWIENIA: edytuj tutaj ===== */
+const CONFIG = {
+  EMAIL: "konradcinkusz@gmail.com",
+  // Adres formularza, np. Formspree: "https://formspree.io/f/xxxxxxxx".
+  // Puste = formularz otworzy program pocztowy z gotową wiadomością (mailto).
+  FORM_ENDPOINT: "",
+  START_DATE: "2026-12-01",       // pierwsza data konsultacji
+  MONTHS_AHEAD: 5,                // ile miesięcy po miesiącu startu można przeglądać
+  WORKDAYS: [1, 2, 3, 4, 5],      // 0 = niedziela ... 6 = sobota
+  SLOTS: ["10:00", "11:00", "12:00", "14:00", "15:00", "16:00"],
+  BLOCKED_DATES: ["2026-12-24", "2026-12-25", "2026-12-26", "2027-01-01", "2027-01-06"]
+};
+/* ==================================== */
+
+(function () {
+  var pad = function (n) { return String(n).padStart(2, "0"); };
+  var iso = function (y, m, d) { return y + "-" + pad(m + 1) + "-" + pad(d); };
+
+  var today = new Date(); today.setHours(0, 0, 0, 0);
+  var start = new Date(CONFIG.START_DATE + "T00:00:00");
+  var earliest = start > today ? start : today;
+
+  var minView = new Date(start.getFullYear(), start.getMonth(), 1);
+  var maxView = new Date(minView.getFullYear(), minView.getMonth() + CONFIG.MONTHS_AHEAD, 1);
+  var view = new Date(minView);
+
+  var grid = document.getElementById("cal-grid");
+  var label = document.getElementById("cal-label");
+  var prev = document.getElementById("cal-prev");
+  var next = document.getElementById("cal-next");
+  var slotsEl = document.getElementById("slots");
+  var chosenEl = document.getElementById("chosen");
+  var slotInput = document.getElementById("f-slot");
+
+  var selDate = null;   // "YYYY-MM-DD"
+  var selTime = null;   // "HH:MM"
+
+  var fmtMonth = new Intl.DateTimeFormat("pl-PL", { month: "long", year: "numeric" });
+  var fmtLong = new Intl.DateTimeFormat("pl-PL", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+
+  function isAvailable(date) {
+    if (date < earliest) return false;
+    if (CONFIG.WORKDAYS.indexOf(date.getDay()) === -1) return false;
+    var key = iso(date.getFullYear(), date.getMonth(), date.getDate());
+    return CONFIG.BLOCKED_DATES.indexOf(key) === -1;
+  }
+
+  function renderCalendar() {
+    label.textContent = fmtMonth.format(view);
+    grid.innerHTML = "";
+    ["Pn", "Wt", "Śr", "Cz", "Pt", "So", "Nd"].forEach(function (d) {
+      var h = document.createElement("div");
+      h.className = "cal-dow"; h.textContent = d; grid.appendChild(h);
+    });
+    var first = new Date(view.getFullYear(), view.getMonth(), 1);
+    var offset = (first.getDay() + 6) % 7;
+    var days = new Date(view.getFullYear(), view.getMonth() + 1, 0).getDate();
+    for (var i = 0; i < offset; i++) grid.appendChild(document.createElement("div"));
+    for (var d = 1; d <= days; d++) {
+      var date = new Date(view.getFullYear(), view.getMonth(), d);
+      var key = iso(view.getFullYear(), view.getMonth(), d);
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "cal-day";
+      b.textContent = d;
+      b.setAttribute("aria-label", fmtLong.format(date));
+      b.disabled = !isAvailable(date);
+      b.setAttribute("aria-pressed", key === selDate ? "true" : "false");
+      b.dataset.key = key;
+      b.addEventListener("click", onDay);
+      grid.appendChild(b);
+    }
+    prev.disabled = view <= minView;
+    next.disabled = view >= maxView;
+  }
+
+  function onDay(e) {
+    selDate = e.currentTarget.dataset.key;
+    selTime = null;
+    renderCalendar();
+    renderSlots();
+    updateChosen();
+  }
+
+  function renderSlots() {
+    slotsEl.innerHTML = "";
+    if (!selDate) return;
+    CONFIG.SLOTS.forEach(function (t) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "slot"; b.textContent = t;
+      b.setAttribute("aria-pressed", t === selTime ? "true" : "false");
+      b.addEventListener("click", function () {
+        selTime = t; renderSlots(); updateChosen();
+      });
+      slotsEl.appendChild(b);
+    });
+  }
+
+  function updateChosen() {
+    if (selDate && selTime) {
+      var p = selDate.split("-");
+      var txt = fmtLong.format(new Date(+p[0], +p[1] - 1, +p[2])) + ", " + selTime;
+      chosenEl.textContent = "Wybrany termin: " + txt;
+      slotInput.value = txt;
+    } else if (selDate) {
+      chosenEl.textContent = "Wybierz godzinę.";
+      slotInput.value = "";
+    } else {
+      chosenEl.textContent = "Nie wybrano terminu.";
+      slotInput.value = "";
+    }
+  }
+
+  prev.addEventListener("click", function () { view = new Date(view.getFullYear(), view.getMonth() - 1, 1); renderCalendar(); });
+  next.addEventListener("click", function () { view = new Date(view.getFullYear(), view.getMonth() + 1, 1); renderCalendar(); });
+  renderCalendar();
+
+  /* ---- formularz ---- */
+  var form = document.getElementById("contact");
+  var statusEl = document.getElementById("status");
+  var sendBtn = document.getElementById("send");
+  var phoneWrap = document.getElementById("phone-wrap");
+  var phoneInput = document.getElementById("f-phone");
+
+  function setStatus(msg, cls) { statusEl.textContent = msg; statusEl.className = cls || ""; }
+
+  form.addEventListener("change", function (e) {
+    if (e.target.name === "kontakt") {
+      var tel = form.elements["kontakt"].value === "telefon";
+      phoneWrap.hidden = !tel;
+      phoneInput.required = tel;
+    }
+  });
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    setStatus("");
+    var email = document.getElementById("f-email");
+    if (!email.value || !email.checkValidity()) { setStatus("Podaj poprawny adres e-mail.", "err"); email.focus(); return; }
+    if (phoneInput.required && !phoneInput.value.trim()) { setStatus("Podaj numer telefonu albo wybierz kontakt e-mailem.", "err"); phoneInput.focus(); return; }
+    if (!document.getElementById("f-consent").checked) { setStatus("Zaznacz zgodę na kontakt.", "err"); return; }
+    if (form.elements["_gotcha"].value) { return; }
+
+    var data = new FormData(form);
+    var lines = [
+      "E-mail: " + (data.get("email") || ""),
+      "Imię: " + (data.get("imie") || "-"),
+      "Preferowany kontakt: " + (data.get("kontakt") || ""),
+      "Telefon: " + (data.get("telefon") || "-"),
+      "Temat: " + (data.get("temat") || "-"),
+      "Preferowany termin: " + (data.get("termin") || "-"),
+      "",
+      "Wiadomość:",
+      (data.get("wiadomosc") || "-")
+    ];
+
+    if (!CONFIG.FORM_ENDPOINT) {
+      var subject = "Prośba o konsultację" + (data.get("termin") ? " (" + data.get("termin") + ")" : "");
+      window.location.href = "mailto:" + CONFIG.EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(lines.join("\n"));
+      setStatus("Otwieram Twój program pocztowy. Jeśli nic się nie dzieje, napisz na " + CONFIG.EMAIL + ".", "ok");
+      return;
+    }
+
+    sendBtn.disabled = true;
+    setStatus("Wysyłam…");
+    data.append("_subject", "Prośba o konsultację");
+    fetch(CONFIG.FORM_ENDPOINT, { method: "POST", body: data, headers: { "Accept": "application/json" } })
+      .then(function (r) {
+        if (!r.ok) throw new Error("http " + r.status);
+        form.reset(); phoneWrap.hidden = true; phoneInput.required = false;
+        selDate = null; selTime = null; renderCalendar(); renderSlots(); updateChosen();
+        setStatus("Dziękuję, wiadomość poszła. Odezwę się mailowo lub telefonicznie.", "ok");
+      })
+      .catch(function () {
+        setStatus("Nie udało się wysłać formularza. Napisz proszę bezpośrednio na " + CONFIG.EMAIL + ".", "err");
+      })
+      .finally(function () { sendBtn.disabled = false; });
+  });
+
+  /* ---- linki ustawiające temat formularza ---- */
+  document.querySelectorAll("[data-topic]").forEach(function (a) {
+    a.addEventListener("click", function () {
+      form.elements["temat"].value = a.getAttribute("data-topic");
+      setTimeout(function () { document.getElementById("f-email").focus({ preventScroll: true }); }, 500);
+    });
+  });
+
+  /* ---- kopiowanie adresu ---- */
+  document.getElementById("copy-mail").addEventListener("click", function () {
+    var btn = this;
+    function done(ok) { btn.textContent = ok ? "Skopiowano" : "Zaznacz i skopiuj ręcznie"; setTimeout(function () { btn.textContent = "Kopiuj adres"; }, 2000); }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(CONFIG.EMAIL).then(function () { done(true); }, function () { done(false); });
+    } else { done(false); }
+  });
+})();
+</script>
+<noscript><div class="wrap"><p class="notice">Do wysłania formularza i wyboru terminu potrzebny jest JavaScript. Możesz napisać bezpośrednio: <a href="mailto:konradcinkusz@gmail.com">konradcinkusz@gmail.com</a>.</p></div></noscript>
+</body>
+</html>
