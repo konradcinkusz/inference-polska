@@ -2,11 +2,14 @@
 
 Strona internetowa usługi **Inference Polska**: analiza dokumentów offline na lokalnym modelu językowym, na maszynie bez dostępu do sieci. Wynik trafia do klienta jako wydrukowany raport w formie książki, a po wydruku wszystkie dane cyfrowe są usuwane.
 
-Strona prowadzi trzy ścieżki oferty, wybierane w panelu „Z czym przychodzisz?” na górze strony:
+Strona prowadzi cztery ścieżki oferty, wybierane w panelu „Z czym przychodzisz?” na górze strony:
 
 1. **Analiza dokumentów offline** (`#analiza`): dla osób prywatnych, konsultacja i raport.
 2. **Node u Ciebie** (`#firmy`): lokalne urządzenie AI dla biur rachunkowych i gabinetów.
-3. **POC w tydzień** (`#poc`): POC nowego rozwiązania lub przepisanie systemu legacy (jako POC) metodą inżynierii augmentatywnej.
+3. **POC i system legacy** (`#poc`): dwie osobno wyceniane usługi, POC nowego rozwiązania oraz przepisanie lub analiza systemu legacy.
+4. **Książka na zamówienie** (`#ksiazka`): od konspektu do wydruku.
+
+Zlecenia 3 i 4 mają dwa tryby pracy (`#tryb`): droższy *fully private* na modelach lokalnych i tańszy *cloud*.
 
 Wszystkie ścieżki kończą się we wspólnej sekcji kontaktu (`#konsultacja`); przyciski z atrybutem `data-topic` ustawiają temat w formularzu.
 
