@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Inference Polska: analiza dokumentów offline, Node dla firm, POC w tydzień</title>
-<meta name="description" content="Analiza dokumentów na maszynie bez sieci, lokalne urządzenie AI dla biur i gabinetów oraz POC nowego rozwiązania lub przepisanie systemu legacy w tydzień. Inżynieria augmentatywna: człowiek odpowiada za wynik, AI przyspiesza pracę.">
+<title>Inference Polska: analiza dokumentów offline, Node dla firm, POC, legacy i książki</title>
+<meta name="description" content="Analiza dokumentów na maszynie bez sieci, lokalne urządzenie AI dla biur i gabinetów, POC w tydzień, przepisanie lub analiza systemu legacy oraz książki na zamówienie. Do wyboru praca fully private na modelach lokalnych albo tańsza na modelach cloud.">
 <meta name="color-scheme" content="light dark">
-<meta property="og:title" content="Inference Polska: analiza dokumentów offline, Node dla firm, POC w tydzień">
-<meta property="og:description" content="Dane i cały proces analizy zostają w moim biurze. Dla firm: lokalny Node oraz POC lub przepisanie systemu legacy w tydzień.">
+<meta property="og:title" content="Inference Polska: analiza dokumentów offline, Node dla firm, POC, legacy i książki">
+<meta property="og:description" content="Dane i cały proces analizy zostają w moim biurze. Dla firm: lokalny Node, POC w tydzień, system legacy i książki na zamówienie, w trybie fully private albo cloud.">
 <meta property="og:type" content="website">
 <script>
 (function(){var r=document.documentElement;r.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")r.setAttribute("data-theme",t);}catch(e){}})();
@@ -57,7 +57,7 @@ header.top .wrap{display:flex;gap:8px 16px;align-items:center;min-height:64px;fl
 .brand-mark{width:28px;height:28px;border-radius:6px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-family:var(--mono);font-size:.8rem;font-weight:700}
 .brand:hover{color:var(--ink);text-decoration:none}
 nav.main{display:flex;flex-wrap:wrap;gap:2px;font-size:.95rem;align-items:center}
-nav.main a{color:var(--muted);text-decoration:none;padding:8px 11px;border-radius:6px;white-space:nowrap;font-weight:500}
+nav.main a{color:var(--muted);text-decoration:none;padding:8px 9px;border-radius:6px;white-space:nowrap;font-weight:500}
 nav.main a:hover{color:var(--ink);background:var(--card-2)}
 nav.main a[aria-current="true"]{color:var(--ink);box-shadow:inset 0 -2px 0 var(--accent);border-radius:6px 6px 0 0}
 nav.main a.nav-cta{background:var(--accent);color:var(--accent-ink);font-weight:700;margin-left:8px;padding:8px 14px}
@@ -73,7 +73,7 @@ nav.main a.nav-cta:hover{background:var(--accent-hover);color:var(--accent-ink)}
   :root:not([data-theme="light"]) .theme-btn .i-moon{display:none}
 }
 .menu-btn{display:none}
-@media (max-width:1040px){
+@media (max-width:1180px){
   nav.main{order:5;width:100%;padding-bottom:10px}
   .js .menu-btn{display:inline-flex}
   .js nav.main{display:none;flex-direction:column;align-items:stretch;gap:0;padding:4px 0 14px}
@@ -83,7 +83,8 @@ nav.main a.nav-cta:hover{background:var(--accent-hover);color:var(--accent-ink)}
   .js nav.main a[aria-current="true"]{box-shadow:inset 3px 0 0 var(--accent);padding-left:12px;border-radius:0}
   .js nav.main a.nav-cta{margin:12px 0 0;border-radius:8px;text-align:center;border-top:0}
 }
-@media (max-width:420px){ #theme-label{display:none} }
+#theme-label{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.theme-btn{width:40px;padding:0;justify-content:center}
 
 /* type */
 h1,h2,h3{color:var(--ink);font-family:var(--serif)}
@@ -187,6 +188,14 @@ section.cont{border-top:0;padding-top:0}
 .gets li{padding-left:28px;position:relative;line-height:1.55}
 .gets li::before{content:"✓";position:absolute;left:0;top:0;color:var(--accent);font-weight:800}
 .sub{margin:44px 0 14px}
+.card .price-line{margin:16px 0 0;padding-top:14px;border-top:1px solid var(--rule);font-family:var(--mono);font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.card.big ul{margin:12px 0 0;padding:0;list-style:none;font-size:1rem}
+.card.big li{padding:4px 0 4px 26px;position:relative;line-height:1.5}
+.card.big li::before{content:"✓";position:absolute;left:0;top:4px;color:var(--accent);font-weight:800}
+.modes{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));margin-top:28px}
+.plan .lvl{font-family:var(--mono);font-size:.82rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 16px;padding-bottom:16px;border-bottom:1px solid var(--rule)}
+.plan .lvl b{color:var(--accent);letter-spacing:.2em;margin-right:8px}
+.plan .lvl b i{font-style:normal;opacity:.3}
 
 /* about */
 .about{display:grid;grid-template-columns:minmax(0,280px) 1fr;gap:40px;align-items:start}
@@ -308,10 +317,12 @@ footer p{margin:0 0 8px}
   <div class="wrap">
     <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">IP</span>Inference Polska</a>
     <nav class="main" id="nav" aria-label="Nawigacja po stronie">
-      <a href="#analiza" data-spy="analiza">Analiza dokumentów</a>
-      <a href="#firmy" data-spy="firmy">Node dla firm</a>
-      <a href="#poc" data-spy="poc">POC w tydzień</a>
-      <a href="#o-mnie" data-spy="o-mnie">Kim jestem</a>
+      <a href="#analiza" data-spy="analiza">Dokumenty</a>
+      <a href="#firmy" data-spy="firmy">Node</a>
+      <a href="#poc" data-spy="poc">POC i legacy</a>
+      <a href="#ksiazka" data-spy="ksiazka">Książki</a>
+      <a href="#tryb" data-spy="tryb">Private / cloud</a>
+      <a href="#o-mnie" data-spy="o-mnie">O mnie</a>
       <a href="#konsultacja" data-spy="konsultacja" class="nav-cta">Umów rozmowę</a>
     </nav>
     <button type="button" class="icon-btn theme-btn" id="theme-btn" aria-label="Przełącz motyw jasny lub ciemny">
@@ -364,8 +375,15 @@ footer p{margin:0 0 8px}
     <a class="route" href="#poc">
       <span class="n" aria-hidden="true">03</span>
       <span class="q">Mam pomysł na system albo system legacy</span>
-      <span class="a">POC w tydzień<span class="tag-new">Nowe</span></span>
-      <span class="m">działający prototyp lub przepisanie legacy · wycena po rozmowie</span>
+      <span class="a">POC lub system legacy</span>
+      <span class="m">POC w tydzień · przepisanie lub analiza legacy · dwie osobne wyceny</span>
+      <span class="go" aria-hidden="true">&rarr;</span>
+    </a>
+    <a class="route" href="#ksiazka">
+      <span class="n" aria-hidden="true">04</span>
+      <span class="q">Potrzebuję książki: poradnika, podręcznika, opracowania</span>
+      <span class="a">Książka na zamówienie<span class="tag-new">Nowe</span></span>
+      <span class="m">od konspektu do wydruku · fully private albo taniej w cloud</span>
       <span class="go" aria-hidden="true">&rarr;</span>
     </a>
   </nav>
@@ -596,13 +614,13 @@ footer p{margin:0 0 8px}
   </div>
 </section>
 
-<!-- ===== 03: POC w tydzień ===== -->
+<!-- ===== 03: POC i system legacy ===== -->
 <section id="poc" class="alt" data-spy="poc">
   <div class="wrap">
-    <p class="label"><span class="no">03</span> Dla firm i zespołów <span class="new">Nowe</span></p>
-    <h2>POC w tydzień: nowy pomysł albo system legacy</h2>
+    <p class="label"><span class="no">03</span> Dla firm i zespołów</p>
+    <h2>POC w tydzień albo system legacy: dwie osobne usługi</h2>
     <div class="prose">
-      <p>Masz pomysł, którego nie da się ocenić na slajdach, albo stary system, którego nikt nie chce ruszać? W tydzień buduję działający proof of concept (POC). Widać na nim, czy kierunek ma sens, zanim wydasz budżet na pełny projekt.</p>
+      <p>Masz pomysł, którego nie da się ocenić na slajdach, albo stary system, którego nikt nie chce ruszać? To dwa różne zlecenia i każde wyceniam osobno. W obu wynik widać po tygodniu, zanim wydasz budżet na pełny projekt.</p>
       <p>Pracuję metodą <strong>inżynierii augmentatywnej</strong>: architekturę, decyzje i odpowiedzialność za wynik biorę ja, a modele AI przyspieszają czytanie kodu, pisanie i testy. Dzięki temu tydzień wystarcza na działający prototyp, a nie tylko na prezentację.</p>
     </div>
 
@@ -611,11 +629,18 @@ footer p{margin:0 0 8px}
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.4 1 2.5h6c0-1.1.3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></div>
         <h3>POC nowego rozwiązania</h3>
         <p>Od pomysłu do działającego prototypu: najważniejsza ścieżka użytkownika, prawdziwy kod, dane testowe. Sprawdzasz pomysł na czymś, co da się uruchomić i pokazać, a nie na opisie.</p>
+        <p class="price-line">Usługa A · osobna wycena</p>
+        <p style="margin-top:14px"><a class="btn" href="#formularz" data-topic="POC nowego rozwiązania">Zapytaj o POC</a></p>
       </div>
       <div class="card big">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8M21 3v5h-5M21 12a9 9 0 0 1-15.5 6.2L3 16M3 21v-5h5"/></svg></div>
-        <h3>Przepisanie systemu legacy (jako POC)</h3>
-        <p>Przepisuję stary system na współczesną technologię w wersji POC: kluczowe funkcje działają na nowym stosie. Widzisz, jak wyglądałaby migracja, co przenosi się łatwo i gdzie są ryzyka, zanim zdecydujesz o całości.</p>
+        <h3>System legacy: przepisanie lub analiza</h3>
+        <ul>
+          <li><strong>Przepisanie (jako POC):</strong> kluczowe funkcje starego systemu działają na współczesnej technologii. Widzisz, jak wyglądałaby migracja i gdzie są ryzyka.</li>
+          <li><strong>Analiza:</strong> ustalam, co system faktycznie robi, od czego zależy i co warto przenieść, a wynik dostajesz jako pisemne opracowanie.</li>
+        </ul>
+        <p class="price-line">Usługa B · osobna wycena</p>
+        <p style="margin-top:14px"><a class="btn" href="#formularz" data-topic="System legacy: przepisanie lub analiza">Zapytaj o legacy</a></p>
       </div>
     </div>
 
@@ -624,7 +649,7 @@ footer p{margin:0 0 8px}
       <li>
         <p class="when">Dzień 1</p>
         <h3>Zakres</h3>
-        <p>Rozmowa, przegląd pomysłu lub istniejącego kodu i jedno jasne kryterium: co POC ma udowodnić.</p>
+        <p>Rozmowa, przegląd pomysłu lub istniejącego kodu i jedno jasne kryterium: co ma zostać udowodnione.</p>
       </li>
       <li class="span3">
         <p class="when">Dni 2–4</p>
@@ -634,7 +659,7 @@ footer p{margin:0 0 8px}
       <li>
         <p class="when">Dzień 5</p>
         <h3>Demo</h3>
-        <p>Pokazuję działający POC i przekazuję kod razem z rekomendacją, co dalej.</p>
+        <p>Pokazuję działający wynik i przekazuję kod razem z rekomendacją, co dalej.</p>
       </li>
     </ol>
     <div class="week-scale" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
@@ -647,8 +672,67 @@ footer p{margin:0 0 8px}
       <li>Rekomendację: rozwijać, zmienić kierunek czy zrezygnować.</li>
     </ul>
 
-    <div class="notice" role="note" style="margin-top:32px;max-width:52rem">POC to dowód, że kierunek działa, a nie gotowy system produkcyjny. Zakres na tydzień i cenę ustalamy po rozmowie, zanim zacznę. Zasady poufności kodu i danych spisujemy przed startem.</div>
-    <p style="margin:24px 0 0"><a class="btn" href="#formularz" data-topic="POC lub przepisanie systemu legacy">Porozmawiajmy o POC</a></p>
+    <div class="notice" role="note" style="margin-top:32px;max-width:52rem">POC to dowód, że kierunek działa, a nie gotowy system produkcyjny. POC nowego rozwiązania i praca nad systemem legacy mają osobne ceny. Na cenę wpływa też <a href="#tryb">tryb pracy</a>: fully private albo cloud. Zakres i cenę ustalamy po rozmowie, zanim zacznę.</div>
+  </div>
+</section>
+
+<!-- ===== 04: książka na zamówienie ===== -->
+<section id="ksiazka" data-spy="ksiazka">
+  <div class="wrap">
+    <p class="label"><span class="no">04</span> Książka na zamówienie <span class="new">Nowe</span></p>
+    <h2>Przygotuję i napiszę dowolną książkę</h2>
+    <div class="prose">
+      <p>Poradnik, podręcznik, opracowanie techniczne, materiały szkoleniowe, historia firmy. Podajesz temat i czytelnika, a ja przygotowuję książkę od konspektu po wydruk. Tak samo powstały moje publikacje:
+        <a href="https://github.com/konradcinkusz/chaos-theory-for-dummies" rel="noopener">Chaos from Zero</a> oraz
+        <a href="https://github.com/konradcinkusz/math-for-ai-engineers" rel="noopener">Mathematics from Zero for the AI Engineer</a>.</p>
+      <p>Także tutaj pracuję metodą inżynierii augmentatywnej: modele AI przyspieszają zbieranie materiału i pisanie, a za układ, treść i sprawdzenie źródeł odpowiadam ja.</p>
+    </div>
+
+    <ol class="steps" style="margin-top:28px">
+      <li><div><h3>Temat i czytelnik</h3><p>Ustalamy, o czym jest książka, dla kogo i co czytelnik ma po niej umieć lub wiedzieć.</p></div></li>
+      <li><div><h3>Konspekt</h3><p>Dostajesz spis treści z opisem rozdziałów. Poprawiamy go, zanim powstanie pierwsza strona.</p></div></li>
+      <li><div><h3>Pisanie i redakcja</h3><p>Piszę rozdziały, sprawdzam fakty i źródła, przygotowuję rysunki i wykresy. Ty czytasz i zgłaszasz uwagi.</p></div></li>
+      <li><div><h3>Skład i wydruk</h3><p>Oddaję złożoną książkę: plik gotowy do druku i wydrukowany egzemplarz, ze spisem treści i źródłami.</p></div></li>
+    </ol>
+
+    <div class="notice" role="note" style="margin-top:32px;max-width:52rem">Cena zależy od objętości, tematu i <a href="#tryb">trybu pracy</a>: fully private albo cloud. Wycenę przygotowuję po rozmowie.</div>
+    <p style="margin:24px 0 0"><a class="btn" href="#formularz" data-topic="Książka na zamówienie">Zapytaj o książkę</a></p>
+  </div>
+</section>
+
+<!-- ===== tryb pracy ===== -->
+<section id="tryb" class="alt" data-spy="tryb">
+  <div class="wrap">
+    <p class="label">Tryb pracy · dotyczy zleceń <span class="no">03</span> i <span class="no">04</span></p>
+    <h2>Fully private albo cloud: Ty wybierasz</h2>
+    <p class="prose">POC, pracę nad systemem legacy i książkę mogę wykonać na dwa sposoby. Różnią się tym, gdzie przetwarzany jest Twój materiał, i ceną. Tryb wybierasz przed startem i zapisujemy go w umowie.</p>
+
+    <div class="modes">
+      <article class="plan feat">
+        <span class="tag">Pełna prywatność</span>
+        <h3>Fully private</h3>
+        <p class="who">Kod objęty tajemnicą, dane wrażliwe, niepublikowane treści</p>
+        <p class="lvl"><b>zł zł zł</b> wyższa cena</p>
+        <ul>
+          <li>Pracuję wyłącznie na modelach lokalnych, na własnej maszynie</li>
+          <li>Twój kod i materiały nie trafiają do żadnej usługi chmurowej</li>
+          <li>Wnioskowanie zostaje u mnie, tak jak przy analizie dokumentów</li>
+          <li>Zasady przechowywania i usuwania danych na piśmie</li>
+        </ul>
+      </article>
+      <article class="plan">
+        <h3>Cloud</h3>
+        <p class="who">Projekty bez danych wrażliwych, prototypy na danych testowych</p>
+        <p class="lvl"><b>zł <i>zł zł</i></b> niższa cena</p>
+        <ul>
+          <li>Pracuję z modelami chmurowymi (cloud)</li>
+          <li>Materiał jest przetwarzany na serwerach dostawcy modelu</li>
+          <li>Ten sam zakres i ten sam człowiek odpowiedzialny za wynik</li>
+          <li>Wiesz z góry, co wychodzi poza moje biuro</li>
+        </ul>
+      </article>
+    </div>
+    <p class="muted small" style="margin-top:20px;max-width:52rem">Analiza prywatnych dokumentów (01) i Node u Ciebie (02) działają zawsze offline. Wybór trybu dotyczy tylko POC, systemów legacy i książek.</p>
   </div>
 </section>
 
@@ -702,7 +786,7 @@ footer p{margin:0 0 8px}
     <p class="badges"><span class="badge">Konsultacje od 1 grudnia 2026</span> <span class="badge">Stacjonarnie</span></p>
     <div class="prose">
       <p>Konsultacja w sprawie dokumentów odbywa się na miejscu: przekazujesz mi osobiście kopie dokumentów. Potem przygotowuję wydrukowany raport i odsyłam Ci go z powrotem razem z kopiami. Nic nie zostaje u mnie, a po wydruku usuwam dane cyfrowe z maszyny.</p>
-      <p>Pytasz o <a href="#firmy">Node dla firmy</a> albo <a href="#poc">POC w tydzień</a>? Wybierz temat w formularzu. Odezwę się mailowo lub telefonicznie i ustalimy zakres.</p>
+      <p>Pytasz o <a href="#firmy">Node dla firmy</a>, <a href="#poc">POC lub system legacy</a> albo <a href="#ksiazka">książkę</a>? Wybierz temat i tryb pracy w formularzu. Odezwę się mailowo lub telefonicznie i ustalimy zakres.</p>
     </div>
 
     <div class="book-grid">
@@ -734,7 +818,11 @@ footer p{margin:0 0 8px}
               </optgroup>
               <optgroup label="Dla firm">
                 <option value="Zapytaj o ofertę">Node dla biura lub gabinetu: zapytaj o ofertę</option>
-                <option value="POC lub przepisanie systemu legacy">POC lub przepisanie systemu legacy</option>
+              </optgroup>
+              <optgroup label="Zlecenia">
+                <option>POC nowego rozwiązania</option>
+                <option>System legacy: przepisanie lub analiza</option>
+                <option>Książka na zamówienie</option>
               </optgroup>
               <option>Inne</option>
             </select>
@@ -754,6 +842,13 @@ footer p{margin:0 0 8px}
           </fieldset>
           <label id="phone-wrap" hidden>Numer telefonu
             <input type="tel" name="telefon" id="f-phone" autocomplete="tel" placeholder="+48 ...">
+          </label>
+          <label>Tryb pracy <span class="opt">(POC, legacy, książka)</span>
+            <select name="tryb">
+              <option value="">Nie dotyczy lub nie wiem jeszcze</option>
+              <option>Fully private (modele lokalne)</option>
+              <option>Cloud (taniej)</option>
+            </select>
           </label>
           <label>Wiadomość <span class="opt">(opcjonalnie)</span>
             <textarea name="wiadomosc" placeholder="Jedno–dwa zdania o tym, czego potrzebujesz."></textarea>
@@ -998,6 +1093,7 @@ const CONFIG = {
       "Preferowany kontakt: " + (data.get("kontakt") || ""),
       "Telefon: " + (data.get("telefon") || "-"),
       "Temat: " + (data.get("temat") || "-"),
+      "Tryb pracy: " + (data.get("tryb") || "-"),
       "Preferowany termin: " + (data.get("termin") || "-"),
       "",
       "Wiadomość:",
