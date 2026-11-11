@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Inference Polska: analiza dokumentów offline</title>
-<meta name="description" content="Analiza dokumentów offline: dane i cały proces analizy nie opuszczają mojego biura. Rozmowa wstępna jest bezpłatna, analiza kosztuje 150 zł brutto za każde rozpoczęte 50 stron (tryb fully private). Także: prywatna sztuczna inteligencja w gabinecie, prototyp w tydzień i książki na zamówienie. Tryb pracy do wyboru: fully private albo cloud.">
+<meta name="description" content="Analiza dokumentów offline: dane i cały proces analizy nie opuszczają mojego biura. Rozmowa wstępna jest bezpłatna, analiza kosztuje 150 zł brutto za każde rozpoczęte 50 stron (tryb fully private). Także: prywatna sztuczna inteligencja w gabinecie, prototyp w tydzień, kontrakt programistyczny i książki na zamówienie. Tryb pracy do wyboru: fully private albo cloud.">
 <meta name="color-scheme" content="light dark">
 <meta property="og:title" content="Inference Polska: analiza dokumentów offline">
 <meta property="og:description" content="Analiza dokumentów offline: dane i cały proces analizy nie opuszczają mojego biura. Rozmowa wstępna bezpłatna. Tryb cloud jako tańsza opcja, na opisanych warunkach.">
@@ -51,9 +51,9 @@ strong,b{color:var(--ink);font-weight:600}
 .brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:1.05rem;color:var(--ink);text-decoration:none;white-space:nowrap}
 .brand:hover{color:var(--ink);text-decoration:none}
 .brand-mark{width:26px;height:26px;border-radius:4px;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-family:var(--mono);font-size:.72rem;font-weight:700}
-.pitch{color:var(--ink);font-size:1.02rem;line-height:1.5;margin:28px 0}
+.pitch{color:var(--ink);font-size:1.02rem;line-height:1.5;margin:22px 0}
 nav.main{display:flex;flex-direction:column}
-nav.main a{padding:11px 0;border-top:1px solid var(--rule-strong);color:var(--muted);text-decoration:none;font-size:1rem}
+nav.main a{padding:9px 0;border-top:1px solid var(--rule-strong);color:var(--muted);text-decoration:none;font-size:1rem}
 nav.main a:hover,nav.main a[aria-current="true"]{color:var(--ink)}
 nav.main a[aria-current="true"]{font-weight:600}
 nav.main a.nav-cta{margin-top:20px;border:0;border-radius:6px;background:var(--accent);color:var(--accent-ink);font-weight:600;text-align:center;padding:12px 14px}
@@ -118,7 +118,7 @@ section>.wrap{border-top:1px solid var(--rule);padding-top:60px}
 .fig{margin:34px 0 0;border:1px solid var(--rule);border-radius:6px;padding:20px 16px 14px}
 .fig figcaption{font-size:.92rem;color:var(--muted);margin-top:10px;text-align:center}
 .price{margin:40px 0 0}
-.price .num{font-size:1.15rem;color:var(--ink);margin-bottom:8px}
+.price .num{font-size:1.15rem;color:var(--ink);margin-bottom:14px}
 .price .num b{font-size:clamp(2.4rem,5vw,3.2rem);font-weight:600;letter-spacing:-.03em;line-height:1;margin-right:10px}
 
 /* diagram trybu cloud */
@@ -178,18 +178,17 @@ summary:hover h3{color:var(--accent)}
 .case .pdf span{font-family:var(--mono);font-size:.72rem;font-weight:400;color:var(--muted);margin-left:8px}
 
 /* pakiety i tryby */
-.plans,.modes{display:grid;gap:0 36px;margin:28px 0 20px}
+.plans,.modes{display:grid;gap:30px 36px;margin:34px 0 20px}
 .plans{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
 .modes{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
-.plan{display:flex;flex-direction:column;border-top:1px solid var(--ink);padding:16px 0 24px}
-.plan .tag{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.plan{position:relative;display:flex;flex-direction:column;border-top:1px solid var(--ink);padding:16px 0 24px}
+.plan .tag{position:absolute;top:-24px;left:0;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
 .plan h3{font-size:1.25rem;margin-bottom:4px}
 .plan .who{font-size:.95rem;color:var(--muted);margin:0 0 12px}
 .plan .lvl{font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);margin:0 0 12px}
 .plan ul{margin:0;padding:0;list-style:none;font-size:.97rem}
 .plan li{padding:4px 0 4px 18px;position:relative;line-height:1.5}
 .plan li::before{content:"–";position:absolute;left:0;color:var(--muted)}
-.plan .ask{margin:auto 0 0;padding-top:18px}
 
 /* tryb cloud */
 .cloud .body ol,.cloud .body ul{margin:0 0 4px;padding-left:1.4em}
@@ -282,7 +281,7 @@ footer p{margin:0 0 6px}
 
 <header class="side" id="header">
   <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">IP</span>Inference Polska</a>
-  <p class="pitch">Analizuję wrażliwe dokumenty offline i oddaję wydrukowany raport. Dla firm: prywatna AI w gabinecie, prototyp w tydzień i książki na zamówienie.</p>
+  <p class="pitch">Analizuję wrażliwe dokumenty offline i oddaję raport. Dla firm: prywatna AI w gabinecie, prototyp w tydzień, kontrakt programistyczny i książki na zamówienie.</p>
   <button type="button" class="icon-btn menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
   <nav class="main" id="nav" aria-label="Nawigacja po stronie">
     <a href="#oferta" data-spy="oferta">Oferta</a>
@@ -291,6 +290,7 @@ footer p{margin:0 0 6px}
     <a href="#firmy" data-spy="firmy">AI w gabinecie</a>
     <a href="#poc" data-spy="poc">Prototyp</a>
     <a href="#ksiazka" data-spy="ksiazka">Książki</a>
+    <a href="#kontrakt" data-spy="kontrakt">Kontrakt</a>
     <a href="#tryb" data-spy="tryb">Tryb pracy</a>
     <a href="#o-mnie" data-spy="o-mnie">O mnie</a>
     <a class="nav-cta" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a>
@@ -327,6 +327,7 @@ footer p{margin:0 0 6px}
       <a href="#firmy"><span class="t">Prywatna sztuczna inteligencja w Twoim gabinecie</span><span class="m">wycena po rozmowie<br>zawsze offline</span></a>
       <a href="#poc"><span class="t">Prototyp w tydzień</span><span class="m">wycena po rozmowie<br>fully private lub cloud</span></a>
       <a href="#ksiazka"><span class="t">Książka na zamówienie</span><span class="m">wycena po rozmowie<br>fully private lub cloud</span></a>
+      <a href="#kontrakt"><span class="t">Kontrakt programistyczny</span><span class="m">125–180 zł netto / godz.<br>fully private lub cloud</span></a>
     </div>
   </div>
 </section>
@@ -340,7 +341,7 @@ footer p{margin:0 0 6px}
       <dl class="facts3">
         <div><dt>Wszystko lokalnie</dt><dd>Dokumenty i cały proces wnioskowania zostają na jednym urządzeniu w moim biurze.</dd></div>
         <div><dt>Maszyna bez sieci</dt><dd>Pracuję na własnej maszynie z lokalną AI, odłączonej od internetu. Bez Wi-Fi i bez kabla sieciowego. Podłączona jest tylko drukarka ze skanerem. Materiał z e-maila i bazy przepisów ładuję na nią kontrolowanie.</dd></div>
-        <div><dt>Po wydruku nic nie zostaje</dt><dd>Gdy drukuję wynik i odsyłam go Tobie, usuwam z maszyny wszystko: skany, wynik analizy, historię i ślady po pracy.</dd></div>
+        <div><dt>Po zakończeniu nic nie zostaje</dt><dd>Gdy oddaję raport, usuwam z maszyny wszystko: skany, wynik analizy, historię i ślady po pracy.</dd></div>
         <div><dt>Sprawdza człowiek</dt><dd>Analiza opiera się na oficjalnych źródłach przepisów i wiedzy, a wynik zawsze sprawdzam sam.</dd></div>
       </dl>
     </div>
@@ -351,9 +352,9 @@ footer p{margin:0 0 6px}
         <li><span class="box">Skan lub import</span><span class="cap">skanuję papier albo ładuję materiał z e-maila</span></li>
         <li class="safe"><span class="pill">Obcy serwer AI<span class="vh"> (brak połączenia)</span></span><span class="box">Maszyna offline</span><span class="cap">lokalna AI, bez dostępu do sieci</span></li>
         <li><span class="box">Moja weryfikacja</span><span class="cap">sprawdzam analizę</span></li>
-        <li><span class="box">Raport</span><span class="cap">wydruk albo zaszyfrowany PDF</span></li>
+        <li><span class="box">Raport</span><span class="cap">PDF (wydruk lub zaszyfrowany) albo HTML</span></li>
       </ol>
-      <figcaption>Materiał wchodzi na maszynę offline jako skan albo plik z e-maila, a raport wychodzi jako wydruk albo zaszyfrowany PDF. Sama analiza odbywa się bez sieci, a po zakończeniu usuwam z maszyny wszystko. Wiadomości e-mail przechodzą przez serwery pocztowe.</figcaption>
+      <figcaption>Materiał wchodzi na maszynę offline jako skan albo plik z e-maila, a raport wychodzi jako PDF (wydruk albo zaszyfrowany plik) albo HTML. Sama analiza odbywa się bez sieci, a po zakończeniu usuwam z maszyny wszystko. Wiadomości e-mail przechodzą przez serwery pocztowe.</figcaption>
     </figure>
     <div class="mores">
       <details class="more" id="diagram-cloud">
@@ -365,7 +366,7 @@ footer p{margin:0 0 6px}
               <li><span class="box">Mój komputer</span><span class="cap">usuwam zbędne dane osobowe</span></li>
               <li class="out"><span class="pill">Treść opuszcza biuro</span><span class="box">Model w chmurze</span><span class="cap">przez API, szyfrowane połączenie; przechowuje do 30 dni</span></li>
               <li><span class="box">Moja weryfikacja</span><span class="cap">sprawdzam analizę</span></li>
-              <li><span class="box">Raport</span><span class="cap">wydruk albo zaszyfrowany PDF</span></li>
+              <li><span class="box">Raport</span><span class="cap">PDF (wydruk lub zaszyfrowany) albo HTML</span></li>
             </ol>
             <figcaption>Tak wygląda analiza dokumentów w trybie cloud, tylko dla dokumentów niewrażliwych. Treść trafia przez API do dostawcy modelu (Anthropic, USA), a zbędne dane osobowe usuwam wcześniej, o ile zakres na to pozwala. Dostawca domyślnie nie trenuje na niej modeli. Analizę sprawdzam sam, a materiał u siebie usuwam po zakończeniu. <a href="#cloud">Szczegóły w sekcji Tryb pracy</a>.</figcaption>
           </figure>
@@ -386,7 +387,7 @@ footer p{margin:0 0 6px}
         <div class="body">
       <p>Popularne narzędzia AI, takie jak ChatGPT, przetwarzają to, co im wyślesz, na serwerach swojego dostawcy. Serwery te często stoją w USA. Razem z dokumentem poza kraj wyjeżdża więc cały proces wnioskowania, czyli sama analiza Twojej sprawy.</p>
       <p>Nie musisz wiedzieć, czym jest chmura ani jak działa model językowy. Wystarczy jedno pytanie: czy treść mojej sprawy powinna opuszczać kraj i trafiać do firmy, która nie ma z nią nic wspólnego?</p>
-      <p class="muted small">Dla porządku: przy analizie dokumentów, prototypach i książkach możesz wybrać tryb cloud. Wtedy treść także trafia do dostawcy modelu za granicą, ale na innych warunkach niż na prywatnym koncie. Opisuję je w sekcji <a href="#tryb">Tryb pracy</a>. Dokumentacja medyczna i dane objęte tajemnicą zawodową: wyłącznie offline.</p>
+      <p class="muted small">Dla porządku: przy analizie dokumentów, prototypach, książkach i kontrakcie programistycznym możesz wybrać tryb cloud. Wtedy treść także trafia do dostawcy modelu za granicą, ale na innych warunkach niż na prywatnym koncie. Opisuję je w sekcji <a href="#tryb">Tryb pracy</a>. Dokumentacja medyczna i dane objęte tajemnicą zawodową: wyłącznie offline.</p>
       <ul class="plain">
         <li><strong>Treść wyjeżdża.</strong> Dokument trafia na cudzy serwer, często w innym kraju niż Twój.</li>
         <li><strong>Analiza dzieje się gdzie indziej.</strong> Nie tylko dane, ale i sam proces wnioskowania odbywa się poza Twoim krajem.</li>
@@ -419,7 +420,7 @@ footer p{margin:0 0 6px}
       <li>
         <div>
           <h3>Raport</h3>
-          <p>Przygotowuję wydrukowany raport, ze spisem treści, wnioskami i źródłami, które możesz sprawdzić samodzielnie. Odsyłam Ci go z powrotem razem z kopiami dokumentów albo wysyłam jako zaszyfrowany PDF. Po zakończeniu usuwam z maszyny offline wszystkie dane cyfrowe: skany, pliki i wynik analizy.</p>
+          <p>Przygotowuję raport w jednym z dwóch formatów: elegancki PDF (wydrukowany i odesłany razem z kopiami dokumentów albo wysłany jako zaszyfrowany plik) albo elegancki raport HTML w stylu Wikipedii. Ma wnioski i źródła, które możesz sprawdzić samodzielnie. Hasło do zaszyfrowanego PDF ustalamy osobno niż plik: na rozmowie wstępnej albo telefonicznie, nigdy w tej samej wiadomości co raport. Po zakończeniu usuwam z maszyny offline wszystkie dane cyfrowe: skany, pliki i wynik analizy, a ze skrzynki pocztowej wiadomość z materiałem i wysłany raport.</p>
         </div>
       </li>
     </ol>
@@ -427,9 +428,9 @@ footer p{margin:0 0 6px}
         </div>
       </details>
       <details class="more" id="raport">
-        <summary><h3>Raport: wydruk lub zaszyfrowany PDF</h3></summary>
+        <summary><h3>Raport: PDF lub HTML</h3></summary>
         <div class="body">
-    <p>Raport nie jest zrzutem rozmowy z czatem. To złożony dokument, który możesz położyć na biurku, podkreślić i pokazać swojemu prawnikowi lub lekarzowi. Dostajesz go jako wydruk albo, jeśli wolisz, jako zaszyfrowany PDF. Forma jest taka sama jak w moich publikacjach:
+    <p>Raport nie jest zrzutem rozmowy z czatem. To złożony dokument w jednym z dwóch formatów. Elegancki PDF możesz wydrukować, położyć na biurku, podkreślić i pokazać swojemu prawnikowi lub lekarzowi; dostajesz go jako wydruk albo jako zaszyfrowany plik. Hasło do PDF ustalamy osobną drogą niż plik, na rozmowie wstępnej albo telefonicznie. Jest długie i jednorazowe: używam go tylko do jednego raportu. Drugi format to elegancki raport HTML w stylu Wikipedii, ze wszystkimi informacjami. Forma PDF jest taka sama jak w moich publikacjach:
       <a href="https://github.com/konradcinkusz/chaos-theory-for-dummies" rel="noopener">Chaos from Zero</a> oraz
       <a href="https://github.com/konradcinkusz/math-for-ai-engineers" rel="noopener">Mathematics from Zero for the AI Engineer</a>.</p>
     <div class="toc">
@@ -451,8 +452,8 @@ footer p{margin:0 0 6px}
         <summary><h3>Czym to jest, a czym nie jest</h3></summary>
         <div class="body">
       <p>To analiza i uporządkowanie Twojego materiału z odwołaniem do źródeł. To <strong>nie</strong> jest porada prawna, medyczna ani podatkowa. Model językowy może się mylić, dlatego wynik sprawdza człowiek, a raport wskazuje, co zweryfikować w źródle.</p>
-      <p>W sprawach, w których potrzebny jest prawnik, lekarz lub doradca podatkowy, raport ma ułatwić Ci rozmowę z nim: pokazać, o co pytać i na co się powołać. Po wydruku usuwam z maszyny wszystkie dane cyfrowe, a Ty dostajesz swoje kopie z powrotem. Zasady ustalamy na piśmie, zanim cokolwiek zeskanuję.</p>
-      <p><strong>Tryb cloud nie jest usługą offline.</strong> Możesz go wybrać przy analizie dokumentów (poza dokumentacją medyczną i danymi objętymi tajemnicą zawodową), prototypie i książce. W tym trybie treść trafia do dostawcy modelu, na warunkach opisanych w sekcji <a href="#tryb">Tryb pracy</a>.</p>
+      <p>W sprawach, w których potrzebny jest prawnik, lekarz lub doradca podatkowy, raport ma ułatwić Ci rozmowę z nim: pokazać, o co pytać i na co się powołać. Po zakończeniu usuwam z maszyny wszystkie dane cyfrowe, a Ty dostajesz swoje kopie z powrotem. Zasady ustalamy na piśmie, zanim cokolwiek zeskanuję.</p>
+      <p><strong>Tryb cloud nie jest usługą offline.</strong> Możesz go wybrać przy analizie dokumentów (poza dokumentacją medyczną i danymi objętymi tajemnicą zawodową), prototypie, książce i kontrakcie programistycznym. W tym trybie treść trafia do dostawcy modelu, na warunkach opisanych w sekcji <a href="#tryb">Tryb pracy</a>.</p>
         </div>
       </details>
     </div>
@@ -592,7 +593,7 @@ footer p{margin:0 0 6px}
     <h2>Prywatna sztuczna inteligencja w Twoim gabinecie</h2>
     <p>Jeżeli pracujesz na cudzych danych (księgi, dokumentacja pacjentów), nie możesz ich wysyłać do publicznych usług AI na cudzych serwerach. Wynajmuję i utrzymuję lokalne urządzenie z oprogramowaniem, które stoi w Twoim biurze, działa offline i uczy Twój zespół pracować lokalnie. Nie musisz mieć własnego działu IT. Ta usługa działa zawsze offline.</p>
     <div class="mores">
-      <details class="more">
+      <details class="more" open>
         <summary><h3>Pakiety: Biuro, Gabinet, Pro</h3></summary>
         <div class="body">
     <div class="plans">
@@ -606,7 +607,6 @@ footer p{margin:0 0 6px}
           <li>Serwis i wymiana sprzętu</li>
           <li>Szkolenie zespołu, 2 godziny</li>
         </ul>
-        <p class="ask"><a class="btn ghost" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
       </article>
       <article class="plan feat">
         <span class="tag">Dane wrażliwe</span>
@@ -619,7 +619,6 @@ footer p{margin:0 0 6px}
           <li>Szkolenie zespołu, 2 godziny</li>
           <li>Procedura czyszczenia danych po sprawie</li>
         </ul>
-        <p class="ask"><a class="btn" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
       </article>
       <article class="plan">
         <h3>Pakiet Pro</h3>
@@ -630,7 +629,6 @@ footer p{margin:0 0 6px}
           <li>Integracja z Twoimi dokumentami</li>
           <li>Zakres ustalamy po rozmowie wstępnej</li>
         </ul>
-        <p class="ask"><a class="btn ghost" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
       </article>
     </div>
     <p class="muted small"><strong>Usługi dodatkowe:</strong> indeksowanie archiwum dokumentów firmy, dodatkowa baza branżowa, dodatkowe szkolenie zespołu, wizyta serwisowa na miejscu. Zakup urządzenia zamiast wynajmu wyceniam indywidualnie. Dokładną ofertę przygotowuję po rozmowie wstępnej.</p>
@@ -679,11 +677,30 @@ footer p{margin:0 0 6px}
   </div>
 </section>
 
+<section id="kontrakt" data-spy="kontrakt">
+  <div class="wrap">
+    <p class="label"><span class="no">05</span> Dla firm i zespołów</p>
+    <h2>Kontrakt programistyczny</h2>
+    <p class="say">Pracuję dla Ciebie jako programista, rozliczany godzinowo. Im dłuższy kontrakt, tym niższa stawka.</p>
+    <div class="price">
+      <p class="num"><b>180 zł</b> netto za godzinę, kontrakt do 3 miesięcy</p>
+      <p class="num"><b>125 zł</b> netto za godzinę, kontrakt na 3 lata (maksymalna długość)</p>
+      <p class="muted small">Stawka maleje wraz z długością kontraktu. Stawki pośrednie ustalamy po rozmowie wstępnej.</p>
+    </div>
+    <dl class="facts3">
+      <div><dt>Tryb cloud</dt><dd>Pracuję z modelami chmurowymi. Koszt tokenów jest po mojej stronie.</dd></div>
+      <div><dt>Tryb fully private</dt><dd>Pracuję na mojej maszynie offline, bez modeli chmurowych.</dd></div>
+    </dl>
+    <p class="note">Tryb wybierasz przed startem. Jego szczegóły i warunki przetwarzania danych opisuje sekcja <a href="#tryb">Tryb pracy</a>.</p>
+    <p><a class="btn" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
+  </div>
+</section>
+
 <section id="tryb" data-spy="tryb">
   <div class="wrap">
-    <p class="label">Tryb pracy · dotyczy zleceń 01, 03 i 04</p>
+    <p class="label">Tryb pracy · dotyczy zleceń 01, 03, 04 i 05</p>
     <h2>Tryb pracy: fully private albo cloud</h2>
-    <p>Analizę dokumentów, prototyp i książkę mogę wykonać na dwa sposoby. Różnią się tym, gdzie przetwarzany jest Twój materiał, i ceną. Tryb wybierasz przed startem i zapisujemy go w umowie. Wyjątkiem jest wynajem urządzenia w gabinecie (02): działa zawsze offline i nie ma wyboru trybu.</p>
+    <p>Analizę dokumentów, prototyp, książkę i kontrakt programistyczny mogę realizować na dwa sposoby. Różnią się tym, gdzie przetwarzany jest Twój materiał, i ceną. Tryb wybierasz przed startem i zapisujemy go w umowie. Wyjątkiem jest wynajem urządzenia w gabinecie (02): działa zawsze offline i nie ma wyboru trybu.</p>
     <div class="modes">
       <article class="plan feat">
         <span class="tag">Pełna prywatność</span>
@@ -811,7 +828,7 @@ footer p{margin:0 0 6px}
     <h2>Umów rozmowę wstępną</h2>
     <p class="say">Rozmowa wstępna jest bezpłatna. Na miejscu ustalamy zakres.</p>
       <p>Rozmowa wstępna jest bezpłatna, każda, bez limitu. Odbywa się na miejscu: opowiadasz o sprawie i przekazujesz mi osobiście kopie dokumentów. Płatna jest dopiero <strong>analiza dokumentów: 150 zł brutto za każde rozpoczęte 50 stron</strong> (do 50 stron: 150 zł, 51–100 stron: 300 zł). Większe akta wyceniam po rozmowie wstępnej.</p>
-      <p>Standardowy zakres to do 50 stron dokumentacji. Większe akta analizuję w kolejnych pakietach po 50 stron. Po analizie odsyłam Ci wydrukowany raport razem z kopiami albo wysyłam go jako zaszyfrowany PDF, a dane cyfrowe usuwam z maszyny.</p>
+      <p>Standardowy zakres to do 50 stron dokumentacji. Większe akta analizuję w kolejnych pakietach po 50 stron. Po analizie dostajesz raport: elegancki PDF (wydrukowany razem z kopiami albo zaszyfrowany) lub elegancki HTML. Dane cyfrowe usuwam z maszyny.</p>
       <p>Pytasz o <a href="#firmy">prywatną sztuczną inteligencję w gabinecie</a>, <a href="#poc">prototyp</a> albo <a href="#ksiazka">książkę</a>? Umów rozmowę wstępną albo napisz na adres poniżej.</p>
     <div class="book-link">
       <p><a class="btn" href="#rozmowa" target="_blank" rel="noopener" data-book id="book-btn"><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
