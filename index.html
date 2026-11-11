@@ -123,6 +123,23 @@ section>.wrap{border-top:1px solid var(--rule);padding-top:60px}
 .price .num{font-size:1.15rem;color:var(--ink);margin-bottom:8px}
 .price .num b{font-size:clamp(2.4rem,5vw,3.2rem);font-weight:600;letter-spacing:-.03em;line-height:1;margin-right:10px}
 
+/* diagram trybu cloud */
+.fig+.mores{margin-top:16px}
+.more .fig{margin:4px 0 0}
+.flow{list-style:none;margin:36px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0 44px}
+.flow li{position:relative;text-align:center}
+.flow .box{display:grid;place-items:center;min-height:72px;padding:12px 8px;border:2px solid var(--ink);border-radius:4px;font-weight:700;line-height:1.2;color:var(--ink)}
+.flow+figcaption{margin-top:18px}
+.flow .cap{display:block;margin-top:8px;font-size:.82rem;line-height:1.35;color:var(--muted)}
+.flow li:not(:last-child)::after{content:"\2192";position:absolute;top:18px;right:-44px;width:44px;font-size:1.5rem;line-height:1;text-align:center;color:var(--ink)}
+.flow .out .box{border-color:var(--warn)}
+.flow .pill{position:absolute;bottom:100%;margin-bottom:10px;left:50%;transform:translateX(-50%);white-space:nowrap;padding:3px 12px;border:1px dashed var(--warn);border-radius:999px;font-size:.78rem;color:var(--warn)}
+@media (max-width:640px){
+  .flow{grid-template-columns:1fr;gap:38px 0;margin-top:8px}
+  .flow li:not(:last-child)::after{content:"\2193";top:auto;bottom:-34px;left:0;right:0;width:auto}
+  .flow .pill{position:static;display:inline-block;transform:none;margin-bottom:8px}
+}
+
 /* zwijane bloki */
 .mores{margin-top:36px;border-bottom:1px solid var(--rule)}
 .mores+p{margin-top:22px}
@@ -355,6 +372,23 @@ footer p{margin:0 0 6px}
       </svg>
       <figcaption>Dokument wchodzi jako skan, wychodzi jako wydruk. Pomiędzy nimi nie ma sieci, a po wydruku nie zostaje nic.</figcaption>
     </figure>
+    <div class="mores">
+      <details class="more" id="diagram-cloud">
+        <summary><h3>Diagram: jak to wygląda w trybie cloud</h3></summary>
+        <div class="body">
+          <figure class="fig">
+            <ol class="flow">
+              <li><span class="box">Twój materiał</span><span class="cap">dokumenty, kod lub tekst</span></li>
+              <li><span class="box">Mój komputer</span><span class="cap">usuwam zbędne dane osobowe</span></li>
+              <li class="out"><span class="pill">Treść opuszcza biuro</span><span class="box">Model w chmurze</span><span class="cap">przez API, szyfrowane połączenie; przechowuje do 30 dni</span></li>
+              <li><span class="box">Moja weryfikacja</span><span class="cap">sprawdzam wynik</span></li>
+              <li><span class="box">Wynik</span><span class="cap">raport, prototyp lub książka</span></li>
+            </ol>
+            <figcaption>Tryb cloud, dla dokumentów niewrażliwych, prototypów i książek. Treść trafia przez API do dostawcy modelu (Anthropic, USA), a zbędne dane osobowe usuwam wcześniej, o ile zakres na to pozwala. Dostawca domyślnie nie trenuje na niej modeli. Wynik sprawdzam sam, a materiał u siebie usuwam po zakończeniu. <a href="#cloud">Szczegóły w sekcji Tryb pracy</a>.</figcaption>
+          </figure>
+        </div>
+      </details>
+    </div>
 
     <div class="price">
       <p class="num"><b>150 zł</b> brutto za każde rozpoczęte 50 stron dokumentacji</p>
