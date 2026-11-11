@@ -63,7 +63,7 @@ Każdą usługę z oferty można ukryć bez zmiany kodu, zmiennymi repozytorium 
 | `SHOW_KSIAZKA`, `SHOW_KSIAZKA_OPIS` | wiersz i sekcja „Książka na zamówienie” (`#ksiazka`) |
 | `SHOW_KONTRAKT`, `SHOW_KONTRAKT_OPIS` | wiersz i sekcja „Kontrakt programistyczny” (`#kontrakt`) |
 
-- Brak zmiennej oznacza, że element jest widoczny. Wartość `false`, `0`, `no`, `off` lub `nie` (wielkość liter nie ma znaczenia) go ukrywa.
+- Zmienna ma wartość `true` (widoczne) albo `false` (niewidoczne); wielkość liter nie ma znaczenia. Brak zmiennej oznacza, że element jest widoczny. Inna wartość (np. literówka `flase`) przerywa publikację z komunikatem w logu, żeby element, który miał być ukryty, nie został po cichu na stronie.
 - Ukryty element w ogóle nie trafia do opublikowanej strony (ani HTML, ani ceny). Wiersz oferty bez ukrytego opisu zostaje jako zwykły tekst bez odnośnika, a odnośniki do usuniętych sekcji w tekście zamieniają się w zwykły tekst.
 - Zmiana zmiennej **nie uruchamia** publikacji. Po zmianie uruchom ręcznie workflow: **Actions → Deploy to GitHub Pages → Run workflow**.
 - Przełączane są tylko wiersze oferty, sekcje i menu (`scripts/build-site.py`). Wzmianki w zwykłym tekście (opis w lewej kolumnie, `<meta>`, sekcja „Tryb pracy”) pozostają bez zmian.
