@@ -189,7 +189,6 @@ section.cont{border-top:0;padding-top:0}
 .cloud li{padding:4px 0;line-height:1.6}
 .cloud li::marker{color:var(--accent);font-weight:700}
 .cloud p{max-width:46rem}
-.todo{background:var(--warn-soft);color:var(--warn);font-family:var(--mono);font-size:.85em;font-weight:700;padding:1px 6px;border-radius:4px;border:1px dashed var(--warn)}
 .cmp{width:100%;border-collapse:collapse;font-size:1rem;margin:0;border:1px solid var(--rule);border-radius:10px}
 .cmp caption{text-align:left;font-size:.95rem;color:var(--muted);padding:0 0 10px}
 .cmp th,.cmp td{text-align:left;vertical-align:top;padding:12px 14px;border-bottom:1px solid var(--rule);line-height:1.5}
@@ -834,7 +833,7 @@ footer p{margin:0 0 8px}
 
     <div class="cloud" id="cloud">
       <h3>Jak dokładnie działa tryb cloud</h3>
-      <p class="muted small" style="margin:0">W trybie cloud korzystam z modeli Claude firmy Anthropic przez API, na warunkach komercyjnych <mark class="todo">[DO POTWIERDZENIA: który model]</mark>.</p>
+      <p class="muted small" style="margin:0">W trybie cloud korzystam z modeli Claude firmy Anthropic przez API, na warunkach komercyjnych. Używam modeli Claude Opus 5.5, Claude Sonnet 5.5 i Claude Haiku 5.5.</p>
 
       <h4>Jak to działa</h4>
       <ol>
@@ -842,14 +841,14 @@ footer p{margin:0 0 8px}
         <li>Przed wysłaniem usuwam z materiału to, co nie jest potrzebne do zadania (dane osobowe, numery, nazwiska osób trzecich), o ile zakres na to pozwala.</li>
         <li>Moje oprogramowanie wysyła treść szyfrowanym połączeniem do modelu językowego przez API dostawcy. Nie wklejam materiału do okna czatu na prywatnym koncie.</li>
         <li>Wynik sprawdzam sam, zanim go dostaniesz.</li>
-        <li>Po zakończeniu usuwam materiał u siebie. U dostawcy treść jest usuwana zgodnie z jego okresem retencji <mark class="todo">[DO POTWIERDZENIA: 30 dni / zerowa retencja]</mark>.</li>
+        <li>Po zakończeniu usuwam materiał u siebie. U dostawcy treść jest usuwana zgodnie z jego standardowym okresem retencji w API: do 30 dni.</li>
       </ol>
 
       <h4>Na jakich warunkach</h4>
       <ul>
-        <li>Korzystam z API na warunkach komercyjnych z umową powierzenia przetwarzania danych <mark class="todo">[DO POTWIERDZENIA: DPA zaakceptowana, data]</mark>.</li>
+        <li>Korzystam z API na warunkach komercyjnych z umową powierzenia przetwarzania danych (DPA). Jest ona częścią <a href="https://www.anthropic.com/legal/commercial-terms" target="_blank" rel="noopener">warunków komercyjnych</a> dostawcy i obowiązuje od ich akceptacji.</li>
         <li>W umowie z Tobą dostawca modelu jest wskazany z nazwy jako podwykonawca przetwarzania, a Ty wyrażasz na to zgodę przed startem.</li>
-        <li>Anthropic to firma z USA. Treść opuszcza moje biuro i jest przetwarzana na serwerach dostawcy <mark class="todo">[DO POTWIERDZENIA: region i podstawa przekazania poza EOG]</mark>.</li>
+        <li>Anthropic to firma z USA. Treść opuszcza moje biuro i jest przetwarzana na serwerach dostawcy. Nie gwarantuję przetwarzania w EOG: może się ono odbywać w USA lub w innym regionie dostawcy. Podstawą przekazania danych poza EOG są standardowe klauzule umowne zawarte w <a href="https://www.anthropic.com/legal/data-processing-addendum" target="_blank" rel="noopener">DPA</a>.</li>
         <li>Treści wysyłane przez API domyślnie nie są używane do trenowania modeli. Wyjątek: gdy klient sam prześle opinię lub wyrazi zgodę.</li>
         <li>Zakres, okres przechowywania i sposób usunięcia danych dostajesz na piśmie.</li>
       </ul>
@@ -862,7 +861,7 @@ footer p{margin:0 0 8px}
         </thead>
         <tbody>
           <tr><th scope="row">Trening modeli</th><td data-label="Indywidualne konto">rozmowy mogą być używane do trenowania modeli, jeśli na koncie jest włączone to ustawienie</td><td data-label="Tryb cloud u mnie">domyślnie nie są używane</td></tr>
-          <tr><th scope="row">Przechowywanie</th><td data-label="Indywidualne konto">do 5 lat przy włączonym ustawieniu, 30 dni bez niego</td><td data-label="Tryb cloud u mnie"><mark class="todo">[DO POTWIERDZENIA: 30 dni / zerowa retencja]</mark></td></tr>
+          <tr><th scope="row">Przechowywanie</th><td data-label="Indywidualne konto">do 5 lat przy włączonym ustawieniu, 30 dni bez niego</td><td data-label="Tryb cloud u mnie">standardowo do 30 dni</td></tr>
           <tr><th scope="row">Umowa powierzenia</th><td data-label="Indywidualne konto">warunki konsumenckie, pisane dla osób prywatnych</td><td data-label="Tryb cloud u mnie">warunki komercyjne z umową powierzenia</td></tr>
           <tr><th scope="row">Kto odpowiada wobec Ciebie</th><td data-label="Indywidualne konto">nikt, robisz to sam</td><td data-label="Tryb cloud u mnie">ja, na podstawie umowy z Tobą</td></tr>
           <tr><th scope="row">Weryfikacja wyniku</th><td data-label="Indywidualne konto">Twoja</td><td data-label="Tryb cloud u mnie">moja, przed oddaniem</td></tr>
@@ -877,7 +876,7 @@ footer p{margin:0 0 8px}
         <li>Jeśli nie chcesz, żeby treść opuściła Polskę: tryb offline.</li>
       </ul>
 
-      <p class="srcs">Pozostałe źródła: <a href="https://privacy.claude.com/en/articles/9267385-does-anthropic-act-as-a-data-processor-or-controller" target="_blank" rel="noopener">rola dostawcy jako podmiotu przetwarzającego</a>, <a href="https://privacy.claude.com/en/articles/7996862-how-do-i-view-and-sign-your-data-processing-addendum-dpa" target="_blank" rel="noopener">umowa powierzenia (DPA) do warunków komercyjnych</a>, <a href="https://support.claude.com/en/articles/15707726-using-claude-for-legal-work-privilege-confidentiality-and-how-to-think-about-configuration" target="_blank" rel="noopener">retencja w API</a>.</p>
+      <p class="srcs">Pozostałe źródła: <a href="https://privacy.claude.com/en/articles/9267385-does-anthropic-act-as-a-data-processor-or-controller" target="_blank" rel="noopener">rola dostawcy jako podmiotu przetwarzającego</a>, <a href="https://privacy.claude.com/en/articles/7996862-how-do-i-view-and-sign-your-data-processing-addendum-dpa" target="_blank" rel="noopener">umowa powierzenia (DPA) do warunków komercyjnych</a>, <a href="https://support.claude.com/en/articles/15707726-using-claude-for-legal-work-privilege-confidentiality-and-how-to-think-about-configuration" target="_blank" rel="noopener">retencja w API</a>, <a href="https://platform.claude.com/docs/en/manage-claude/api-and-data-retention" target="_blank" rel="noopener">retencja danych w dokumentacji API</a>, <a href="https://platform.claude.com/docs/en/manage-claude/data-residency" target="_blank" rel="noopener">regiony przetwarzania</a>, <a href="https://www.anthropic.com/legal/data-processing-addendum" target="_blank" rel="noopener">treść DPA</a>.</p>
     </div>
   </div>
 </section>
