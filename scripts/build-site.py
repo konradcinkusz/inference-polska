@@ -2,8 +2,10 @@
 """Buduje stronę do publikacji.
 
 Usuwa z index.html elementy oferty wyłączone zmiennymi repozytorium (GitHub:
-Settings -> Secrets and variables -> Actions -> Variables). Brak zmiennej
-oznacza, że element jest widoczny. Wartość false, 0, no, off lub nie ukrywa go.
+Settings -> Secrets and variables -> Actions -> Variables). Zmienna ma wartość
+true (widoczne) lub false (niewidoczne), wielkość liter nie ma znaczenia. Brak
+zmiennej oznacza, że element jest widoczny. Inna wartość przerywa budowanie, żeby
+literówka nie zostawiła na stronie elementu, który miał być ukryty.
 
 Użycie: build-site.py index.html _site/index.html
 """
@@ -19,13 +21,17 @@ OFFER = {
     "ksiazka": "KSIAZKA",
     "kontrakt": "KONTRAKT",
 }
-FALSE_VALUES = {"false", "0", "no", "off", "nie"}
 PAIR = re.compile(r"<!--offer:(\w+):(row|desc)-->(.*?)<!--/offer:\1:\2-->", re.S)
 ANCHOR = re.compile(r'<a\b[^>]*?href="#([^"]+)"[^>]*>(.*?)</a>', re.S)
 
 
 def enabled(name):
-    return os.environ.get(name, "").strip().lower() not in FALSE_VALUES
+    value = os.environ.get(name, "").strip().lower()
+    if value in ("", "true"):
+        return True
+    if value == "false":
+        return False
+    sys.exit("Zmienna %s ma niedozwoloną wartość %r (dozwolone: true, false)." % (name, value))
 
 
 def flag(key, kind):
