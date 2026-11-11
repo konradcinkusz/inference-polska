@@ -1,17 +1,17 @@
 # Inference Polska
 
-Strona internetowa usługi **Inference Polska**: analiza dokumentów offline na lokalnym modelu językowym, na maszynie bez dostępu do sieci. Wynik trafia do klienta jako wydrukowany raport w formie książki, a po wydruku wszystkie dane cyfrowe są usuwane.
+Strona internetowa usługi **Inference Polska**: analiza wrażliwych dokumentów offline, na maszynie bez dostępu do sieci. Klient dostaje wydrukowany raport, a po wydruku wszystkie dane cyfrowe są usuwane. Rozmowa wstępna jest bezpłatna, a analiza dokumentów kosztuje 150 zł brutto za każde rozpoczęte 50 stron.
 
-Strona prowadzi cztery ścieżki oferty, wybierane w panelu „Z czym przychodzisz?” na górze strony:
+## Sekcje strony
 
-1. **Analiza dokumentów offline** (`#analiza`): dla osób prywatnych, konsultacja i raport.
-2. **Node u Ciebie** (`#firmy`): lokalne urządzenie AI dla biur rachunkowych i gabinetów.
-3. **POC i system legacy** (`#poc`): dwie osobno wyceniane usługi, POC nowego rozwiązania oraz przepisanie lub analiza systemu legacy.
-4. **Książka na zamówienie** (`#ksiazka`): od konspektu do wydruku.
-
-Zlecenia 3 i 4 mają dwa tryby pracy (`#tryb`): droższy *fully private* na modelach lokalnych i tańszy *cloud*.
-
-Wszystkie ścieżki kończą się we wspólnej sekcji kontaktu (`#konsultacja`); przyciski z atrybutem `data-topic` ustawiają temat w formularzu.
+1. **Analiza dokumentów offline** (`#analiza`, `#rozwiazanie`, `#jak`, `#raport`): problem, rozwiązanie, przebieg, wynik i cena.
+2. **Przykładowe sprawy** (`#przyklady`): 16 fikcyjnych akt w czterech grupach, z linkami do PDF-ów w `assets/akta/`. Pliki są kopią wydania `pdfs` z repozytorium `iference-polska-use-cases`; po zmianie akt trzeba je skopiować ponownie.
+3. **Prywatna sztuczna inteligencja w Twoim gabinecie** (`#firmy`): Pakiet Biuro, Pakiet Gabinet i Pakiet Pro, wycena na zapytanie.
+4. **POC w tydzień** (`#poc`).
+5. **Książka na zamówienie** (`#ksiazka`).
+6. **Tryb pracy** (`#tryb`): droższy *fully private* na modelach lokalnych i tańszy *cloud*, tylko dla POC i książek.
+7. **Kim jestem** (`#o-mnie`).
+8. **Umów rozmowę wstępną** (`#rozmowa`): kalendarz i formularz; przyciski z atrybutem `data-topic` ustawiają temat w formularzu.
 
 ## Co jest w repozytorium
 
@@ -20,7 +20,7 @@ Wszystkie ścieżki kończą się we wspólnej sekcji kontaktu (`#konsultacja`);
 | `index.html` | Cała strona: HTML, CSS i JavaScript w jednym pliku, bez zależności. |
 | `.nojekyll` | Wyłącza przetwarzanie Jekyll na GitHub Pages. |
 | `.github/workflows/deploy-pages.yml` | Akcja wdrażająca stronę na GitHub Pages. |
-| `assets/` | Zdjęcie do sekcji „Kim jestem”. |
+| `assets/` | Zdjęcie do sekcji „Kim jestem” oraz `akta/`: 16 fikcyjnych akt w PDF do sekcji „Przykładowe sprawy”. |
 | `README.md` | Ten plik. |
 
 Strona ma jasny i ciemny motyw: domyślnie zgodny z ustawieniem systemu, z przełącznikiem w nagłówku (wybór zapamiętywany w przeglądarce).
@@ -41,7 +41,7 @@ Ustawienia są w obiekcie `CONFIG` na początku skryptu w `index.html`:
 
 - `EMAIL`: adres kontaktowy,
 - `FORM_ENDPOINT`: adres usługi formularza (np. Formspree). Puste: formularz otwiera program pocztowy (mailto),
-- `START_DATE`, `MONTHS_AHEAD`, `WORKDAYS`, `SLOTS`, `BLOCKED_DATES`: kalendarz terminów konsultacji.
+- `START_DATE`, `MONTHS_AHEAD`, `WORKDAYS`, `SLOTS`, `BLOCKED_DATES`: kalendarz terminów rozmów wstępnych.
 
 ## Podgląd lokalny
 
