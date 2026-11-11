@@ -26,7 +26,7 @@ Na komputerze strona ma stałą lewą kolumnę (nazwa, jedno zdanie opisu, menu,
 | `index.html` | Cała strona: HTML, CSS i JavaScript w jednym pliku, bez zależności. |
 | `.nojekyll` | Wyłącza przetwarzanie Jekyll na GitHub Pages. |
 | `.github/workflows/deploy-pages.yml` | Akcja wdrażająca stronę na GitHub Pages. |
-| `assets/` | Zdjęcie do sekcji „Kim jestem” oraz `akta/`: 16 fikcyjnych akt w PDF do sekcji „Przykładowe sprawy”. |
+| `assets/` | Zdjęcie do sekcji „Kim jestem”, `akta/` (16 fikcyjnych akt w PDF do sekcji „Przykładowe sprawy”) oraz `google-calendar.png` (ikona Kalendarza Google z przycisków rezerwacji, pomniejszona kopia pliku z Wikimedia Commons; znak towarowy Google). |
 | `README.md` | Ten plik. |
 
 Strona ma jasny i ciemny motyw: domyślnie zgodny z ustawieniem systemu, z przełącznikiem w lewej kolumnie (na telefonie w górnym pasku) (wybór zapamiętywany w przeglądarce).
