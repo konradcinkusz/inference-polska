@@ -8,16 +8,17 @@ Na komputerze strona ma stałą lewą kolumnę (nazwa, jedno zdanie opisu, menu,
 
 ## Sekcje strony
 
-0. **Oferta** (`#oferta`): cztery usługi jako duża lista z ceną lub „wycena po rozmowie”.
+0. **Oferta** (`#oferta`): pięć usług jako duża lista z ceną lub „wycena po rozmowie”.
 
 1. **Analiza dokumentów offline** (`#analiza`): rozwiązanie i cena, a w zwijanych blokach problem (`#problem`), przebieg (`#jak`), wynik (`#raport`) i granice usługi (`#granice`).
 2. **Przykładowe sprawy** (`#przyklady`): 16 fikcyjnych akt w czterech grupach, z linkami do PDF-ów w `assets/akta/`. Pliki są kopią wydania `pdfs` z repozytorium `iference-polska-use-cases`; po zmianie akt trzeba je skopiować ponownie.
 3. **Prywatna sztuczna inteligencja w Twoim gabinecie** (`#firmy`): Pakiet Biuro, Pakiet Gabinet i Pakiet Pro, wycena na zapytanie.
 4. **Prototyp w tydzień** (`#poc`).
 5. **Książka na zamówienie** (`#ksiazka`).
-6. **Tryb pracy** (`#tryb`): droższy *fully private* na modelach lokalnych i tańszy *cloud*, dla analizy dokumentów, prototypu i książki (nie dla wynajmu urządzenia w gabinecie). Blok „Jak dokładnie działa tryb cloud” (`#cloud`): kroki, warunki przetwarzania, porównanie z kontem indywidualnym, kiedy nie cloud.
-7. **Kim jestem** (`#o-mnie`).
-8. **Umów rozmowę wstępną** (`#rozmowa`): przycisk do rezerwacji w Kalendarzu Google i adres e-mail. Każdy przycisk „Umów rozmowę wstępną” na stronie prowadzi wprost do rezerwacji (nowa karta, ikona Kalendarza Google). Kliknięcie adresu e-mail nie otwiera programu pocztowego, tylko kopiuje adres do schowka i pokazuje duży napis.
+6. **Kontrakt programistyczny** (`#kontrakt`): praca godzinowa, 180 zł netto za godzinę przy kontrakcie do 3 miesięcy, 125 zł netto przy kontrakcie na 3 lata (maksymalna długość), stawki pośrednie po rozmowie wstępnej. W trybie cloud koszt tokenów ponosi wykonawca; w trybie fully private praca odbywa się na jego maszynie offline.
+7. **Tryb pracy** (`#tryb`): droższy *fully private* na modelach lokalnych i tańszy *cloud*, dla analizy dokumentów, prototypu, książki i kontraktu programistycznego (nie dla wynajmu urządzenia w gabinecie). Blok „Jak dokładnie działa tryb cloud” (`#cloud`): kroki, warunki przetwarzania, porównanie z kontem indywidualnym, kiedy nie cloud.
+8. **Kim jestem** (`#o-mnie`).
+9. **Umów rozmowę wstępną** (`#rozmowa`): przycisk do rezerwacji w Kalendarzu Google i adres e-mail. Każdy przycisk „Umów rozmowę wstępną” na stronie prowadzi wprost do rezerwacji (nowa karta, ikona Kalendarza Google). Kliknięcie adresu e-mail nie otwiera programu pocztowego, tylko kopiuje adres do schowka i pokazuje duży napis.
 
 ## Co jest w repozytorium
 

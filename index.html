@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Inference Polska: analiza dokumentów offline</title>
-<meta name="description" content="Analiza dokumentów offline: dane i cały proces analizy nie opuszczają mojego biura. Rozmowa wstępna jest bezpłatna, analiza kosztuje 150 zł brutto za każde rozpoczęte 50 stron (tryb fully private). Także: prywatna sztuczna inteligencja w gabinecie, prototyp w tydzień i książki na zamówienie. Tryb pracy do wyboru: fully private albo cloud.">
+<meta name="description" content="Analiza dokumentów offline: dane i cały proces analizy nie opuszczają mojego biura. Rozmowa wstępna jest bezpłatna, analiza kosztuje 150 zł brutto za każde rozpoczęte 50 stron (tryb fully private). Także: prywatna sztuczna inteligencja w gabinecie, prototyp w tydzień, kontrakt programistyczny i książki na zamówienie. Tryb pracy do wyboru: fully private albo cloud.">
 <meta name="color-scheme" content="light dark">
 <meta property="og:title" content="Inference Polska: analiza dokumentów offline">
 <meta property="og:description" content="Analiza dokumentów offline: dane i cały proces analizy nie opuszczają mojego biura. Rozmowa wstępna bezpłatna. Tryb cloud jako tańsza opcja, na opisanych warunkach.">
@@ -51,9 +51,9 @@ strong,b{color:var(--ink);font-weight:600}
 .brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:1.05rem;color:var(--ink);text-decoration:none;white-space:nowrap}
 .brand:hover{color:var(--ink);text-decoration:none}
 .brand-mark{width:26px;height:26px;border-radius:4px;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-family:var(--mono);font-size:.72rem;font-weight:700}
-.pitch{color:var(--ink);font-size:1.02rem;line-height:1.5;margin:28px 0}
+.pitch{color:var(--ink);font-size:1.02rem;line-height:1.5;margin:22px 0}
 nav.main{display:flex;flex-direction:column}
-nav.main a{padding:11px 0;border-top:1px solid var(--rule-strong);color:var(--muted);text-decoration:none;font-size:1rem}
+nav.main a{padding:9px 0;border-top:1px solid var(--rule-strong);color:var(--muted);text-decoration:none;font-size:1rem}
 nav.main a:hover,nav.main a[aria-current="true"]{color:var(--ink)}
 nav.main a[aria-current="true"]{font-weight:600}
 nav.main a.nav-cta{margin-top:20px;border:0;border-radius:6px;background:var(--accent);color:var(--accent-ink);font-weight:600;text-align:center;padding:12px 14px}
@@ -118,7 +118,7 @@ section>.wrap{border-top:1px solid var(--rule);padding-top:60px}
 .fig{margin:34px 0 0;border:1px solid var(--rule);border-radius:6px;padding:20px 16px 14px}
 .fig figcaption{font-size:.92rem;color:var(--muted);margin-top:10px;text-align:center}
 .price{margin:40px 0 0}
-.price .num{font-size:1.15rem;color:var(--ink);margin-bottom:8px}
+.price .num{font-size:1.15rem;color:var(--ink);margin-bottom:14px}
 .price .num b{font-size:clamp(2.4rem,5vw,3.2rem);font-weight:600;letter-spacing:-.03em;line-height:1;margin-right:10px}
 
 /* diagram trybu cloud */
@@ -281,7 +281,7 @@ footer p{margin:0 0 6px}
 
 <header class="side" id="header">
   <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">IP</span>Inference Polska</a>
-  <p class="pitch">Analizuję wrażliwe dokumenty offline i oddaję raport. Dla firm: prywatna AI w gabinecie, prototyp w tydzień i książki na zamówienie.</p>
+  <p class="pitch">Analizuję wrażliwe dokumenty offline i oddaję raport. Dla firm: prywatna AI w gabinecie, prototyp w tydzień, kontrakt programistyczny i książki na zamówienie.</p>
   <button type="button" class="icon-btn menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
   <nav class="main" id="nav" aria-label="Nawigacja po stronie">
     <a href="#oferta" data-spy="oferta">Oferta</a>
@@ -290,6 +290,7 @@ footer p{margin:0 0 6px}
     <a href="#firmy" data-spy="firmy">AI w gabinecie</a>
     <a href="#poc" data-spy="poc">Prototyp</a>
     <a href="#ksiazka" data-spy="ksiazka">Książki</a>
+    <a href="#kontrakt" data-spy="kontrakt">Kontrakt</a>
     <a href="#tryb" data-spy="tryb">Tryb pracy</a>
     <a href="#o-mnie" data-spy="o-mnie">O mnie</a>
     <a class="nav-cta" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a>
@@ -326,6 +327,7 @@ footer p{margin:0 0 6px}
       <a href="#firmy"><span class="t">Prywatna sztuczna inteligencja w Twoim gabinecie</span><span class="m">wycena po rozmowie<br>zawsze offline</span></a>
       <a href="#poc"><span class="t">Prototyp w tydzień</span><span class="m">wycena po rozmowie<br>fully private lub cloud</span></a>
       <a href="#ksiazka"><span class="t">Książka na zamówienie</span><span class="m">wycena po rozmowie<br>fully private lub cloud</span></a>
+      <a href="#kontrakt"><span class="t">Kontrakt programistyczny</span><span class="m">125–180 zł netto / godz.<br>fully private lub cloud</span></a>
     </div>
   </div>
 </section>
@@ -385,7 +387,7 @@ footer p{margin:0 0 6px}
         <div class="body">
       <p>Popularne narzędzia AI, takie jak ChatGPT, przetwarzają to, co im wyślesz, na serwerach swojego dostawcy. Serwery te często stoją w USA. Razem z dokumentem poza kraj wyjeżdża więc cały proces wnioskowania, czyli sama analiza Twojej sprawy.</p>
       <p>Nie musisz wiedzieć, czym jest chmura ani jak działa model językowy. Wystarczy jedno pytanie: czy treść mojej sprawy powinna opuszczać kraj i trafiać do firmy, która nie ma z nią nic wspólnego?</p>
-      <p class="muted small">Dla porządku: przy analizie dokumentów, prototypach i książkach możesz wybrać tryb cloud. Wtedy treść także trafia do dostawcy modelu za granicą, ale na innych warunkach niż na prywatnym koncie. Opisuję je w sekcji <a href="#tryb">Tryb pracy</a>. Dokumentacja medyczna i dane objęte tajemnicą zawodową: wyłącznie offline.</p>
+      <p class="muted small">Dla porządku: przy analizie dokumentów, prototypach, książkach i kontrakcie programistycznym możesz wybrać tryb cloud. Wtedy treść także trafia do dostawcy modelu za granicą, ale na innych warunkach niż na prywatnym koncie. Opisuję je w sekcji <a href="#tryb">Tryb pracy</a>. Dokumentacja medyczna i dane objęte tajemnicą zawodową: wyłącznie offline.</p>
       <ul class="plain">
         <li><strong>Treść wyjeżdża.</strong> Dokument trafia na cudzy serwer, często w innym kraju niż Twój.</li>
         <li><strong>Analiza dzieje się gdzie indziej.</strong> Nie tylko dane, ale i sam proces wnioskowania odbywa się poza Twoim krajem.</li>
@@ -451,7 +453,7 @@ footer p{margin:0 0 6px}
         <div class="body">
       <p>To analiza i uporządkowanie Twojego materiału z odwołaniem do źródeł. To <strong>nie</strong> jest porada prawna, medyczna ani podatkowa. Model językowy może się mylić, dlatego wynik sprawdza człowiek, a raport wskazuje, co zweryfikować w źródle.</p>
       <p>W sprawach, w których potrzebny jest prawnik, lekarz lub doradca podatkowy, raport ma ułatwić Ci rozmowę z nim: pokazać, o co pytać i na co się powołać. Po zakończeniu usuwam z maszyny wszystkie dane cyfrowe, a Ty dostajesz swoje kopie z powrotem. Zasady ustalamy na piśmie, zanim cokolwiek zeskanuję.</p>
-      <p><strong>Tryb cloud nie jest usługą offline.</strong> Możesz go wybrać przy analizie dokumentów (poza dokumentacją medyczną i danymi objętymi tajemnicą zawodową), prototypie i książce. W tym trybie treść trafia do dostawcy modelu, na warunkach opisanych w sekcji <a href="#tryb">Tryb pracy</a>.</p>
+      <p><strong>Tryb cloud nie jest usługą offline.</strong> Możesz go wybrać przy analizie dokumentów (poza dokumentacją medyczną i danymi objętymi tajemnicą zawodową), prototypie, książce i kontrakcie programistycznym. W tym trybie treść trafia do dostawcy modelu, na warunkach opisanych w sekcji <a href="#tryb">Tryb pracy</a>.</p>
         </div>
       </details>
     </div>
@@ -675,11 +677,30 @@ footer p{margin:0 0 6px}
   </div>
 </section>
 
+<section id="kontrakt" data-spy="kontrakt">
+  <div class="wrap">
+    <p class="label"><span class="no">05</span> Dla firm i zespołów</p>
+    <h2>Kontrakt programistyczny</h2>
+    <p class="say">Pracuję dla Ciebie jako programista, rozliczany godzinowo. Im dłuższy kontrakt, tym niższa stawka.</p>
+    <div class="price">
+      <p class="num"><b>180 zł</b> netto za godzinę, kontrakt do 3 miesięcy</p>
+      <p class="num"><b>125 zł</b> netto za godzinę, kontrakt na 3 lata (maksymalna długość)</p>
+      <p class="muted small">Stawka maleje wraz z długością kontraktu. Stawki pośrednie ustalamy po rozmowie wstępnej.</p>
+    </div>
+    <dl class="facts3">
+      <div><dt>Tryb cloud</dt><dd>Pracuję z modelami chmurowymi. Koszt tokenów jest po mojej stronie.</dd></div>
+      <div><dt>Tryb fully private</dt><dd>Pracuję na mojej maszynie offline, bez modeli chmurowych.</dd></div>
+    </dl>
+    <p class="note">Tryb wybierasz przed startem. Jego szczegóły i warunki przetwarzania danych opisuje sekcja <a href="#tryb">Tryb pracy</a>.</p>
+    <p><a class="btn" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
+  </div>
+</section>
+
 <section id="tryb" data-spy="tryb">
   <div class="wrap">
-    <p class="label">Tryb pracy · dotyczy zleceń 01, 03 i 04</p>
+    <p class="label">Tryb pracy · dotyczy zleceń 01, 03, 04 i 05</p>
     <h2>Tryb pracy: fully private albo cloud</h2>
-    <p>Analizę dokumentów, prototyp i książkę mogę wykonać na dwa sposoby. Różnią się tym, gdzie przetwarzany jest Twój materiał, i ceną. Tryb wybierasz przed startem i zapisujemy go w umowie. Wyjątkiem jest wynajem urządzenia w gabinecie (02): działa zawsze offline i nie ma wyboru trybu.</p>
+    <p>Analizę dokumentów, prototyp, książkę i kontrakt programistyczny mogę realizować na dwa sposoby. Różnią się tym, gdzie przetwarzany jest Twój materiał, i ceną. Tryb wybierasz przed startem i zapisujemy go w umowie. Wyjątkiem jest wynajem urządzenia w gabinecie (02): działa zawsze offline i nie ma wyboru trybu.</p>
     <div class="modes">
       <article class="plan feat">
         <span class="tag">Pełna prywatność</span>
