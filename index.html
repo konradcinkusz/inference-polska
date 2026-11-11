@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Inference Polska: analiza dokumentów offline</title>
-<meta name="description" content="Analiza dokumentów offline: dane i cały proces analizy nie opuszczają mojego biura. Rozmowa wstępna jest bezpłatna, analiza kosztuje 150 zł brutto za każde rozpoczęte 50 stron (tryb fully private). Także: prywatna sztuczna inteligencja w gabinecie, prototyp w tydzień, kontrakt programistyczny i książki na zamówienie. Tryb pracy do wyboru: fully private albo cloud.">
+<title>Inference Polska: analiza dokumentów przez prywatną sztuczną inteligencję</title>
+<meta name="description" content="Analiza dokumentów przez prywatną sztuczną inteligencję: lokalny model na maszynie bez sieci, dane i cały proces analizy nie opuszczają mojego biura. Rozmowa wstępna jest bezpłatna, analiza kosztuje 150 zł brutto za każde rozpoczęte 50 stron (tryb fully private). Także: prywatna sztuczna inteligencja w gabinecie, prototyp w tydzień, kontrakt programistyczny i książki na zamówienie. Tryb pracy do wyboru: fully private albo cloud.">
 <meta name="color-scheme" content="light dark">
-<meta property="og:title" content="Inference Polska: analiza dokumentów offline">
-<meta property="og:description" content="Analiza dokumentów offline: dane i cały proces analizy nie opuszczają mojego biura. Rozmowa wstępna bezpłatna. Tryb cloud jako tańsza opcja, na opisanych warunkach.">
+<meta property="og:title" content="Inference Polska: analiza dokumentów przez prywatną sztuczną inteligencję">
+<meta property="og:description" content="Analiza dokumentów przez prywatną sztuczną inteligencję: lokalny model na maszynie bez sieci, dane i cały proces analizy nie opuszczają mojego biura. Rozmowa wstępna bezpłatna. Tryb cloud jako tańsza opcja, na opisanych warunkach.">
 <meta property="og:type" content="website">
 <script>
 (function(){var r=document.documentElement;r.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")r.setAttribute("data-theme",t);}catch(e){}})();
@@ -117,6 +117,14 @@ section>.wrap{border-top:1px solid var(--rule);padding-top:60px}
 .facts3 dd{margin:0}
 .fig{margin:34px 0 0;border:1px solid var(--rule);border-radius:6px;padding:20px 16px 14px}
 .fig figcaption{font-size:.92rem;color:var(--muted);margin-top:10px;text-align:center}
+.rate-calc{display:none}
+.js .rate-calc{display:block}
+.js .rate-static{display:none}
+.range-label{display:block;color:var(--ink);margin:4px 0 6px}
+.rate-calc input[type=range]{display:block;width:100%;max-width:520px;margin:10px 0 4px;accent-color:var(--accent)}
+.range-scale{display:flex;justify-content:space-between;max-width:520px;font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.rate-check{display:flex;gap:10px;align-items:flex-start;margin:18px 0 8px;font-weight:600;color:var(--ink);cursor:pointer}
+.rate-check input{width:19px;height:19px;margin:3px 0 0;flex:none;accent-color:var(--accent)}
 .price{margin:40px 0 0}
 .price .num{font-size:1.15rem;color:var(--ink);margin-bottom:14px}
 .price .num b{font-size:clamp(2.4rem,5vw,3.2rem);font-weight:600;letter-spacing:-.03em;line-height:1;margin-right:10px}
@@ -281,7 +289,7 @@ footer p{margin:0 0 6px}
 
 <header class="side" id="header">
   <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">IP</span>Inference Polska</a>
-  <p class="pitch">Analizuję wrażliwe dokumenty offline i oddaję raport. Dla firm: prywatna AI w gabinecie, prototyp w tydzień, kontrakt programistyczny i książki na zamówienie.</p>
+  <p class="pitch">Jestem inżynierem AI. Analizuję wrażliwe dokumenty prywatną sztuczną inteligencją. Dla firm: prywatna AI w gabinecie, prototypy, kontrakty i książki.</p>
   <button type="button" class="icon-btn menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
   <nav class="main" id="nav" aria-label="Nawigacja po stronie">
     <a href="#oferta" data-spy="oferta">Oferta</a>
@@ -309,9 +317,9 @@ footer p{margin:0 0 6px}
 <main id="top">
 
 <div class="wrap hero">
-  <p class="label">Inżynieria augmentatywna · człowiek + AI</p>
-  <h1>Analiza dokumentów offline</h1>
-  <p class="say">Dane i cały proces analizy nie opuszczają mojego biura.</p>
+  <p class="label">Konrad Cinkusz · inżynier AI i programista</p>
+  <h1>Analiza dokumentów przez prywatną sztuczną inteligencję</h1>
+  <p class="say">Lokalny model AI na mojej maszynie bez sieci. Dane i cały proces analizy nie opuszczają mojego biura.</p>
   <p class="muted small">To tryb fully private. Taniej: <a href="#tryb">tryb cloud</a> dla dokumentów niewrażliwych.</p>
   <div class="cta">
     <a class="btn" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a>
@@ -682,15 +690,22 @@ footer p{margin:0 0 6px}
     <p class="label"><span class="no">05</span> Dla firm i zespołów</p>
     <h2>Kontrakt programistyczny</h2>
     <p class="say">Pracuję dla Ciebie jako programista, rozliczany godzinowo. Im dłuższy kontrakt, tym niższa stawka.</p>
-    <div class="price">
+    <p>Koszt tokenów jest po mojej stronie. Inferencja jest w pełni zgodna zarówno przez API, jak i lokalnie.</p>
+
+    <div class="price rate-static">
       <p class="num"><b>180 zł</b> netto za godzinę, kontrakt do 3 miesięcy</p>
       <p class="num"><b>125 zł</b> netto za godzinę, kontrakt na 3 lata (maksymalna długość)</p>
-      <p class="muted small">Stawka maleje wraz z długością kontraktu. Stawki pośrednie ustalamy po rozmowie wstępnej.</p>
     </div>
-    <dl class="facts3">
-      <div><dt>Tryb cloud</dt><dd>Pracuję z modelami chmurowymi. Koszt tokenów jest po mojej stronie.</dd></div>
-      <div><dt>Tryb fully private</dt><dd>Pracuję na mojej maszynie offline, bez modeli chmurowych.</dd></div>
-    </dl>
+
+    <div class="price rate-calc" id="rate-calc">
+      <p class="num" aria-live="polite"><b id="rate-val">180 zł</b> netto za godzinę</p>
+      <label class="range-label" for="rate-months">Długość kontraktu: <strong id="rate-months-label">3 miesiące</strong></label>
+      <input type="range" id="rate-months" min="1" max="36" step="1" value="3" aria-describedby="rate-note">
+      <div class="range-scale" aria-hidden="true"><span>do 3 mies.</span><span>3 lata</span></div>
+      <label class="rate-check"><input type="checkbox" id="rate-local"><span>Inferencja lokalna (maszyna offline): +15%</span></label>
+      <p class="muted small">Inferencja lokalna jest droższa o 15%. Modele lokalne są słabsze, więc większy jest wkład programisty w weryfikację, generowanie trwa dłużej, a dochodzi zużycie energii elektrycznej.</p>
+    </div>
+    <p class="muted small" id="rate-note">Stawka maleje liniowo od 180 zł netto za godzinę przy kontrakcie do 3 miesięcy do 125 zł netto za godzinę przy kontrakcie na 3 lata (maksymalna długość). Wyliczenie jest orientacyjne; stawkę dla Twojego kontraktu ustalamy po rozmowie wstępnej.</p>
     <p class="note">Tryb wybierasz przed startem. Jego szczegóły i warunki przetwarzania danych opisuje sekcja <a href="#tryb">Tryb pracy</a>.</p>
     <p><a class="btn" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
   </div>
@@ -972,6 +987,43 @@ const CONFIG = {
   document.getElementById("copy-mail").addEventListener("click", copy);
   toast.addEventListener("click", hide);
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") hide(); });
+})();
+
+/* ---- kontrakt programistyczny: suwak długości kontraktu i dopłata za inferencję lokalną ---- */
+(function () {
+  var range = document.getElementById("rate-months");
+  var local = document.getElementById("rate-local");
+  var val = document.getElementById("rate-val");
+  var lab = document.getElementById("rate-months-label");
+  if (!range || !local || !val || !lab) return;
+
+  var RATE_SHORT = 180, RATE_LONG = 125, SHORT_MONTHS = 3, LONG_MONTHS = 36, LOCAL_SURCHARGE = 1.15;
+
+  function plural(n, one, few, many) {
+    var m10 = n % 10, m100 = n % 100;
+    if (n === 1) return one;
+    if (m10 >= 2 && m10 <= 4 && !(m100 >= 12 && m100 <= 14)) return few;
+    return many;
+  }
+  function describe(m) {
+    var t = m + " " + plural(m, "miesiąc", "miesiące", "miesięcy");
+    if (m % 12 === 0) { var y = m / 12; t += " (" + y + " " + plural(y, "rok", "lata", "lat") + ")"; }
+    return t;
+  }
+  function rate(m, isLocal) {
+    var base = m <= SHORT_MONTHS ? RATE_SHORT
+      : RATE_SHORT - (m - SHORT_MONTHS) * (RATE_SHORT - RATE_LONG) / (LONG_MONTHS - SHORT_MONTHS);
+    return Math.round(base * (isLocal ? LOCAL_SURCHARGE : 1));
+  }
+  function update() {
+    var m = +range.value, r = rate(m, local.checked);
+    val.textContent = r + " zł";
+    lab.textContent = describe(m);
+    range.setAttribute("aria-valuetext", describe(m) + ", " + r + " zł netto za godzinę");
+  }
+  range.addEventListener("input", update);
+  local.addEventListener("change", update);
+  update();
 })();
 
 /* ---- kotwice do zwiniętych bloków: otwórz blok, do którego prowadzi odnośnik ---- */

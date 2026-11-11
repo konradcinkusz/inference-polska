@@ -1,6 +1,6 @@
 # Inference Polska
 
-Strona internetowa usługi **Inference Polska**: analiza wrażliwych dokumentów offline, na maszynie bez dostępu do sieci. Klient dostaje raport w jednym z dwóch formatów: elegancki PDF (wydrukowany albo wysłany zaszyfrowany) lub elegancki HTML w stylu Wikipedii. Po zakończeniu wszystkie dane cyfrowe są usuwane z maszyny. Rozmowa wstępna jest bezpłatna, a analiza dokumentów kosztuje 150 zł brutto za każde rozpoczęte 50 stron. Analizę dokumentów, prototypy i książki na zamówienie można zlecić także w trybie cloud; strona opisuje, jak ten tryb działa i na jakich warunkach przetwarzane są dane.
+Strona internetowa usługi **Inference Polska**: analiza wrażliwych dokumentów przez prywatną sztuczną inteligencję: lokalny model na maszynie bez dostępu do sieci. Klient dostaje raport w jednym z dwóch formatów: elegancki PDF (wydrukowany albo wysłany zaszyfrowany) lub elegancki HTML w stylu Wikipedii. Po zakończeniu wszystkie dane cyfrowe są usuwane z maszyny. Rozmowa wstępna jest bezpłatna, a analiza dokumentów kosztuje 150 zł brutto za każde rozpoczęte 50 stron. Analizę dokumentów, prototypy i książki na zamówienie można zlecić także w trybie cloud; strona opisuje, jak ten tryb działa i na jakich warunkach przetwarzane są dane.
 
 ## Układ
 
@@ -15,7 +15,7 @@ Na komputerze strona ma stałą lewą kolumnę (nazwa, jedno zdanie opisu, menu,
 3. **Prywatna sztuczna inteligencja w Twoim gabinecie** (`#firmy`): Pakiet Biuro, Pakiet Gabinet i Pakiet Pro, wycena na zapytanie.
 4. **Prototyp w tydzień** (`#poc`).
 5. **Książka na zamówienie** (`#ksiazka`).
-6. **Kontrakt programistyczny** (`#kontrakt`): praca godzinowa, 180 zł netto za godzinę przy kontrakcie do 3 miesięcy, 125 zł netto przy kontrakcie na 3 lata (maksymalna długość), stawki pośrednie po rozmowie wstępnej. W trybie cloud koszt tokenów ponosi wykonawca; w trybie fully private praca odbywa się na jego maszynie offline.
+6. **Kontrakt programistyczny** (`#kontrakt`): praca godzinowa, 180 zł netto za godzinę przy kontrakcie do 3 miesięcy, 125 zł netto przy kontrakcie na 3 lata (maksymalna długość), długość kontraktu wybiera się suwakiem (1–36 miesięcy), a stawka maleje liniowo między tymi punktami (orientacyjnie; dokładną ustala się po rozmowie wstępnej). Koszt tokenów ponosi wykonawca. Pole „Inferencja lokalna” dolicza 15% (słabsze modele, większy wkład programisty w weryfikację, dłuższe generowanie, zużycie energii). Stałe stawek są na początku skryptu kontraktu w `index.html` (`RATE_SHORT`, `RATE_LONG`, `LOCAL_SURCHARGE`).
 7. **Tryb pracy** (`#tryb`): droższy *fully private* na modelach lokalnych i tańszy *cloud*, dla analizy dokumentów, prototypu, książki i kontraktu programistycznego (nie dla wynajmu urządzenia w gabinecie). Blok „Jak dokładnie działa tryb cloud” (`#cloud`): kroki, warunki przetwarzania, porównanie z kontem indywidualnym, kiedy nie cloud.
 8. **Kim jestem** (`#o-mnie`).
 9. **Umów rozmowę wstępną** (`#rozmowa`): przycisk do rezerwacji w Kalendarzu Google i adres e-mail. Każdy przycisk „Umów rozmowę wstępną” na stronie prowadzi wprost do rezerwacji (nowa karta, ikona Kalendarza Google). Kliknięcie adresu e-mail nie otwiera programu pocztowego, tylko kopiuje adres do schowka i pokazuje duży napis.
