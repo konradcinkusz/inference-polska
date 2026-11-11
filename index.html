@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Inference Polska: analiza wrażliwych dokumentów bez wysyłania ich do internetu</title>
-<meta name="description" content="Analizuję wrażliwe dokumenty lokalnie, na maszynie bez dostępu do sieci, i oddaję wydrukowany raport. Rozmowa wstępna jest bezpłatna, analiza kosztuje 150 zł brutto za każde rozpoczęte 50 stron. Także: prywatna sztuczna inteligencja w gabinecie, POC w tydzień i książki na zamówienie.">
+<meta name="description" content="Analizuję wrażliwe dokumenty lokalnie, na maszynie bez dostępu do sieci, i oddaję wydrukowany raport. Rozmowa wstępna jest bezpłatna, analiza kosztuje 150 zł brutto za każde rozpoczęte 50 stron. Także: prywatna sztuczna inteligencja w gabinecie (zawsze offline) oraz POC w tydzień i książki na zamówienie, do wyboru w trybie fully private albo cloud.">
 <meta name="color-scheme" content="light dark">
 <meta property="og:title" content="Inference Polska: analiza wrażliwych dokumentów bez wysyłania ich do internetu">
-<meta property="og:description" content="Analiza dokumentów na maszynie bez sieci i wydrukowany raport. Rozmowa wstępna bezpłatna. Także: prywatna sztuczna inteligencja w gabinecie, POC w tydzień i książki na zamówienie.">
+<meta property="og:description" content="Analiza dokumentów na maszynie bez sieci i wydrukowany raport. Rozmowa wstępna bezpłatna. POC i książki na zamówienie także w trybie cloud, na opisanych warunkach.">
 <meta property="og:type" content="website">
 <script>
 (function(){var r=document.documentElement;r.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")r.setAttribute("data-theme",t);}catch(e){}})();
@@ -181,6 +181,36 @@ section.cont{border-top:0;padding-top:0}
 .case p{margin:0;font-size:.97rem;line-height:1.55}
 .case .pdf{margin-top:auto;padding-top:6px;font-size:.95rem;font-weight:600}
 .case .pdf span{font-family:var(--mono);font-size:.75rem;font-weight:700;border:1px solid currentColor;border-radius:4px;padding:0 5px;margin-left:6px;vertical-align:.1em}
+/* tryb cloud */
+.cloud{margin-top:44px;background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:28px;box-shadow:var(--shadow)}
+.cloud>h3{font-size:1.5rem;margin-bottom:6px}
+.cloud h4{font-family:var(--sans);font-size:1.1rem;font-weight:700;color:var(--ink);margin:30px 0 10px}
+.cloud ol,.cloud ul{margin:0;padding-left:1.4em;max-width:46rem}
+.cloud li{padding:4px 0;line-height:1.6}
+.cloud li::marker{color:var(--accent);font-weight:700}
+.cloud p{max-width:46rem}
+.todo{background:var(--warn-soft);color:var(--warn);font-family:var(--mono);font-size:.85em;font-weight:700;padding:1px 6px;border-radius:4px;border:1px dashed var(--warn)}
+.cmp{width:100%;border-collapse:collapse;font-size:1rem;margin:0;border:1px solid var(--rule);border-radius:10px}
+.cmp caption{text-align:left;font-size:.95rem;color:var(--muted);padding:0 0 10px}
+.cmp th,.cmp td{text-align:left;vertical-align:top;padding:12px 14px;border-bottom:1px solid var(--rule);line-height:1.5}
+.cmp thead th{font-size:.9rem;color:var(--ink);background:var(--card-2)}
+.cmp tbody th{font-weight:700;color:var(--ink);width:22%}
+.cmp td:last-child,.cmp thead th:last-child{background:var(--accent-soft)}
+.cmp tbody tr:last-child th,.cmp tbody tr:last-child td{border-bottom:0}
+.srcs{font-size:.95rem;color:var(--muted);margin:14px 0 0}
+.hint{font-size:.92rem;color:var(--muted);line-height:1.5;margin:-8px 0 0}
+@media (max-width:640px){
+  .cloud{padding:20px 16px}
+  .cmp,.cmp tbody,.cmp tr,.cmp th,.cmp td{display:block;width:auto}
+  .cmp{border:0}
+  .cmp caption{display:block}
+  .cmp thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+  .cmp tbody tr{border:1px solid var(--rule);border-radius:10px;margin-bottom:12px;overflow:hidden}
+  .cmp tbody th{width:auto;background:var(--card-2);border-bottom:1px solid var(--rule)}
+  .cmp td{border-bottom:1px solid var(--rule)}
+  .cmp td:last-child{border-bottom:0}
+  .cmp td::before{content:attr(data-label);display:block;font-family:var(--mono);font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+}
 .plain{margin:0 0 18px;padding-left:1.3em}
 .plain li{padding:3px 0}
 .modes{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));margin-top:28px}
@@ -326,15 +356,16 @@ footer p{margin:0 0 8px}
 
 <div class="wrap hero">
   <div>
-    <p class="label">Inżynieria augmentatywna · człowiek + lokalna AI</p>
+    <p class="label">Inżynieria augmentatywna · człowiek + AI</p>
     <h1>Analiza wrażliwych dokumentów bez wysyłania ich do internetu</h1>
     <p class="lead">Ludzie mają problemy do rozwiązania, których treść nie powinna być nikomu udostępniana: umowy, pisma urzędowe, dokumentacja medyczna, rozliczenia. Takie sprawy trzeba rozwiązać, ale nikt postronny nie powinien mieć wglądu w ich treść.</p>
-    <p class="lead"><strong>Ja pomagam je rozwiązać:</strong> analizuję Twoje dokumenty, sprawdzam przepisy i literaturę naukową i oddaję Ci wydrukowany raport z wnioskami i źródłami. Robię to z pomocą AI, ale wyłącznie u siebie w biurze, na komputerze bez dostępu do internetu.</p>
+    <p class="lead"><strong>Ja pomagam je rozwiązać:</strong> analizuję Twoje dokumenty, sprawdzam przepisy i literaturę naukową i oddaję Ci wydrukowany raport z wnioskami i źródłami. Analizę dokumentów robię z pomocą AI, ale wyłącznie u siebie w biurze, na komputerze bez dostępu do internetu.</p>
     <ul class="hero-points">
       <li>Pracuję na własnej maszynie z lokalną AI, odłączonej od internetu, z drukarką i skanerem.</li>
       <li>Analiza opiera się na oficjalnych źródłach przepisów i wiedzy.</li>
       <li>Wynik zawsze sprawdza człowiek.</li>
     </ul>
+    <p class="muted small" style="margin:-12px 0 26px">Tak działa analiza dokumentów i prywatna sztuczna inteligencja w gabinecie. POC i książki mogę wykonać także w <a href="#tryb">trybie cloud</a>.</p>
     <div class="cta">
       <a class="btn" href="#rozmowa">Umów rozmowę wstępną</a>
       <a class="btn ghost" href="#rozwiazanie">Zobacz, jak to rozwiązuję</a>
@@ -382,6 +413,7 @@ footer p{margin:0 0 8px}
     <div class="prose">
       <p>Popularne narzędzia AI, takie jak ChatGPT, przetwarzają to, co im wyślesz, na serwerach swojego dostawcy. Serwery te często stoją w USA. Razem z dokumentem poza kraj wyjeżdża więc cały proces wnioskowania, czyli sama analiza Twojej sprawy.</p>
       <p>Nie musisz wiedzieć, czym jest chmura ani jak działa model językowy. Wystarczy jedno pytanie: czy treść mojej sprawy powinna opuszczać kraj i trafiać do firmy, która nie ma z nią nic wspólnego?</p>
+      <p class="muted small">Dla porządku: przy POC i książkach na zamówienie możesz wybrać tryb cloud. Wtedy treść także trafia do dostawcy modelu za granicą, ale na innych warunkach niż na prywatnym koncie. Opisuję je w sekcji <a href="#tryb">Tryb pracy</a>. Analiza dokumentów odbywa się zawsze offline.</p>
     </div>
 
     <div class="three">
@@ -654,6 +686,7 @@ footer p{margin:0 0 8px}
       <h3 id="granice" style="margin-top:32px">Czym to jest, a czym nie jest</h3>
       <p>To analiza i uporządkowanie Twojego materiału z odwołaniem do źródeł. To <strong>nie</strong> jest porada prawna, medyczna ani podatkowa. Model językowy może się mylić, dlatego wynik sprawdza człowiek, a raport wskazuje, co zweryfikować w źródle.</p>
       <p>W sprawach, w których potrzebny jest prawnik, lekarz lub doradca podatkowy, raport ma ułatwić Ci rozmowę z nim: pokazać, o co pytać i na co się powołać. Po wydruku usuwam z maszyny wszystkie dane cyfrowe, a Ty dostajesz swoje kopie z powrotem. Zasady ustalamy na piśmie, zanim cokolwiek zeskanuję.</p>
+      <p><strong>Tryb cloud nie jest usługą offline.</strong> Dotyczy tylko POC i książek na zamówienie. W tym trybie treść trafia do dostawcy modelu, na warunkach opisanych w sekcji <a href="#tryb">Tryb pracy</a>.</p>
     </div>
 
     <div class="offer-strip">
@@ -769,7 +802,7 @@ footer p{margin:0 0 8px}
 <section id="tryb" data-spy="tryb">
   <div class="wrap">
     <p class="label">Tryb pracy · dotyczy zleceń <span class="no">03</span> i <span class="no">04</span></p>
-    <h2>Fully private albo cloud: Ty wybierasz</h2>
+    <h2>Tryb pracy: fully private albo cloud</h2>
     <p class="prose">POC i książkę mogę wykonać na dwa sposoby. Różnią się tym, gdzie przetwarzany jest Twój materiał, i ceną. Tryb wybierasz przed startem i zapisujemy go w umowie.</p>
 
     <div class="modes">
@@ -798,6 +831,54 @@ footer p{margin:0 0 8px}
       </article>
     </div>
     <p class="muted small" style="margin-top:20px;max-width:52rem">Analiza dokumentów (01) i „Prywatna sztuczna inteligencja w Twoim gabinecie” (02) działają zawsze offline. Wybór trybu dotyczy tylko POC i książek.</p>
+
+    <div class="cloud" id="cloud">
+      <h3>Jak dokładnie działa tryb cloud</h3>
+      <p class="muted small" style="margin:0">W trybie cloud korzystam z modeli Claude firmy Anthropic przez API, na warunkach komercyjnych <mark class="todo">[DO POTWIERDZENIA: który model]</mark>.</p>
+
+      <h4>Jak to działa</h4>
+      <ol>
+        <li>Dostaję od Ciebie materiał i ustalamy zakres na piśmie.</li>
+        <li>Przed wysłaniem usuwam z materiału to, co nie jest potrzebne do zadania (dane osobowe, numery, nazwiska osób trzecich), o ile zakres na to pozwala.</li>
+        <li>Moje oprogramowanie wysyła treść szyfrowanym połączeniem do modelu językowego przez API dostawcy. Nie wklejam materiału do okna czatu na prywatnym koncie.</li>
+        <li>Wynik sprawdzam sam, zanim go dostaniesz.</li>
+        <li>Po zakończeniu usuwam materiał u siebie. U dostawcy treść jest usuwana zgodnie z jego okresem retencji <mark class="todo">[DO POTWIERDZENIA: 30 dni / zerowa retencja]</mark>.</li>
+      </ol>
+
+      <h4>Na jakich warunkach</h4>
+      <ul>
+        <li>Korzystam z API na warunkach komercyjnych z umową powierzenia przetwarzania danych <mark class="todo">[DO POTWIERDZENIA: DPA zaakceptowana, data]</mark>.</li>
+        <li>W umowie z Tobą dostawca modelu jest wskazany z nazwy jako podwykonawca przetwarzania, a Ty wyrażasz na to zgodę przed startem.</li>
+        <li>Anthropic to firma z USA. Treść opuszcza moje biuro i jest przetwarzana na serwerach dostawcy <mark class="todo">[DO POTWIERDZENIA: region i podstawa przekazania poza EOG]</mark>.</li>
+        <li>Treści wysyłane przez API domyślnie nie są używane do trenowania modeli. Wyjątek: gdy klient sam prześle opinię lub wyrazi zgodę.</li>
+        <li>Zakres, okres przechowywania i sposób usunięcia danych dostajesz na piśmie.</li>
+      </ul>
+
+      <h4>Czym to się różni od wklejenia dokumentów do własnego czatu AI</h4>
+      <table class="cmp">
+        <caption>Porównanie dotyczy planów jednego dostawcy, którego używam: Anthropic (Claude).</caption>
+        <thead>
+          <tr><td></td><th scope="col">Indywidualne konto w czacie AI (Free, Pro, Max)</th><th scope="col">Tryb cloud w Inference Polska (API)</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Trening modeli</th><td data-label="Indywidualne konto">rozmowy mogą być używane do trenowania modeli, jeśli na koncie jest włączone to ustawienie</td><td data-label="Tryb cloud u mnie">domyślnie nie są używane</td></tr>
+          <tr><th scope="row">Przechowywanie</th><td data-label="Indywidualne konto">do 5 lat przy włączonym ustawieniu, 30 dni bez niego</td><td data-label="Tryb cloud u mnie"><mark class="todo">[DO POTWIERDZENIA: 30 dni / zerowa retencja]</mark></td></tr>
+          <tr><th scope="row">Umowa powierzenia</th><td data-label="Indywidualne konto">warunki konsumenckie, pisane dla osób prywatnych</td><td data-label="Tryb cloud u mnie">warunki komercyjne z umową powierzenia</td></tr>
+          <tr><th scope="row">Kto odpowiada wobec Ciebie</th><td data-label="Indywidualne konto">nikt, robisz to sam</td><td data-label="Tryb cloud u mnie">ja, na podstawie umowy z Tobą</td></tr>
+          <tr><th scope="row">Weryfikacja wyniku</th><td data-label="Indywidualne konto">Twoja</td><td data-label="Tryb cloud u mnie">moja, przed oddaniem</td></tr>
+        </tbody>
+      </table>
+      <p class="srcs">Źródła: <a href="https://privacy.claude.com/en/articles/7996868-is-my-data-used-for-model-training" target="_blank" rel="noopener">trenowanie modeli w usługach komercyjnych</a> oraz <a href="https://www.anthropic.com/news/updates-to-our-consumer-terms" target="_blank" rel="noopener">zmiany w warunkach konsumenckich</a>. Stan na listopad 2026.</p>
+
+      <h4>Kiedy nie cloud</h4>
+      <ul>
+        <li>Dokumentacja medyczna, dane objęte tajemnicą zawodową (adwokacką, radcowską, lekarską, doradcy podatkowego) i dane szczególnych kategorii: wyłącznie tryb offline.</li>
+        <li>Analiza dokumentów i „Prywatna sztuczna inteligencja w Twoim gabinecie” działają zawsze offline.</li>
+        <li>Jeśli nie chcesz, żeby treść opuściła Polskę: tryb offline.</li>
+      </ul>
+
+      <p class="srcs">Pozostałe źródła: <a href="https://privacy.claude.com/en/articles/9267385-does-anthropic-act-as-a-data-processor-or-controller" target="_blank" rel="noopener">rola dostawcy jako podmiotu przetwarzającego</a>, <a href="https://privacy.claude.com/en/articles/7996862-how-do-i-view-and-sign-your-data-processing-addendum-dpa" target="_blank" rel="noopener">umowa powierzenia (DPA) do warunków komercyjnych</a>, <a href="https://support.claude.com/en/articles/15707726-using-claude-for-legal-work-privilege-confidentiality-and-how-to-think-about-configuration" target="_blank" rel="noopener">retencja w API</a>.</p>
+    </div>
   </div>
 </section>
 
@@ -917,6 +998,7 @@ footer p{margin:0 0 8px}
               <option>Cloud (taniej)</option>
             </select>
           </label>
+          <p class="hint">Cloud: treść trafia do dostawcy modelu; szczegóły w sekcji <a href="#tryb">Tryb pracy</a>.</p>
           <label>Wiadomość <span class="opt">(opcjonalnie)</span>
             <textarea name="wiadomosc" placeholder="Jedno–dwa zdania o tym, czego potrzebujesz."></textarea>
           </label>
