@@ -17,7 +17,7 @@ Na komputerze strona ma stałą lewą kolumnę (nazwa, jedno zdanie opisu, menu,
 5. **Książka na zamówienie** (`#ksiazka`).
 6. **Tryb pracy** (`#tryb`): droższy *fully private* na modelach lokalnych i tańszy *cloud*, dla analizy dokumentów, prototypu i książki (nie dla wynajmu urządzenia w gabinecie). Blok „Jak dokładnie działa tryb cloud” (`#cloud`): kroki, warunki przetwarzania, porównanie z kontem indywidualnym, kiedy nie cloud.
 7. **Kim jestem** (`#o-mnie`).
-8. **Umów rozmowę wstępną** (`#rozmowa`): kalendarz i formularz; przyciski z atrybutem `data-topic` ustawiają temat w formularzu.
+8. **Umów rozmowę wstępną** (`#rozmowa`): przycisk do rezerwacji w Kalendarzu Google i adres e-mail. Każdy przycisk „Umów rozmowę wstępną” na stronie prowadzi wprost do rezerwacji (nowa karta, ikona Kalendarza Google). Kliknięcie adresu e-mail nie otwiera programu pocztowego, tylko kopiuje adres do schowka i pokazuje duży napis.
 
 ## Co jest w repozytorium
 
@@ -31,7 +31,7 @@ Na komputerze strona ma stałą lewą kolumnę (nazwa, jedno zdanie opisu, menu,
 
 Strona ma jasny i ciemny motyw: domyślnie zgodny z ustawieniem systemu, z przełącznikiem w lewej kolumnie (na telefonie w górnym pasku) (wybór zapamiętywany w przeglądarce).
 
-Strona jest statyczna: bez cookies, bez zewnętrznych skryptów i czcionek. Jedyne połączenie z zewnętrzną usługą to opcjonalne wysłanie formularza.
+Strona jest statyczna: bez cookies, bez zewnętrznych skryptów, czcionek i formularzy. Rezerwacja terminu odbywa się poza stroną, w Kalendarzu Google.
 
 ## Publikacja (GitHub Pages + GitHub Actions)
 
@@ -46,8 +46,7 @@ Strona będzie dostępna pod `https://konradcinkusz.github.io/inference-polska/`
 Ustawienia są w obiekcie `CONFIG` na początku skryptu w `index.html`:
 
 - `EMAIL`: adres kontaktowy,
-- `FORM_ENDPOINT`: adres usługi formularza (np. Formspree). Puste: formularz otwiera program pocztowy (mailto),
-- `START_DATE`, `MONTHS_AHEAD`, `WORKDAYS`, `SLOTS`, `BLOCKED_DATES`: kalendarz terminów rozmów wstępnych.
+- `BOOKING_URL`: adres strony rezerwacji z Kalendarza Google (terminarz spotkań); używają go wszystkie przyciski „Umów rozmowę wstępną”.
 
 ## Podgląd lokalny
 
