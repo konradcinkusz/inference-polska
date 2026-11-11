@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Inference Polska: analiza wrażliwych dokumentów bez wysyłania ich do internetu</title>
-<meta name="description" content="Analizuję wrażliwe dokumenty lokalnie, na maszynie bez dostępu do sieci, i oddaję wydrukowany raport. Rozmowa wstępna jest bezpłatna, analiza kosztuje 150 zł brutto za każde rozpoczęte 50 stron. Także: prywatna sztuczna inteligencja w gabinecie (zawsze offline) oraz prototyp w tydzień i książki na zamówienie, do wyboru w trybie fully private albo cloud.">
+<title>Inference Polska: analiza dokumentów offline</title>
+<meta name="description" content="Analiza dokumentów offline: dane i cały proces analizy nie opuszczają mojego biura. Rozmowa wstępna jest bezpłatna, analiza kosztuje 150 zł brutto za każde rozpoczęte 50 stron (tryb fully private). Także: prywatna sztuczna inteligencja w gabinecie, prototyp w tydzień i książki na zamówienie. Tryb pracy do wyboru: fully private albo cloud.">
 <meta name="color-scheme" content="light dark">
-<meta property="og:title" content="Inference Polska: analiza wrażliwych dokumentów bez wysyłania ich do internetu">
-<meta property="og:description" content="Analiza dokumentów na maszynie bez sieci i wydrukowany raport. Rozmowa wstępna bezpłatna. Prototypy i książki na zamówienie także w trybie cloud, na opisanych warunkach.">
+<meta property="og:title" content="Inference Polska: analiza dokumentów offline">
+<meta property="og:description" content="Analiza dokumentów offline: dane i cały proces analizy nie opuszczają mojego biura. Rozmowa wstępna bezpłatna. Tryb cloud jako tańsza opcja, na opisanych warunkach.">
 <meta property="og:type" content="website">
 <script>
 (function(){var r=document.documentElement;r.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")r.setAttribute("data-theme",t);}catch(e){}})();
@@ -125,6 +125,7 @@ section>.wrap{border-top:1px solid var(--rule);padding-top:60px}
 
 /* zwijane bloki */
 .mores{margin-top:36px;border-bottom:1px solid var(--rule)}
+.mores+p{margin-top:22px}
 details.more{border-top:1px solid var(--rule)}
 summary{display:flex;align-items:center;gap:12px;padding:15px 0;cursor:pointer;list-style:none}
 summary::-webkit-details-marker{display:none}
@@ -324,11 +325,11 @@ footer p{margin:0 0 6px}
 
 <div class="wrap hero">
   <p class="label">Inżynieria augmentatywna · człowiek + AI</p>
-  <h1>Analiza wrażliwych dokumentów bez wysyłania ich do internetu</h1>
-  <p class="lead">Ludzie mają problemy do rozwiązania, których treść nie powinna być nikomu udostępniana: umowy, pisma urzędowe, dokumentacja medyczna, rozliczenia. Analizuję Twoje dokumenty, sprawdzam przepisy i literaturę naukową i oddaję Ci wydrukowany raport z wnioskami i źródłami. Analizę dokumentów robię z pomocą AI, ale wyłącznie u siebie w biurze, na komputerze bez dostępu do internetu.</p>
+  <h1>Analiza dokumentów offline</h1>
+  <p class="say">Dane i cały proces analizy nie opuszczają mojego biura.</p>
+  <p class="muted small">To tryb fully private. Taniej: <a href="#tryb">tryb cloud</a> dla dokumentów niewrażliwych.</p>
   <div class="cta">
     <a class="btn" href="#rozmowa">Umów rozmowę wstępną</a>
-    <a class="btn ghost" href="#analiza">Zobacz, jak to rozwiązuję</a>
   </div>
 </div>
 
@@ -337,7 +338,7 @@ footer p{margin:0 0 6px}
     <p class="label">Oferta</p>
     <h2 class="vh">Oferta</h2>
     <div class="offer">
-      <a href="#analiza"><span class="t">Analiza dokumentów</span><span class="m">150 zł brutto / 50 stron<br>zawsze offline</span></a>
+      <a href="#analiza"><span class="t">Analiza dokumentów</span><span class="m">150 zł brutto / 50 stron<br>fully private lub cloud</span></a>
       <a href="#firmy"><span class="t">Prywatna sztuczna inteligencja w Twoim gabinecie</span><span class="m">wycena po rozmowie<br>zawsze offline</span></a>
       <a href="#poc"><span class="t">Prototyp w tydzień</span><span class="m">wycena po rozmowie<br>fully private lub cloud</span></a>
       <a href="#ksiazka"><span class="t">Książka na zamówienie</span><span class="m">wycena po rozmowie<br>fully private lub cloud</span></a>
@@ -348,9 +349,8 @@ footer p{margin:0 0 6px}
 <section id="analiza" data-spy="analiza">
   <div class="wrap">
     <p class="label"><span class="no">01</span> Dla osób prywatnych i firm</p>
-    <h2>Analiza dokumentów offline</h2>
+    <h2>Jak wygląda analiza offline</h2>
     <div id="rozwiazanie">
-      <p class="say">Dane i cały proces analizy nie opuszczają mojego biura.</p>
     <p>Analizuję Twoją sprawę na lokalnym modelu językowym. Analiza opiera się na aktualnych bazach aktów prawnych i literatury naukowej, a wynik sprawdza człowiek. Wszystkie dane i cały proces wnioskowania są przetwarzane na maszynie, która stoi u mnie i nie ma dostępu do sieci.</p>
       <dl class="facts3">
         <div><dt>Wszystko lokalnie</dt><dd>Dokumenty i cały proces wnioskowania zostają na jednym urządzeniu w moim biurze.</dd></div>
@@ -392,7 +392,7 @@ footer p{margin:0 0 6px}
 
     <div class="price">
       <p class="num"><b>150 zł</b> brutto za każde rozpoczęte 50 stron dokumentacji</p>
-      <p>Do 50 stron: 150 zł, 51–100 stron: 300 zł. Większe akta: wycena po rozmowie wstępnej. Rozmowa wstępna jest bezpłatna.</p>
+      <p>Do 50 stron: 150 zł, 51–100 stron: 300 zł. Większe akta: wycena po rozmowie wstępnej. Rozmowa wstępna jest bezpłatna. Cena dotyczy trybu fully private. Tryb cloud: wycena po rozmowie wstępnej.</p>
       <p class="muted small">Standardowy zakres to do 50 stron dokumentacji. Większe akta analizuję w kolejnych pakietach po 50 stron.</p>
       <p><a class="btn" href="#rozmowa" data-topic="Sprawa prawna lub urzędowa">Umów rozmowę wstępną</a></p>
     </div>
@@ -403,7 +403,7 @@ footer p{margin:0 0 6px}
         <div class="body">
       <p>Popularne narzędzia AI, takie jak ChatGPT, przetwarzają to, co im wyślesz, na serwerach swojego dostawcy. Serwery te często stoją w USA. Razem z dokumentem poza kraj wyjeżdża więc cały proces wnioskowania, czyli sama analiza Twojej sprawy.</p>
       <p>Nie musisz wiedzieć, czym jest chmura ani jak działa model językowy. Wystarczy jedno pytanie: czy treść mojej sprawy powinna opuszczać kraj i trafiać do firmy, która nie ma z nią nic wspólnego?</p>
-      <p class="muted small">Dla porządku: przy prototypach i książkach na zamówienie możesz wybrać tryb cloud. Wtedy treść także trafia do dostawcy modelu za granicą, ale na innych warunkach niż na prywatnym koncie. Opisuję je w sekcji <a href="#tryb">Tryb pracy</a>. Analiza dokumentów odbywa się zawsze offline.</p>
+      <p class="muted small">Dla porządku: przy analizie dokumentów, prototypach i książkach możesz wybrać tryb cloud. Wtedy treść także trafia do dostawcy modelu za granicą, ale na innych warunkach niż na prywatnym koncie. Opisuję je w sekcji <a href="#tryb">Tryb pracy</a>. Dokumentacja medyczna i dane objęte tajemnicą zawodową: wyłącznie offline.</p>
       <ul class="plain">
         <li><strong>Treść wyjeżdża.</strong> Dokument trafia na cudzy serwer, często w innym kraju niż Twój.</li>
         <li><strong>Analiza dzieje się gdzie indziej.</strong> Nie tylko dane, ale i sam proces wnioskowania odbywa się poza Twoim krajem.</li>
@@ -469,7 +469,7 @@ footer p{margin:0 0 6px}
         <div class="body">
       <p>To analiza i uporządkowanie Twojego materiału z odwołaniem do źródeł. To <strong>nie</strong> jest porada prawna, medyczna ani podatkowa. Model językowy może się mylić, dlatego wynik sprawdza człowiek, a raport wskazuje, co zweryfikować w źródle.</p>
       <p>W sprawach, w których potrzebny jest prawnik, lekarz lub doradca podatkowy, raport ma ułatwić Ci rozmowę z nim: pokazać, o co pytać i na co się powołać. Po wydruku usuwam z maszyny wszystkie dane cyfrowe, a Ty dostajesz swoje kopie z powrotem. Zasady ustalamy na piśmie, zanim cokolwiek zeskanuję.</p>
-      <p><strong>Tryb cloud nie jest usługą offline.</strong> Dotyczy tylko prototypów i książek na zamówienie. W tym trybie treść trafia do dostawcy modelu, na warunkach opisanych w sekcji <a href="#tryb">Tryb pracy</a>.</p>
+      <p><strong>Tryb cloud nie jest usługą offline.</strong> Możesz go wybrać przy analizie dokumentów (poza dokumentacją medyczną i danymi objętymi tajemnicą zawodową), prototypie i książce. W tym trybie treść trafia do dostawcy modelu, na warunkach opisanych w sekcji <a href="#tryb">Tryb pracy</a>.</p>
         </div>
       </details>
     </div>
@@ -482,7 +482,7 @@ footer p{margin:0 0 6px}
     <h2>Przykładowe sprawy</h2>
     <p><strong>Dla kogo:</strong> dla osób prywatnych ze sprawą urzędową, medyczną, podatkową lub umową, a także dla małych firm, biur rachunkowych, gabinetów i kancelarii. Poniżej szesnaście przykładowych akt. Sprawdź, czy któraś sytuacja przypomina Twoją.</p>
     <div class="cases">
-      <details open>
+      <details>
         <summary><h3>Zdrowie i ZUS</h3><span class="count">4 sprawy</span></summary>
         <div class="case-grid">
           <article class="case">
@@ -608,6 +608,10 @@ footer p{margin:0 0 6px}
     <p class="label"><span class="no">02</span> Dla biur rachunkowych i gabinetów</p>
     <h2>Prywatna sztuczna inteligencja w Twoim gabinecie</h2>
     <p>Jeżeli pracujesz na cudzych danych (księgi, dokumentacja pacjentów), nie możesz ich wysyłać do publicznych usług AI na cudzych serwerach. Wynajmuję i utrzymuję lokalne urządzenie z oprogramowaniem, które stoi w Twoim biurze, działa offline i uczy Twój zespół pracować lokalnie. Nie musisz mieć własnego działu IT. Ta usługa działa zawsze offline.</p>
+    <div class="mores">
+      <details class="more">
+        <summary><h3>Pakiety: Biuro, Gabinet, Pro</h3></summary>
+        <div class="body">
     <div class="plans">
       <article class="plan">
         <h3>Pakiet Biuro</h3>
@@ -647,6 +651,10 @@ footer p{margin:0 0 6px}
       </article>
     </div>
     <p class="muted small"><strong>Usługi dodatkowe:</strong> indeksowanie archiwum dokumentów firmy, dodatkowa baza branżowa, dodatkowe szkolenie zespołu, wizyta serwisowa na miejscu. Zakup urządzenia zamiast wynajmu wyceniam indywidualnie. Dokładną ofertę przygotowuję po rozmowie wstępnej.</p>
+        </div>
+      </details>
+    </div>
+    <p><a class="btn ghost" href="#rozmowa">Umów rozmowę wstępną</a></p>
   </div>
 </section>
 
@@ -690,9 +698,9 @@ footer p{margin:0 0 6px}
 
 <section id="tryb" data-spy="tryb">
   <div class="wrap">
-    <p class="label">Tryb pracy · dotyczy zleceń <span class="no">03</span> i <span class="no">04</span></p>
+    <p class="label">Tryb pracy · dotyczy zleceń 01, 03 i 04</p>
     <h2>Tryb pracy: fully private albo cloud</h2>
-    <p>Prototyp i książkę mogę wykonać na dwa sposoby. Różnią się tym, gdzie przetwarzany jest Twój materiał, i ceną. Tryb wybierasz przed startem i zapisujemy go w umowie.</p>
+    <p>Analizę dokumentów, prototyp i książkę mogę wykonać na dwa sposoby. Różnią się tym, gdzie przetwarzany jest Twój materiał, i ceną. Tryb wybierasz przed startem i zapisujemy go w umowie. Wyjątkiem jest wynajem urządzenia w gabinecie (02): działa zawsze offline i nie ma wyboru trybu.</p>
     <div class="modes">
       <article class="plan feat">
         <span class="tag">Pełna prywatność</span>
@@ -708,7 +716,7 @@ footer p{margin:0 0 6px}
       </article>
       <article class="plan">
         <h3>Cloud</h3>
-        <p class="who">Projekty bez danych wrażliwych, prototypy na danych testowych</p>
+        <p class="who">Materiały bez danych wrażliwych, prototypy na danych testowych</p>
         <p class="lvl">Niższa cena</p>
         <ul>
           <li>Pracuję z modelami chmurowymi (cloud)</li>
@@ -718,7 +726,7 @@ footer p{margin:0 0 6px}
         </ul>
       </article>
     </div>
-    <p class="muted small">Analiza dokumentów (01) i „Prywatna sztuczna inteligencja w Twoim gabinecie” (02) działają zawsze offline. Wybór trybu dotyczy tylko prototypów i książek.</p>
+    <p class="muted small">Dokumentacja medyczna i dane objęte tajemnicą zawodową: wyłącznie fully private (szczegóły niżej, w „Kiedy nie cloud”).</p>
     <p class="note"><strong>Tryb cloud w skrócie:</strong> treść trafia przez API do Anthropic, firmy z USA. Domyślnie nie jest używana do trenowania modeli. U dostawcy jest przechowywana do 30 dni. Przetwarzanie w EOG nie jest gwarantowane.</p>
     <div class="mores">
       <details class="more cloud" id="cloud">
@@ -763,7 +771,7 @@ footer p{margin:0 0 6px}
       <h4>Kiedy nie cloud</h4>
       <ul>
         <li>Dokumentacja medyczna, dane objęte tajemnicą zawodową (adwokacką, radcowską, lekarską, doradcy podatkowego) i dane szczególnych kategorii: wyłącznie tryb offline.</li>
-        <li>Analiza dokumentów i „Prywatna sztuczna inteligencja w Twoim gabinecie” działają zawsze offline.</li>
+        <li>„Prywatna sztuczna inteligencja w Twoim gabinecie” działa zawsze offline i nie ma wyboru trybu.</li>
         <li>Jeśli nie chcesz, żeby treść opuściła Polskę: tryb offline.</li>
       </ul>
 
@@ -877,7 +885,7 @@ footer p{margin:0 0 6px}
           <label id="phone-wrap" hidden>Numer telefonu
             <input type="tel" name="telefon" id="f-phone" autocomplete="tel" placeholder="+48 ...">
           </label>
-          <label>Tryb pracy <span class="opt">(prototyp, książka)</span>
+          <label>Tryb pracy <span class="opt">(analiza, prototyp, książka)</span>
             <select name="tryb">
               <option value="">Nie dotyczy lub nie wiem jeszcze</option>
               <option>Fully private (modele lokalne)</option>
@@ -891,7 +899,7 @@ footer p{margin:0 0 6px}
           <input type="hidden" name="termin" id="f-slot" value="">
           <div class="hp" aria-hidden="true"><label>Nie wypełniaj <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
 
-          <div class="notice warn" style="margin:0" role="note">Nie wpisuj tu treści dokumentów ani danych wrażliwych (zdrowie, PESEL, numery spraw). Formularz przechodzi przez zewnętrzną usługę, a dokumenty analizuję dopiero na maszynie offline, po spotkaniu.</div>
+          <div class="notice warn" style="margin:0" role="note">Nie wpisuj tu treści dokumentów ani danych wrażliwych (zdrowie, PESEL, numery spraw). Formularz przechodzi przez zewnętrzną usługę, a dokumenty analizuję dopiero po spotkaniu, w wybranym trybie pracy.</div>
 
           <label class="check"><input type="checkbox" id="f-consent" required> <span>Zgadzam się, żeby podany adres e-mail i telefon zostały użyte wyłącznie do odpowiedzi na to zgłoszenie.</span></label>
 
