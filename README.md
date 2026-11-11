@@ -1,6 +1,6 @@
 # Inference Polska
 
-Strona internetowa usługi **Inference Polska**: analiza wrażliwych dokumentów offline, na maszynie bez dostępu do sieci. Klient dostaje wydrukowany raport, a po wydruku wszystkie dane cyfrowe są usuwane. Rozmowa wstępna jest bezpłatna, a analiza dokumentów kosztuje 150 zł brutto za każde rozpoczęte 50 stron. POC i książki na zamówienie można zlecić także w trybie cloud; strona opisuje, jak ten tryb działa i na jakich warunkach przetwarzane są dane.
+Strona internetowa usługi **Inference Polska**: analiza wrażliwych dokumentów offline, na maszynie bez dostępu do sieci. Klient dostaje wydrukowany raport, a po wydruku wszystkie dane cyfrowe są usuwane. Rozmowa wstępna jest bezpłatna, a analiza dokumentów kosztuje 150 zł brutto za każde rozpoczęte 50 stron. Prototypy i książki na zamówienie można zlecić także w trybie cloud; strona opisuje, jak ten tryb działa i na jakich warunkach przetwarzane są dane.
 
 ## Układ
 
@@ -13,9 +13,9 @@ Na komputerze strona ma stałą lewą kolumnę (nazwa, jedno zdanie opisu, menu,
 1. **Analiza dokumentów offline** (`#analiza`): rozwiązanie i cena, a w zwijanych blokach problem (`#problem`), przebieg (`#jak`), wynik (`#raport`) i granice usługi (`#granice`).
 2. **Przykładowe sprawy** (`#przyklady`): 16 fikcyjnych akt w czterech grupach, z linkami do PDF-ów w `assets/akta/`. Pliki są kopią wydania `pdfs` z repozytorium `iference-polska-use-cases`; po zmianie akt trzeba je skopiować ponownie.
 3. **Prywatna sztuczna inteligencja w Twoim gabinecie** (`#firmy`): Pakiet Biuro, Pakiet Gabinet i Pakiet Pro, wycena na zapytanie.
-4. **POC w tydzień** (`#poc`).
+4. **Prototyp w tydzień** (`#poc`).
 5. **Książka na zamówienie** (`#ksiazka`).
-6. **Tryb pracy** (`#tryb`): droższy *fully private* na modelach lokalnych i tańszy *cloud*, tylko dla POC i książek. Blok „Jak dokładnie działa tryb cloud” (`#cloud`): kroki, warunki przetwarzania, porównanie z kontem indywidualnym, kiedy nie cloud.
+6. **Tryb pracy** (`#tryb`): droższy *fully private* na modelach lokalnych i tańszy *cloud*, tylko dla prototypów i książek. Blok „Jak dokładnie działa tryb cloud” (`#cloud`): kroki, warunki przetwarzania, porównanie z kontem indywidualnym, kiedy nie cloud.
 7. **Kim jestem** (`#o-mnie`).
 8. **Umów rozmowę wstępną** (`#rozmowa`): kalendarz i formularz; przyciski z atrybutem `data-topic` ustawiają temat w formularzu.
 
