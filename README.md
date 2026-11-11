@@ -2,9 +2,15 @@
 
 Strona internetowa usługi **Inference Polska**: analiza wrażliwych dokumentów offline, na maszynie bez dostępu do sieci. Klient dostaje wydrukowany raport, a po wydruku wszystkie dane cyfrowe są usuwane. Rozmowa wstępna jest bezpłatna, a analiza dokumentów kosztuje 150 zł brutto za każde rozpoczęte 50 stron. POC i książki na zamówienie można zlecić także w trybie cloud; strona opisuje, jak ten tryb działa i na jakich warunkach przetwarzane są dane.
 
+## Układ
+
+Na komputerze strona ma stałą lewą kolumnę (nazwa, jedno zdanie opisu, menu, przycisk rozmowy wstępnej) i treść po prawej. Na telefonie kolumna staje się górnym paskiem z rozwijanym menu. Jeden krój pisma, cienkie linie zamiast kart, bez cieni i ikon. Jedyny efekt to podświetlenie wiersza na liście „Oferta”. Szczegóły (kroki, układ raportu, granice usługi, warunki trybu cloud, publikacje) są w zwijanych blokach; odnośnik do kotwicy wewnątrz zwiniętego bloku sam go otwiera.
+
 ## Sekcje strony
 
-1. **Analiza dokumentów offline** (`#analiza`, `#rozwiazanie`, `#jak`, `#raport`): problem, rozwiązanie, przebieg, wynik i cena.
+0. **Oferta** (`#oferta`): cztery usługi jako duża lista z ceną lub „wycena po rozmowie”.
+
+1. **Analiza dokumentów offline** (`#analiza`): rozwiązanie i cena, a w zwijanych blokach problem (`#problem`), przebieg (`#jak`), wynik (`#raport`) i granice usługi (`#granice`).
 2. **Przykładowe sprawy** (`#przyklady`): 16 fikcyjnych akt w czterech grupach, z linkami do PDF-ów w `assets/akta/`. Pliki są kopią wydania `pdfs` z repozytorium `iference-polska-use-cases`; po zmianie akt trzeba je skopiować ponownie.
 3. **Prywatna sztuczna inteligencja w Twoim gabinecie** (`#firmy`): Pakiet Biuro, Pakiet Gabinet i Pakiet Pro, wycena na zapytanie.
 4. **POC w tydzień** (`#poc`).
@@ -23,7 +29,7 @@ Strona internetowa usługi **Inference Polska**: analiza wrażliwych dokumentów
 | `assets/` | Zdjęcie do sekcji „Kim jestem” oraz `akta/`: 16 fikcyjnych akt w PDF do sekcji „Przykładowe sprawy”. |
 | `README.md` | Ten plik. |
 
-Strona ma jasny i ciemny motyw: domyślnie zgodny z ustawieniem systemu, z przełącznikiem w nagłówku (wybór zapamiętywany w przeglądarce).
+Strona ma jasny i ciemny motyw: domyślnie zgodny z ustawieniem systemu, z przełącznikiem w lewej kolumnie (na telefonie w górnym pasku) (wybór zapamiętywany w przeglądarce).
 
 Strona jest statyczna: bez cookies, bez zewnętrznych skryptów i czcionek. Jedyne połączenie z zewnętrzną usługą to opcjonalne wysłanie formularza.
 
