@@ -209,56 +209,20 @@ summary:hover h3{color:var(--accent)}
 @media (max-width:640px){ .about{grid-template-columns:1fr;gap:20px} .about figure{max-width:180px} }
 
 /* kontakt */
-.book-grid{display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));align-items:start;margin-top:28px}
-.panel{border:1px solid var(--rule);border-radius:6px;padding:22px}
 .book-link{margin-top:24px}
 .book-link p{margin:0 0 10px}
-.book-grid.single{grid-template-columns:minmax(0,520px)}
-.panel h3{margin-bottom:14px}
-.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.cal-head strong{text-transform:capitalize}
-.cal-nav{font-size:1rem;width:42px;height:42px;border:1px solid var(--rule-strong);background:transparent;color:var(--ink);border-radius:6px;cursor:pointer}
-.cal-nav:hover:not([disabled]){border-color:var(--ink)}
-.cal-nav[disabled]{opacity:.35;cursor:default}
-.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
-.cal-dow{font-family:var(--mono);font-size:.7rem;text-align:center;color:var(--muted);padding:4px 0;text-transform:uppercase}
-.cal-day{aspect-ratio:1;min-height:36px;border:1px solid var(--rule);background:transparent;color:var(--ink);border-radius:4px;font:inherit;font-size:.97rem;font-weight:600;cursor:pointer;padding:0}
-.cal-day:hover:not([disabled]){border-color:var(--ink)}
-.cal-day[disabled]{opacity:.35;cursor:default;border-color:transparent;font-weight:400}
-.cal-day[aria-pressed="true"],.slot[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
-.slots{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.slot{font:inherit;font-size:.97rem;font-weight:600;min-height:42px;padding:6px 14px;border:1px solid var(--rule-strong);background:transparent;color:var(--ink);border-radius:4px;cursor:pointer}
-.slot:hover{border-color:var(--ink)}
-.chosen{font-weight:600;margin:14px 0 0;min-height:1.5em;color:var(--ink)}
-.cal-help{font-size:.92rem;color:var(--muted);margin:10px 0 0;line-height:1.55}
-form{display:grid;gap:14px}
-label{display:block;font-size:.97rem;font-weight:600;color:var(--ink)}
-label>input:not([type=radio]):not([type=checkbox]),label>select,label>textarea{display:block;margin-top:6px}
-label .opt{font-weight:400;color:var(--muted)}
-input[type=email],input[type=tel],input[type=text],select,textarea{font:inherit;font-weight:400;font-size:1rem;min-height:46px;padding:9px 12px;border:1px solid var(--rule-strong);border-radius:4px;background:transparent;color:var(--ink);width:100%}
-select option{background:var(--paper);color:var(--ink)}
-input::placeholder,textarea::placeholder{color:var(--muted);opacity:.8}
-input:focus,select:focus,textarea:focus{border-color:var(--accent)}
-textarea{min-height:100px;resize:vertical}
-fieldset{border:0;padding:0;margin:0}
-legend{font-size:.97rem;font-weight:600;padding:0;margin-bottom:6px;color:var(--ink)}
-.radio{display:flex;gap:20px;flex-wrap:wrap}
-.radio label{display:flex;gap:8px;align-items:center;font-weight:400}
-input[type=radio],input[type=checkbox]{width:19px;height:19px;accent-color:var(--accent)}
-.check{display:flex!important;gap:10px;align-items:flex-start;font-weight:400!important;font-size:.92rem!important;color:var(--muted)!important;line-height:1.5}
-.check input{margin-top:2px;flex:none}
-.hint{font-size:.9rem;color:var(--muted);line-height:1.5;margin:-6px 0 0}
-.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-.notice{font-size:.95rem;line-height:1.55;border-left:2px solid var(--rule-strong);padding:8px 0 8px 14px;color:var(--text)}
-.notice.warn{border-left-color:var(--warn);background:var(--warn-soft);padding:10px 14px}
-#status{font-weight:600;min-height:1.4em;margin:0}
-#status.ok{color:var(--ok)}
-#status.err{color:var(--warn)}
+.gi{width:auto;height:1.3em;margin-right:.6em;flex:none}
+nav.main a.nav-cta{display:flex;align-items:center;justify-content:center}
 .mail-box{margin-top:32px;padding-top:20px;border-top:1px solid var(--rule);display:flex;flex-wrap:wrap;gap:10px 20px;align-items:center;justify-content:space-between}
 .mail-box .addr{font-size:1.2rem;font-weight:600;word-break:break-all}
 .mail-box p{margin:0}
 .copy{font:inherit;font-size:.92rem;font-weight:600;min-height:42px;padding:6px 14px;border:1px solid var(--rule-strong);border-radius:6px;background:transparent;color:var(--ink);cursor:pointer}
 .copy:hover{border-color:var(--ink)}
+.mail-box .mail{color:inherit}
+.toast{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:24px;background:color-mix(in srgb,var(--paper) 86%,transparent);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);cursor:pointer;text-align:center}
+.toast .big{font-size:clamp(2rem,6vw,4.2rem);font-weight:600;letter-spacing:-.03em;line-height:1.1;color:var(--ink);margin:0 0 14px}
+.toast .addr{font-family:var(--mono);font-size:clamp(1rem,2.6vw,1.6rem);color:var(--ink);margin:0 0 10px;word-break:break-all}
+.toast .hintx{font-size:.9rem;color:var(--muted);margin:0}
 
 footer{border-top:1px solid var(--rule);padding:32px 0 56px;font-size:.9rem;color:var(--muted)}
 footer p{margin:0 0 6px}
@@ -283,10 +247,9 @@ footer p{margin:0 0 6px}
   .offer a{grid-template-columns:1fr;padding:16px 14px}
   .offer .m{text-align:left}
   .facts3>div{grid-template-columns:1fr}
-  .panel{padding:18px 16px}
 }
 @media print{
-  .side,.cta,#contact,.cal-nav,.copy{display:none}
+  .side,.cta,.copy,.toast{display:none}
   .shell{display:block}
   body{background:#fff;color:#000}
   details>*{display:block}
@@ -311,7 +274,7 @@ footer p{margin:0 0 6px}
     <a href="#ksiazka" data-spy="ksiazka">Książki</a>
     <a href="#tryb" data-spy="tryb">Tryb pracy</a>
     <a href="#o-mnie" data-spy="o-mnie">O mnie</a>
-    <a href="#rozmowa" data-spy="rozmowa" class="nav-cta">Umów rozmowę wstępną</a>
+    <a class="nav-cta" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a>
   </nav>
   <div class="side-foot">
     <button type="button" class="icon-btn theme-btn" id="theme-btn" aria-label="Przełącz motyw jasny lub ciemny">
@@ -332,7 +295,7 @@ footer p{margin:0 0 6px}
   <p class="say">Dane i cały proces analizy nie opuszczają mojego biura.</p>
   <p class="muted small">To tryb fully private. Taniej: <a href="#tryb">tryb cloud</a> dla dokumentów niewrażliwych.</p>
   <div class="cta">
-    <a class="btn" href="#rozmowa">Umów rozmowę wstępną</a>
+    <a class="btn" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a>
   </div>
 </div>
 
@@ -397,7 +360,7 @@ footer p{margin:0 0 6px}
       <p class="num"><b>150 zł</b> brutto za każde rozpoczęte 50 stron dokumentacji</p>
       <p>Do 50 stron: 150 zł, 51–100 stron: 300 zł. Większe akta: wycena po rozmowie wstępnej. Rozmowa wstępna jest bezpłatna. Cena dotyczy trybu fully private. Tryb cloud: wycena po rozmowie wstępnej.</p>
       <p class="muted small">Standardowy zakres to do 50 stron dokumentacji. Większe akta analizuję w kolejnych pakietach po 50 stron.</p>
-      <p><a class="btn" href="#rozmowa" data-topic="Sprawa prawna lub urzędowa">Umów rozmowę wstępną</a></p>
+      <p><a class="btn" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
     </div>
 
     <div class="mores">
@@ -626,7 +589,7 @@ footer p{margin:0 0 6px}
           <li>Serwis i wymiana sprzętu</li>
           <li>Szkolenie zespołu, 2 godziny</li>
         </ul>
-        <p class="ask"><a class="btn ghost" href="#formularz" data-topic="Pakiet Biuro">Zapytaj o wycenę</a></p>
+        <p class="ask"><a class="btn ghost" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
       </article>
       <article class="plan feat">
         <span class="tag">Dane wrażliwe</span>
@@ -639,7 +602,7 @@ footer p{margin:0 0 6px}
           <li>Szkolenie zespołu, 2 godziny</li>
           <li>Procedura czyszczenia danych po sprawie</li>
         </ul>
-        <p class="ask"><a class="btn" href="#formularz" data-topic="Pakiet Gabinet">Zapytaj o wycenę</a></p>
+        <p class="ask"><a class="btn" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
       </article>
       <article class="plan">
         <h3>Pakiet Pro</h3>
@@ -650,14 +613,14 @@ footer p{margin:0 0 6px}
           <li>Integracja z Twoimi dokumentami</li>
           <li>Zakres ustalamy po rozmowie wstępnej</li>
         </ul>
-        <p class="ask"><a class="btn ghost" href="#formularz" data-topic="Pakiet Pro">Zapytaj o wycenę</a></p>
+        <p class="ask"><a class="btn ghost" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
       </article>
     </div>
     <p class="muted small"><strong>Usługi dodatkowe:</strong> indeksowanie archiwum dokumentów firmy, dodatkowa baza branżowa, dodatkowe szkolenie zespołu, wizyta serwisowa na miejscu. Zakup urządzenia zamiast wynajmu wyceniam indywidualnie. Dokładną ofertę przygotowuję po rozmowie wstępnej.</p>
         </div>
       </details>
     </div>
-    <p><a class="btn ghost" href="#rozmowa">Umów rozmowę wstępną</a></p>
+    <p><a class="btn ghost" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
   </div>
 </section>
 
@@ -669,7 +632,7 @@ footer p{margin:0 0 6px}
       <p>Masz pomysł, którego nie da się ocenić na slajdach? W tydzień buduję działający prototyp: najważniejszą ścieżkę użytkownika, na prawdziwym kodzie i danych testowych. Widać na nim, czy kierunek ma sens, zanim wydasz budżet na pełny projekt.</p>
       <p>Pracuję metodą <strong>inżynierii augmentatywnej</strong>: architekturę, decyzje i odpowiedzialność za wynik biorę ja, a modele AI przyspieszają pisanie kodu i testy.</p>
     <p class="note">Prototyp to dowód, że kierunek działa, a nie gotowy system produkcyjny. Na cenę wpływa <a href="#tryb">tryb pracy</a>: fully private albo cloud. Zakres i cenę ustalamy po rozmowie wstępnej, zanim zacznę.</p>
-    <p><a class="btn" href="#formularz" data-topic="Prototyp w tydzień">Zapytaj o prototyp</a></p>
+    <p><a class="btn" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
   </div>
 </section>
 
@@ -695,7 +658,7 @@ footer p{margin:0 0 6px}
       </details>
     </div>
     <p class="note">Cena zależy od objętości, tematu i <a href="#tryb">trybu pracy</a>: fully private albo cloud. Wycenę przygotowuję po rozmowie wstępnej.</p>
-    <p><a class="btn" href="#formularz" data-topic="Książka na zamówienie">Zapytaj o książkę</a></p>
+    <p><a class="btn" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
   </div>
 </section>
 
@@ -825,100 +788,22 @@ footer p{margin:0 0 6px}
   </div>
 </section>
 
-<section id="rozmowa" data-spy="rozmowa">
+<section id="rozmowa">
   <div class="wrap">
     <p class="label">Kontakt · od 1 grudnia 2026 · stacjonarnie</p>
     <h2>Umów rozmowę wstępną</h2>
     <p class="say">Rozmowa wstępna jest bezpłatna. Na miejscu ustalamy zakres.</p>
       <p>Rozmowa wstępna jest bezpłatna, każda, bez limitu. Odbywa się na miejscu: opowiadasz o sprawie i przekazujesz mi osobiście kopie dokumentów. Płatna jest dopiero <strong>analiza dokumentów: 150 zł brutto za każde rozpoczęte 50 stron</strong> (do 50 stron: 150 zł, 51–100 stron: 300 zł). Większe akta wyceniam po rozmowie wstępnej.</p>
       <p>Standardowy zakres to do 50 stron dokumentacji. Większe akta analizuję w kolejnych pakietach po 50 stron. Po analizie odsyłam Ci wydrukowany raport razem z kopiami, a dane cyfrowe usuwam z maszyny.</p>
-      <p>Pytasz o <a href="#firmy">prywatną sztuczną inteligencję w gabinecie</a>, <a href="#poc">prototyp</a> albo <a href="#ksiazka">książkę</a>? Wybierz temat i tryb pracy w formularzu.</p>
-    <div class="book-link" id="book-link" hidden>
-      <p><a class="btn" id="book-btn" href="#rozmowa" target="_blank" rel="noopener">Zarezerwuj rozmowę wstępną</a></p>
+      <p>Pytasz o <a href="#firmy">prywatną sztuczną inteligencję w gabinecie</a>, <a href="#poc">prototyp</a> albo <a href="#ksiazka">książkę</a>? Umów rozmowę wstępną albo napisz na adres poniżej.</p>
+    <div class="book-link">
+      <p><a class="btn" href="#rozmowa" target="_blank" rel="noopener" data-book id="book-btn"><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
       <p class="muted small">Rezerwacja odbywa się w Kalendarzu Google, w nowej karcie. Podajesz tam imię i e-mail. Nie wpisuj treści dokumentów ani danych wrażliwych.</p>
-    </div>
-    <div class="book-grid" id="book-grid">
-      <div class="panel" id="cal-panel" aria-labelledby="cal-h">
-        <h3 id="cal-h">Wybierz termin</h3>
-        <div class="cal-head">
-          <button type="button" class="cal-nav" id="cal-prev" aria-label="Poprzedni miesiąc">&larr;</button>
-          <strong id="cal-label" aria-live="polite"></strong>
-          <button type="button" class="cal-nav" id="cal-next" aria-label="Następny miesiąc">&rarr;</button>
-        </div>
-        <div class="cal-grid" id="cal-grid"></div>
-        <div class="slots" id="slots" role="group" aria-label="Godziny"></div>
-        <p class="chosen" id="chosen" aria-live="polite">Nie wybrano terminu.</p>
-        <p class="cal-help">To prośba o termin, a nie automatyczna rezerwacja. Potwierdzam go mailowo lub telefonicznie i wtedy podaję miejsce spotkania. Dni robocze, od 1 grudnia 2026.</p>
-      </div>
-
-      <div class="panel" id="formularz" aria-labelledby="form-h">
-        <h3 id="form-h">Zostaw kontakt</h3>
-        <form id="contact" novalidate>
-          <label>Czego dotyczy sprawa?
-            <select name="temat">
-              <option value="">Wybierz</option>
-              <optgroup label="Analiza dokumentów">
-                <option>Sprawa prawna lub urzędowa</option>
-                <option>Umowy i dokumenty</option>
-                <option>Podatki i księgowość</option>
-                <option>Dokumentacja medyczna</option>
-                <option>Dokumentacja techniczna lub naukowa</option>
-              </optgroup>
-              <optgroup label="Prywatna sztuczna inteligencja w gabinecie">
-                <option>Pakiet Biuro</option>
-                <option>Pakiet Gabinet</option>
-                <option>Pakiet Pro</option>
-              </optgroup>
-              <optgroup label="Zlecenia">
-                <option>Prototyp w tydzień</option>
-                <option>Książka na zamówienie</option>
-              </optgroup>
-              <option>Inne</option>
-            </select>
-          </label>
-          <label>Twój e-mail
-            <input type="email" name="email" id="f-email" autocomplete="email" required placeholder="adres@example.com">
-          </label>
-          <label>Imię <span class="opt">(opcjonalnie)</span>
-            <input type="text" name="imie" autocomplete="given-name">
-          </label>
-          <fieldset>
-            <legend>Jak mam się z Tobą skontaktować?</legend>
-            <div class="radio">
-              <label><input type="radio" name="kontakt" value="e-mail" checked> E-mailem</label>
-              <label><input type="radio" name="kontakt" value="telefon"> Telefonicznie</label>
-            </div>
-          </fieldset>
-          <label id="phone-wrap" hidden>Numer telefonu
-            <input type="tel" name="telefon" id="f-phone" autocomplete="tel" placeholder="+48 ...">
-          </label>
-          <label>Tryb pracy <span class="opt">(analiza, prototyp, książka)</span>
-            <select name="tryb">
-              <option value="">Nie dotyczy lub nie wiem jeszcze</option>
-              <option>Fully private (modele lokalne)</option>
-              <option>Cloud (taniej)</option>
-            </select>
-          </label>
-          <p class="hint">Cloud: treść trafia do dostawcy modelu; szczegóły w sekcji <a href="#tryb">Tryb pracy</a>.</p>
-          <label>Wiadomość <span class="opt">(opcjonalnie)</span>
-            <textarea name="wiadomosc" placeholder="Jedno–dwa zdania o tym, czego potrzebujesz."></textarea>
-          </label>
-          <input type="hidden" name="termin" id="f-slot" value="">
-          <div class="hp" aria-hidden="true"><label>Nie wypełniaj <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
-
-          <div class="notice warn" style="margin:0" role="note">Nie wpisuj tu treści dokumentów ani danych wrażliwych (zdrowie, PESEL, numery spraw). Formularz przechodzi przez zewnętrzną usługę, a dokumenty analizuję dopiero po spotkaniu, w wybranym trybie pracy.</div>
-
-          <label class="check"><input type="checkbox" id="f-consent" required> <span>Zgadzam się, żeby podany adres e-mail i telefon zostały użyte wyłącznie do odpowiedzi na to zgłoszenie.</span></label>
-
-          <button class="btn" type="submit" id="send">Wyślij prośbę o rozmowę wstępną</button>
-          <p id="status" role="status" aria-live="polite"></p>
-        </form>
-      </div>
     </div>
     <div class="mail-box" id="kontakt">
       <div>
-        <p class="muted small">Formularz nie działa? Napisz bezpośrednio:</p>
-        <p class="addr"><a href="mailto:konradcinkusz@gmail.com">konradcinkusz@gmail.com</a></p>
+        <p class="muted small">Wolisz napisać? Kliknij adres, a skopiuje się do schowka:</p>
+        <p class="addr"><a class="mail" href="mailto:konradcinkusz@gmail.com">konradcinkusz@gmail.com</a></p>
       </div>
       <button class="copy" type="button" id="copy-mail">Kopiuj adres</button>
     </div>
@@ -930,29 +815,28 @@ footer p{margin:0 0 6px}
 <footer>
   <div class="wrap">
     <p><strong>Konrad Cinkusz</strong> · <a href="mailto:konradcinkusz@gmail.com">konradcinkusz@gmail.com</a></p>
-    <p>Strona jest statyczna: bez cookies, bez zewnętrznych skryptów i czcionek. Jedyne połączenie z zewnętrzną usługą to wysłanie formularza. Rezerwacja terminu odbywa się poza tą stroną, w Kalendarzu Google.</p>
+    <p>Strona jest statyczna: bez cookies, bez zewnętrznych skryptów, czcionek i formularzy. Rezerwacja terminu odbywa się poza tą stroną, w Kalendarzu Google.</p>
     <p>© 2026 Konrad Cinkusz</p>
   </div>
 </footer>
 </div>
 </div>
 
+<div class="toast" id="toast" aria-hidden="true" hidden>
+  <div class="box">
+    <p class="big" id="toast-title"></p>
+    <p class="addr" id="toast-addr"></p>
+    <p class="hintx">Kliknij, aby zamknąć</p>
+  </div>
+</div>
+<div class="vh" id="toast-live" role="status" aria-live="polite"></div>
+
 <script>
 /* ===== USTAWIENIA: edytuj tutaj ===== */
 const CONFIG = {
   EMAIL: "konradcinkusz@gmail.com",
-  // Adres formularza, np. Formspree: "https://formspree.io/f/xxxxxxxx".
-  // Puste = formularz otworzy program pocztowy z gotową wiadomością (mailto).
-  FORM_ENDPOINT: "",
-  // Adres strony rezerwacji z Kalendarza Google (terminarz spotkań), np. "https://calendar.app.google/xxxxxxxx".
-  // Ustawiony = przycisk „Zarezerwuj rozmowę wstępną” otwiera ten adres, a własny kalendarz jest ukryty.
-  // Pusty = działa własny kalendarz z prośbą o termin.
-  BOOKING_URL: "https://calendar.app.google/HVZyAXuq3Zz44hgc6",
-  START_DATE: "2026-12-01",       // pierwsza data rozmów wstępnych
-  MONTHS_AHEAD: 5,                // ile miesięcy po miesiącu startu można przeglądać
-  WORKDAYS: [1, 2, 3, 4, 5],      // 0 = niedziela ... 6 = sobota
-  SLOTS: ["10:00", "11:00", "12:00", "14:00", "15:00", "16:00"],
-  BLOCKED_DATES: ["2026-12-24", "2026-12-25", "2026-12-26", "2027-01-01", "2027-01-06"]
+  // Adres strony rezerwacji z Kalendarza Google (terminarz spotkań). Używają go wszystkie przyciski „Umów rozmowę wstępną”.
+  BOOKING_URL: "https://calendar.app.google/HVZyAXuq3Zz44hgc6"
 };
 /* ==================================== */
 
@@ -1011,199 +895,49 @@ const CONFIG = {
   document.querySelectorAll("section[data-spy]").forEach(function (s) { io.observe(s); });
 })();
 
-/* ---- kalendarz i formularz ---- */
+/* ---- rezerwacja w Kalendarzu Google i kopiowanie adresu e-mail ---- */
 (function () {
-  if (CONFIG.BOOKING_URL) {
-    document.getElementById("book-btn").href = CONFIG.BOOKING_URL;
-    document.getElementById("book-link").hidden = false;
-    document.getElementById("cal-panel").hidden = true;
-    document.getElementById("book-grid").classList.add("single");
-    document.getElementById("form-h").textContent = "Wolisz napisać? Zostaw kontakt";
+  document.querySelectorAll("[data-book]").forEach(function (a) { a.href = CONFIG.BOOKING_URL; });
+
+  var toast = document.getElementById("toast");
+  var title = document.getElementById("toast-title");
+  var addr = document.getElementById("toast-addr");
+  var live = document.getElementById("toast-live");
+  var timer;
+
+  function hide() { toast.hidden = true; }
+  function show(ok) {
+    title.textContent = ok ? "Adres skopiowany do schowka" : "Nie udało się skopiować. Zaznacz adres ręcznie:";
+    addr.textContent = CONFIG.EMAIL;
+    toast.hidden = false;
+    live.textContent = title.textContent + " " + CONFIG.EMAIL;
+    clearTimeout(timer);
+    timer = setTimeout(hide, ok ? 4000 : 8000);
   }
-  var pad = function (n) { return String(n).padStart(2, "0"); };
-  var iso = function (y, m, d) { return y + "-" + pad(m + 1) + "-" + pad(d); };
-
-  var today = new Date(); today.setHours(0, 0, 0, 0);
-  var start = new Date(CONFIG.START_DATE + "T00:00:00");
-  var earliest = start > today ? start : today;
-
-  var minView = new Date(start.getFullYear(), start.getMonth(), 1);
-  var maxView = new Date(minView.getFullYear(), minView.getMonth() + CONFIG.MONTHS_AHEAD, 1);
-  var view = new Date(minView);
-
-  var grid = document.getElementById("cal-grid");
-  var label = document.getElementById("cal-label");
-  var prev = document.getElementById("cal-prev");
-  var next = document.getElementById("cal-next");
-  var slotsEl = document.getElementById("slots");
-  var chosenEl = document.getElementById("chosen");
-  var slotInput = document.getElementById("f-slot");
-
-  var selDate = null;   // "YYYY-MM-DD"
-  var selTime = null;   // "HH:MM"
-
-  var fmtMonth = new Intl.DateTimeFormat("pl-PL", { month: "long", year: "numeric" });
-  var fmtLong = new Intl.DateTimeFormat("pl-PL", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
-
-  function isAvailable(date) {
-    if (date < earliest) return false;
-    if (CONFIG.WORKDAYS.indexOf(date.getDay()) === -1) return false;
-    var key = iso(date.getFullYear(), date.getMonth(), date.getDate());
-    return CONFIG.BLOCKED_DATES.indexOf(key) === -1;
+  function fallbackCopy() {
+    try {
+      var t = document.createElement("textarea");
+      t.value = CONFIG.EMAIL; t.setAttribute("readonly", "");
+      t.style.position = "fixed"; t.style.opacity = "0";
+      document.body.appendChild(t); t.select();
+      var ok = document.execCommand("copy");
+      document.body.removeChild(t);
+      return ok;
+    } catch (e) { return false; }
   }
-
-  function renderCalendar() {
-    label.textContent = fmtMonth.format(view);
-    grid.innerHTML = "";
-    ["Pn", "Wt", "Śr", "Cz", "Pt", "So", "Nd"].forEach(function (d) {
-      var h = document.createElement("div");
-      h.className = "cal-dow"; h.textContent = d; grid.appendChild(h);
-    });
-    var first = new Date(view.getFullYear(), view.getMonth(), 1);
-    var offset = (first.getDay() + 6) % 7;
-    var days = new Date(view.getFullYear(), view.getMonth() + 1, 0).getDate();
-    for (var i = 0; i < offset; i++) grid.appendChild(document.createElement("div"));
-    for (var d = 1; d <= days; d++) {
-      var date = new Date(view.getFullYear(), view.getMonth(), d);
-      var key = iso(view.getFullYear(), view.getMonth(), d);
-      var b = document.createElement("button");
-      b.type = "button";
-      b.className = "cal-day";
-      b.textContent = d;
-      b.setAttribute("aria-label", fmtLong.format(date));
-      b.disabled = !isAvailable(date);
-      b.setAttribute("aria-pressed", key === selDate ? "true" : "false");
-      b.dataset.key = key;
-      b.addEventListener("click", onDay);
-      grid.appendChild(b);
-    }
-    prev.disabled = view <= minView;
-    next.disabled = view >= maxView;
-  }
-
-  function onDay(e) {
-    selDate = e.currentTarget.dataset.key;
-    selTime = null;
-    renderCalendar();
-    renderSlots();
-    updateChosen();
-  }
-
-  function renderSlots() {
-    slotsEl.innerHTML = "";
-    if (!selDate) return;
-    CONFIG.SLOTS.forEach(function (t) {
-      var b = document.createElement("button");
-      b.type = "button"; b.className = "slot"; b.textContent = t;
-      b.setAttribute("aria-pressed", t === selTime ? "true" : "false");
-      b.addEventListener("click", function () {
-        selTime = t; renderSlots(); updateChosen();
-      });
-      slotsEl.appendChild(b);
-    });
-  }
-
-  function updateChosen() {
-    if (selDate && selTime) {
-      var p = selDate.split("-");
-      var txt = fmtLong.format(new Date(+p[0], +p[1] - 1, +p[2])) + ", " + selTime;
-      chosenEl.textContent = "Wybrany termin: " + txt;
-      slotInput.value = txt;
-    } else if (selDate) {
-      chosenEl.textContent = "Wybierz godzinę.";
-      slotInput.value = "";
-    } else {
-      chosenEl.textContent = "Nie wybrano terminu.";
-      slotInput.value = "";
-    }
-  }
-
-  prev.addEventListener("click", function () { view = new Date(view.getFullYear(), view.getMonth() - 1, 1); renderCalendar(); });
-  next.addEventListener("click", function () { view = new Date(view.getFullYear(), view.getMonth() + 1, 1); renderCalendar(); });
-  renderCalendar();
-
-  /* ---- formularz ---- */
-  var form = document.getElementById("contact");
-  var statusEl = document.getElementById("status");
-  var sendBtn = document.getElementById("send");
-  var phoneWrap = document.getElementById("phone-wrap");
-  var phoneInput = document.getElementById("f-phone");
-
-  function setStatus(msg, cls) { statusEl.textContent = msg; statusEl.className = cls || ""; }
-
-  form.addEventListener("change", function (e) {
-    if (e.target.name === "kontakt") {
-      var tel = form.elements["kontakt"].value === "telefon";
-      phoneWrap.hidden = !tel;
-      phoneInput.required = tel;
-    }
-  });
-
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    setStatus("");
-    var email = document.getElementById("f-email");
-    if (!email.value || !email.checkValidity()) { setStatus("Podaj poprawny adres e-mail.", "err"); email.focus(); return; }
-    if (phoneInput.required && !phoneInput.value.trim()) { setStatus("Podaj numer telefonu albo wybierz kontakt e-mailem.", "err"); phoneInput.focus(); return; }
-    if (!document.getElementById("f-consent").checked) { setStatus("Zaznacz zgodę na kontakt.", "err"); return; }
-    if (form.elements["_gotcha"].value) { return; }
-
-    var data = new FormData(form);
-    var lines = [
-      "E-mail: " + (data.get("email") || ""),
-      "Imię: " + (data.get("imie") || "-"),
-      "Preferowany kontakt: " + (data.get("kontakt") || ""),
-      "Telefon: " + (data.get("telefon") || "-"),
-      "Temat: " + (data.get("temat") || "-"),
-      "Tryb pracy: " + (data.get("tryb") || "-"),
-      "Preferowany termin: " + (data.get("termin") || "-"),
-      "",
-      "Wiadomość:",
-      (data.get("wiadomosc") || "-")
-    ];
-    var subject = "Prośba o rozmowę wstępną" + (data.get("temat") ? ": " + data.get("temat") : "");
-
-    if (!CONFIG.FORM_ENDPOINT) {
-      var mailSubject = subject + (data.get("termin") ? " (" + data.get("termin") + ")" : "");
-      window.location.href = "mailto:" + CONFIG.EMAIL + "?subject=" + encodeURIComponent(mailSubject) + "&body=" + encodeURIComponent(lines.join("\n"));
-      setStatus("Otwieram Twój program pocztowy. Jeśli nic się nie dzieje, napisz na " + CONFIG.EMAIL + ".", "ok");
-      return;
-    }
-
-    sendBtn.disabled = true;
-    setStatus("Wysyłam…");
-    data.append("_subject", subject);
-    fetch(CONFIG.FORM_ENDPOINT, { method: "POST", body: data, headers: { "Accept": "application/json" } })
-      .then(function (r) {
-        if (!r.ok) throw new Error("http " + r.status);
-        form.reset(); phoneWrap.hidden = true; phoneInput.required = false;
-        selDate = null; selTime = null; renderCalendar(); renderSlots(); updateChosen();
-        setStatus("Dziękuję, wiadomość poszła. Odezwę się mailowo lub telefonicznie.", "ok");
-      })
-      .catch(function () {
-        setStatus("Nie udało się wysłać formularza. Napisz proszę bezpośrednio na " + CONFIG.EMAIL + ".", "err");
-      })
-      .finally(function () { sendBtn.disabled = false; });
-  });
-
-  /* ---- linki ustawiające temat formularza ---- */
-  document.querySelectorAll("[data-topic]").forEach(function (a) {
-    a.addEventListener("click", function () {
-      form.elements["temat"].value = a.getAttribute("data-topic");
-      if (a.getAttribute("href") === "#formularz") {
-        setTimeout(function () { document.getElementById("f-email").focus({ preventScroll: true }); }, 500);
-      }
-    });
-  });
-
-  /* ---- kopiowanie adresu ---- */
-  document.getElementById("copy-mail").addEventListener("click", function () {
-    var btn = this;
-    function done(ok) { btn.textContent = ok ? "Skopiowano" : "Zaznacz i skopiuj ręcznie"; setTimeout(function () { btn.textContent = "Kopiuj adres"; }, 2000); }
+  function copy() {
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(CONFIG.EMAIL).then(function () { done(true); }, function () { done(false); });
-    } else { done(false); }
+      navigator.clipboard.writeText(CONFIG.EMAIL).then(function () { show(true); }, function () { show(fallbackCopy()); });
+    } else { show(fallbackCopy()); }
+  }
+
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="mailto:"]');
+    if (a) { e.preventDefault(); copy(); }
   });
+  document.getElementById("copy-mail").addEventListener("click", copy);
+  toast.addEventListener("click", hide);
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") hide(); });
 })();
 
 /* ---- kotwice do zwiniętych bloków: otwórz blok, do którego prowadzi odnośnik ---- */
@@ -1224,6 +958,5 @@ const CONFIG = {
   reveal();
 })();
 </script>
-<noscript><div class="wrap"><p class="notice">Do wysłania formularza i wyboru terminu potrzebny jest JavaScript. Możesz napisać bezpośrednio: <a href="mailto:konradcinkusz@gmail.com">konradcinkusz@gmail.com</a>.</p></div></noscript>
 </body>
 </html>
