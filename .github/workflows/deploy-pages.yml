@@ -23,9 +23,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Prepare site
+        env:
+          SHOW_ANALIZA: ${{ vars.SHOW_ANALIZA }}
+          SHOW_ANALIZA_OPIS: ${{ vars.SHOW_ANALIZA_OPIS }}
+          SHOW_GABINET: ${{ vars.SHOW_GABINET }}
+          SHOW_GABINET_OPIS: ${{ vars.SHOW_GABINET_OPIS }}
+          SHOW_PROTOTYP: ${{ vars.SHOW_PROTOTYP }}
+          SHOW_PROTOTYP_OPIS: ${{ vars.SHOW_PROTOTYP_OPIS }}
+          SHOW_KSIAZKA: ${{ vars.SHOW_KSIAZKA }}
+          SHOW_KSIAZKA_OPIS: ${{ vars.SHOW_KSIAZKA_OPIS }}
+          SHOW_KONTRAKT: ${{ vars.SHOW_KONTRAKT }}
+          SHOW_KONTRAKT_OPIS: ${{ vars.SHOW_KONTRAKT_OPIS }}
         run: |
           mkdir _site
-          cp index.html _site/
+          python3 scripts/build-site.py index.html _site/index.html
           cp -r assets _site/
           touch _site/.nojekyll
       - uses: actions/configure-pages@v5

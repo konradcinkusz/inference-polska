@@ -105,7 +105,7 @@ section>.wrap{border-top:1px solid var(--rule);padding-top:60px}
 
 /* oferta: duża lista typograficzna */
 .offer{border-bottom:1px solid var(--ink)}
-.offer a{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:6px 28px;padding:20px 14px;margin:0 -14px;border-top:1px solid var(--ink);color:var(--ink);text-decoration:none;transition:background-color .15s,padding-left .15s}
+.offer a,.offer>div{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:6px 28px;padding:20px 14px;margin:0 -14px;border-top:1px solid var(--ink);color:var(--ink);text-decoration:none;transition:background-color .15s,padding-left .15s}
 .offer a:hover{background:var(--tint);padding-left:26px;color:var(--ink)}
 .offer .t{font-size:clamp(1.55rem,3.3vw,2.7rem);font-weight:500;line-height:1.08;letter-spacing:-.025em}
 .offer .m{font-family:var(--mono);font-size:.74rem;line-height:1.6;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);text-align:right}
@@ -270,7 +270,7 @@ footer p{margin:0 0 6px}
   .hero{padding:40px 0 52px}
   section{padding:0 0 46px}
   section>.wrap{padding-top:46px}
-  .offer a{grid-template-columns:1fr;padding:16px 14px}
+  .offer a,.offer>div{grid-template-columns:1fr;padding:16px 14px}
   .offer .m{text-align:left}
   .facts3>div{grid-template-columns:1fr}
 }
@@ -293,15 +293,15 @@ footer p{margin:0 0 6px}
   <button type="button" class="icon-btn menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
   <nav class="main" id="nav" aria-label="Nawigacja po stronie">
     <a href="#oferta" data-spy="oferta">Oferta</a>
-    <a href="#analiza" data-spy="analiza">Analiza dokumentów</a>
-    <a href="#przyklady" data-spy="przyklady">Przykłady</a>
-    <a href="#firmy" data-spy="firmy">AI w gabinecie</a>
-    <a href="#poc" data-spy="poc">Prototyp</a>
-    <a href="#ksiazka" data-spy="ksiazka">Książki</a>
-    <a href="#kontrakt" data-spy="kontrakt">Kontrakt</a>
+    <!--offer:analiza:desc--><a href="#analiza" data-spy="analiza">Analiza dokumentów</a><!--/offer:analiza:desc-->
+    <!--offer:analiza:desc--><a href="#przyklady" data-spy="przyklady">Przykłady</a><!--/offer:analiza:desc-->
+    <!--offer:gabinet:desc--><a href="#firmy" data-spy="firmy">AI w gabinecie</a><!--/offer:gabinet:desc-->
+    <!--offer:prototyp:desc--><a href="#poc" data-spy="poc">Prototyp</a><!--/offer:prototyp:desc-->
+    <!--offer:ksiazka:desc--><a href="#ksiazka" data-spy="ksiazka">Książki</a><!--/offer:ksiazka:desc-->
+    <!--offer:kontrakt:desc--><a href="#kontrakt" data-spy="kontrakt">Kontrakt</a><!--/offer:kontrakt:desc-->
     <a href="#tryb" data-spy="tryb">Tryb pracy</a>
     <a href="#o-mnie" data-spy="o-mnie">O mnie</a>
-    <a class="nav-cta" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a>
+    <a class="nav-cta" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a>
   </nav>
   <div class="side-foot">
     <button type="button" class="icon-btn theme-btn" id="theme-btn" aria-label="Przełącz motyw jasny lub ciemny">
@@ -322,7 +322,7 @@ footer p{margin:0 0 6px}
   <p class="say">Lokalny model AI na mojej maszynie bez sieci. Dane i cały proces analizy nie opuszczają mojego biura.</p>
   <p class="muted small">To tryb fully private. Taniej: <a href="#tryb">tryb cloud</a> dla dokumentów niewrażliwych.</p>
   <div class="cta">
-    <a class="btn" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a>
+    <a class="btn" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a>
   </div>
 </div>
 
@@ -331,15 +331,16 @@ footer p{margin:0 0 6px}
     <p class="label">Oferta</p>
     <h2 class="vh">Oferta</h2>
     <div class="offer">
-      <a href="#analiza"><span class="t">Analiza dokumentów</span><span class="m">150 zł brutto / 50 stron<br>fully private lub cloud</span></a>
-      <a href="#firmy"><span class="t">Prywatna sztuczna inteligencja w Twoim gabinecie</span><span class="m">wycena po rozmowie<br>zawsze offline</span></a>
-      <a href="#poc"><span class="t">Prototyp w tydzień</span><span class="m">wycena po rozmowie<br>fully private lub cloud</span></a>
-      <a href="#ksiazka"><span class="t">Książka na zamówienie</span><span class="m">wycena po rozmowie<br>fully private lub cloud</span></a>
-      <a href="#kontrakt"><span class="t">Kontrakt programistyczny</span><span class="m">125–180 zł netto / godz.<br>fully private lub cloud</span></a>
+      <!--offer:analiza:row--><a href="#analiza"><span class="t">Analiza dokumentów</span><span class="m">150 zł brutto / 50 stron<br>fully private lub cloud</span></a><!--/offer:analiza:row-->
+      <!--offer:gabinet:row--><a href="#firmy"><span class="t">Prywatna sztuczna inteligencja w Twoim gabinecie</span><span class="m">wycena po rozmowie<br>zawsze offline</span></a><!--/offer:gabinet:row-->
+      <!--offer:prototyp:row--><a href="#poc"><span class="t">Prototyp w tydzień</span><span class="m">wycena po rozmowie<br>fully private lub cloud</span></a><!--/offer:prototyp:row-->
+      <!--offer:ksiazka:row--><a href="#ksiazka"><span class="t">Książka na zamówienie</span><span class="m">wycena po rozmowie<br>fully private lub cloud</span></a><!--/offer:ksiazka:row-->
+      <!--offer:kontrakt:row--><a href="#kontrakt"><span class="t">Kontrakt programistyczny</span><span class="m">125–180 zł netto / godz.<br>fully private lub cloud</span></a><!--/offer:kontrakt:row-->
     </div>
   </div>
 </section>
 
+<!--offer:analiza:desc-->
 <section id="analiza" data-spy="analiza">
   <div class="wrap">
     <p class="label"><span class="no">01</span> Dla osób prywatnych i firm</p>
@@ -386,7 +387,7 @@ footer p{margin:0 0 6px}
       <p class="num"><b>150 zł</b> brutto za każde rozpoczęte 50 stron dokumentacji</p>
       <p>Do 50 stron: 150 zł, 51–100 stron: 300 zł. Większe akta: wycena po rozmowie wstępnej. Rozmowa wstępna jest bezpłatna. Cena dotyczy trybu fully private. Tryb cloud: wycena po rozmowie wstępnej.</p>
       <p class="muted small">Standardowy zakres to do 50 stron dokumentacji. Większe akta analizuję w kolejnych pakietach po 50 stron.</p>
-      <p><a class="btn" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
+      <p><a class="btn" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
     </div>
 
     <div class="mores">
@@ -467,7 +468,9 @@ footer p{margin:0 0 6px}
     </div>
   </div>
 </section>
+<!--/offer:analiza:desc-->
 
+<!--offer:analiza:desc-->
 <section id="przyklady" data-spy="przyklady">
   <div class="wrap">
     <p class="label"><span class="no">01</span> Analiza dokumentów · Przykłady</p>
@@ -594,7 +597,9 @@ footer p{margin:0 0 6px}
     <p class="muted small">Wszystkie akta są w pełni fikcyjne. Służą do pokazania rodzaju spraw i do testów jakości. To dokumenty wejściowe, a nie gotowe raporty.</p>
   </div>
 </section>
+<!--/offer:analiza:desc-->
 
+<!--offer:gabinet:desc-->
 <section id="firmy" data-spy="firmy">
   <div class="wrap">
     <p class="label"><span class="no">02</span> Dla biur rachunkowych i gabinetów</p>
@@ -643,10 +648,12 @@ footer p{margin:0 0 6px}
         </div>
       </details>
     </div>
-    <p><a class="btn ghost" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
+    <p><a class="btn ghost" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
   </div>
 </section>
+<!--/offer:gabinet:desc-->
 
+<!--offer:prototyp:desc-->
 <section id="poc" data-spy="poc">
   <div class="wrap">
     <p class="label"><span class="no">03</span> Dla firm i zespołów</p>
@@ -655,10 +662,12 @@ footer p{margin:0 0 6px}
       <p>Masz pomysł, którego nie da się ocenić na slajdach? W tydzień buduję działający prototyp: najważniejszą ścieżkę użytkownika, na prawdziwym kodzie i danych testowych. Widać na nim, czy kierunek ma sens, zanim wydasz budżet na pełny projekt.</p>
       <p>Pracuję metodą <strong>inżynierii augmentatywnej</strong>: architekturę, decyzje i odpowiedzialność za wynik biorę ja, a modele AI przyspieszają pisanie kodu i testy.</p>
     <p class="note">Prototyp to dowód, że kierunek działa, a nie gotowy system produkcyjny. Na cenę wpływa <a href="#tryb">tryb pracy</a>: fully private albo cloud. Zakres i cenę ustalamy po rozmowie wstępnej, zanim zacznę.</p>
-    <p><a class="btn" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
+    <p><a class="btn" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
   </div>
 </section>
+<!--/offer:prototyp:desc-->
 
+<!--offer:ksiazka:desc-->
 <section id="ksiazka" data-spy="ksiazka">
   <div class="wrap">
     <p class="label"><span class="no">04</span> Książka na zamówienie</p>
@@ -681,10 +690,12 @@ footer p{margin:0 0 6px}
       </details>
     </div>
     <p class="note">Cena zależy od objętości, tematu i <a href="#tryb">trybu pracy</a>: fully private albo cloud. Wycenę przygotowuję po rozmowie wstępnej.</p>
-    <p><a class="btn" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
+    <p><a class="btn" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
   </div>
 </section>
+<!--/offer:ksiazka:desc-->
 
+<!--offer:kontrakt:desc-->
 <section id="kontrakt" data-spy="kontrakt">
   <div class="wrap">
     <p class="label"><span class="no">05</span> Dla firm i zespołów</p>
@@ -707,9 +718,10 @@ footer p{margin:0 0 6px}
     </div>
     <p class="muted small" id="rate-note">Stawka maleje liniowo od 180 zł netto za godzinę przy kontrakcie do 3 miesięcy do 125 zł netto za godzinę przy kontrakcie na 3 lata (maksymalna długość). Wyliczenie jest orientacyjne; stawkę dla Twojego kontraktu ustalamy po rozmowie wstępnej.</p>
     <p class="note">Tryb wybierasz przed startem. Jego szczegóły i warunki przetwarzania danych opisuje sekcja <a href="#tryb">Tryb pracy</a>.</p>
-    <p><a class="btn" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
+    <p><a class="btn" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
   </div>
 </section>
+<!--/offer:kontrakt:desc-->
 
 <section id="tryb" data-spy="tryb">
   <div class="wrap">
@@ -840,13 +852,13 @@ footer p{margin:0 0 6px}
 <section id="rozmowa">
   <div class="wrap">
     <p class="label">Kontakt · od 1 grudnia 2026 · stacjonarnie</p>
-    <h2>Umów rozmowę wstępną</h2>
+    <h2>Umów darmową rozmowę wstępną</h2>
     <p class="say">Rozmowa wstępna jest bezpłatna. Na miejscu ustalamy zakres.</p>
       <p>Rozmowa wstępna jest bezpłatna, każda, bez limitu. Odbywa się na miejscu: opowiadasz o sprawie i przekazujesz mi osobiście kopie dokumentów. Płatna jest dopiero <strong>analiza dokumentów: 150 zł brutto za każde rozpoczęte 50 stron</strong> (do 50 stron: 150 zł, 51–100 stron: 300 zł). Większe akta wyceniam po rozmowie wstępnej.</p>
       <p>Standardowy zakres to do 50 stron dokumentacji. Większe akta analizuję w kolejnych pakietach po 50 stron. Po analizie dostajesz raport: elegancki PDF (wydrukowany razem z kopiami albo zaszyfrowany) lub elegancki HTML. Dane cyfrowe usuwam z maszyny.</p>
-      <p>Pytasz o <a href="#firmy">prywatną sztuczną inteligencję w gabinecie</a>, <a href="#poc">prototyp</a> albo <a href="#ksiazka">książkę</a>? Umów rozmowę wstępną albo napisz na adres poniżej.</p>
+      <p>Pytasz o <a href="#firmy">prywatną sztuczną inteligencję w gabinecie</a>, <a href="#poc">prototyp</a> albo <a href="#ksiazka">książkę</a>? Umów darmową rozmowę wstępną albo napisz na adres poniżej.</p>
     <div class="book-link">
-      <p><a class="btn" href="#rozmowa" target="_blank" rel="noopener" data-book id="book-btn"><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
+      <p><a class="btn" href="#rozmowa" target="_blank" rel="noopener" data-book id="book-btn"><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
       <p class="muted small">Rezerwacja odbywa się w Kalendarzu Google, w nowej karcie. Podajesz tam imię i e-mail. Nie wpisuj treści dokumentów ani danych wrażliwych.</p>
     </div>
     <div class="mail-box" id="kontakt">
@@ -884,7 +896,7 @@ footer p{margin:0 0 6px}
 /* ===== USTAWIENIA: edytuj tutaj ===== */
 const CONFIG = {
   EMAIL: "konradcinkusz@gmail.com",
-  // Adres strony rezerwacji z Kalendarza Google (terminarz spotkań). Używają go wszystkie przyciski „Umów rozmowę wstępną”.
+  // Adres strony rezerwacji z Kalendarza Google (terminarz spotkań). Używają go wszystkie przyciski „Umów darmową rozmowę wstępną”.
   BOOKING_URL: "https://calendar.app.google/HVZyAXuq3Zz44hgc6"
 };
 /* ==================================== */
