@@ -5,7 +5,7 @@ Strona internetowa usługi **Inference Polska**: analiza wrażliwych dokumentów
 ## Sekcje strony
 
 1. **Analiza dokumentów offline** (`#analiza`, `#rozwiazanie`, `#jak`, `#raport`): problem, rozwiązanie, przebieg, wynik i cena.
-2. **Przykładowe sprawy** (`#przyklady`): 16 fikcyjnych akt w czterech grupach, z linkami do PDF-ów w wydaniu `pdfs` repozytorium `iference-polska-use-cases`.
+2. **Przykładowe sprawy** (`#przyklady`): 16 fikcyjnych akt w czterech grupach, z linkami do PDF-ów w `assets/akta/`. Pliki są kopią wydania `pdfs` z repozytorium `iference-polska-use-cases`; po zmianie akt trzeba je skopiować ponownie.
 3. **Prywatna sztuczna inteligencja w Twoim gabinecie** (`#firmy`): Pakiet Biuro, Pakiet Gabinet i Pakiet Pro, wycena na zapytanie.
 4. **POC w tydzień** (`#poc`).
 5. **Książka na zamówienie** (`#ksiazka`).
@@ -20,7 +20,7 @@ Strona internetowa usługi **Inference Polska**: analiza wrażliwych dokumentów
 | `index.html` | Cała strona: HTML, CSS i JavaScript w jednym pliku, bez zależności. |
 | `.nojekyll` | Wyłącza przetwarzanie Jekyll na GitHub Pages. |
 | `.github/workflows/deploy-pages.yml` | Akcja wdrażająca stronę na GitHub Pages. |
-| `assets/` | Zdjęcie do sekcji „Kim jestem”. |
+| `assets/` | Zdjęcie do sekcji „Kim jestem” oraz `akta/`: 16 fikcyjnych akt w PDF do sekcji „Przykładowe sprawy”. |
 | `README.md` | Ten plik. |
 
 Strona ma jasny i ciemny motyw: domyślnie zgodny z ustawieniem systemu, z przełącznikiem w nagłówku (wybór zapamiętywany w przeglądarce).
