@@ -116,8 +116,6 @@ section>.wrap{border-top:1px solid var(--rule);padding-top:60px}
 .facts3 dt{color:var(--ink);font-weight:600}
 .facts3 dd{margin:0}
 .fig{margin:34px 0 0;border:1px solid var(--rule);border-radius:6px;padding:20px 16px 14px}
-.fig svg{width:100%;height:auto;display:block;color:var(--ink)}
-.fig .s-muted{stroke:var(--muted)} .fig .f-muted{fill:var(--muted)} .fig .s-warn{stroke:var(--warn)} .fig .s-accent{stroke:var(--accent)}
 .fig figcaption{font-size:.92rem;color:var(--muted);margin-top:10px;text-align:center}
 .price{margin:40px 0 0}
 .price .num{font-size:1.15rem;color:var(--ink);margin-bottom:8px}
@@ -133,6 +131,8 @@ section>.wrap{border-top:1px solid var(--rule);padding-top:60px}
 .flow .cap{display:block;margin-top:8px;font-size:.82rem;line-height:1.35;color:var(--muted)}
 .flow li:not(:last-child)::after{content:"\2192";position:absolute;top:18px;right:-44px;width:44px;font-size:1.5rem;line-height:1;text-align:center;color:var(--ink)}
 .flow .out .box{border-color:var(--warn)}
+.flow .safe .box{border-color:var(--accent)}
+.flow .safe .pill{border-color:var(--accent);color:var(--accent)}
 .flow .pill{position:absolute;bottom:100%;margin-bottom:10px;left:50%;transform:translateX(-50%);white-space:nowrap;padding:3px 12px;border:1px dashed var(--warn);border-radius:999px;font-size:.78rem;color:var(--warn)}
 @media (max-width:640px){
   .flow{grid-template-columns:1fr;gap:38px 0;margin-top:8px}
@@ -337,40 +337,21 @@ footer p{margin:0 0 6px}
     <p>Analizuję Twoją sprawę na lokalnym modelu językowym. Analiza opiera się na aktualnych bazach aktów prawnych i literatury naukowej, a wynik sprawdza człowiek. Wszystkie dane i cały proces wnioskowania są przetwarzane na maszynie, która stoi u mnie i nie ma dostępu do sieci.</p>
       <dl class="facts3">
         <div><dt>Wszystko lokalnie</dt><dd>Dokumenty i cały proces wnioskowania zostają na jednym urządzeniu w moim biurze.</dd></div>
-        <div><dt>Maszyna bez sieci</dt><dd>Pracuję na własnej maszynie z lokalną AI, odłączonej od internetu. Bez Wi-Fi i bez kabla sieciowego. Podłączona jest tylko drukarka ze skanerem.</dd></div>
+        <div><dt>Maszyna bez sieci</dt><dd>Pracuję na własnej maszynie z lokalną AI, odłączonej od internetu. Bez Wi-Fi i bez kabla sieciowego. Podłączona jest tylko drukarka ze skanerem. Materiał z e-maila i bazy przepisów ładuję na nią kontrolowanie.</dd></div>
         <div><dt>Po wydruku nic nie zostaje</dt><dd>Gdy drukuję wynik i odsyłam go Tobie, usuwam z maszyny wszystko: skany, wynik analizy, historię i ślady po pracy.</dd></div>
         <div><dt>Sprawdza człowiek</dt><dd>Analiza opiera się na oficjalnych źródłach przepisów i wiedzy, a wynik zawsze sprawdzam sam.</dd></div>
       </dl>
     </div>
 
     <figure class="fig">
-      <svg viewBox="0 0 780 210" role="img" aria-labelledby="fig-t fig-d" xmlns="http://www.w3.org/2000/svg">
-        <title id="fig-t">Droga dokumentu</title>
-        <desc id="fig-d">Papier A4 trafia do skanera, potem do maszyny bez sieci, a wynik wraca jako wydrukowany raport. Połączenie z obcym serwerem AI jest przekreślone.</desc>
-        <g fill="none" stroke="currentColor" stroke-width="2" font-family="system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif" font-size="15">
-          <rect x="14" y="100" width="150" height="70" rx="4"/>
-          <rect x="216" y="100" width="150" height="70" rx="4"/>
-          <rect x="418" y="100" width="150" height="70" rx="4" stroke-width="3" class="s-accent"/>
-          <rect x="620" y="100" width="146" height="70" rx="4"/>
-          <path d="M164 135h52M366 135h52M568 135h52"/>
-          <path d="M206 128l10 7-10 7M408 128l10 7-10 7M610 128l10 7-10 7" stroke-linejoin="round" stroke-linecap="round"/>
-          <rect x="438" y="16" width="110" height="38" rx="19" stroke-dasharray="5 5" class="s-muted"/>
-          <path d="M493 54v46" class="s-muted" stroke-dasharray="3 5"/>
-          <path d="M444 20l98 30" class="s-warn" stroke-width="3" stroke-linecap="round"/>
-        </g>
-        <g fill="currentColor" font-family="system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif" text-anchor="middle">
-          <text x="89" y="141" font-size="17" font-weight="700">Papier A4</text>
-          <text x="291" y="141" font-size="17" font-weight="700">Skaner</text>
-          <text x="493" y="141" font-size="17" font-weight="700">Maszyna offline</text>
-          <text x="693" y="141" font-size="17" font-weight="700">Raport</text>
-          <text x="89" y="196" font-size="13" class="f-muted">kopie dokumentów</text>
-          <text x="291" y="196" font-size="13" class="f-muted">jedyne wejście</text>
-          <text x="493" y="196" font-size="13" class="f-muted">lokalna AI, bez sieci</text>
-          <text x="693" y="196" font-size="13" class="f-muted">wydruk do ręki</text>
-          <text x="493" y="40" font-size="13" class="f-muted">Obcy serwer AI</text>
-        </g>
-      </svg>
-      <figcaption>Dokument wchodzi jako skan, wychodzi jako wydruk. Pomiędzy nimi nie ma sieci, a po wydruku nie zostaje nic.</figcaption>
+      <ol class="flow" aria-label="Droga materiału w trybie offline">
+        <li><span class="box">Twój materiał</span><span class="cap">kopie A4 albo e&#8209;mail</span></li>
+        <li><span class="box">Skan lub import</span><span class="cap">skanuję papier albo ładuję materiał z e-maila</span></li>
+        <li class="safe"><span class="pill">Bez sieci</span><span class="box">Maszyna offline</span><span class="cap">lokalna AI, bez dostępu do sieci</span></li>
+        <li><span class="box">Moja weryfikacja</span><span class="cap">sprawdzam analizę</span></li>
+        <li><span class="box">Raport</span><span class="cap">wydruk albo zaszyfrowany PDF</span></li>
+      </ol>
+      <figcaption>Materiał wchodzi na maszynę offline jako skan albo plik z e-maila, a raport wychodzi jako wydruk albo zaszyfrowany PDF. Sama analiza odbywa się bez sieci, a po zakończeniu usuwam z maszyny wszystko. Wiadomości e-mail przechodzą przez serwery pocztowe.</figcaption>
     </figure>
     <div class="mores">
       <details class="more" id="diagram-cloud">
@@ -378,13 +359,13 @@ footer p{margin:0 0 6px}
         <div class="body">
           <figure class="fig">
             <ol class="flow">
-              <li><span class="box">Twój materiał</span><span class="cap">dokumenty, kod lub tekst</span></li>
+              <li><span class="box">Twój materiał</span><span class="cap">kopie A4 albo e&#8209;mail</span></li>
               <li><span class="box">Mój komputer</span><span class="cap">usuwam zbędne dane osobowe</span></li>
               <li class="out"><span class="pill">Treść opuszcza biuro</span><span class="box">Model w chmurze</span><span class="cap">przez API, szyfrowane połączenie; przechowuje do 30 dni</span></li>
-              <li><span class="box">Moja weryfikacja</span><span class="cap">sprawdzam wynik</span></li>
-              <li><span class="box">Wynik</span><span class="cap">raport, prototyp lub książka</span></li>
+              <li><span class="box">Moja weryfikacja</span><span class="cap">sprawdzam analizę</span></li>
+              <li><span class="box">Raport</span><span class="cap">wydruk albo zaszyfrowany PDF</span></li>
             </ol>
-            <figcaption>Tryb cloud, dla dokumentów niewrażliwych, prototypów i książek. Treść trafia przez API do dostawcy modelu (Anthropic, USA), a zbędne dane osobowe usuwam wcześniej, o ile zakres na to pozwala. Dostawca domyślnie nie trenuje na niej modeli. Wynik sprawdzam sam, a materiał u siebie usuwam po zakończeniu. <a href="#cloud">Szczegóły w sekcji Tryb pracy</a>.</figcaption>
+            <figcaption>Tak wygląda analiza dokumentów w trybie cloud, tylko dla dokumentów niewrażliwych. Treść trafia przez API do dostawcy modelu (Anthropic, USA), a zbędne dane osobowe usuwam wcześniej, o ile zakres na to pozwala. Dostawca domyślnie nie trenuje na niej modeli. Analizę sprawdzam sam, a materiał u siebie usuwam po zakończeniu. <a href="#cloud">Szczegóły w sekcji Tryb pracy</a>.</figcaption>
           </figure>
         </div>
       </details>
@@ -423,8 +404,8 @@ footer p{margin:0 0 6px}
       </li>
       <li>
         <div>
-          <h3>Skan</h3>
-          <p>Przekazujesz mi osobiście kopie dokumentów (kartki A4), więc nie oddawaj oryginałów. Skanuję je na urządzeniu offline. Skany trafiają wyłącznie do maszyny, która nie ma dostępu do sieci.</p>
+          <h3>Skan lub e-mail</h3>
+          <p>Przekazujesz mi osobiście kopie dokumentów (kartki A4), więc nie oddawaj oryginałów. Skanuję je na urządzeniu offline. Możesz też przesłać materiał e-mailem, a ja załaduję go na maszynę offline. Wiadomość e-mail przechodzi przez serwery pocztowe. Do analizy materiał trafia wyłącznie na maszynę, która nie ma dostępu do sieci.</p>
         </div>
       </li>
       <li>
@@ -436,7 +417,7 @@ footer p{margin:0 0 6px}
       <li>
         <div>
           <h3>Raport</h3>
-          <p>Przygotowuję wydrukowany raport, ze spisem treści, wnioskami i źródłami, które możesz sprawdzić samodzielnie. Odsyłam Ci go z powrotem razem z kopiami dokumentów. Po wydruku usuwam z maszyny wszystkie dane cyfrowe: skany i wynik analizy. Nic nie zostaje u mnie.</p>
+          <p>Przygotowuję wydrukowany raport, ze spisem treści, wnioskami i źródłami, które możesz sprawdzić samodzielnie. Odsyłam Ci go z powrotem razem z kopiami dokumentów albo wysyłam jako zaszyfrowany PDF. Po zakończeniu usuwam z maszyny offline wszystkie dane cyfrowe: skany, pliki i wynik analizy.</p>
         </div>
       </li>
     </ol>
@@ -444,9 +425,9 @@ footer p{margin:0 0 6px}
         </div>
       </details>
       <details class="more" id="raport">
-        <summary><h3>Wynik: wydrukowany raport</h3></summary>
+        <summary><h3>Raport: wydruk lub zaszyfrowany PDF</h3></summary>
         <div class="body">
-    <p>Raport nie jest zrzutem rozmowy z czatem. To złożony, wydrukowany dokument, który możesz położyć na biurku, podkreślić i pokazać swojemu prawnikowi lub lekarzowi. Forma jest taka sama jak w moich publikacjach:
+    <p>Raport nie jest zrzutem rozmowy z czatem. To złożony dokument, który możesz położyć na biurku, podkreślić i pokazać swojemu prawnikowi lub lekarzowi. Dostajesz go jako wydruk albo, jeśli wolisz, jako zaszyfrowany PDF. Forma jest taka sama jak w moich publikacjach:
       <a href="https://github.com/konradcinkusz/chaos-theory-for-dummies" rel="noopener">Chaos from Zero</a> oraz
       <a href="https://github.com/konradcinkusz/math-for-ai-engineers" rel="noopener">Mathematics from Zero for the AI Engineer</a>.</p>
     <div class="toc">
@@ -828,7 +809,7 @@ footer p{margin:0 0 6px}
     <h2>Umów rozmowę wstępną</h2>
     <p class="say">Rozmowa wstępna jest bezpłatna. Na miejscu ustalamy zakres.</p>
       <p>Rozmowa wstępna jest bezpłatna, każda, bez limitu. Odbywa się na miejscu: opowiadasz o sprawie i przekazujesz mi osobiście kopie dokumentów. Płatna jest dopiero <strong>analiza dokumentów: 150 zł brutto za każde rozpoczęte 50 stron</strong> (do 50 stron: 150 zł, 51–100 stron: 300 zł). Większe akta wyceniam po rozmowie wstępnej.</p>
-      <p>Standardowy zakres to do 50 stron dokumentacji. Większe akta analizuję w kolejnych pakietach po 50 stron. Po analizie odsyłam Ci wydrukowany raport razem z kopiami, a dane cyfrowe usuwam z maszyny.</p>
+      <p>Standardowy zakres to do 50 stron dokumentacji. Większe akta analizuję w kolejnych pakietach po 50 stron. Po analizie odsyłam Ci wydrukowany raport razem z kopiami albo wysyłam go jako zaszyfrowany PDF, a dane cyfrowe usuwam z maszyny.</p>
       <p>Pytasz o <a href="#firmy">prywatną sztuczną inteligencję w gabinecie</a>, <a href="#poc">prototyp</a> albo <a href="#ksiazka">książkę</a>? Umów rozmowę wstępną albo napisz na adres poniżej.</p>
     <div class="book-link">
       <p><a class="btn" href="#rozmowa" target="_blank" rel="noopener" data-book id="book-btn"><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
