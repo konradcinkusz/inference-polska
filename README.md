@@ -18,7 +18,7 @@ Na komputerze strona ma stałą lewą kolumnę (nazwa, jedno zdanie opisu, menu,
 6. **Kontrakt programistyczny** (`#kontrakt`): praca godzinowa, 180 zł netto za godzinę przy kontrakcie do 3 miesięcy, 125 zł netto przy kontrakcie na 3 lata (maksymalna długość), długość kontraktu wybiera się suwakiem (1–36 miesięcy), a stawka maleje liniowo między tymi punktami (orientacyjnie; dokładną ustala się po rozmowie wstępnej). Koszt tokenów ponosi wykonawca. Pole „Inferencja lokalna” dolicza 15% (słabsze modele, większy wkład programisty w weryfikację, dłuższe generowanie, zużycie energii). Stałe stawek są na początku skryptu kontraktu w `index.html` (`RATE_SHORT`, `RATE_LONG`, `LOCAL_SURCHARGE`).
 7. **Tryb pracy** (`#tryb`): droższy *fully private* na modelach lokalnych i tańszy *cloud*, dla analizy dokumentów, prototypu, książki i kontraktu programistycznego (nie dla wynajmu urządzenia w gabinecie). Blok „Jak dokładnie działa tryb cloud” (`#cloud`): kroki, warunki przetwarzania, porównanie z kontem indywidualnym, kiedy nie cloud.
 8. **Kim jestem** (`#o-mnie`).
-9. **Umów rozmowę wstępną** (`#rozmowa`): przycisk do rezerwacji w Kalendarzu Google i adres e-mail. Każdy przycisk „Umów rozmowę wstępną” na stronie prowadzi wprost do rezerwacji (nowa karta, ikona Kalendarza Google). Kliknięcie adresu e-mail nie otwiera programu pocztowego, tylko kopiuje adres do schowka i pokazuje duży napis.
+9. **Umów darmową rozmowę wstępną** (`#rozmowa`): przycisk do rezerwacji w Kalendarzu Google i adres e-mail. Każdy przycisk „Umów darmową rozmowę wstępną” na stronie prowadzi wprost do rezerwacji (nowa karta, ikona Kalendarza Google). Kliknięcie adresu e-mail nie otwiera programu pocztowego, tylko kopiuje adres do schowka i pokazuje duży napis.
 
 ## Co jest w repozytorium
 
@@ -27,6 +27,7 @@ Na komputerze strona ma stałą lewą kolumnę (nazwa, jedno zdanie opisu, menu,
 | `index.html` | Cała strona: HTML, CSS i JavaScript w jednym pliku, bez zależności. |
 | `.nojekyll` | Wyłącza przetwarzanie Jekyll na GitHub Pages. |
 | `.github/workflows/deploy-pages.yml` | Akcja wdrażająca stronę na GitHub Pages. |
+| `scripts/build-site.py` | Skrypt budujący stronę: usuwa elementy oferty wyłączone zmiennymi repozytorium. |
 | `assets/` | Zdjęcie do sekcji „Kim jestem”, `akta/` (16 fikcyjnych akt w PDF do sekcji „Przykładowe sprawy”) oraz `google-calendar.png` (ikona Kalendarza Google z przycisków rezerwacji, pomniejszona kopia pliku z Wikimedia Commons; znak towarowy Google). |
 | `README.md` | Ten plik. |
 
@@ -47,7 +48,26 @@ Strona będzie dostępna pod `https://konradcinkusz.github.io/inference-polska/`
 Ustawienia są w obiekcie `CONFIG` na początku skryptu w `index.html`:
 
 - `EMAIL`: adres kontaktowy,
-- `BOOKING_URL`: adres strony rezerwacji z Kalendarza Google (terminarz spotkań); używają go wszystkie przyciski „Umów rozmowę wstępną”.
+- `BOOKING_URL`: adres strony rezerwacji z Kalendarza Google (terminarz spotkań); używają go wszystkie przyciski „Umów darmową rozmowę wstępną”.
+
+## Widoczność oferty (zmienne repozytorium)
+
+Każdą usługę z oferty można ukryć bez zmiany kodu, zmiennymi repozytorium GitHub: **Settings → Secrets and variables → Actions → Variables → New repository variable**. Każda usługa ma dwie zmienne: jedną dla jej wiersza na liście oferty i jedną dla opisu (sekcja i pozycja w menu).
+
+| Zmienna | Co ukrywa |
+|---|---|
+| `SHOW_ANALIZA` | wiersz „Analiza dokumentów” na liście oferty |
+| `SHOW_ANALIZA_OPIS` | sekcje „Analiza dokumentów” (`#analiza`) i „Przykładowe sprawy” (`#przyklady`) oraz ich pozycje w menu |
+| `SHOW_GABINET`, `SHOW_GABINET_OPIS` | wiersz i sekcja „Prywatna sztuczna inteligencja w Twoim gabinecie” (`#firmy`) |
+| `SHOW_PROTOTYP`, `SHOW_PROTOTYP_OPIS` | wiersz i sekcja „Prototyp w tydzień” (`#poc`) |
+| `SHOW_KSIAZKA`, `SHOW_KSIAZKA_OPIS` | wiersz i sekcja „Książka na zamówienie” (`#ksiazka`) |
+| `SHOW_KONTRAKT`, `SHOW_KONTRAKT_OPIS` | wiersz i sekcja „Kontrakt programistyczny” (`#kontrakt`) |
+
+- Brak zmiennej oznacza, że element jest widoczny. Wartość `false`, `0`, `no`, `off` lub `nie` (wielkość liter nie ma znaczenia) go ukrywa.
+- Ukryty element w ogóle nie trafia do opublikowanej strony (ani HTML, ani ceny). Wiersz oferty bez ukrytego opisu zostaje jako zwykły tekst bez odnośnika, a odnośniki do usuniętych sekcji w tekście zamieniają się w zwykły tekst.
+- Zmiana zmiennej **nie uruchamia** publikacji. Po zmianie uruchom ręcznie workflow: **Actions → Deploy to GitHub Pages → Run workflow**.
+- Przełączane są tylko wiersze oferty, sekcje i menu (`scripts/build-site.py`). Wzmianki w zwykłym tekście (opis w lewej kolumnie, `<meta>`, sekcja „Tryb pracy”) pozostają bez zmian.
+- Lokalnie (`index.html` otwarty wprost) widać wszystko. Podgląd z flagami: `SHOW_KONTRAKT=false python3 scripts/build-site.py index.html _site/index.html`.
 
 ## Podgląd lokalny
 
