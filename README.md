@@ -26,10 +26,10 @@ W jednej chwili widać jeden ekran z jedną informacją. Na górze jest delikatn
 Są trzy rodzaje ekranów:
 
 - **Ekran z jednym przyciskiem** (strona główna, każda usługa, kontakt): nagłówek, najwyżej jedno zdanie i jeden duży przycisk „Umów darmową rozmowę wstępną”. Pod spodem drobnym drukiem cena i delikatne odnośniki do szczegółów.
-- **Ekran ze szczegółem** (np. „Jak to działa”, „Cena”): jeden temat. Na górze powrót do usługi, na dole przycisk rezerwacji. Ekran wyższy niż okno przewija się wewnątrz.
+- **Ekran ze szczegółem** (np. „Jak to działa”, „Cena”): jeden temat. Na górze powrót do usługi, na dole przycisk rezerwacji. Najdłuższe tematy są podzielone na części (np. `#jak` i `#jak-2`), tak że na komputerze (okno o wysokości 800 px) każdy ekran mieści się w oknie. Na niższych oknach i na telefonie część ekranów jest wyższa: przewija się wewnątrz, a przewijanie klawiaturą zatrzymuje się także na dole takiego ekranu (znacznik `.end`), więc nic się nie pomija.
 - **Ekran wyboru** (`#oferta`): lista usług.
 
-Powrót, przycisk na dole, strzałki i lista szczegółów pod usługą powstają w skrypcie z atrybutów `data-parent` i `data-title` ekranu, w kolejności z pliku. Nowy ekran ze szczegółem to nowy `<section class="view" id="..." data-parent="..." data-title="...">`. Bez JavaScriptu ekrany są widoczne jeden pod drugim.
+Powrót, przycisk na dole, strzałki i lista szczegółów pod usługą powstają w skrypcie z atrybutów `data-parent` i `data-title` ekranu, w kolejności z pliku. Nowy ekran ze szczegółem to nowy `<section class="view" id="..." data-parent="..." data-title="...">`. Ekran usługi trzeba objąć tym samym znacznikiem `<!--offer:KLUCZ:desc-->` … `<!--/offer:KLUCZ:desc-->` co jej pozostałe ekrany, bo od niego zależy ukrywanie zmiennymi `SHOW_*`. Bez JavaScriptu ekrany są widoczne jeden pod drugim.
 
 ## Zawartość (ekrany i sekcje)
 
@@ -37,13 +37,13 @@ Powrót, przycisk na dole, strzałki i lista szczegółów pod usługą powstaj�
 |---|---|
 | Strona główna (`#top`) | |
 | Oferta (`#oferta`) | pięć usług z ceną lub „wycena po rozmowie” |
-| Analiza spraw (`#analiza`) | `#jak`, `#rozwiazanie`, `#diagram`, `#raport`, `#cena`, `#przyklady`, `#granice`, `#problem` |
+| Analiza spraw (`#analiza`) | `#jak`, `#jak-2`, `#rozwiazanie`, `#rozwiazanie-2`, `#diagram`, `#raport`, `#raport-uklad`, `#cena`, `#przyklady`, `#granice`, `#problem`, `#problem-2` |
 | Prywatna sztuczna inteligencja w Twoim gabinecie (`#firmy`) | `#firmy-jak`, `#pakiety` |
 | Prototyp w tydzień (`#poc`) | `#poc-jak` |
 | Książka na zamówienie (`#ksiazka`) | `#ksiazka-opis`, `#ksiazka-kroki` |
-| Kontrakt programistyczny (`#kontrakt`) | `#stawka` |
+| Kontrakt programistyczny (`#kontrakt`) | `#stawka`, `#stawka-zasady` |
 | Tryb pracy (`#tryb`) | `#cloud`, `#cloud-warunki`, `#cloud-porownanie`, `#cloud-kiedy-nie` |
-| Kim jestem (`#o-mnie`) | |
+| Kim jestem (`#o-mnie`) | `#o-mnie-2` (publikacje i odnośniki; w menu nadal „O mnie”) |
 | Kontakt (`#rozmowa`) | |
 
 - **Przykładowe sprawy** (`#przyklady`): 16 fikcyjnych akt w czterech grupach, z linkami do PDF-ów w `assets/akta/`. Pliki są kopią wydania `pdfs` z repozytorium `iference-polska-use-cases`; po zmianie akt trzeba je skopiować ponownie.
