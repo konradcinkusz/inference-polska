@@ -8,7 +8,7 @@
    (widoczne) lub false (niewidoczne), wielkość liter nie ma znaczenia. Brak
    zmiennej oznacza, że element jest widoczny. Inna wartość przerywa budowanie,
    żeby literówka nie zostawiła na stronie elementu, który miał być ukryty.
-3. Zapisuje index.html, assets/ i .nojekyll w podanym katalogu.
+3. Zapisuje index.html, assets/, filmy/ i .nojekyll w podanym katalogu.
 
 Użycie: build-site.py _site
 """
@@ -86,6 +86,8 @@ def main(dst):
     out.mkdir(parents=True, exist_ok=True)
     (out / "index.html").write_text(html, encoding="utf-8")
     shutil.copytree(ROOT / "assets", out / "assets", dirs_exist_ok=True)
+    if (ROOT / "filmy").is_dir():
+        shutil.copytree(ROOT / "filmy", out / "filmy", dirs_exist_ok=True)
     (out / ".nojekyll").touch()
     print("Szablon: " + name)
     print("Ukryte: " + (", ".join(sorted(set(hidden))) if hidden else "nic"))
