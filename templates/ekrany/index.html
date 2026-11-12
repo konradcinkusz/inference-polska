@@ -70,9 +70,10 @@ nav.main a[aria-current="true"]{color:var(--ink);background:var(--tint)}
 #theme-label{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 
 /* ekrany: w jednej chwili widać jeden */
-.view{position:relative;min-height:calc(100vh - 56px);min-height:calc(100dvh - 56px);display:flex;flex-direction:column;justify-content:center;padding:40px 24px 88px;scroll-snap-align:start;scroll-snap-stop:always}
+.view{position:relative;min-height:calc(100vh - 56px);min-height:calc(100dvh - 56px);display:flex;flex-direction:column;justify-content:center;padding:40px 24px 72px;scroll-snap-align:start;scroll-snap-stop:always}
 .cue{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);width:44px;height:44px;display:grid;place-items:center;border-radius:50%;color:var(--muted);text-decoration:none;font-size:1.4rem;line-height:1;animation:bob 2.4s ease-in-out infinite}
 .cue:hover{color:var(--ink);background:var(--tint)}
+.end{position:absolute;left:0;bottom:0;width:100%;height:1px;pointer-events:none;scroll-snap-align:end;scroll-snap-stop:always}
 @keyframes bob{50%{transform:translate(-50%,5px)}}
 .wrap{width:100%;max-width:740px;margin:0 auto}
 .wrap.wide{max-width:1040px}
@@ -86,14 +87,15 @@ nav.main a[aria-current="true"]{color:var(--ink);background:var(--tint)}
 .go{margin:36px 0 0}
 .fine{margin:20px 0 0;font-size:.92rem;color:var(--muted)}
 .fine a{color:inherit}
-.crumb{margin:0 0 26px;font-size:.93rem}
+.view[data-parent]{padding-top:28px}
+.crumb{margin:0 0 18px;font-size:.93rem}
 .crumb a{color:var(--muted);text-decoration:none}
 .crumb a:hover{color:var(--ink)}
 .sub{display:flex;flex-wrap:wrap;gap:4px 6px;margin:44px 0 0;font-size:.93rem}
 .hero .sub{justify-content:center}
 .sub a{padding:5px 10px;border-radius:6px;color:var(--muted);text-decoration:none}
 .sub a:hover{color:var(--ink);background:var(--tint)}
-.foot{margin:48px 0 0;padding-top:24px;border-top:1px solid var(--rule)}
+.foot{margin:32px 0 0;padding-top:20px;border-top:1px solid var(--rule)}
 
 /* typografia */
 h1,h2,h3,h4{color:var(--ink);font-weight:600;margin:0}
@@ -224,7 +226,7 @@ summary:hover h3{color:var(--accent)}
 .cloud li{padding:3px 0}
 .cmp{width:100%;border-collapse:collapse;font-size:.97rem;margin:0}
 .cmp caption{text-align:left;font-size:.92rem;color:var(--muted);padding:0 0 10px}
-.cmp th,.cmp td{text-align:left;vertical-align:top;padding:11px 12px 11px 0;border-top:1px solid var(--rule);line-height:1.5}
+.cmp th,.cmp td{text-align:left;vertical-align:top;padding:8px 12px 8px 0;border-top:1px solid var(--rule);line-height:1.5}
 .cmp thead th{font-size:.9rem;color:var(--ink);border-top:1px solid var(--ink)}
 .cmp thead td{border-top:1px solid var(--ink)}
 .cmp tbody th{font-weight:600;color:var(--ink);width:24%}
@@ -346,7 +348,7 @@ summary:hover h3{color:var(--accent)}
 <!--offer:analiza:desc-->
 <section class="view" id="jak" data-parent="analiza" data-title="Jak to działa">
   <div class="wrap">
-    <h2>Jak to działa: cztery kroki</h2>
+    <h2>Jak to działa: od rozmowy do skanu</h2>
     <ol class="steps">
       <li>
         <div>
@@ -360,6 +362,15 @@ summary:hover h3{color:var(--accent)}
           <p>Przekazujesz mi osobiście kopie dokumentów (kartki A4), więc nie oddawaj oryginałów. Skanuję je na urządzeniu offline. Możesz też przesłać materiał e-mailem, a ja załaduję go na maszynę offline. Wiadomość e-mail przechodzi przez serwery pocztowe. Do analizy materiał trafia wyłącznie na maszynę, która nie ma dostępu do sieci.</p>
         </div>
       </li>
+    </ol>
+  </div>
+</section>
+<!--/offer:analiza:desc-->
+<!--offer:analiza:desc-->
+<section class="view" id="jak-2" data-parent="analiza" data-title="Analiza i raport">
+  <div class="wrap">
+    <h2>Jak to działa: od analizy do raportu</h2>
+    <ol class="steps" style="counter-reset:s 2">
       <li>
         <div>
           <h3>Analiza</h3>
@@ -385,6 +396,15 @@ summary:hover h3{color:var(--accent)}
       <dl class="facts3">
         <div><dt>Wszystko lokalnie</dt><dd>Dokumenty i cały proces wnioskowania zostają na jednym urządzeniu w moim biurze.</dd></div>
         <div><dt>Maszyna bez sieci</dt><dd>Pracuję na własnej maszynie z lokalną AI, odłączonej od internetu. Bez Wi-Fi i bez kabla sieciowego. Podłączona jest tylko drukarka ze skanerem. Materiał z e-maila i bazy przepisów ładuję na nią kontrolowanie.</dd></div>
+      </dl>
+  </div>
+</section>
+<!--/offer:analiza:desc-->
+<!--offer:analiza:desc-->
+<section class="view" id="rozwiazanie-2" data-parent="analiza" data-title="Po analizie">
+  <div class="wrap">
+    <h2>Po analizie</h2>
+      <dl class="facts3">
         <div><dt>Po zakończeniu nic nie zostaje</dt><dd>Gdy oddaję raport, usuwam z maszyny wszystko: skany, wynik analizy, historię i ślady po pracy.</dd></div>
         <div><dt>Sprawdza człowiek</dt><dd>Analiza opiera się na oficjalnych źródłach przepisów i wiedzy, a wynik zawsze sprawdzam sam.</dd></div>
       </dl>
@@ -432,6 +452,13 @@ summary:hover h3{color:var(--accent)}
     <p>Raport nie jest zrzutem rozmowy z czatem. To złożony dokument w jednym z dwóch formatów. Elegancki PDF możesz wydrukować, położyć na biurku, podkreślić i pokazać swojemu prawnikowi lub lekarzowi; dostajesz go jako wydruk albo jako zaszyfrowany plik. Hasło do PDF ustalamy osobną drogą niż plik, na rozmowie wstępnej albo telefonicznie. Jest długie i jednorazowe: używam go tylko do jednego raportu. Drugi format to elegancki raport HTML w stylu Wikipedii, ze wszystkimi informacjami. Forma PDF jest taka sama jak w moich publikacjach:
       <a href="https://github.com/konradcinkusz/chaos-theory-for-dummies" rel="noopener">Chaos from Zero</a> oraz
       <a href="https://github.com/konradcinkusz/math-for-ai-engineers" rel="noopener">Mathematics from Zero for the AI Engineer</a>.</p>
+  </div>
+</section>
+<!--/offer:analiza:desc-->
+<!--offer:analiza:desc-->
+<section class="view" id="raport-uklad" data-parent="analiza" data-title="Układ raportu">
+  <div class="wrap">
+    <h2>Co jest w raporcie</h2>
     <div class="toc">
       <strong>Przykładowy układ raportu</strong>
       <ol>
@@ -603,12 +630,19 @@ summary:hover h3{color:var(--accent)}
     <h2>Gdzie trafia treść Twojej sprawy w zwykłym czacie AI</h2>
       <p>Popularne narzędzia AI, takie jak ChatGPT, przetwarzają to, co im wyślesz, na serwerach swojego dostawcy. Serwery te często stoją w USA. Razem z dokumentem poza kraj wyjeżdża więc cały proces wnioskowania, czyli sama analiza Twojej sprawy.</p>
       <p>Nie musisz wiedzieć, czym jest chmura ani jak działa model językowy. Wystarczy jedno pytanie: czy treść mojej sprawy powinna opuszczać kraj i trafiać do firmy, która nie ma z nią nic wspólnego?</p>
-      <p class="muted small">Dla porządku: przy analizie spraw, prototypach, książkach i kontrakcie programistycznym możesz wybrać tryb cloud. Wtedy treść także trafia do dostawcy modelu za granicą, ale na innych warunkach niż na prywatnym koncie. Opisuję je w sekcji <a href="#tryb">Tryb pracy</a>. Dokumentacja medyczna i dane objęte tajemnicą zawodową: wyłącznie offline.</p>
+  </div>
+</section>
+<!--/offer:analiza:desc-->
+<!--offer:analiza:desc-->
+<section class="view" id="problem-2" data-parent="analiza" data-title="Co z tego wynika">
+  <div class="wrap">
+    <h2>Co to znaczy dla Twojej sprawy</h2>
       <ul class="plain">
         <li><strong>Treść wyjeżdża.</strong> Dokument trafia na cudzy serwer, często w innym kraju niż Twój.</li>
         <li><strong>Analiza dzieje się gdzie indziej.</strong> Nie tylko dane, ale i sam proces wnioskowania odbywa się poza Twoim krajem.</li>
         <li><strong>Nie masz wglądu.</strong> Nie widzisz, gdzie dokładnie trafiła Twoja sprawa i jak długo tam zostaje.</li>
       </ul>
+      <p class="muted small">Dla porządku: przy analizie spraw, prototypach, książkach i kontrakcie programistycznym możesz wybrać tryb cloud. Wtedy treść także trafia do dostawcy modelu za granicą, ale na innych warunkach niż na prywatnym koncie. Opisuję je w sekcji <a href="#tryb">Tryb pracy</a>. Dokumentacja medyczna i dane objęte tajemnicą zawodową: wyłącznie offline.</p>
   </div>
 </section>
 <!--/offer:analiza:desc-->
@@ -765,6 +799,13 @@ summary:hover h3{color:var(--accent)}
       <label class="rate-check"><input type="checkbox" id="rate-local"><span>Inferencja lokalna (maszyna offline): +15%</span></label>
       <p class="muted small">Inferencja lokalna jest droższa o 15%. Modele lokalne są słabsze, więc większy jest wkład programisty w weryfikację, generowanie trwa dłużej, a dochodzi zużycie energii elektrycznej.</p>
     </div>
+  </div>
+</section>
+<!--/offer:kontrakt:desc-->
+<!--offer:kontrakt:desc-->
+<section class="view" id="stawka-zasady" data-parent="kontrakt" data-title="Zasady liczenia">
+  <div class="wrap">
+    <h2>Jak liczona jest stawka</h2>
     <p class="muted small" id="rate-note">Stawka maleje liniowo od 180 zł netto za godzinę przy kontrakcie do 3 miesięcy do 125 zł netto za godzinę przy kontrakcie na 3 lata (maksymalna długość). Wyliczenie jest orientacyjne; stawkę dla Twojego kontraktu ustalamy po rozmowie wstępnej.</p>
     <p class="note">Tryb wybierasz przed startem. Jego szczegóły i warunki przetwarzania danych opisuje sekcja <a href="#tryb">Tryb pracy</a>.</p>
   </div>
@@ -879,14 +920,21 @@ summary:hover h3{color:var(--accent)}
           <div class="fact"><b>3</b><span>recenzowane publikacje naukowe o LLM i agentach</span></div>
           <div class="fact"><b>mgr inż.</b><span>Politechnika Warszawska</span></div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <details class="more"><summary><h3>Publikacje</h3></summary><div class="body">
+<section class="view" id="o-mnie-2" data-nav="o-mnie" data-title="Publikacje i linki">
+  <div class="wrap">
+    <p class="label">Kto za tym stoi</p>
+    <h2>Publikacje i linki</h2>
+    <div>
         <ul class="pubs">
           <li>Cognitive Agents Powered by Large Language Models for Agile Software Project Management<span>Electronics, vol. 14, nr 1, 2025</span></li>
           <li>Towards LLM-augmented Multiagent Systems for Agile Software Engineering<span>IEEE/ACM ASE ’24, Sacramento, 2024</span></li>
           <li>Communicative Agents for Software Project Management and System Development<span>MDAI 2024, Tokio, 2024</span></li>
         </ul>
-        </div></details>
 
         <p>Poza pracą: wspinaczka i trekkingi wysokogórskie, squash, łucznictwo, podróże koleją i dużo książek.</p>
 
@@ -1011,6 +1059,14 @@ const CONFIG = {
       next.scrollIntoView({ behavior: reduce.matches ? "auto" : "smooth" });
     });
     v.appendChild(cue);
+  });
+
+  // znacznik końca ekranu: przy ekranie wyższym niż okno przewijanie zatrzymuje się także na jego dole, więc nic się nie pomija
+  views.forEach(function (v) {
+    var end = document.createElement("span");
+    end.className = "end";
+    end.setAttribute("aria-hidden", "true");
+    v.appendChild(end);
   });
 
   function root(v) {
