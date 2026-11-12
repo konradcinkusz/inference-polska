@@ -34,8 +34,8 @@
 }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
-html{scroll-behavior:smooth;scroll-padding-top:24px}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto} *{transition:none!important}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+html{scroll-padding-top:72px}
 body{margin:0;background:var(--paper);color:var(--text);font-family:var(--sans);font-size:1.0625rem;line-height:1.65;-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility}
 a{color:var(--accent);text-underline-offset:.18em;text-decoration-thickness:1px}
 a:hover{color:var(--accent-hover);text-decoration-thickness:2px}
@@ -44,22 +44,18 @@ strong,b{color:var(--ink);font-weight:600}
 .skip{position:absolute;left:-9999px;top:8px;z-index:100;background:var(--accent);color:var(--accent-ink);padding:10px 16px;border-radius:4px;font-weight:600}
 .skip:focus{left:16px}
 .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+h1:focus,h2:focus{outline:none}
+#toast-live{position:fixed;top:0;left:0}
 
-/* układ: stała lewa kolumna + treść */
-.shell{display:grid;grid-template-columns:minmax(300px,380px) minmax(0,1fr);max-width:1440px;margin:0 auto}
-.side{position:sticky;top:0;align-self:start;height:100vh;height:100dvh;overflow-y:auto;display:flex;flex-direction:column;padding:32px 32px 24px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:1.05rem;color:var(--ink);text-decoration:none;white-space:nowrap}
+/* górny pasek: delikatne menu */
+.bar{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:6px 22px;min-height:56px;padding:8px 24px;background:var(--paper)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:1.02rem;color:var(--ink);text-decoration:none;white-space:nowrap;margin-right:6px}
 .brand:hover{color:var(--ink);text-decoration:none}
-.brand-mark{width:26px;height:26px;border-radius:4px;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-family:var(--mono);font-size:.72rem;font-weight:700}
-.pitch{color:var(--ink);font-size:1.02rem;line-height:1.5;margin:22px 0}
-nav.main{display:flex;flex-direction:column}
-nav.main a{padding:9px 0;border-top:1px solid var(--rule-strong);color:var(--muted);text-decoration:none;font-size:1rem}
-nav.main a:hover,nav.main a[aria-current="true"]{color:var(--ink)}
-nav.main a[aria-current="true"]{font-weight:600}
-nav.main a.nav-cta{margin-top:20px;border:0;border-radius:6px;background:var(--accent);color:var(--accent-ink);font-weight:600;text-align:center;padding:12px 14px}
-nav.main a.nav-cta:hover{background:var(--accent-hover);color:var(--accent-ink)}
-.side-foot{margin-top:auto;padding-top:24px;display:flex;align-items:center;gap:14px;font-size:.85rem}
-.side-mail{color:var(--muted);text-decoration:none;overflow:hidden;text-overflow:ellipsis}
+.brand-mark{width:26px;height:26px;border-radius:5px;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-family:var(--mono);font-size:.72rem;font-weight:700}
+nav.main{display:flex;align-items:center;gap:2px;min-width:0;margin-right:auto}
+nav.main a{padding:6px 11px;border-radius:6px;color:var(--muted);text-decoration:none;font-size:.93rem;font-weight:500;white-space:nowrap}
+nav.main a:hover{color:var(--ink)}
+nav.main a[aria-current="true"]{color:var(--ink);background:var(--tint)}
 .icon-btn{flex:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;font:inherit;font-size:.88rem;font-weight:600;min-height:38px;padding:6px 12px;border:1px solid var(--rule-strong);border-radius:6px;background:transparent;color:var(--ink);cursor:pointer}
 .icon-btn:hover{border-color:var(--ink)}
 .icon-btn svg{width:17px;height:17px}
@@ -72,9 +68,34 @@ nav.main a.nav-cta:hover{background:var(--accent-hover);color:var(--accent-ink)}
   :root:not([data-theme="light"]) .theme-btn .i-moon{display:none}
 }
 #theme-label{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
-.menu-btn{display:none}
-.col{min-width:0;padding:0 48px 0 24px}
-.wrap{max-width:800px}
+
+/* ekrany: w jednej chwili widać jeden */
+.view{min-height:calc(100vh - 56px);min-height:calc(100dvh - 56px);display:flex;flex-direction:column;justify-content:center;padding:40px 24px 88px}
+.js .view{display:none}
+.js .view.on{display:flex;animation:in .22s ease-out}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.wrap{width:100%;max-width:740px;margin:0 auto}
+.wrap.wide{max-width:1040px}
+.hero .wrap{max-width:860px;text-align:center}
+.hero .label{margin-bottom:18px}
+.hero h1,.hero h2{font-size:clamp(2.2rem,5.4vw,3.9rem);line-height:1.05;letter-spacing:-.03em;margin-bottom:22px}
+.hero .say{max-width:640px;margin:0 auto 8px;color:var(--text)}
+.hero-mark{width:132px;height:132px;margin:0 auto 34px;border-radius:30px;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-family:var(--mono);font-size:2.9rem;font-weight:700;letter-spacing:-.04em}
+.hero-mark img{width:68px;height:auto}
+.hero-mark.light{background:var(--tint)}
+.go{margin:36px 0 0}
+.fine{margin:20px 0 0;font-size:.92rem;color:var(--muted)}
+.fine a{color:inherit}
+.crumb{margin:0 0 26px;font-size:.93rem}
+.crumb a{color:var(--muted);text-decoration:none}
+.crumb a:hover{color:var(--ink)}
+.sub{display:flex;flex-wrap:wrap;gap:4px 6px;margin:44px 0 0;font-size:.93rem}
+.hero .sub{justify-content:center}
+.sub a{padding:5px 10px;border-radius:6px;color:var(--muted);text-decoration:none}
+.sub a:hover{color:var(--ink);background:var(--tint)}
+.foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 24px;margin:48px 0 0;padding-top:24px;border-top:1px solid var(--rule)}
+.foot .next{font-weight:600;text-decoration:none}
+.foot .next:hover{text-decoration:underline}
 
 /* typografia */
 h1,h2,h3,h4{color:var(--ink);font-weight:600;margin:0}
@@ -92,16 +113,13 @@ p{margin:0 0 16px}
 .note{border-left:2px solid var(--rule-strong);padding:2px 0 2px 16px;color:var(--muted);font-size:.97rem;margin:22px 0}
 .plain{margin:0 0 16px;padding-left:1.2em}
 .plain li{padding:3px 0}
-
-.hero{padding:56px 0 64px}
-section{padding:0 0 60px}
-section>.wrap{border-top:1px solid var(--rule);padding-top:60px}
-.cta{display:flex;flex-wrap:wrap;gap:12px}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;font:inherit;font-size:1rem;font-weight:600;padding:10px 20px;border-radius:6px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);text-decoration:none;cursor:pointer}
 .btn:hover{background:var(--accent-hover);border-color:var(--accent-hover);color:var(--accent-ink);text-decoration:none}
 .btn.ghost{background:transparent;color:var(--accent)}
 .btn.ghost:hover{background:var(--tint);color:var(--accent)}
 .btn[disabled]{opacity:.6;cursor:wait}
+.btn.big{min-height:68px;font-size:clamp(1.08rem,2.2vw,1.3rem);padding:16px 38px;border-radius:10px}
+.btn.big .gi{height:1.5em}
 
 /* oferta: duża lista typograficzna */
 .offer{border-bottom:1px solid var(--ink)}
@@ -109,6 +127,7 @@ section>.wrap{border-top:1px solid var(--rule);padding-top:60px}
 .offer a:hover{background:var(--tint);padding-left:26px;color:var(--ink)}
 .offer .t{font-size:clamp(1.55rem,3.3vw,2.7rem);font-weight:500;line-height:1.08;letter-spacing:-.025em}
 .offer .m{font-family:var(--mono);font-size:.74rem;line-height:1.6;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);text-align:right}
+.offer{margin-top:4px;text-align:left}
 
 /* fakty, cena */
 .facts3{margin:26px 0 0}
@@ -117,6 +136,7 @@ section>.wrap{border-top:1px solid var(--rule);padding-top:60px}
 .facts3 dd{margin:0}
 .fig{margin:34px 0 0;border:1px solid var(--rule);border-radius:6px;padding:20px 16px 14px}
 .fig figcaption{font-size:.92rem;color:var(--muted);margin-top:10px;text-align:center}
+.fig{margin-top:8px}
 .rate-calc{display:none}
 .js .rate-calc{display:block}
 .js .rate-static{display:none}
@@ -128,6 +148,7 @@ section>.wrap{border-top:1px solid var(--rule);padding-top:60px}
 .price{margin:40px 0 0}
 .price .num{font-size:1.15rem;color:var(--ink);margin-bottom:14px}
 .price .num b{font-size:clamp(2.4rem,5vw,3.2rem);font-weight:600;letter-spacing:-.03em;line-height:1;margin-right:10px}
+.price{margin:0}
 
 /* diagram trybu cloud */
 .fig+.mores{margin-top:16px}
@@ -198,9 +219,11 @@ summary:hover h3{color:var(--accent)}
 .plan li{padding:4px 0 4px 18px;position:relative;line-height:1.5}
 .plan li::before{content:"–";position:absolute;left:0;color:var(--muted)}
 
+.plans,.modes{margin-top:52px}
+
 /* tryb cloud */
-.cloud .body ol,.cloud .body ul{margin:0 0 4px;padding-left:1.4em}
-.cloud .body li{padding:3px 0}
+.cloud ol,.cloud ul{margin:0 0 4px;padding-left:1.4em}
+.cloud li{padding:3px 0}
 .cmp{width:100%;border-collapse:collapse;font-size:.97rem;margin:0}
 .cmp caption{text-align:left;font-size:.92rem;color:var(--muted);padding:0 0 10px}
 .cmp th,.cmp td{text-align:left;vertical-align:top;padding:11px 12px 11px 0;border-top:1px solid var(--rule);line-height:1.5}
@@ -235,48 +258,31 @@ summary:hover h3{color:var(--accent)}
 @media (max-width:640px){ .about{grid-template-columns:1fr;gap:20px} .about figure{max-width:180px} }
 
 /* kontakt */
-.book-link{margin-top:24px}
-.book-link p{margin:0 0 10px}
 .gi{width:auto;height:1.3em;margin-right:.6em;flex:none}
-nav.main a.nav-cta{display:flex;align-items:center;justify-content:center;font-size:.94rem;padding:12px 10px}
-.mail-box{margin-top:32px;padding-top:20px;border-top:1px solid var(--rule);display:flex;flex-wrap:wrap;gap:10px 20px;align-items:center;justify-content:space-between}
-.mail-box .addr{font-size:1.2rem;font-weight:600;word-break:break-all}
-.mail-box p{margin:0}
-.copy{font:inherit;font-size:.92rem;font-weight:600;min-height:42px;padding:6px 14px;border:1px solid var(--rule-strong);border-radius:6px;background:transparent;color:var(--ink);cursor:pointer}
-.copy:hover{border-color:var(--ink)}
-.mail-box .mail{color:inherit}
+.mail-line{margin:44px 0 0;font-size:.97rem;color:var(--muted)}
+.mail-line .mail{font-weight:600}
 .toast{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:24px;background:color-mix(in srgb,var(--paper) 86%,transparent);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);cursor:pointer;text-align:center}
 .toast .big{font-size:clamp(2rem,6vw,4.2rem);font-weight:600;letter-spacing:-.03em;line-height:1.1;color:var(--ink);margin:0 0 14px}
 .toast .addr{font-family:var(--mono);font-size:clamp(1rem,2.6vw,1.6rem);color:var(--ink);margin:0 0 10px;word-break:break-all}
 .toast .hintx{font-size:.9rem;color:var(--muted);margin:0}
 
-footer{border-top:1px solid var(--rule);padding:32px 0 56px;font-size:.9rem;color:var(--muted)}
-footer p{margin:0 0 6px}
-
-/* telefon i wąskie okna: kolumna staje się górnym paskiem */
-@media (max-width:1000px){
-  html{scroll-padding-top:76px}
-  .shell{display:block}
-  .side{position:sticky;top:0;z-index:50;height:auto;overflow:visible;flex-direction:row;flex-wrap:wrap;align-items:center;gap:8px 10px;padding:10px 16px;background:var(--paper);border-bottom:1px solid var(--rule)}
-  .brand{margin-right:auto}
-  .pitch,.side-mail{display:none}
-  .side-foot{margin:0;padding:0;order:2}
-  .menu-btn{order:3}
-  nav.main{order:5;width:100%;padding-bottom:8px}
-  .js .menu-btn{display:inline-flex}
-  .js nav.main{display:none}
-  .js .side.open nav.main{display:flex}
-  .col{padding:0 16px}
-  .hero{padding:40px 0 52px}
-  section{padding:0 0 46px}
-  section>.wrap{padding-top:46px}
+@media (max-width:640px){
+  .bar{padding:8px 12px;gap:6px 8px}
+  .brand-name{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+  nav.main{overflow-x:auto}
+  nav.main a{padding:6px 6px;font-size:.86rem}
+  .view{padding:28px 16px 72px}
+  .hero-mark{width:104px;height:104px;border-radius:24px;font-size:2.3rem;margin-bottom:26px}
+  .btn.big{width:100%;padding:14px 12px;font-size:1rem}
+  .btn.big .gi{margin-right:.5em}
   .offer a,.offer>div{grid-template-columns:1fr;padding:16px 14px}
   .offer .m{text-align:left}
   .facts3>div{grid-template-columns:1fr}
+  .foot .btn{width:100%}
 }
 @media print{
-  .side,.cta,.copy,.toast{display:none}
-  .shell{display:block}
+  .bar,.go,.foot,.sub,.crumb,.toast{display:none}
+  .js .view,.view{display:block;min-height:0;padding:24px 0}
   body{background:#fff;color:#000}
   details>*{display:block}
 }
@@ -284,51 +290,38 @@ footer p{margin:0 0 6px}
 </head>
 <body>
 
-<a class="skip" href="#top">Przejdź do treści</a>
-<div class="shell">
+<a class="skip" href="#main" id="skip">Przejdź do treści</a>
 
-<header class="side" id="header">
-  <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">IP</span>Inference Polska</a>
-  <p class="pitch">Jestem inżynierem AI. Analizuję sprawy i wrażliwe dokumenty prywatną sztuczną inteligencją. Dla firm: prywatna AI w gabinecie, prototypy, kontrakty i książki.</p>
-  <button type="button" class="icon-btn menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
+<header class="bar" id="header">
+  <a class="brand" href="#top" aria-label="Inference Polska, strona główna"><span class="brand-mark" aria-hidden="true">IP</span><span class="brand-name">Inference Polska</span></a>
   <nav class="main" id="nav" aria-label="Nawigacja po stronie">
-    <a href="#oferta" data-spy="oferta">Oferta</a>
-    <!--offer:analiza:desc--><a href="#analiza" data-spy="analiza">Analiza spraw</a><!--/offer:analiza:desc-->
-    <!--offer:analiza:desc--><a href="#przyklady" data-spy="przyklady">Przykłady</a><!--/offer:analiza:desc-->
-    <!--offer:gabinet:desc--><a href="#firmy" data-spy="firmy">AI w gabinecie</a><!--/offer:gabinet:desc-->
-    <!--offer:prototyp:desc--><a href="#poc" data-spy="poc">Prototyp</a><!--/offer:prototyp:desc-->
-    <!--offer:ksiazka:desc--><a href="#ksiazka" data-spy="ksiazka">Książki</a><!--/offer:ksiazka:desc-->
-    <!--offer:kontrakt:desc--><a href="#kontrakt" data-spy="kontrakt">Kontrakt</a><!--/offer:kontrakt:desc-->
-    <a href="#tryb" data-spy="tryb">Tryb pracy</a>
-    <a href="#o-mnie" data-spy="o-mnie">O mnie</a>
-    <a class="nav-cta" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a>
+    <a href="#oferta">Oferta</a>
+    <a href="#tryb">Tryb pracy</a>
+    <a href="#o-mnie">O mnie</a>
+    <a href="#rozmowa">Kontakt</a>
   </nav>
-  <div class="side-foot">
     <button type="button" class="icon-btn theme-btn" id="theme-btn" aria-label="Przełącz motyw jasny lub ciemny">
       <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
       <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
       <span id="theme-label">Ciemny</span>
     </button>
-    <a class="side-mail" href="mailto:konradcinkusz@gmail.com">konradcinkusz@gmail.com</a>
-  </div>
 </header>
 
-<div class="col">
-<main id="top">
+<main id="main">
 
-<div class="wrap hero">
-  <p class="label">Konrad Cinkusz · inżynier AI i programista</p>
-  <h1>Analiza Twojej sprawy przez prywatną sztuczną inteligencję</h1>
-  <p class="say">Lokalny model AI na mojej maszynie bez sieci. Dane i cały proces analizy nie opuszczają mojego biura.</p>
-  <p class="muted small">To tryb fully private. Taniej: <a href="#tryb">tryb cloud</a> dla dokumentów niewrażliwych.</p>
-  <div class="cta">
-    <a class="btn" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a>
-  </div>
-</div>
-
-<section id="oferta" data-spy="oferta">
+<section class="view hero" id="top" data-title="Inference Polska">
   <div class="wrap">
-    <p class="label">Oferta</p>
+    <div class="hero-mark" aria-hidden="true">IP</div>
+    <p class="label">Konrad Cinkusz · inżynier AI i programista</p>
+    <h1>Analiza Twojej sprawy przez prywatną sztuczną inteligencję</h1>
+    <p class="go"><a class="btn big" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
+    <p class="fine">Bezpłatna, na miejscu. Termin wybierasz w Kalendarzu Google. <a href="#oferta">Zobacz ofertę</a></p>
+  </div>
+</section>
+
+<section class="view hero" id="oferta" data-title="Oferta">
+  <div class="wrap wide">
+    <p class="label">Oferta · wybierz usługę</p>
     <h2 class="vh">Oferta</h2>
     <div class="offer">
       <!--offer:analiza:row--><a href="#analiza"><span class="t">Analiza spraw</span><span class="m">150 zł brutto / 50 stron dokumentów<br>fully private lub cloud</span></a><!--/offer:analiza:row-->
@@ -341,72 +334,20 @@ footer p{margin:0 0 6px}
 </section>
 
 <!--offer:analiza:desc-->
-<section id="analiza" data-spy="analiza">
+<section class="view hero" id="analiza" data-title="Analiza spraw" data-nav="oferta">
   <div class="wrap">
     <p class="label"><span class="no">01</span> Dla osób prywatnych i firm</p>
-    <h2>Jak wygląda analiza offline</h2>
-    <div id="rozwiazanie">
-    <p>Analizuję Twoją sprawę na lokalnym modelu językowym. Analiza opiera się na aktualnych bazach aktów prawnych i literatury naukowej, a wynik sprawdza człowiek. Wszystkie dane i cały proces wnioskowania są przetwarzane na maszynie, która stoi u mnie i nie ma dostępu do sieci.</p>
-      <dl class="facts3">
-        <div><dt>Wszystko lokalnie</dt><dd>Dokumenty i cały proces wnioskowania zostają na jednym urządzeniu w moim biurze.</dd></div>
-        <div><dt>Maszyna bez sieci</dt><dd>Pracuję na własnej maszynie z lokalną AI, odłączonej od internetu. Bez Wi-Fi i bez kabla sieciowego. Podłączona jest tylko drukarka ze skanerem. Materiał z e-maila i bazy przepisów ładuję na nią kontrolowanie.</dd></div>
-        <div><dt>Po zakończeniu nic nie zostaje</dt><dd>Gdy oddaję raport, usuwam z maszyny wszystko: skany, wynik analizy, historię i ślady po pracy.</dd></div>
-        <div><dt>Sprawdza człowiek</dt><dd>Analiza opiera się na oficjalnych źródłach przepisów i wiedzy, a wynik zawsze sprawdzam sam.</dd></div>
-      </dl>
-    </div>
-
-    <figure class="fig">
-      <ol class="flow" aria-label="Droga materiału w trybie offline">
-        <li><span class="box">Twój materiał</span><span class="cap">kopie A4 albo e&#8209;mail</span></li>
-        <li><span class="box">Skan lub import</span><span class="cap">skanuję papier albo ładuję materiał z e-maila</span></li>
-        <li class="safe"><span class="pill">Obcy serwer AI<span class="vh"> (brak połączenia)</span></span><span class="box">Maszyna offline</span><span class="cap">lokalna AI, bez dostępu do sieci</span></li>
-        <li><span class="box">Moja weryfikacja</span><span class="cap">sprawdzam analizę</span></li>
-        <li><span class="box">Raport</span><span class="cap">PDF (wydruk lub zaszyfrowany) albo HTML</span></li>
-      </ol>
-      <figcaption>Materiał wchodzi na maszynę offline jako skan albo plik z e-maila, a raport wychodzi jako PDF (wydruk albo zaszyfrowany plik) albo HTML. Sama analiza odbywa się bez sieci, a po zakończeniu usuwam z maszyny wszystko. Wiadomości e-mail przechodzą przez serwery pocztowe.</figcaption>
-    </figure>
-    <div class="mores">
-      <details class="more" id="diagram-cloud">
-        <summary><h3>Diagram: jak to wygląda w trybie cloud</h3></summary>
-        <div class="body">
-          <figure class="fig">
-            <ol class="flow">
-              <li><span class="box">Twój materiał</span><span class="cap">kopie A4 albo e&#8209;mail</span></li>
-              <li><span class="box">Mój komputer</span><span class="cap">usuwam zbędne dane osobowe</span></li>
-              <li class="out"><span class="pill">Treść opuszcza biuro</span><span class="box">Model w chmurze</span><span class="cap">przez API, szyfrowane połączenie; przechowuje do 30 dni</span></li>
-              <li><span class="box">Moja weryfikacja</span><span class="cap">sprawdzam analizę</span></li>
-              <li><span class="box">Raport</span><span class="cap">PDF (wydruk lub zaszyfrowany) albo HTML</span></li>
-            </ol>
-            <figcaption>Tak wygląda analiza spraw w trybie cloud, tylko dla dokumentów niewrażliwych. Treść trafia przez API do dostawcy modelu (Anthropic, USA), a zbędne dane osobowe usuwam wcześniej, o ile zakres na to pozwala. Dostawca domyślnie nie trenuje na niej modeli. Analizę sprawdzam sam, a materiał u siebie usuwam po zakończeniu. <a href="#cloud">Szczegóły w sekcji Tryb pracy</a>.</figcaption>
-          </figure>
-        </div>
-      </details>
-    </div>
-
-    <div class="price">
-      <p class="num"><b>150 zł</b> brutto za każde rozpoczęte 50 stron dokumentacji</p>
-      <p>Do 50 stron: 150 zł, 51–100 stron: 300 zł. Większe akta: wycena po rozmowie wstępnej. Rozmowa wstępna jest bezpłatna. Cena dotyczy trybu fully private. Tryb cloud: wycena po rozmowie wstępnej.</p>
-      <p class="muted small">Standardowy zakres to do 50 stron dokumentacji. Większe akta analizuję w kolejnych pakietach po 50 stron.</p>
-      <p><a class="btn" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
-    </div>
-
-    <div class="mores">
-      <details class="more" id="problem">
-        <summary><h3>Gdzie trafia treść Twojej sprawy w zwykłym czacie AI</h3></summary>
-        <div class="body">
-      <p>Popularne narzędzia AI, takie jak ChatGPT, przetwarzają to, co im wyślesz, na serwerach swojego dostawcy. Serwery te często stoją w USA. Razem z dokumentem poza kraj wyjeżdża więc cały proces wnioskowania, czyli sama analiza Twojej sprawy.</p>
-      <p>Nie musisz wiedzieć, czym jest chmura ani jak działa model językowy. Wystarczy jedno pytanie: czy treść mojej sprawy powinna opuszczać kraj i trafiać do firmy, która nie ma z nią nic wspólnego?</p>
-      <p class="muted small">Dla porządku: przy analizie spraw, prototypach, książkach i kontrakcie programistycznym możesz wybrać tryb cloud. Wtedy treść także trafia do dostawcy modelu za granicą, ale na innych warunkach niż na prywatnym koncie. Opisuję je w sekcji <a href="#tryb">Tryb pracy</a>. Dokumentacja medyczna i dane objęte tajemnicą zawodową: wyłącznie offline.</p>
-      <ul class="plain">
-        <li><strong>Treść wyjeżdża.</strong> Dokument trafia na cudzy serwer, często w innym kraju niż Twój.</li>
-        <li><strong>Analiza dzieje się gdzie indziej.</strong> Nie tylko dane, ale i sam proces wnioskowania odbywa się poza Twoim krajem.</li>
-        <li><strong>Nie masz wglądu.</strong> Nie widzisz, gdzie dokładnie trafiła Twoja sprawa i jak długo tam zostaje.</li>
-      </ul>
-        </div>
-      </details>
-      <details class="more" id="jak">
-        <summary><h3>Jak to działa: cztery kroki</h3></summary>
-        <div class="body">
+    <h2>Analiza spraw</h2>
+    <p class="say">Lokalny model AI na mojej maszynie bez sieci. Dane i cały proces analizy nie opuszczają mojego biura.</p>
+    <p class="go"><a class="btn big" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
+    <p class="fine">150 zł brutto za każde rozpoczęte 50 stron dokumentów. Rozmowa wstępna jest bezpłatna.</p>
+  </div>
+</section>
+<!--/offer:analiza:desc-->
+<!--offer:analiza:desc-->
+<section class="view" id="jak" data-parent="analiza" data-title="Jak to działa">
+  <div class="wrap">
+    <h2>Jak to działa: cztery kroki</h2>
     <ol class="steps">
       <li>
         <div>
@@ -434,11 +375,61 @@ footer p{margin:0 0 6px}
       </li>
     </ol>
     <p class="muted small">Pracuję jako inżynier augmentatywny: człowiek prowadzi rozmowę i odpowiada za wynik, a model przyspiesza przeszukiwanie i porządkowanie materiału.</p>
+  </div>
+</section>
+<!--/offer:analiza:desc-->
+<!--offer:analiza:desc-->
+<section class="view" id="rozwiazanie" data-parent="analiza" data-title="Co zostaje u mnie">
+  <div class="wrap">
+    <h2>Jak wygląda analiza offline</h2>
+    <p>Analizuję Twoją sprawę na lokalnym modelu językowym. Analiza opiera się na aktualnych bazach aktów prawnych i literatury naukowej, a wynik sprawdza człowiek. Wszystkie dane i cały proces wnioskowania są przetwarzane na maszynie, która stoi u mnie i nie ma dostępu do sieci.</p>
+      <dl class="facts3">
+        <div><dt>Wszystko lokalnie</dt><dd>Dokumenty i cały proces wnioskowania zostają na jednym urządzeniu w moim biurze.</dd></div>
+        <div><dt>Maszyna bez sieci</dt><dd>Pracuję na własnej maszynie z lokalną AI, odłączonej od internetu. Bez Wi-Fi i bez kabla sieciowego. Podłączona jest tylko drukarka ze skanerem. Materiał z e-maila i bazy przepisów ładuję na nią kontrolowanie.</dd></div>
+        <div><dt>Po zakończeniu nic nie zostaje</dt><dd>Gdy oddaję raport, usuwam z maszyny wszystko: skany, wynik analizy, historię i ślady po pracy.</dd></div>
+        <div><dt>Sprawdza człowiek</dt><dd>Analiza opiera się na oficjalnych źródłach przepisów i wiedzy, a wynik zawsze sprawdzam sam.</dd></div>
+      </dl>
+  </div>
+</section>
+<!--/offer:analiza:desc-->
+<!--offer:analiza:desc-->
+<section class="view" id="diagram" data-parent="analiza" data-title="Droga materiału">
+  <div class="wrap wide">
+    <h2>Droga Twojego materiału</h2>
+    <figure class="fig">
+      <ol class="flow" aria-label="Droga materiału w trybie offline">
+        <li><span class="box">Twój materiał</span><span class="cap">kopie A4 albo e&#8209;mail</span></li>
+        <li><span class="box">Skan lub import</span><span class="cap">skanuję papier albo ładuję materiał z e-maila</span></li>
+        <li class="safe"><span class="pill">Obcy serwer AI<span class="vh"> (brak połączenia)</span></span><span class="box">Maszyna offline</span><span class="cap">lokalna AI, bez dostępu do sieci</span></li>
+        <li><span class="box">Moja weryfikacja</span><span class="cap">sprawdzam analizę</span></li>
+        <li><span class="box">Raport</span><span class="cap">PDF (wydruk lub zaszyfrowany) albo HTML</span></li>
+      </ol>
+      <figcaption>Materiał wchodzi na maszynę offline jako skan albo plik z e-maila, a raport wychodzi jako PDF (wydruk albo zaszyfrowany plik) albo HTML. Sama analiza odbywa się bez sieci, a po zakończeniu usuwam z maszyny wszystko. Wiadomości e-mail przechodzą przez serwery pocztowe.</figcaption>
+    </figure>
+    <div class="mores">
+      <details class="more" id="diagram-cloud">
+        <summary><h3>Diagram: jak to wygląda w trybie cloud</h3></summary>
+        <div class="body">
+          <figure class="fig">
+            <ol class="flow">
+              <li><span class="box">Twój materiał</span><span class="cap">kopie A4 albo e&#8209;mail</span></li>
+              <li><span class="box">Mój komputer</span><span class="cap">usuwam zbędne dane osobowe</span></li>
+              <li class="out"><span class="pill">Treść opuszcza biuro</span><span class="box">Model w chmurze</span><span class="cap">przez API, szyfrowane połączenie; przechowuje do 30 dni</span></li>
+              <li><span class="box">Moja weryfikacja</span><span class="cap">sprawdzam analizę</span></li>
+              <li><span class="box">Raport</span><span class="cap">PDF (wydruk lub zaszyfrowany) albo HTML</span></li>
+            </ol>
+            <figcaption>Tak wygląda analiza spraw w trybie cloud, tylko dla dokumentów niewrażliwych. Treść trafia przez API do dostawcy modelu (Anthropic, USA), a zbędne dane osobowe usuwam wcześniej, o ile zakres na to pozwala. Dostawca domyślnie nie trenuje na niej modeli. Analizę sprawdzam sam, a materiał u siebie usuwam po zakończeniu. <a href="#cloud">Szczegóły w sekcji Tryb pracy</a>.</figcaption>
+          </figure>
         </div>
       </details>
-      <details class="more" id="raport">
-        <summary><h3>Raport: PDF lub HTML</h3></summary>
-        <div class="body">
+    </div>
+  </div>
+</section>
+<!--/offer:analiza:desc-->
+<!--offer:analiza:desc-->
+<section class="view" id="raport" data-parent="analiza" data-title="Raport">
+  <div class="wrap">
+    <h2>Raport: PDF lub HTML</h2>
     <p>Raport nie jest zrzutem rozmowy z czatem. To złożony dokument w jednym z dwóch formatów. Elegancki PDF możesz wydrukować, położyć na biurku, podkreślić i pokazać swojemu prawnikowi lub lekarzowi; dostajesz go jako wydruk albo jako zaszyfrowany plik. Hasło do PDF ustalamy osobną drogą niż plik, na rozmowie wstępnej albo telefonicznie. Jest długie i jednorazowe: używam go tylko do jednego raportu. Drugi format to elegancki raport HTML w stylu Wikipedii, ze wszystkimi informacjami. Forma PDF jest taka sama jak w moich publikacjach:
       <a href="https://github.com/konradcinkusz/chaos-theory-for-dummies" rel="noopener">Chaos from Zero</a> oraz
       <a href="https://github.com/konradcinkusz/math-for-ai-engineers" rel="noopener">Mathematics from Zero for the AI Engineer</a>.</p>
@@ -455,25 +446,24 @@ footer p{margin:0 0 6px}
     </div>
       <h4>Bazy da się aktualizować</h4>
       <p>Maszyna nigdy nie łączy się z siecią, więc bazy wgrywam kontrolowanie, ze zweryfikowanych nośników: nowe i zmienione akty prawne oraz nowe publikacje naukowe. Każdy raport podaje, z jakiej wersji baz korzystał, żebyś wiedział, na jakim stanie prawnym opiera się analiza.</p>
-        </div>
-      </details>
-      <details class="more" id="granice">
-        <summary><h3>Czym to jest, a czym nie jest</h3></summary>
-        <div class="body">
-      <p>To analiza i uporządkowanie Twojego materiału z odwołaniem do źródeł. To <strong>nie</strong> jest porada prawna, medyczna ani podatkowa. Model językowy może się mylić, dlatego wynik sprawdza człowiek, a raport wskazuje, co zweryfikować w źródle.</p>
-      <p>W sprawach, w których potrzebny jest prawnik, lekarz lub doradca podatkowy, raport ma ułatwić Ci rozmowę z nim: pokazać, o co pytać i na co się powołać. Po zakończeniu usuwam z maszyny wszystkie dane cyfrowe, a Ty dostajesz swoje kopie z powrotem. Zasady ustalamy na piśmie, zanim cokolwiek zeskanuję.</p>
-      <p><strong>Tryb cloud nie jest usługą offline.</strong> Możesz go wybrać przy analizie spraw (poza dokumentacją medyczną i danymi objętymi tajemnicą zawodową), prototypie, książce i kontrakcie programistycznym. W tym trybie treść trafia do dostawcy modelu, na warunkach opisanych w sekcji <a href="#tryb">Tryb pracy</a>.</p>
-        </div>
-      </details>
+  </div>
+</section>
+<!--/offer:analiza:desc-->
+<!--offer:analiza:desc-->
+<section class="view" id="cena" data-parent="analiza" data-title="Cena">
+  <div class="wrap">
+    <h2>Ile to kosztuje</h2>
+    <div class="price">
+      <p class="num"><b>150 zł</b> brutto za każde rozpoczęte 50 stron dokumentacji</p>
+      <p>Do 50 stron: 150 zł, 51–100 stron: 300 zł. Większe akta: wycena po rozmowie wstępnej. Rozmowa wstępna jest bezpłatna. Cena dotyczy trybu fully private. Tryb cloud: wycena po rozmowie wstępnej.</p>
+      <p class="muted small">Standardowy zakres to do 50 stron dokumentacji. Większe akta analizuję w kolejnych pakietach po 50 stron.</p>
     </div>
   </div>
 </section>
 <!--/offer:analiza:desc-->
-
 <!--offer:analiza:desc-->
-<section id="przyklady" data-spy="przyklady">
-  <div class="wrap">
-    <p class="label"><span class="no">01</span> Analiza spraw · Przykłady</p>
+<section class="view" id="przyklady" data-parent="analiza" data-title="Przykłady">
+  <div class="wrap wide">
     <h2>Przykładowe sprawy</h2>
     <p><strong>Dla kogo:</strong> dla osób prywatnych ze sprawą urzędową, medyczną, podatkową lub umową, a także dla małych firm, biur rachunkowych, gabinetów i kancelarii. Poniżej szesnaście przykładowych akt. Sprawdź, czy któraś sytuacja przypomina Twoją.</p>
     <div class="cases">
@@ -598,17 +588,55 @@ footer p{margin:0 0 6px}
   </div>
 </section>
 <!--/offer:analiza:desc-->
+<!--offer:analiza:desc-->
+<section class="view" id="granice" data-parent="analiza" data-title="Granice usługi">
+  <div class="wrap">
+    <h2>Czym to jest, a czym nie jest</h2>
+      <p>To analiza i uporządkowanie Twojego materiału z odwołaniem do źródeł. To <strong>nie</strong> jest porada prawna, medyczna ani podatkowa. Model językowy może się mylić, dlatego wynik sprawdza człowiek, a raport wskazuje, co zweryfikować w źródle.</p>
+      <p>W sprawach, w których potrzebny jest prawnik, lekarz lub doradca podatkowy, raport ma ułatwić Ci rozmowę z nim: pokazać, o co pytać i na co się powołać. Po zakończeniu usuwam z maszyny wszystkie dane cyfrowe, a Ty dostajesz swoje kopie z powrotem. Zasady ustalamy na piśmie, zanim cokolwiek zeskanuję.</p>
+      <p><strong>Tryb cloud nie jest usługą offline.</strong> Możesz go wybrać przy analizie spraw (poza dokumentacją medyczną i danymi objętymi tajemnicą zawodową), prototypie, książce i kontrakcie programistycznym. W tym trybie treść trafia do dostawcy modelu, na warunkach opisanych w sekcji <a href="#tryb">Tryb pracy</a>.</p>
+  </div>
+</section>
+<!--/offer:analiza:desc-->
+<!--offer:analiza:desc-->
+<section class="view" id="problem" data-parent="analiza" data-title="Zwykły czat AI">
+  <div class="wrap">
+    <h2>Gdzie trafia treść Twojej sprawy w zwykłym czacie AI</h2>
+      <p>Popularne narzędzia AI, takie jak ChatGPT, przetwarzają to, co im wyślesz, na serwerach swojego dostawcy. Serwery te często stoją w USA. Razem z dokumentem poza kraj wyjeżdża więc cały proces wnioskowania, czyli sama analiza Twojej sprawy.</p>
+      <p>Nie musisz wiedzieć, czym jest chmura ani jak działa model językowy. Wystarczy jedno pytanie: czy treść mojej sprawy powinna opuszczać kraj i trafiać do firmy, która nie ma z nią nic wspólnego?</p>
+      <p class="muted small">Dla porządku: przy analizie spraw, prototypach, książkach i kontrakcie programistycznym możesz wybrać tryb cloud. Wtedy treść także trafia do dostawcy modelu za granicą, ale na innych warunkach niż na prywatnym koncie. Opisuję je w sekcji <a href="#tryb">Tryb pracy</a>. Dokumentacja medyczna i dane objęte tajemnicą zawodową: wyłącznie offline.</p>
+      <ul class="plain">
+        <li><strong>Treść wyjeżdża.</strong> Dokument trafia na cudzy serwer, często w innym kraju niż Twój.</li>
+        <li><strong>Analiza dzieje się gdzie indziej.</strong> Nie tylko dane, ale i sam proces wnioskowania odbywa się poza Twoim krajem.</li>
+        <li><strong>Nie masz wglądu.</strong> Nie widzisz, gdzie dokładnie trafiła Twoja sprawa i jak długo tam zostaje.</li>
+      </ul>
+  </div>
+</section>
+<!--/offer:analiza:desc-->
 
 <!--offer:gabinet:desc-->
-<section id="firmy" data-spy="firmy">
+<section class="view hero" id="firmy" data-title="AI w gabinecie" data-nav="oferta">
   <div class="wrap">
     <p class="label"><span class="no">02</span> Dla biur rachunkowych i gabinetów</p>
     <h2>Prywatna sztuczna inteligencja w Twoim gabinecie</h2>
+    <p class="say">Lokalne urządzenie z AI stoi w Twoim biurze i działa offline. Wynajmuję je, utrzymuję i szkolę Twój zespół.</p>
+    <p class="go"><a class="btn big" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
+    <p class="fine">Wycena po rozmowie wstępnej. Ta usługa działa zawsze offline.</p>
+  </div>
+</section>
+<!--/offer:gabinet:desc-->
+<!--offer:gabinet:desc-->
+<section class="view" id="firmy-jak" data-parent="firmy" data-title="Dla kogo">
+  <div class="wrap">
+    <h2>Dla kogo jest AI w gabinecie</h2>
     <p>Jeżeli pracujesz na cudzych danych (księgi, dokumentacja pacjentów), nie możesz ich wysyłać do publicznych usług AI na cudzych serwerach. Wynajmuję i utrzymuję lokalne urządzenie z oprogramowaniem, które stoi w Twoim biurze, działa offline i uczy Twój zespół pracować lokalnie. Nie musisz mieć własnego działu IT. Ta usługa działa zawsze offline.</p>
-    <div class="mores">
-      <details class="more" open>
-        <summary><h3>Pakiety: Biuro, Gabinet, Pro</h3></summary>
-        <div class="body">
+  </div>
+</section>
+<!--/offer:gabinet:desc-->
+<!--offer:gabinet:desc-->
+<section class="view" id="pakiety" data-parent="firmy" data-title="Pakiety">
+  <div class="wrap wide">
+    <h2>Pakiety: Biuro, Gabinet, Pro</h2>
     <div class="plans">
       <article class="plan">
         <h3>Pakiet Biuro</h3>
@@ -645,62 +673,84 @@ footer p{margin:0 0 6px}
       </article>
     </div>
     <p class="muted small"><strong>Usługi dodatkowe:</strong> indeksowanie archiwum dokumentów firmy, dodatkowa baza branżowa, dodatkowe szkolenie zespołu, wizyta serwisowa na miejscu. Zakup urządzenia zamiast wynajmu wyceniam indywidualnie. Dokładną ofertę przygotowuję po rozmowie wstępnej.</p>
-        </div>
-      </details>
-    </div>
-    <p><a class="btn ghost" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
   </div>
 </section>
 <!--/offer:gabinet:desc-->
 
 <!--offer:prototyp:desc-->
-<section id="poc" data-spy="poc">
+<section class="view hero" id="poc" data-title="Prototyp w tydzień" data-nav="oferta">
   <div class="wrap">
     <p class="label"><span class="no">03</span> Dla firm i zespołów</p>
     <h2>Prototyp w tydzień</h2>
     <p class="say">W tydzień dostajesz działający prototyp, kod, krótką dokumentację i rekomendację, co dalej.</p>
+    <p class="go"><a class="btn big" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
+    <p class="fine">Wycena po rozmowie wstępnej. Tryb fully private lub cloud.</p>
+  </div>
+</section>
+<!--/offer:prototyp:desc-->
+<!--offer:prototyp:desc-->
+<section class="view" id="poc-jak" data-parent="poc" data-title="Jak pracuję">
+  <div class="wrap">
+    <h2>Jak powstaje prototyp</h2>
       <p>Masz pomysł, którego nie da się ocenić na slajdach? W tydzień buduję działający prototyp: najważniejszą ścieżkę użytkownika, na prawdziwym kodzie i danych testowych. Widać na nim, czy kierunek ma sens, zanim wydasz budżet na pełny projekt.</p>
       <p>Pracuję metodą <strong>inżynierii augmentatywnej</strong>: architekturę, decyzje i odpowiedzialność za wynik biorę ja, a modele AI przyspieszają pisanie kodu i testy.</p>
     <p class="note">Prototyp to dowód, że kierunek działa, a nie gotowy system produkcyjny. Na cenę wpływa <a href="#tryb">tryb pracy</a>: fully private albo cloud. Zakres i cenę ustalamy po rozmowie wstępnej, zanim zacznę.</p>
-    <p><a class="btn" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
   </div>
 </section>
 <!--/offer:prototyp:desc-->
 
 <!--offer:ksiazka:desc-->
-<section id="ksiazka" data-spy="ksiazka">
+<section class="view hero" id="ksiazka" data-title="Książka na zamówienie" data-nav="oferta">
   <div class="wrap">
     <p class="label"><span class="no">04</span> Książka na zamówienie</p>
     <h2>Przygotuję i napiszę dowolną książkę</h2>
+    <p class="say">Podajesz temat i czytelnika, a ja przygotowuję książkę od konspektu po wydruk.</p>
+    <p class="go"><a class="btn big" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
+    <p class="fine">Wycena po rozmowie wstępnej. Tryb fully private lub cloud.</p>
+  </div>
+</section>
+<!--/offer:ksiazka:desc-->
+<!--offer:ksiazka:desc-->
+<section class="view" id="ksiazka-opis" data-parent="ksiazka" data-title="Co mogę napisać">
+  <div class="wrap">
+    <h2>Co mogę napisać</h2>
       <p>Poradnik, podręcznik, opracowanie techniczne, materiały szkoleniowe, historia firmy. Podajesz temat i czytelnika, a ja przygotowuję książkę od konspektu po wydruk. Tak samo powstały moje publikacje:
         <a href="https://github.com/konradcinkusz/chaos-theory-for-dummies" rel="noopener">Chaos from Zero</a> oraz
         <a href="https://github.com/konradcinkusz/math-for-ai-engineers" rel="noopener">Mathematics from Zero for the AI Engineer</a>.</p>
       <p>Także tutaj pracuję metodą inżynierii augmentatywnej: modele AI przyspieszają zbieranie materiału i pisanie, a za układ, treść i sprawdzenie źródeł odpowiadam ja.</p>
-    <div class="mores">
-      <details class="more">
-        <summary><h3>Jak powstaje książka: cztery kroki</h3></summary>
-        <div class="body">
+    <p class="note">Cena zależy od objętości, tematu i <a href="#tryb">trybu pracy</a>: fully private albo cloud. Wycenę przygotowuję po rozmowie wstępnej.</p>
+  </div>
+</section>
+<!--/offer:ksiazka:desc-->
+<!--offer:ksiazka:desc-->
+<section class="view" id="ksiazka-kroki" data-parent="ksiazka" data-title="Cztery kroki">
+  <div class="wrap">
+    <h2>Jak powstaje książka: cztery kroki</h2>
     <ol class="steps">
       <li><div><h3>Temat i czytelnik</h3><p>Ustalamy, o czym jest książka, dla kogo i co czytelnik ma po niej umieć lub wiedzieć.</p></div></li>
       <li><div><h3>Konspekt</h3><p>Dostajesz spis treści z opisem rozdziałów. Poprawiamy go, zanim powstanie pierwsza strona.</p></div></li>
       <li><div><h3>Pisanie i redakcja</h3><p>Piszę rozdziały, sprawdzam fakty i źródła, przygotowuję rysunki i wykresy. Ty czytasz i zgłaszasz uwagi.</p></div></li>
       <li><div><h3>Skład i wydruk</h3><p>Oddaję złożoną książkę: plik gotowy do druku i wydrukowany egzemplarz, ze spisem treści i źródłami.</p></div></li>
     </ol>
-        </div>
-      </details>
-    </div>
-    <p class="note">Cena zależy od objętości, tematu i <a href="#tryb">trybu pracy</a>: fully private albo cloud. Wycenę przygotowuję po rozmowie wstępnej.</p>
-    <p><a class="btn" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
   </div>
 </section>
 <!--/offer:ksiazka:desc-->
 
 <!--offer:kontrakt:desc-->
-<section id="kontrakt" data-spy="kontrakt">
+<section class="view hero" id="kontrakt" data-title="Kontrakt programistyczny" data-nav="oferta">
   <div class="wrap">
     <p class="label"><span class="no">05</span> Dla firm i zespołów</p>
     <h2>Kontrakt programistyczny</h2>
     <p class="say">Pracuję dla Ciebie jako programista, rozliczany godzinowo. Im dłuższy kontrakt, tym niższa stawka.</p>
+    <p class="go"><a class="btn big" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
+    <p class="fine">125–180 zł netto za godzinę. Tryb fully private lub cloud.</p>
+  </div>
+</section>
+<!--/offer:kontrakt:desc-->
+<!--offer:kontrakt:desc-->
+<section class="view" id="stawka" data-parent="kontrakt" data-title="Stawka">
+  <div class="wrap">
+    <h2>Ile kosztuje godzina</h2>
     <p>Koszt tokenów jest po mojej stronie. Inferencja jest w pełni zgodna zarówno przez API, jak i lokalnie.</p>
 
     <div class="price rate-static">
@@ -718,13 +768,12 @@ footer p{margin:0 0 6px}
     </div>
     <p class="muted small" id="rate-note">Stawka maleje liniowo od 180 zł netto za godzinę przy kontrakcie do 3 miesięcy do 125 zł netto za godzinę przy kontrakcie na 3 lata (maksymalna długość). Wyliczenie jest orientacyjne; stawkę dla Twojego kontraktu ustalamy po rozmowie wstępnej.</p>
     <p class="note">Tryb wybierasz przed startem. Jego szczegóły i warunki przetwarzania danych opisuje sekcja <a href="#tryb">Tryb pracy</a>.</p>
-    <p><a class="btn" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
   </div>
 </section>
 <!--/offer:kontrakt:desc-->
 
-<section id="tryb" data-spy="tryb">
-  <div class="wrap">
+<section class="view" id="tryb" data-title="Tryb pracy">
+  <div class="wrap wide">
     <p class="label">Tryb pracy · dotyczy zleceń 01, 03, 04 i 05</p>
     <h2>Tryb pracy: fully private albo cloud</h2>
     <p>Analizę spraw, prototyp, książkę i kontrakt programistyczny mogę realizować na dwa sposoby. Różnią się tym, gdzie przetwarzany jest Twój materiał, i ceną. Tryb wybierasz przed startem i zapisujemy go w umowie. Wyjątkiem jest wynajem urządzenia w gabinecie (02): działa zawsze offline i nie ma wyboru trybu.</p>
@@ -753,15 +802,14 @@ footer p{margin:0 0 6px}
         </ul>
       </article>
     </div>
-    <p class="muted small">Dokumentacja medyczna i dane objęte tajemnicą zawodową: wyłącznie fully private (szczegóły niżej, w „Kiedy nie cloud”).</p>
+    <p class="muted small">Dokumentacja medyczna i dane objęte tajemnicą zawodową: wyłącznie fully private (zobacz: <a href="#cloud-kiedy-nie">kiedy nie cloud</a>).</p>
+  </div>
+</section>
+<section class="view cloud" id="cloud" data-parent="tryb" data-title="Jak działa cloud">
+  <div class="wrap">
+    <h2>Jak dokładnie działa tryb cloud</h2>
     <p class="note"><strong>Tryb cloud w skrócie:</strong> treść trafia przez API do Anthropic, firmy z USA. Domyślnie nie jest używana do trenowania modeli. U dostawcy jest przechowywana do 30 dni. Przetwarzanie w EOG nie jest gwarantowane.</p>
-    <div class="mores">
-      <details class="more cloud" id="cloud">
-        <summary><h3>Jak dokładnie działa tryb cloud</h3></summary>
-        <div class="body">
-      <p class="muted small" style="margin:0">W trybie cloud korzystam z modeli Claude firmy Anthropic przez API, na warunkach komercyjnych. Używam modeli Claude Opus 5.5, Claude Sonnet 5.5 i Claude Haiku 5.5.</p>
-
-      <h4>Jak to działa</h4>
+      <p class="muted small">W trybie cloud korzystam z modeli Claude firmy Anthropic przez API, na warunkach komercyjnych. Używam modeli Claude Opus 5.5, Claude Sonnet 5.5 i Claude Haiku 5.5.</p>
       <ol>
         <li>Dostaję od Ciebie materiał i ustalamy zakres na piśmie.</li>
         <li>Przed wysłaniem usuwam z materiału to, co nie jest potrzebne do zadania (dane osobowe, numery, nazwiska osób trzecich), o ile zakres na to pozwala.</li>
@@ -769,8 +817,11 @@ footer p{margin:0 0 6px}
         <li>Wynik sprawdzam sam, zanim go dostaniesz.</li>
         <li>Po zakończeniu usuwam materiał u siebie. U dostawcy treść jest usuwana zgodnie z jego standardowym okresem retencji w API: do 30 dni.</li>
       </ol>
-
-      <h4>Na jakich warunkach</h4>
+  </div>
+</section>
+<section class="view cloud" id="cloud-warunki" data-parent="tryb" data-title="Warunki">
+  <div class="wrap">
+    <h2>Tryb cloud: na jakich warunkach</h2>
       <ul>
         <li>Korzystam z API na warunkach komercyjnych z umową powierzenia przetwarzania danych (DPA). Jest ona częścią <a href="https://www.anthropic.com/legal/commercial-terms" target="_blank" rel="noopener">warunków komercyjnych</a> dostawcy i obowiązuje od ich akceptacji.</li>
         <li>W umowie z Tobą dostawca modelu jest wskazany z nazwy jako podwykonawca przetwarzania, a Ty wyrażasz na to zgodę przed startem.</li>
@@ -778,8 +829,11 @@ footer p{margin:0 0 6px}
         <li>Treści wysyłane przez API domyślnie nie są używane do trenowania modeli. Wyjątek: gdy klient sam prześle opinię lub wyrazi zgodę.</li>
         <li>Zakres, okres przechowywania i sposób usunięcia danych dostajesz na piśmie.</li>
       </ul>
-
-      <h4>Czym to się różni od wklejenia dokumentów do własnego czatu AI</h4>
+  </div>
+</section>
+<section class="view cloud" id="cloud-porownanie" data-parent="tryb" data-title="Cloud a własny czat AI">
+  <div class="wrap wide">
+    <h2>Czym to się różni od wklejenia dokumentów do własnego czatu AI</h2>
       <table class="cmp">
         <caption>Porównanie dotyczy planów jednego dostawcy, którego używam: Anthropic (Claude).</caption>
         <thead>
@@ -794,23 +848,22 @@ footer p{margin:0 0 6px}
         </tbody>
       </table>
       <p class="srcs">Źródła: <a href="https://privacy.claude.com/en/articles/7996868-is-my-data-used-for-model-training" target="_blank" rel="noopener">trenowanie modeli w usługach komercyjnych</a> oraz <a href="https://www.anthropic.com/news/updates-to-our-consumer-terms" target="_blank" rel="noopener">zmiany w warunkach konsumenckich</a>. Stan na listopad 2026.</p>
-
-      <h4>Kiedy nie cloud</h4>
+  </div>
+</section>
+<section class="view cloud" id="cloud-kiedy-nie" data-parent="tryb" data-title="Kiedy nie cloud">
+  <div class="wrap">
+    <h2>Kiedy nie cloud</h2>
       <ul>
         <li>Dokumentacja medyczna, dane objęte tajemnicą zawodową (adwokacką, radcowską, lekarską, doradcy podatkowego) i dane szczególnych kategorii: wyłącznie tryb offline.</li>
         <li>„Prywatna sztuczna inteligencja w Twoim gabinecie” działa zawsze offline i nie ma wyboru trybu.</li>
         <li>Jeśli nie chcesz, żeby treść opuściła Polskę: tryb offline.</li>
       </ul>
-
       <p class="srcs">Pozostałe źródła: <a href="https://privacy.claude.com/en/articles/9267385-does-anthropic-act-as-a-data-processor-or-controller" target="_blank" rel="noopener">rola dostawcy jako podmiotu przetwarzającego</a>, <a href="https://privacy.claude.com/en/articles/7996862-how-do-i-view-and-sign-your-data-processing-addendum-dpa" target="_blank" rel="noopener">umowa powierzenia (DPA) do warunków komercyjnych</a>, <a href="https://support.claude.com/en/articles/15707726-using-claude-for-legal-work-privilege-confidentiality-and-how-to-think-about-configuration" target="_blank" rel="noopener">retencja w API</a>, <a href="https://platform.claude.com/docs/en/manage-claude/api-and-data-retention" target="_blank" rel="noopener">retencja danych w dokumentacji API</a>, <a href="https://platform.claude.com/docs/en/manage-claude/data-residency" target="_blank" rel="noopener">regiony przetwarzania</a>, <a href="https://www.anthropic.com/legal/data-processing-addendum" target="_blank" rel="noopener">treść DPA</a>.</p>
-        </div>
-      </details>
-    </div>
   </div>
 </section>
 
-<section id="o-mnie" data-spy="o-mnie">
-  <div class="wrap">
+<section class="view" id="o-mnie" data-title="O mnie">
+  <div class="wrap wide">
     <p class="label">Kto za tym stoi</p>
     <h2>Kim jestem</h2>
     <div class="about">
@@ -849,39 +902,21 @@ footer p{margin:0 0 6px}
   </div>
 </section>
 
-<section id="rozmowa">
+<section class="view hero" id="rozmowa" data-title="Kontakt">
   <div class="wrap">
-    <p class="label">Kontakt · od 1 grudnia 2026 · stacjonarnie</p>
-    <h2>Umów darmową rozmowę wstępną</h2>
-    <p class="say">Rozmowa wstępna jest bezpłatna. Na miejscu ustalamy zakres.</p>
-      <p>Rozmowa wstępna jest bezpłatna, każda, bez limitu. Odbywa się na miejscu: opowiadasz o sprawie i przekazujesz mi osobiście kopie dokumentów. Płatna jest dopiero <strong>analiza sprawy: 150 zł brutto za każde rozpoczęte 50 stron dokumentów</strong> (do 50 stron: 150 zł, 51–100 stron: 300 zł). Większe akta wyceniam po rozmowie wstępnej.</p>
-      <p>Standardowy zakres to do 50 stron dokumentacji. Większe akta analizuję w kolejnych pakietach po 50 stron. Po analizie dostajesz raport: elegancki PDF (wydrukowany razem z kopiami albo zaszyfrowany) lub elegancki HTML. Dane cyfrowe usuwam z maszyny.</p>
-      <p>Pytasz o <a href="#firmy">prywatną sztuczną inteligencję w gabinecie</a>, <a href="#poc">prototyp</a> albo <a href="#ksiazka">książkę</a>? Umów darmową rozmowę wstępną albo napisz na adres poniżej.</p>
-    <div class="book-link">
-      <p><a class="btn" href="#rozmowa" target="_blank" rel="noopener" data-book id="book-btn"><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
-      <p class="muted small">Rezerwacja odbywa się w Kalendarzu Google, w nowej karcie. Podajesz tam imię i e-mail. Nie wpisuj treści dokumentów ani danych wrażliwych.</p>
-    </div>
-    <div class="mail-box" id="kontakt">
-      <div>
-        <p class="muted small">Wolisz napisać? Kliknij adres, a skopiuje się do schowka:</p>
-        <p class="addr"><a class="mail" href="mailto:konradcinkusz@gmail.com">konradcinkusz@gmail.com</a></p>
-      </div>
-      <button class="copy" type="button" id="copy-mail">Kopiuj adres</button>
-    </div>
+    <div class="hero-mark light" aria-hidden="true"><img src="assets/google-calendar.png" alt="" width="68" height="74"></div>
+    <p class="label">Od 1 grudnia 2026 · stacjonarnie</p>
+    <h2>Darmowa rozmowa wstępna</h2>
+    <p class="go"><a class="btn big" href="#rozmowa" target="_blank" rel="noopener" data-book id="book-btn"><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
+    <p class="fine">Rezerwacja odbywa się w Kalendarzu Google, w nowej karcie. Podajesz tam imię i e-mail. Nie wpisuj treści dokumentów ani danych wrażliwych.</p>
+    <p class="mail-line" id="kontakt">Wolisz napisać? Kliknij adres, a skopiuje się do schowka: <a class="mail" href="mailto:konradcinkusz@gmail.com">konradcinkusz@gmail.com</a></p>
+    <p class="fine">Strona jest statyczna: bez cookies, bez zewnętrznych skryptów, czcionek i formularzy. © 2026 Konrad Cinkusz</p>
   </div>
 </section>
 
 </main>
 
-<footer>
-  <div class="wrap">
-    <p><strong>Konrad Cinkusz</strong> · <a href="mailto:konradcinkusz@gmail.com">konradcinkusz@gmail.com</a></p>
-    <p>Strona jest statyczna: bez cookies, bez zewnętrznych skryptów, czcionek i formularzy. Rezerwacja terminu odbywa się poza tą stroną, w Kalendarzu Google.</p>
-    <p>© 2026 Konrad Cinkusz</p>
-  </div>
-</footer>
-</div>
-</div>
+<template id="book-tpl"><a class="btn" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></template>
 
 <div class="toast" id="toast" aria-hidden="true" hidden>
   <div class="box">
@@ -900,7 +935,6 @@ const CONFIG = {
   BOOKING_URL: "https://calendar.app.google/HVZyAXuq3Zz44hgc6"
 };
 /* ==================================== */
-
 /* ---- motyw ---- */
 (function () {
   var root = document.documentElement;
@@ -928,32 +962,86 @@ const CONFIG = {
   sync();
 })();
 
-/* ---- menu mobilne i podświetlanie bieżącej sekcji ---- */
+/* ---- ekrany: w jednej chwili widoczny jest jeden, wybierany kotwicą w adresie ---- */
 (function () {
-  var header = document.getElementById("header");
-  var menuBtn = document.getElementById("menu-btn");
-  var nav = document.getElementById("nav");
-  function setOpen(open) {
-    header.classList.toggle("open", open);
-    menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
-  }
-  menuBtn.addEventListener("click", function () { setOpen(!header.classList.contains("open")); });
-  nav.addEventListener("click", function (e) { if (e.target.closest("a")) setOpen(false); });
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape") setOpen(false); });
+  var views = [].slice.call(document.querySelectorAll(".view"));
+  var home = document.getElementById("top");
+  var navLinks = document.querySelectorAll("#nav a");
+  var tpl = document.getElementById("book-tpl");
+  var first = true;
 
-  if (!("IntersectionObserver" in window)) return;
-  var links = nav.querySelectorAll("a[data-spy]");
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (en) {
-      if (!en.isIntersecting) return;
-      var key = en.target.getAttribute("data-spy");
-      links.forEach(function (a) {
-        if (a.getAttribute("data-spy") === key) a.setAttribute("aria-current", "true");
-        else a.removeAttribute("aria-current");
-      });
+  function link(cls, id, text) {
+    var a = document.createElement("a");
+    if (cls) a.className = cls;
+    a.href = "#" + id;
+    a.textContent = text;
+    return a;
+  }
+  function title(v) { return v.getAttribute("data-title") || v.id; }
+
+  // ekrany podrzędne: powrót na górze, na dole przycisk rezerwacji i następny ekran; ekran nadrzędny: delikatna lista podrzędnych
+  views.forEach(function (parent) {
+    var kids = views.filter(function (v) { return v.getAttribute("data-parent") === parent.id; });
+    if (!kids.length) return;
+    var sub = document.createElement("nav");
+    sub.className = "sub";
+    sub.setAttribute("aria-label", title(parent) + ": szczegóły");
+    kids.forEach(function (kid, i) {
+      sub.appendChild(link("", kid.id, title(kid)));
+      var wrap = kid.querySelector(".wrap");
+      var crumb = document.createElement("p");
+      crumb.className = "crumb";
+      crumb.appendChild(link("", parent.id, "← " + title(parent)));
+      wrap.insertBefore(crumb, wrap.firstChild);
+      var foot = document.createElement("div");
+      foot.className = "foot";
+      foot.appendChild(tpl.content.cloneNode(true));
+      var next = kids[i + 1];
+      if (next) foot.appendChild(link("next", next.id, "Dalej: " + title(next) + " →"));
+      wrap.appendChild(foot);
     });
-  }, { rootMargin: "-40% 0px -55% 0px" });
-  document.querySelectorAll("section[data-spy]").forEach(function (s) { io.observe(s); });
+    parent.querySelector(".wrap").appendChild(sub);
+  });
+
+  function root(v) {
+    var p;
+    while ((p = v.getAttribute("data-parent")) && document.getElementById(p)) v = document.getElementById(p);
+    return v;
+  }
+  function route() {
+    var id = decodeURIComponent(location.hash.slice(1));
+    var el = id ? document.getElementById(id) : null;
+    var view = (el && el.closest(".view")) || home;
+    views.forEach(function (v) { v.classList.toggle("on", v === view); });
+
+    var r = root(view), key = r.getAttribute("data-nav") || r.id;
+    navLinks.forEach(function (a) {
+      if (a.getAttribute("href") === "#" + key) a.setAttribute("aria-current", "true");
+      else a.removeAttribute("aria-current");
+    });
+
+    if (el && el !== view) {
+      // kotwica wewnątrz ekranu: otwórz zwinięty blok i przewiń do niej
+      var d = el.closest("details");
+      while (d) { d.open = true; d = d.parentElement && d.parentElement.closest("details"); }
+      el.scrollIntoView();
+    } else {
+      window.scrollTo(0, 0);
+    }
+    if (!first) {
+      var h = view.querySelector("h1, h2");
+      if (h) { h.tabIndex = -1; h.focus({ preventScroll: true }); }
+    }
+    first = false;
+  }
+  window.addEventListener("hashchange", route);
+  route();
+
+  document.getElementById("skip").addEventListener("click", function (e) {
+    e.preventDefault();
+    var h = document.querySelector(".view.on h1, .view.on h2");
+    if (h) { h.tabIndex = -1; h.focus(); }
+  });
 })();
 
 /* ---- rezerwacja w Kalendarzu Google i kopiowanie adresu e-mail ---- */
@@ -996,7 +1084,6 @@ const CONFIG = {
     var a = e.target.closest && e.target.closest('a[href^="mailto:"]');
     if (a) { e.preventDefault(); copy(); }
   });
-  document.getElementById("copy-mail").addEventListener("click", copy);
   toast.addEventListener("click", hide);
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") hide(); });
 })();
@@ -1036,24 +1123,6 @@ const CONFIG = {
   range.addEventListener("input", update);
   local.addEventListener("change", update);
   update();
-})();
-
-/* ---- kotwice do zwiniętych bloków: otwórz blok, do którego prowadzi odnośnik ---- */
-(function () {
-  function reveal() {
-    var id = decodeURIComponent(location.hash.slice(1));
-    var el = id && document.getElementById(id);
-    if (!el) return;
-    var d = el.closest("details"), opened = false;
-    while (d) { if (!d.open) { d.open = true; opened = true; } d = d.parentElement && d.parentElement.closest("details"); }
-    if (opened) el.scrollIntoView();
-  }
-  window.addEventListener("hashchange", reveal);
-  document.addEventListener("click", function (e) {
-    var a = e.target.closest && e.target.closest('a[href^="#"]');
-    if (a) setTimeout(reveal, 0);
-  });
-  reveal();
 })();
 </script>
 </body>
