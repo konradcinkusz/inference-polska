@@ -173,7 +173,7 @@ const S = {
      ${V(1, MV(2,270,0,P(160,320,1.5,I.doc)))}
      ${V(2, P(322,150,1,I.gear)+P(380,112,.7,`<g class="spin rev">${I.gear.replace('class="spin"','')}</g>`), "", 1.2)}
      ${V(3, P(520,205,1.1,I.lock))}
-     ${V(3, pill(320,600,"bez internetu","g"), "up", .2)}
+     ${V(3, pill(320,600,"offline albo cloud","g"), "up", .2)}
    </svg>`}),
  a2: f => ({cls:"", html: head(f)+dg(`
    <rect x="20" y="60" width="700" height="540" rx="36" class="zone"/>${T(60,112,"Polska","zl")}
@@ -198,6 +198,21 @@ const S = {
    ${V(6, L("M975 320H1010","ln ac")+P(1090,320,1.5,I.report), "up")}${V(6, T(1090,470,"Raport","sm"), "up", .2)}
    ${V(7, pill(600,572,"po wszystkim: dane usunięte","g"), "up")}
  `)}),
+ modes: f => ({cls:"", html: head(f)+dg(`
+   ${V(1, `<rect x="20" y="40" width="640" height="500" rx="36" class="zone"/>${T(60,92,"Fully private · offline","zl")}`
+        + P(120,280,1.15,I.doc)+P(340,280,1.05,I.chip)+P(560,280,1.15,I.report)
+        + T(120,400,"dokument","sm")+T(340,415,"lokalna AI","sm")+T(560,400,"raport","sm"), "up")}
+   ${V(1, L("M185 280H245","ln ac")+L("M435 280H495","ln ac"), "", .4)}
+   ${V(1, pill(340,485,"nic nie opuszcza biura","g"), "up", .6)}
+   ${V(2, `<rect x="720" y="40" width="460" height="500" rx="36" class="zone"/>${T(760,92,"Cloud · moje biuro","zl")}`, "up")}
+   ${V(3, `<rect x="1230" y="40" width="440" height="400" rx="36" class="dash" style="fill:rgba(20,23,26,.03)"/>${T(1270,92,"dostawca modelu","zl")}${P(1450,225,1.5,I.cloud)}${T(1450,345,"Anthropic, USA")}${T(1450,390,"do 30 dni · bez trenowania","sm")}`, "up")}
+   ${V(3, L("M900 185C1020 110 1200 110 1345 195","dash"), "", .2)}
+   ${V(2, MV(3,620,5,P(830,220,1.1,I.doc),false), "pop", .3)}
+   ${V(2, T(950,335,"usuwam zbędne dane osobowe","sm"), "up", .5)}
+   ${V(4, L("M1225 480H1130","ln ac"), "")}
+   ${V(4, P(880,465,.9,I.person)+P(912,423,.55,I.check)+P(1060,465,.9,I.report), "up", .5)}
+   ${V(5, pill(840,600,"dokumentacja medyczna i tajemnica zawodowa: tylko offline","w"), "up")}
+ `)}),
  a5: f => ({cls:"", html: head(f)+dg(`
    ${V(1, `<rect x="60" y="10" width="520" height="620" rx="20" class="fw"/><path class="fa" d="M63 13h514v74h-514z"/><text x="320" y="64" class="nodenum" style="font-size:34px">RAPORT</text>`, "up")}
    ${f.rows.map((r,i)=>V(2, `<g class="row"><circle cx="112" cy="${150+i*80}" r="22" class="fa"/><text x="112" y="${159+i*80}" class="nodenum" style="font-size:24px">${i+1}</text><text x="154" y="${159+i*80}">${esc(r)}</text><path class="ln" style="stroke-width:3;opacity:.25" d="M154 ${180+i*80}H540"/></g>`, "up", i*.18)).join("")}
@@ -216,7 +231,7 @@ const S = {
        ${V(1,`<text x="183" y="270" style="font-size:110px;font-weight:700;fill:#1c5a48;text-anchor:middle">50</text><text x="183" y="320" style="font-size:34px;font-weight:700;fill:#1c5a48;text-anchor:middle">stron</text>`,"pop",.7)}
      </svg>
    </div>
-   <div class="col" style="gap:22px"><p class="it" data-s="2" style="font-size:52px;font-weight:700;color:#fff">${esc(f.a)}</p><p class="url it" data-s="3">${URL_TXT}</p></div>`}),
+   <div class="col" style="gap:18px"><p class="it" data-s="1" style="font-size:32px">${esc(f.note)}</p><p class="it" data-s="2" style="font-size:52px;font-weight:700;color:#fff">${esc(f.a)}</p><p class="url it" data-s="3">${URL_TXT}</p></div>`}),
  cta: f => ({cls:"panel green", html:`
    <p class="eyebrow base">${esc(f.e)}</p>
    <div style="display:flex;align-items:center;gap:80px">
@@ -297,7 +312,7 @@ const S = {
    ${V(1, `<rect x="40" y="60" width="640" height="440" rx="36" class="fw"/>${P(240,280,1.4,I.doc)}${P(480,280,1.3,I.chip)}<path class="ln ac" d="M315 280H365"/>`+T(360,560,"Analiza spraw")+T(360,606,"dla osób prywatnych i firm","sm"), "up")}
    ${V(2, `<rect x="1000" y="60" width="640" height="440" rx="36" class="fw"/><path class="zone" d="M1140 250L1320 130L1500 250V440H1140z"/>${P(1320,340,1.1,I.chip)}`+T(1320,560,"Prywatna AI w gabinecie")+T(1320,606,"dla biur i gabinetów","sm"), "up")}
    ${V(3, L("M690 280H990","ln ac"), "")}${V(3, `<circle cx="840" cy="280" r="84" class="fw"/>`+P(840,270,1.5,I.lock), "pop", .5)}
-   ${V(3, pill(840,585,"dane zostają na miejscu","g"), "up", .8)}
+   ${V(3, pill(840,585,"Ty decydujesz o danych","g"), "up", .8)}
  `)})
 };
 
@@ -305,9 +320,10 @@ const N = {
  a:["Masz sprawę w urzędzie, spór z pracodawcą albo grubą teczkę dokumentów medycznych i nie wiesz, od czego zacząć? Nazywam się Konrad Cinkusz i jestem inżynierem AI. Analizuję takie sprawy z pomocą sztucznej inteligencji, która działa na mojej własnej maszynie, bez dostępu do internetu.",
     "Zacznijmy od problemu. Kiedy wklejasz dokument do popularnego czatu AI, jego treść trafia na serwer dostawcy, bardzo często za granicą. Razem z dokumentem wyjeżdża cała analiza Twojej sprawy. Nie wiesz, gdzie to trafiło, jak długo tam zostanie ani kto ma do tego dostęp.",
     "U mnie wygląda to inaczej. W moim biurze stoi maszyna z lokalną sztuczną inteligencją. Nie ma połączenia z internetem. Twoje dokumenty trafiają tylko na nią. Model analizuje je na podstawie baz przepisów i literatury naukowej. Wynik sprawdzam sam i oddaję Ci raport. Na koniec usuwam z maszyny wszystkie dane.",
+    "Masz do wyboru dwa tryby. W trybie fully private wszystko dzieje się na mojej maszynie offline i nic nie opuszcza biura. Tryb cloud jest tańszy i przeznaczony dla dokumentów niewrażliwych. Najpierw usuwam z materiału zbędne dane osobowe, a potem treść trafia szyfrowanym połączeniem do dostawcy modelu, firmy Anthropic w USA. Jest tam przechowywana do trzydziestu dni i domyślnie nie służy do trenowania modeli. Wynik tak samo sprawdzam sam. Dokumentację medyczną i dane objęte tajemnicą zawodową analizuję wyłącznie offline.",
     "Cały proces to cztery kroki. Bezpłatna rozmowa wstępna, na której opowiadasz, co się stało. Przekazanie kopii dokumentów, osobiście albo e-mailem. Analiza na maszynie offline, którą sam sprawdzam. I raport: wydrukowany, jako zaszyfrowany PDF albo w formacie HTML.",
     "Raport ma stały układ: streszczenie, analiza dokumentów, przepisy ze wskazaniem miejsca, możliwe drogi postępowania, lista rzeczy do sprawdzenia i źródła. Możesz go położyć przed prawnikiem, lekarzem albo doradcą podatkowym. Mówię wprost: to nie jest porada, tylko dobre przygotowanie do rozmowy ze specjalistą.",
-    "Ile to kosztuje? Sto pięćdziesiąt złotych brutto za każde rozpoczęte pięćdziesiąt stron dokumentów. Rozmowa wstępna jest bezpłatna. Termin zarezerwujesz na mojej stronie, link jest w opisie filmu."],
+    "Ile to kosztuje? Sto pięćdziesiąt złotych brutto za każde rozpoczęte pięćdziesiąt stron dokumentów. Ta cena dotyczy trybu offline, tryb cloud wyceniam po rozmowie. Rozmowa wstępna jest bezpłatna. Termin zarezerwujesz na mojej stronie, link jest w opisie filmu."],
  b:["Prowadzisz biuro rachunkowe, gabinet lekarski albo kancelarię i chcesz korzystać ze sztucznej inteligencji, ale pracujesz na cudzych danych? Pokażę Ci rozwiązanie, w którym sztuczna inteligencja stoi w Twoim biurze i nie łączy się z internetem.",
     "Księgi klientów i dokumentacja pacjentów to dane powierzone. Kiedy ktoś z zespołu wkleja je do publicznego czatu AI, treść trafia na cudzy serwer. A za poufność odpowiadasz Ty.",
     "Moje rozwiązanie to urządzenie z lokalną sztuczną inteligencją, które stoi w Twoim biurze. Korzysta z niego cały zespół. Urządzenie nie łączy się z internetem, więc dane zostają u Ciebie.",
@@ -318,7 +334,7 @@ const N = {
     "Zawodowo tworzę oprogramowanie od ponad dziesięciu lat, głównie w C#, .NET i chmurze Azure. Budowałem systemy dla handlu, bankowości, produktów SaaS i administracji publicznej, między innymi system obiegu dokumentów dla Ministerstwa Obrony Narodowej.",
     "Zajmuję się naukowo systemami, w których wiele modeli językowych współpracuje nad jednym zadaniem. Ukończyłem informatykę na Politechnice Warszawskiej, a wcześniej studia inżynierskie na Politechnice Łódzkiej. Mam trzy recenzowane publikacje na ten temat.",
     "Mój sposób pracy nazywam inżynierią augmentatywną. Człowiek decyduje i odpowiada za wynik. Model AI przyspiesza pracę. A każdy wynik sprawdzam sam, zanim trafi do klienta.",
-    "W Inference Polska oferuję dwie usługi: analizę spraw dla osób prywatnych i firm oraz prywatną sztuczną inteligencję w gabinecie. Łączy je jedna zasada: wrażliwe dane zostają na miejscu.",
+    "W Inference Polska oferuję dwie usługi: analizę spraw dla osób prywatnych i firm oraz prywatną sztuczną inteligencję w gabinecie. Łączy je jedna zasada: to Ty decydujesz, gdzie trafiają Twoje dane, a wrażliwe zostają na miejscu.",
     "Jeśli masz sprawę, z którą nie wiesz, co zrobić, albo prowadzisz biuro i chcesz bezpiecznie korzystać z AI, umów bezpłatną rozmowę wstępną. Link jest w opisie. Dziękuję za uwagę."]
 };
 
@@ -327,11 +343,12 @@ const FILMS = [
   {t:"a1", e:"Inference Polska", h:"Analiza Twojej sprawy", p:"Prywatna sztuczna inteligencja na mojej maszynie."},
   {t:"a2", e:"Problem", h:"Zwykły czat AI: Twoja sprawa wyjeżdża"},
   {t:"a3", e:"Rozwiązanie", h:"U mnie: maszyna bez sieci"},
+  {t:"modes", e:"Tryb pracy", h:"Dwa tryby: Ty wybierasz"},
   {t:"line4", e:"Jak to działa", h:"Cztery kroki", nodes:[
     {icon:I.bubble,t:"Rozmowa wstępna",d:"bezpłatna"},{icon:I.scan,t:"Kopie dokumentów",d:"skan lub e-mail"},
     {icon:I.chip.replace(/class="chipt"/,'class="chipt" style="font-size:40px"'),t:"Analiza offline",d:"AI + moja weryfikacja"},{icon:I.report,t:"Raport",d:"PDF lub HTML"}]},
   {t:"a5", e:"Co dostajesz", h:"Raport ze źródłami", rows:["Streszczenie i pytania","Analiza dokumentów","Przepisy i artykuły","Możliwe drogi","Co sprawdzić","Źródła i data baz"]},
-  {t:"price", e:"Cena", big:"150 zł", a:"Rozmowa wstępna: bezpłatna"}
+  {t:"price", e:"Cena", big:"150 zł", a:"Rozmowa wstępna: bezpłatna", note:"cena dla trybu offline · tryb cloud: wycena po rozmowie"}
 ]},
 { id:"gabinet", tag:"Film 2", name:"Prywatna AI w gabinecie", desc:"Dla biur rachunkowych i gabinetów", k:"b", frames:[
   {t:"b1", e:"Inference Polska", h:"Prywatna AI w&nbsp;Twoim gabinecie", p:"Urządzenie, które stoi u Ciebie."},
@@ -352,9 +369,9 @@ const FILMS = [
   {t:"cta", e:"Porozmawiajmy", h:"Umów rozmowę wstępną", a:"Bezpłatnie"}
 ]}
 ];
-FILMS.forEach(f=>f.frames.forEach((fr,i)=>fr.n=N[f.k][i]));
+FILMS.forEach(f=>{ if(N[f.k].length!==f.frames.length) console.error("lektor: zła liczba tekstów", f.id); f.frames.forEach((fr,i)=>fr.n=N[f.k][i]); });
 
-const POS = [[0,0,0],[2700,620,-5],[5500,-380,4],[8100,900,-3],[10900,60,5],[13700,520,0]];
+const POS = [[0,0,0],[2700,620,-5],[5500,-380,4],[8100,900,-3],[10900,60,5],[13700,520,0],[16500,-150,0]];
 const world = document.getElementById("world"), route = document.querySelector("#route path");
 const menu = document.getElementById("menu"), bar = document.getElementById("bar"), notes = document.getElementById("notes");
 let film = null, fi = 0, step = 0, els = [], maxStep = [], anim = null;
@@ -371,7 +388,7 @@ function build(f){
     world.appendChild(d); els.push(d);
     maxStep.push(Math.max(0,...[...d.querySelectorAll("[data-s],[data-m]")].map(e=>+(e.dataset.s||e.dataset.m))));
   });
-  route.setAttribute("d","M"+POS.map(([x,y])=>`${x+960} ${y+540}`).join(" L"));
+  route.setAttribute("d","M"+POS.slice(0,f.frames.length).map(([x,y])=>`${x+960} ${y+540}`).join(" L"));
 }
 function cam(i, k=1){
   const [x,y,r] = POS[i], vw = innerWidth, vh = innerHeight, s = Math.min(vw/1920, vh/1080)*k;
