@@ -24,7 +24,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Prepare site
         env:
-          SHOW_ANALIZA: ${{ vars.SHOW_ANALIZA }}
+          SITE_TEMPLATE: ${{ vars.SITE_TEMPLATE }}
+          SHOW_ANALIZA:${{ vars.SHOW_ANALIZA }}
           SHOW_ANALIZA_OPIS: ${{ vars.SHOW_ANALIZA_OPIS }}
           SHOW_GABINET: ${{ vars.SHOW_GABINET }}
           SHOW_GABINET_OPIS: ${{ vars.SHOW_GABINET_OPIS }}
@@ -34,11 +35,7 @@ jobs:
           SHOW_KSIAZKA_OPIS: ${{ vars.SHOW_KSIAZKA_OPIS }}
           SHOW_KONTRAKT: ${{ vars.SHOW_KONTRAKT }}
           SHOW_KONTRAKT_OPIS: ${{ vars.SHOW_KONTRAKT_OPIS }}
-        run: |
-          mkdir _site
-          python3 scripts/build-site.py index.html _site/index.html
-          cp -r assets _site/
-          touch _site/.nojekyll
+        run: python3 scripts/build-site.py _site
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

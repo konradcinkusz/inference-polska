@@ -35,7 +35,7 @@
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
-html{scroll-padding-top:72px}
+html{scroll-snap-type:y mandatory;scroll-padding-top:56px}
 body{margin:0;background:var(--paper);color:var(--text);font-family:var(--sans);font-size:1.0625rem;line-height:1.65;-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility}
 a{color:var(--accent);text-underline-offset:.18em;text-decoration-thickness:1px}
 a:hover{color:var(--accent-hover);text-decoration-thickness:2px}
@@ -70,10 +70,10 @@ nav.main a[aria-current="true"]{color:var(--ink);background:var(--tint)}
 #theme-label{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 
 /* ekrany: w jednej chwili widać jeden */
-.view{min-height:calc(100vh - 56px);min-height:calc(100dvh - 56px);display:flex;flex-direction:column;justify-content:center;padding:40px 24px 88px}
-.js .view{display:none}
-.js .view.on{display:flex;animation:in .22s ease-out}
-@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.view{position:relative;min-height:calc(100vh - 56px);min-height:calc(100dvh - 56px);display:flex;flex-direction:column;justify-content:center;padding:40px 24px 88px;scroll-snap-align:start;scroll-snap-stop:always}
+.cue{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);width:44px;height:44px;display:grid;place-items:center;border-radius:50%;color:var(--muted);text-decoration:none;font-size:1.4rem;line-height:1;animation:bob 2.4s ease-in-out infinite}
+.cue:hover{color:var(--ink);background:var(--tint)}
+@keyframes bob{50%{transform:translate(-50%,5px)}}
 .wrap{width:100%;max-width:740px;margin:0 auto}
 .wrap.wide{max-width:1040px}
 .hero .wrap{max-width:860px;text-align:center}
@@ -93,9 +93,7 @@ nav.main a[aria-current="true"]{color:var(--ink);background:var(--tint)}
 .hero .sub{justify-content:center}
 .sub a{padding:5px 10px;border-radius:6px;color:var(--muted);text-decoration:none}
 .sub a:hover{color:var(--ink);background:var(--tint)}
-.foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 24px;margin:48px 0 0;padding-top:24px;border-top:1px solid var(--rule)}
-.foot .next{font-weight:600;text-decoration:none}
-.foot .next:hover{text-decoration:underline}
+.foot{margin:48px 0 0;padding-top:24px;border-top:1px solid var(--rule)}
 
 /* typografia */
 h1,h2,h3,h4{color:var(--ink);font-weight:600;margin:0}
@@ -281,8 +279,9 @@ summary:hover h3{color:var(--accent)}
   .foot .btn{width:100%}
 }
 @media print{
-  .bar,.go,.foot,.sub,.crumb,.toast{display:none}
-  .js .view,.view{display:block;min-height:0;padding:24px 0}
+  html{scroll-snap-type:none}
+  .bar,.go,.foot,.sub,.crumb,.cue,.toast{display:none}
+  .view{display:block;min-height:0;padding:24px 0}
   body{background:#fff;color:#000}
   details>*{display:block}
 }
@@ -962,13 +961,12 @@ const CONFIG = {
   sync();
 })();
 
-/* ---- ekrany: w jednej chwili widoczny jest jeden, wybierany kotwicą w adresie ---- */
+/* ---- ekrany: przewijanie przechodzi do następnego ekranu (scroll-snap); menu i adres podążają za bieżącym ---- */
 (function () {
   var views = [].slice.call(document.querySelectorAll(".view"));
-  var home = document.getElementById("top");
   var navLinks = document.querySelectorAll("#nav a");
   var tpl = document.getElementById("book-tpl");
-  var first = true;
+  var reduce = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : { matches: false };
 
   function link(cls, id, text) {
     var a = document.createElement("a");
@@ -979,14 +977,14 @@ const CONFIG = {
   }
   function title(v) { return v.getAttribute("data-title") || v.id; }
 
-  // ekrany podrzędne: powrót na górze, na dole przycisk rezerwacji i następny ekran; ekran nadrzędny: delikatna lista podrzędnych
+  // ekrany podrzędne: powrót na górze i przycisk rezerwacji na dole; ekran nadrzędny: delikatna lista podrzędnych
   views.forEach(function (parent) {
     var kids = views.filter(function (v) { return v.getAttribute("data-parent") === parent.id; });
     if (!kids.length) return;
     var sub = document.createElement("nav");
     sub.className = "sub";
     sub.setAttribute("aria-label", title(parent) + ": szczegóły");
-    kids.forEach(function (kid, i) {
+    kids.forEach(function (kid) {
       sub.appendChild(link("", kid.id, title(kid)));
       var wrap = kid.querySelector(".wrap");
       var crumb = document.createElement("p");
@@ -996,11 +994,23 @@ const CONFIG = {
       var foot = document.createElement("div");
       foot.className = "foot";
       foot.appendChild(tpl.content.cloneNode(true));
-      var next = kids[i + 1];
-      if (next) foot.appendChild(link("next", next.id, "Dalej: " + title(next) + " →"));
       wrap.appendChild(foot);
     });
     parent.querySelector(".wrap").appendChild(sub);
+  });
+
+  // strzałka na dole ekranu: to samo co przewinięcie o jeden ekran
+  views.forEach(function (v, i) {
+    var next = views[i + 1];
+    if (!next) return;
+    var cue = link("cue", next.id, "↓");
+    cue.setAttribute("aria-hidden", "true");
+    cue.tabIndex = -1;
+    cue.addEventListener("click", function (e) {
+      e.preventDefault();
+      next.scrollIntoView({ behavior: reduce.matches ? "auto" : "smooth" });
+    });
+    v.appendChild(cue);
   });
 
   function root(v) {
@@ -1008,40 +1018,46 @@ const CONFIG = {
     while ((p = v.getAttribute("data-parent")) && document.getElementById(p)) v = document.getElementById(p);
     return v;
   }
-  function route() {
-    var id = decodeURIComponent(location.hash.slice(1));
-    var el = id ? document.getElementById(id) : null;
-    var view = (el && el.closest(".view")) || home;
-    views.forEach(function (v) { v.classList.toggle("on", v === view); });
-
-    var r = root(view), key = r.getAttribute("data-nav") || r.id;
+  var seen = null, timer;
+  function setCurrent(v) {
+    if (v === seen) return;
+    seen = v;
+    var r = root(v), key = r.getAttribute("data-nav") || r.id;
     navLinks.forEach(function (a) {
       if (a.getAttribute("href") === "#" + key) a.setAttribute("aria-current", "true");
       else a.removeAttribute("aria-current");
     });
-
-    if (el && el !== view) {
-      // kotwica wewnątrz ekranu: otwórz zwinięty blok i przewiń do niej
-      var d = el.closest("details");
-      while (d) { d.open = true; d = d.parentElement && d.parentElement.closest("details"); }
-      el.scrollIntoView();
-    } else {
-      window.scrollTo(0, 0);
+    var hash = v.id === "top" ? "" : "#" + v.id;
+    if (location.hash !== hash) {
+      try { history.replaceState(null, "", location.pathname + location.search + hash); } catch (e) {}
     }
-    if (!first) {
-      var h = view.querySelector("h1, h2");
-      if (h) { h.tabIndex = -1; h.focus({ preventScroll: true }); }
-    }
-    first = false;
   }
-  window.addEventListener("hashchange", route);
-  route();
+  function observe() {
+    if (!("IntersectionObserver" in window)) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        clearTimeout(timer);
+        timer = setTimeout(function () { setCurrent(en.target); }, 80);
+      });
+    }, { rootMargin: "-50% 0px -50% 0px" });
+    views.forEach(function (v) { io.observe(v); });
+  }
+  // obserwację włączamy po załadowaniu, żeby nie zatrzeć adresu, zanim przeglądarka przewinie do kotwicy
+  if (document.readyState === "complete") setTimeout(observe, 150);
+  else window.addEventListener("load", function () { setTimeout(observe, 150); });
 
-  document.getElementById("skip").addEventListener("click", function (e) {
-    e.preventDefault();
-    var h = document.querySelector(".view.on h1, .view.on h2");
-    if (h) { h.tabIndex = -1; h.focus(); }
-  });
+  // kotwica do zwiniętego bloku: otwórz blok, do którego prowadzi odnośnik
+  function reveal() {
+    var id = decodeURIComponent(location.hash.slice(1));
+    var el = id && document.getElementById(id);
+    if (!el) return;
+    var d = el.closest("details"), opened = false;
+    while (d) { if (!d.open) { d.open = true; opened = true; } d = d.parentElement && d.parentElement.closest("details"); }
+    if (opened) el.scrollIntoView();
+  }
+  window.addEventListener("hashchange", reveal);
+  reveal();
 })();
 
 /* ---- rezerwacja w Kalendarzu Google i kopiowanie adresu e-mail ---- */
