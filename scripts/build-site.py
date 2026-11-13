@@ -24,6 +24,7 @@ DEFAULT_TEMPLATE = "klasyczny"
 # klucz znacznika w szablonie -> człon nazwy zmiennej
 OFFER = {
     "analiza": "ANALIZA",
+    "pytanie": "PYTANIE",
     "gabinet": "GABINET",
     "prototyp": "PROTOTYP",
     "ksiazka": "KSIAZKA",

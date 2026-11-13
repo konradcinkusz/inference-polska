@@ -27,6 +27,8 @@ jobs:
           SITE_TEMPLATE: ${{ vars.SITE_TEMPLATE }}
           SHOW_ANALIZA: ${{ vars.SHOW_ANALIZA }}
           SHOW_ANALIZA_OPIS: ${{ vars.SHOW_ANALIZA_OPIS }}
+          SHOW_PYTANIE: ${{ vars.SHOW_PYTANIE }}
+          SHOW_PYTANIE_OPIS: ${{ vars.SHOW_PYTANIE_OPIS }}
           SHOW_GABINET: ${{ vars.SHOW_GABINET }}
           SHOW_GABINET_OPIS: ${{ vars.SHOW_GABINET_OPIS }}
           SHOW_PROTOTYP: ${{ vars.SHOW_PROTOTYP }}
