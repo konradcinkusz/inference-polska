@@ -36,8 +36,9 @@ Powrót, przycisk na dole, strzałki i lista szczegółów pod usługą powstaj�
 | Ekran lub sekcja | Szczegóły (ekrany podrzędne; w szablonie „klasycznym” to zwijane bloki) |
 |---|---|
 | Strona główna (`#top`) | |
-| Oferta (`#oferta`) | pięć usług z ceną lub „wycena po rozmowie” |
+| Oferta (`#oferta`) | sześć usług z ceną lub „wycena po rozmowie” |
 | Analiza spraw (`#analiza`) | `#jak`, `#jak-2`, `#rozwiazanie`, `#rozwiazanie-2`, `#diagram`, `#raport`, `#raport-uklad`, `#cena`, `#przyklady`, `#granice`, `#problem`, `#problem-2` |
+| Szybkie pytanie (`#pytanie`) | `#pytanie-jak` |
 | Prywatna sztuczna inteligencja w Twoim gabinecie (`#firmy`) | `#firmy-jak`, `#pakiety` |
 | Prototyp w tydzień (`#poc`) | `#poc-jak` |
 | Książka na zamówienie (`#ksiazka`) | `#ksiazka-opis`, `#ksiazka-kroki` |
@@ -58,7 +59,7 @@ Powrót, przycisk na dole, strzałki i lista szczegółów pod usługą powstaj�
 | `templates/klasyczny/index.html`, `templates/ekrany/index.html` | Szablony strony: HTML, CSS i JavaScript w jednym pliku, bez zależności. |
 | `.nojekyll` | Wyłącza przetwarzanie Jekyll na GitHub Pages. |
 | `.github/workflows/deploy-pages.yml` | Akcja wdrażająca stronę na GitHub Pages. |
-| `filmy/index.html` | Osobna strona z trzema interaktywnymi filmami (prezentacje: analiza spraw, prywatna AI w gabinecie, kim jestem). Jedyne wejście do niej to odnośnik „Filmy” w stopce strony głównej (w szablonie „ekrany” w drobnym druku na ekranie kontaktu); nie ma jej w menu ani w ofercie. Zdjęcie bierze z `assets/konrad-cinkusz.jpg`. |
+| `filmy/index.html` | Osobna strona z czterema interaktywnymi filmami (prezentacje: analiza spraw, prywatna AI w gabinecie, kim jestem, przykład „akta z pułapkami” na bazie MIX-02). Jedyne wejście do niej to odnośnik „Filmy” w stopce strony głównej (w szablonie „ekrany” w drobnym druku na ekranie kontaktu); nie ma jej w menu ani w ofercie. Zdjęcie bierze z `assets/konrad-cinkusz.jpg`. |
 | `scripts/build-site.py` | Skrypt budujący stronę: wybiera szablon (`SITE_TEMPLATE`) i usuwa elementy oferty wyłączone zmiennymi repozytorium. |
 | `assets/` | Zdjęcie do sekcji „Kim jestem”, `akta/` (16 fikcyjnych akt w PDF do sekcji „Przykładowe sprawy”) oraz `google-calendar.png` (ikona Kalendarza Google z przycisków rezerwacji, pomniejszona kopia pliku z Wikimedia Commons; znak towarowy Google). |
 | `README.md` | Ten plik. |
@@ -90,6 +91,7 @@ Każdą usługę z oferty można ukryć bez zmiany kodu, zmiennymi repozytorium 
 |---|---|
 | `SHOW_ANALIZA` | wiersz „Analiza spraw” na liście oferty |
 | `SHOW_ANALIZA_OPIS` | ekran „Analiza spraw” (`#analiza`) i wszystkie jego ekrany szczegółów, w tym „Przykładowe sprawy” (`#przyklady`) |
+| `SHOW_PYTANIE`, `SHOW_PYTANIE_OPIS` | wiersz i ekrany „Szybkie pytanie” (`#pytanie`): odpowiedź na jedno pytanie, 100 zł brutto, zawsze offline |
 | `SHOW_GABINET`, `SHOW_GABINET_OPIS` | wiersz i ekrany „Prywatna sztuczna inteligencja w Twoim gabinecie” (`#firmy`) |
 | `SHOW_PROTOTYP`, `SHOW_PROTOTYP_OPIS` | wiersz i ekrany „Prototyp w tydzień” (`#poc`) |
 | `SHOW_KSIAZKA`, `SHOW_KSIAZKA_OPIS` | wiersz i ekrany „Książka na zamówienie” (`#ksiazka`) |
