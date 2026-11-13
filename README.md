@@ -65,7 +65,7 @@ Powrót, przycisk na dole, strzałki i lista szczegółów pod usługą powstaj�
 
 Strona ma jasny i ciemny motyw: domyślnie zgodny z ustawieniem systemu, z przełącznikiem w górnym pasku (wybór zapamiętywany w przeglądarce).
 
-Strona jest statyczna: bez cookies, bez zewnętrznych skryptów, czcionek i formularzy. Rezerwacja terminu odbywa się poza stroną, w Kalendarzu Google. Jedyny element zewnętrzny to film YouTube w sekcji „Analiza spraw” (`youtube-nocookie.com`, identyfikator filmu w atrybucie `data-yt`): odtwarzacz ładuje się dopiero po kliknięciu, więc do tego czasu strona nie łączy się z YouTube.
+Strona jest statyczna: bez cookies, bez zewnętrznych skryptów, czcionek i formularzy. Rezerwacja terminu odbywa się poza stroną, w Kalendarzu Google. Jedyny element zewnętrzny to trzy filmy YouTube (sekcje „Analiza spraw”, „Prywatna AI w gabinecie” i „Kim jestem”) (`youtube-nocookie.com`, identyfikator filmu w atrybucie `data-yt`): odtwarzacz ładuje się dopiero po kliknięciu, więc do tego czasu strona nie łączy się z YouTube.
 
 ## Publikacja (GitHub Pages + GitHub Actions)
 
