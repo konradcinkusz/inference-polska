@@ -84,6 +84,22 @@ text{font-family:var(--sans)}
 @keyframes spin{to{transform:rotate(360deg)}}
 .on .pulse{animation:pulse 1.6s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
 @keyframes pulse{50%{transform:scale(1.12)}}
+/* karty z faktami */
+.cards{display:grid;grid-template-columns:repeat(var(--n),1fr);grid-auto-rows:1fr;gap:28px;flex:1;min-height:0}
+.card{background:var(--card);border:3px solid var(--rule);border-radius:28px;padding:26px 32px;display:flex;flex-direction:column;gap:12px;min-height:0;overflow:hidden}
+.card .tag{font-size:24px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:6px 16px;border-radius:999px;align-self:flex-start}
+.tag.ok{background:var(--accent-soft);color:var(--ok)}
+.tag.hy{background:#fdf1d9;color:#855400}
+.card .big{font-size:120px;font-weight:700;color:var(--accent);letter-spacing:-2px;line-height:1}
+.card h3{font-size:54px;line-height:1.15;font-weight:700;color:var(--ink)}
+.card p{font-size:41px;line-height:1.33;color:var(--text)}
+.cards.dense .card{padding:20px 26px;gap:8px}
+.cards.dense .card h3{font-size:40px} .cards.dense .card p{font-size:32px;line-height:1.3}
+.cards.dense .card .big{font-size:96px}
+.cards.tiny .card h3{font-size:35px} .cards.tiny .card p{font-size:28px;line-height:1.28}
+.foot{font-size:34px !important;line-height:1.35;color:var(--muted) !important;font-weight:600}
+.srcs{columns:3;column-gap:40px;font-size:38px;line-height:1.75;color:#cfe3da;list-style:none;flex:1}
+.srcs li::before{content:"· ";color:var(--mint)}
 /* interfejs */
 #menu{position:fixed;inset:0;background:var(--dark);color:var(--paper);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5vh;z-index:20;cursor:default;padding:4vh 4vw}
 #menu.hide{display:none}
@@ -348,7 +364,55 @@ const S = {
    ${V(2, `<rect x="1000" y="60" width="640" height="440" rx="36" class="fw"/><path class="zone" d="M1140 250L1320 130L1500 250V440H1140z"/>${P(1320,340,1.1,I.chip)}`+T(1320,560,"Prywatna AI w gabinecie")+T(1320,606,"dla biur i gabinetów","sm"), "up")}
    ${V(3, L("M690 280H990","ln ac"), "")}${V(3, `<circle cx="840" cy="280" r="84" class="fw"/>`+P(840,270,1.5,I.lock), "pop", .5)}
    ${V(3, pill(840,585,"Ty decydujesz o danych","g"), "up", .8)}
- `)})
+ `)}),
+ /* ----- film 5: prywatność ----- */
+ e1: f => ({cls:"panel dark side", html:`
+   <div class="col" style="flex:1"><p class="eyebrow base">${esc(f.e)}</p><h1 class="base" style="font-size:80px">${f.h}</h1><p class="it" data-s="3">${esc(f.p)}</p></div>
+   <svg class="sq" viewBox="0 0 640 640">
+     <rect x="40" y="90" width="560" height="460" rx="40" class="zone"/>
+     ${V(1, P(200,320,1.7,I.folder))}
+     ${V(2, P(430,320,1.7,I.chip))}
+     ${V(3, P(430,170,1,I.lock)+pill(320,600,"prywatność = mniej kopii","g"), "up")}
+   </svg>`}),
+ cards: f => ({cls:"", html: head(f)
+   + `<div class="cards${f.dense?" dense":""}${f.dense==="tiny"?" tiny":""}" style="--n:${f.cols||f.cards.length}">`
+   + f.cards.map((c,i)=>{ const k=c.k||"ok"; return `<div class="card it" data-s="${i+1}">`
+       + (k==="none"?"":`<span class="tag ${k}">${esc(c.tg||(k==="ok"?"Potwierdzone":"Hipotetyczne"))}</span>`)
+       + (c.big?`<p class="big">${esc(c.big)}</p>`:"") + `<h3>${esc(c.h)}</h3><p>${esc(c.p)}</p></div>`; }).join("")
+   + `</div>` + (f.foot?`<p class="foot it" data-s="${f.cards.length+1}">${esc(f.foot)}</p>`:"") }),
+ stat: f => { const bad = I.person.replace(/class="fw"/g,'class="fw" style="fill:#fbeaea;stroke:#a12a2a"');
+   return {cls:"", html: head(f)+dg(`
+   ${V(1, [0,1,2].map(i=>P(110+i*230,230,1.6,i==0?bad:I.person)).join(""), "up")}
+   ${V(1, T(340,420,"Co trzecia osoba w Polsce")+T(340,466,"miała styczność z wyciekiem (BIK)","sm"), "up", .3)}
+   ${V(2, `<path class="ln" d="M900 540H1620"/>`, "")}
+   ${V(2, T(1260,50,"Zgłoszenia naruszeń do UODO","sm"), "up")}
+   ${V(2, `<rect x="960" y="315" width="200" height="225" rx="14" class="fa"/>`, "grow")}
+   ${V(2, T(1060,290,"7,5 tys."), "up", .6)}${V(2, T(1060,590,"2020","sm"), "up", .3)}
+   ${V(3, `<rect x="1320" y="150" width="200" height="390" rx="14" class="bad"/>`, "grow")}
+   ${V(3, T(1420,125,"ok. 13 tys."), "up", .6)}${V(3, T(1420,590,"2022","sm"), "up", .3)}
+ `)}; },
+ timeline: f => { const xs=[170,505,840,1175,1510];
+   return {cls:"", html: head(f)+dg(`
+   ${V(1, L("M40 230H1640","ln ac"), "")}
+   ${f.pts.map((p,i)=>V(i+1, `<circle cx="${xs[i]}" cy="230" r="${i==3?30:20}" class="${i==3?"bad":"fa"}"/>`
+      + T(xs[i],150,p.d,"lb").replace('class="lb"','class="lb" style="font-size:44px"')
+      + T(xs[i],350,p.t)
+      + p.l.map((s,j)=>T(xs[i],398+j*42,s,"sm")).join(""), "up", 0)).join("")}
+   ${V(5, pill(840,590,f.foot,"w"), "up", .3)}
+ `)}; },
+ compare: f => ({cls:"", html: head(f)+dg(`
+   ${V(1, `<rect x="20" y="40" width="800" height="580" rx="36" class="badzone"/>${T(60,92,"Publiczny czat AI","zl")}${P(150,290,1.3,I.doc)}${P(560,250,1.9,I.cloud)}`, "up")}
+   ${V(1, L("M230 270C330 170 400 170 470 220","dash"), "", .3)}
+   ${V(2, [330,470,610].map((x,i)=>P(x,470,.7,I.doc)).join("")+T(470,570,"kopie poza Twoją kontrolą","sm"), "up")}
+   ${V(2, T(150,420,"Gdzie? Jak długo? Kto widzi?","q").replace('class="q"','class="q" style="text-anchor:start;font-size:30px"').replace('x="150"','x="60"'), "up", .3)}
+   ${V(3, `<rect x="860" y="40" width="800" height="580" rx="36" class="zone"/>${T(900,92,"Prywatna AI offline","zl")}${P(990,300,1.3,I.doc)}${P(1360,300,1.5,I.chip)}${P(1360,160,.8,I.lock)}`, "up")}
+   ${V(3, L("M1060 300H1235","ln ac"), "", .3)}
+   ${V(4, pill(1260,470,"bez połączenia z internetem","g")+pill(1260,550,"dane usunięte po analizie","g"), "up")}
+ `)}),
+ src: f => ({cls:"panel dark", html:`
+   <p class="eyebrow base">${esc(f.e)}</p><h2 class="base">${esc(f.h)}</h2>
+   <ul class="srcs it" data-s="1">${f.list.map(s=>`<li>${esc(s)}</li>`).join("")}</ul>
+   <div class="col" style="gap:18px"><p class="it" data-s="2" style="font-size:34px">${esc(f.note)}</p><p class="url it" data-s="2">${URL_TXT}</p></div>`})
 };
 
 const N = {
@@ -376,7 +440,22 @@ const N = {
     "Dla modelu to zwykła treść dokumentu, nie polecenie. Żadne z sześciu poleceń nie zostało wykonane, a każde trafia do raportu jako treść podejrzana. Maszyna jest przy tym odcięta od internetu i nie ma jak niczego wysłać.",
     "Druga pułapka: daty. Klient mówi, że odebrał wypowiedzenie piątego sierpnia. Dokumenty pokazują nadanie piątego, awizo siódmego i doręczenie jedenastego. Termin liczy się od doręczenia, nie od daty pisma, i raport to mówi, ze wskazaniem strony.",
     "Trzecia pułapka: kwoty. Wypowiedzenie podaje zaległość pięć tysięcy dwieście osiemdziesiąt złotych, a zestawienie płatności trzy tysiące dziewięćset sześćdziesiąt. Raport nie wybiera po cichu jednej z nich. Podaje obie, razem z numerami stron.",
-    "Do tego brakująca strona umowy z paragrafem dziewiątym, cudzy dokument dołączony omyłkowo i kaucja, której nikt nie rozliczył. Raport wskazuje każdą z tych rzeczy i żąda uzupełnienia. Jeśli masz teczkę, w której łatwo coś przeoczyć, umów bezpłatną rozmowę wstępną. Link jest w opisie."]
+    "Do tego brakująca strona umowy z paragrafem dziewiątym, cudzy dokument dołączony omyłkowo i kaucja, której nikt nie rozliczył. Raport wskazuje każdą z tych rzeczy i żąda uzupełnienia. Jeśli masz teczkę, w której łatwo coś przeoczyć, umów bezpłatną rozmowę wstępną. Link jest w opisie."],
+ e:["Dlaczego warto rozwiązywać problemy na prywatnej sztucznej inteligencji? Zamiast ogólnych haseł o prywatności pokażę fakty: co w Polsce w sprawie wycieków danych jest potwierdzone, a co jest tylko prawdopodobne. Stan na piętnastego listopada 2026 roku.",
+    "Zasada jest prosta. Każdą informację oznaczam jako potwierdzoną, czyli opartą na oficjalnych komunikatach i źródłach, albo jako hipotetyczną: mechanizm jest znany, ale nie ma udokumentowanego przypadku. Nie bagatelizuję zagrożeń, ale też nie dopisuję faktów, których nie ma.",
+    "Zacznijmy od skali. Według BIK co trzecia osoba w Polsce miała styczność z wyciekiem danych. Liczba zgłoszeń naruszeń do UODO wzrosła z siedmiu i pół tysiąca w 2020 roku do prawie trzynastu tysięcy w 2022.",
+    "Największy przypadek to MyDr. Dwunastego sierpnia 2026 Ministerstwo Cyfryzacji poinformowało, że wyciek może dotyczyć około dziewiętnastu milionów osób. System wykorzystywało około dwunastu tysięcy przychodni i gabinetów, a zagrożone były dane o lekach, receptach i wizytach. Według komunikatów dane są głównie historyczne, sprzed kwietnia 2024. Sprawę nadzoruje Prokuratura Okręgowa w Warszawie, dochodzenie prowadzi CBZC, a UODO zapowiedział kontrolę w spółce.",
+    "To nie jest pojedynczy incydent. W listopadzie 2023 wyciekły PESEL-e i wyniki badań z laboratoriów ALAB, hakerzy żądali okupu. Od marca 2026 celem ataków padło kilkanaście placówek medycznych. W kwietniu prokuratura zaczęła badać kradzież blisko dwóch i dziewięciu dziesiątych miliona rekordów klientów Cyfrowego Polsatu. Potem MyDr, a we wrześniu Medyc: atak przez podatność SQL Injection, ponad milion pacjentów z setek placówek. RMF FM podaje, że za proceder odpowiadają osoby powiązane z wyciekiem z MyDr.",
+    "Skutki prawne już zaszły. Rząd uruchomił sprawdzanie PESEL na stronie bezpiecznedane.gov.pl, a Gawkowski wezwał do zastrzeżenia PESEL i zapowiedział, że okup nie zostanie zapłacony. Pojawiły się pierwsze roszczenia: żądanie trzydziestu tysięcy złotych od MyDr na podstawie artykułu 82 RODO i ponad pięćdziesiąt skarg. Sprawcy przekazali też dziennikarzom próbkę danych znanego polityka jako dowód posiadania bazy. Według relacji ABW poinformowała tę osobę, żeby ograniczyć ryzyko szantażu.",
+    "UODO zwraca uwagę, że naruszenie danych o zdrowiu może prowadzić do naruszenia dóbr osobistych, dyskryminacji czy ostracyzmu społecznego. To jest udokumentowane ostrzeżenie. Samo wystąpienie takich skutków po tych wyciekach nie jest na razie udokumentowane. I właśnie tu zaczynają się hipotezy.",
+    "Teraz hipotezy: bardzo prawdopodobne, ale bez potwierdzenia, że już się dzieją. Odmowa lub podwyżka polisy: nie ma żadnego udokumentowanego przypadku, a użycie takich danych byłoby nielegalne. Scenariusz, że połowa Polaków nie kupi polisy, nie ma oparcia w źródłach. Szantaż: ESET nie zna takich prób, ale ryzyka nie można ignorować, zwłaszcza dla osób publicznych i pacjentów terapii oraz leczenia uzależnień. Dyskryminacja, wyłudzenia na cudzy PESEL, phishing z prawdziwymi danymi i łączenie baz MyDr i Medyc: to znane mechanizmy, żaden niepotwierdzony dla tych konkretnych wycieków.",
+    "Personalizacja. Nie ma polskiego przypadku, w którym wyciek posłużył do personalizacji ofert. Udokumentowany jest tylko legalny odpowiednik: skarga Panoptykonu z 2019 roku na Google i IAB Europe, rozważane działania UODO wobec brokerów danych i kontrole profilowania oraz scoringu w planie na 2026. Hipoteza, że reklamodawcy, ubezpieczyciele czy windykatorzy kupują dane z wycieków, jest spójna z rynkiem brokerów, ale byłaby naruszeniem RODO i nie ma na nią dowodów.",
+    "Skarbówka. Nie ma potwierdzonego przypadku, w którym sprawę otwarto dzięki danym z wycieku. Potwierdzone jest to, co fiskus ma i bez wycieków: STIR, DAC7, KSeF, JPK, rejestry, dane bankowe i kontrole zza biurka, a także dane z kamer rozpoznających tablice rejestracyjne. Prezes UODO uznał, że część przepisów o KAS jest sprzeczna z Konstytucją i RODO. Moja interpretacja: dane skradzione przez hakerów raczej nie przeszłyby testu legalności dowodu w postępowaniu podatkowym. W sprawach karnych skarbowych granica jest mniej oczywista. Prawdopodobne, ale bez przypadków, są wezwania po wyłudzeniu firmy lub kredytu na cudzy PESEL.",
+    "Czarny rynek. Skany dowodów, hasła do poczty, dokumenty bankowe i karty płatnicze. Karty kosztują globalnie od jednego do dwudziestu trzech dolarów. Starszy reportaż money.pl podawał około dwudziestu złotych za skan dowodu i sto za paczkę maili, ale to kwoty historyczne, nie z 2026 roku. Minister powiedział w sierpniu, że dane z MyDr nie są dostępne do sprzedaży w darknecie, a grupa Fingerprint deklarowała, że ich nie sprzeda. To deklaracje, nie weryfikowalne fakty. Aktualnych cen z 2026 roku nie udało się wiarygodnie ustalić. Pewny jest model biznesowy: okup.",
+    "Co z tego wynika dla sztucznej inteligencji? Dokument wklejony do publicznego czatu to kolejna kopia poza Twoją kontrolą: nie wiesz, gdzie leży, jak długo i kto ma do niej dostęp. A wycieki, jak widać, dotykają także ogromnych systemów. Lokalna AI bez internetu usuwa jedną klasę ryzyka: nie ma serwera dostawcy, z którego dane mogłyby wyciec, i nie ma kopii po zakończeniu pracy. Nie rozwiązuje wszystkich problemów z bezpieczeństwem, ale zmniejsza to, co sam możesz zmniejszyć.",
+    "Z tego wynikają trzy zasady. Po pierwsze, mniej danych: wysyłaj tylko to, co konieczne, i usuwaj dane osobowe, zanim materiał opuści komputer. Po drugie, dane wrażliwe, jak dokumentacja medyczna, sprawy sądowe i tajemnica zawodowa, zostają lokalnie. Po trzecie, po analizie dane są usuwane, bo kopia, której nie ma, nie może wyciec.",
+    "Co możesz zrobić już dziś, niezależnie od AI. Sprawdź swój PESEL na bezpiecznedane.gov.pl. Rozważ jego zastrzeżenie, do czego wzywa Gawkowski. I ostrożnie traktuj wiadomości, które powołują się na Twoje prawdziwe wizyty i recepty: przed takim phishingiem ostrzega ESET.",
+    "Źródła to publikacje RMF24, Gazety Prawnej, CyberDefence24, ESET, Rzeczpospolitej, money.pl i innych, a także komunikaty UODO i Ministerstwa Cyfryzacji. Pełne odnośniki są w opisie filmu. Dziękuję za uwagę."]
 };
 
 const FILMS = [
@@ -416,11 +495,63 @@ const FILMS = [
   {t:"d4", e:"Pułapka 3", h:"Dwie różne kwoty zaległości"},
   {t:"d5", e:"Pułapka 4", h:"Luki i cudze dokumenty"},
   {t:"cta", e:"Twoja teczka", h:"Raport, który nie przeoczy", a:"Rozmowa wstępna: bezpłatna"}
+]},
+{ id:"prywatnosc", tag:"Film 5", name:"Dlaczego warto rozwiązywać problemy na prywatnej AI", desc:"Wycieki danych w Polsce: co potwierdzone, co hipotetyczne", k:"e", frames:[
+  {t:"e1", e:"Prywatność · stan na 15.11.2026", h:"Dlaczego warto rozwiązywać problemy na&nbsp;prywatnej AI", p:"Wycieki danych w Polsce: co jest potwierdzone, a co tylko prawdopodobne."},
+  {t:"cards", e:"Zasada", h:"Najpierw: co wiemy, a co zakładamy", foot:"Nie bagatelizuję zagrożeń i nie dopisuję faktów, których nie ma.", cards:[
+    {k:"ok", h:"Fakty ze źródeł", p:"Oficjalne komunikaty, prokuratura, UODO, media. Każdy punkt ma odnośnik do źródła."},
+    {k:"hy", h:"Prawdopodobne, bez dowodu", p:"Mechanizm jest znany, ale nie ma udokumentowanego przypadku. Oznaczam to wprost."}]},
+  {t:"stat", e:"Potwierdzone · skala", h:"Wycieki to norma, nie wyjątek"},
+  {t:"cards", dense:true, e:"Potwierdzone · MyDr · sierpień 2026", h:"19 milionów osób w jednym systemie", foot:"Sprawę nadzoruje Prokuratura Okręgowa w Warszawie, dochodzenie prowadzi CBZC, UODO zapowiedział kontrolę w spółce.", cards:[
+    {big:"19 mln", h:"osób", p:"możliwy zakres wycieku (komunikat Ministerstwa Cyfryzacji, 12 sierpnia 2026)"},
+    {big:"12 tys.", h:"przychodni i gabinetów", p:"korzystało z systemu; zagrożone dane o lekach, receptach i wizytach"},
+    {big:"IV 2024", h:"dane głównie historyczne", p:"według komunikatów pochodzą sprzed kwietnia 2024"}]},
+  {t:"timeline", e:"Potwierdzone · oś czasu", h:"To nie jest jeden incydent", foot:"RMF FM: za Medyc odpowiadają osoby powiązane z wyciekiem z MyDr", pts:[
+    {d:"11.2023", t:"ALAB", l:["PESEL-e i wyniki badań,","żądanie okupu"]},
+    {d:"od 03.2026", t:"Placówki", l:["kilkanaście szpitali,","przychodni, laboratoriów"]},
+    {d:"04.2026", t:"Cyfrowy Polsat", l:["ok. 2,9 mln rekordów","klientów"]},
+    {d:"08.2026", t:"MyDr", l:["ok. 19 mln osób"]},
+    {d:"09.2026", t:"Medyc / Qbusoft", l:["ponad 1 mln pacjentów,","SQL Injection"]}]},
+  {t:"cards", e:"Potwierdzone · reakcje i skutki", h:"Skutki prawne już zaszły", cards:[
+    {h:"Państwo", p:"Sprawdzenie PESEL na bezpiecznedane.gov.pl. Gawkowski wzywa do zastrzeżenia PESEL i zapowiada, że okup nie zostanie zapłacony."},
+    {h:"Poszkodowani", p:"Żądanie 30 tys. zł od MyDr (art. 82 RODO) i ponad 50 skarg. UODO i prawnicy: odszkodowania są możliwe."},
+    {h:"Szantaż jako element sprawy", p:"Sprawcy dali dziennikarzom próbkę danych znanego polityka jako dowód posiadania bazy. Według relacji ABW poinformowała tę osobę."}]},
+  {t:"cards", e:"Stanowisko UODO", h:"Dane o zdrowiu to nie zwykłe dane", foot:"Hasło można zmienić. Historii choroby nie.", cards:[
+    {k:"ok", h:"Udokumentowane ostrzeżenie", p:"UODO: naruszenie danych o zdrowiu może prowadzić do naruszenia dóbr osobistych, dyskryminacji czy ostracyzmu społecznego."},
+    {k:"hy", h:"Niepotwierdzone skutki", p:"To, że do takich skutków już doszło po tych wyciekach: brak udokumentowanych przypadków."}]},
+  {t:"cards", dense:"tiny", cols:3, e:"Hipotetyczne · skutki wycieków medycznych", h:"Co może się stać, choć nie udowodniono", cards:[
+    {k:"hy", h:"Ubezpieczenie", p:"Odmowa lub podwyżka polisy. Brak przypadku; użycie takich danych byłoby nielegalne."},
+    {k:"hy", h:"Szantaż", p:"ESET: brak informacji o próbach, ale ryzyka nie można ignorować (osoby publiczne, terapie, uzależnienia)."},
+    {k:"hy", h:"Dyskryminacja", p:"Przez pracodawcę, kontrahenta, znajomych. UODO ostrzega, brak zgłoszonych przypadków."},
+    {k:"hy", h:"Wyłudzenia na PESEL", p:"Kredyty i firmy na cudze dane. Znany mechanizm, brak potwierdzenia dla tych baz."},
+    {k:"hy", h:"Phishing z prawdziwymi danymi", p:"Wiadomości o realnych wizytach i receptach. Ostrzega ESET, brak zebranych przypadków."},
+    {k:"hy", h:"Łączenie baz", p:"Profile pacjentów z MyDr i Medyc. Brak potwierdzenia, że dane połączono."}]},
+  {t:"cards", e:"Personalizacja i profilowanie", h:"Handel danymi to nie tylko czarny rynek", cards:[
+    {k:"ok", h:"Potwierdzone: legalny odpowiednik", p:"Skarga Panoptykonu (2019): w reklamie behawioralnej krążą dane wrażliwe, także o zdrowiu. UODO rozważał działania wobec brokerów danych; kontrole 2026 obejmują profilowanie i scoring."},
+    {k:"hy", h:"Hipoteza: dane z wycieków", p:"Reklamodawcy, ubezpieczyciele i windykatorzy kupujący je do ofert, cen i scoringu. Spójne z rynkiem brokerów, ale brak polskiego przypadku; byłoby to naruszenie RODO."}]},
+  {t:"cards", dense:true, e:"Skarbówka a dane", h:"Fiskus ma dużo i bez wycieków", foot:"Prawdopodobne, bez przypadków: wezwania po wyłudzeniu firmy lub kredytu na cudzy PESEL.", cards:[
+    {k:"ok", h:"Narzędzia KAS", p:"STIR, DAC7, KSeF, JPK, rejestry, dane bankowe. Kontrola „zza biurka”: 4,5 mln zł nieprawidłowości, ponad 1500 kont na Vinted i OLX."},
+    {k:"ok", h:"Kamery ANPRS", p:"Dane z kamer tablic rejestracyjnych służą do weryfikacji VAT na auta firmowe. RPO pyta o podstawę prawną; prezes UODO: część przepisów o KAS sprzeczna z Konstytucją i RODO."},
+    {k:"hy", h:"Dane z wycieku jako dowód", p:"Brak doniesień. Moja interpretacja: skradzione dane raczej nie przeszłyby testu legalności dowodu (art. 180 Ordynacji podatkowej). W sprawach karnych skarbowych granica jest mniej oczywista."}]},
+  {t:"cards", dense:true, e:"Czarny rynek", h:"Dane mają cenę, okup to model biznesowy", foot:"Okup: ALAB (2023); w sprawie Medyc żądanie zapłaty za „testy bezpieczeństwa”.", cards:[
+    {k:"ok", h:"Co się sprzedaje", p:"Skany dowodów, hasła do poczty, dokumenty bankowe, karty płatnicze. Karty: globalnie od 1 do 23 dolarów."},
+    {k:"ok", tg:"Potwierdzone, ale dawne", h:"Stare ceny", p:"Reportaż money.pl: ok. 20 zł za skan dowodu, ok. 100 zł za paczkę maili. To kwoty historyczne, nie z 2026 r."},
+    {k:"hy", h:"Dane z MyDr i Medyc", p:"Minister: nie są do sprzedaży w darknecie; Fingerprint deklarował, że ich nie sprzeda. To deklaracje, nie fakty. Cen z 2026 r. brak."}]},
+  {t:"compare", e:"Co z tego wynika", h:"Wysłany plik zostaje poza Twoją kontrolą"},
+  {t:"cards", e:"Praktyka", h:"Trzy zasady rozwiązywania spraw na AI", cards:[
+    {k:"none", big:"1", h:"Mniej danych", p:"Wysyłaj tylko to, co konieczne. Dane osobowe usuwaj z materiału, zanim opuści Twój komputer."},
+    {k:"none", big:"2", h:"Wrażliwe zostaje lokalnie", p:"Dokumentacja medyczna, sprawy sądowe, tajemnica zawodowa: lokalna AI bez internetu."},
+    {k:"none", big:"3", h:"Usuń po analizie", p:"Kopia, której nie ma, nie może wyciec."}]},
+  {t:"cards", e:"Zacznij dziś", h:"Trzy kroki niezależnie od AI", cards:[
+    {k:"none", big:"1", h:"Sprawdź PESEL", p:"Rząd uruchomił sprawdzanie na stronie bezpiecznedane.gov.pl."},
+    {k:"none", big:"2", h:"Rozważ zastrzeżenie", p:"Do zastrzeżenia PESEL wzywa Gawkowski."},
+    {k:"none", big:"3", h:"Uważaj na wiadomości", p:"Wiadomość powołująca się na Twoje prawdziwe wizyty i recepty może być phishingiem (ostrzega ESET)."}]},
+  {t:"src", e:"Źródła", h:"Skąd to wiem", list:["RMF24","GazetaPrawna","CyberDefence24","ITwiz","CEO.com.pl","ESET","Superbiz","Money.pl","Tabletowo","Infor","Legiscope","Rzeczpospolita","Akademia LTCA","Poradnik Przedsiębiorcy","Bank.pl / BIK","Antyweb","Instalki"], note:"Pełne odnośniki w opisie filmu. Stan wiedzy na 15.11.2026."}
 ]}
 ];
 FILMS.forEach(f=>{ if(N[f.k].length!==f.frames.length) console.error("lektor: zła liczba tekstów", f.id); f.frames.forEach((fr,i)=>fr.n=N[f.k][i]); });
 
-const POS = [[0,0,0],[2700,620,-5],[5500,-380,4],[8100,900,-3],[10900,60,5],[13700,520,0],[16500,-150,0]];
+const POS = [[0,0,0],[2700,620,-5],[5500,-380,4],[8100,900,-3],[10900,60,5],[13700,520,0],[16500,-150,0],[19200,700,-4],[22000,-300,3],[24800,500,-3],[27600,-200,5],[30400,600,0],[33200,-100,-4],[36000,500,3],[38800,0,0]];
 const world = document.getElementById("world"), route = document.querySelector("#route path");
 const menu = document.getElementById("menu"), bar = document.getElementById("bar"), notes = document.getElementById("notes");
 let film = null, fi = 0, step = 0, els = [], maxStep = [], anim = null;
@@ -502,7 +633,7 @@ addEventListener("wheel", e=>{
 addEventListener("contextmenu", e=>{ if(film){ e.preventDefault(); prev(); } });
 addEventListener("keydown", e=>{
   const k = e.key;
-  if(!film){ if(k>="1"&&k<="4") start(+k-1); return; }
+  if(!film){ if(k>="1"&&k<="5") start(+k-1); return; }
   if(k===" "||k==="ArrowRight"||k==="Enter"||k==="PageDown"){ e.preventDefault(); next(); }
   else if(k==="ArrowLeft"||k==="Backspace"||k==="PageUp"){ e.preventDefault(); prev(); }
   else if(k==="Escape") toMenu();
