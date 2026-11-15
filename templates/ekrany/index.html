@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Inference Polska: analiza spraw przez prywatną sztuczną inteligencję</title>
-<meta name="description" content="Analiza spraw i dokumentów przez prywatną sztuczną inteligencję: lokalny model na maszynie bez sieci, dane i cały proces analizy nie opuszczają mojego biura. Rozmowa wstępna jest bezpłatna, analiza kosztuje 150 zł brutto za każde rozpoczęte 50 stron (tryb fully private). Także: prywatna sztuczna inteligencja w gabinecie, prototyp w tydzień, kontrakt programistyczny i książki na zamówienie. Tryb pracy do wyboru: fully private albo cloud.">
+<meta name="description" content="Analiza spraw i dokumentów przez prywatną sztuczną inteligencję: lokalny model na maszynie bez sieci, dane i cały proces analizy nie opuszczają mojego biura. Rozmowa wstępna jest bezpłatna, analiza kosztuje od 150 zł brutto za każde rozpoczęte 50 stron (online; offline: 450 zł), raport standardowo do 7 dni, biuro w Zgierzu. Także: prywatna sztuczna inteligencja w gabinecie, prototyp w tydzień, kontrakt programistyczny i książki na zamówienie. Tryb pracy do wyboru: offline albo online.">
 <meta name="color-scheme" content="light dark">
 <meta property="og:title" content="Inference Polska: analiza spraw przez prywatną sztuczną inteligencję">
-<meta property="og:description" content="Analiza spraw i dokumentów przez prywatną sztuczną inteligencję: lokalny model na maszynie bez sieci, dane i cały proces analizy nie opuszczają mojego biura. Rozmowa wstępna bezpłatna. Tryb cloud jako tańsza opcja, na opisanych warunkach.">
+<meta property="og:description" content="Analiza spraw i dokumentów przez prywatną sztuczną inteligencję: lokalny model na maszynie bez sieci, dane i cały proces analizy nie opuszczają mojego biura. Rozmowa wstępna bezpłatna. Biuro w Zgierzu. Tryb online jako tańsza opcja, na opisanych warunkach.">
 <meta property="og:type" content="website">
 <script>
 (function(){var r=document.documentElement;r.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")r.setAttribute("data-theme",t);}catch(e){}})();
@@ -152,6 +152,10 @@ p{margin:0 0 16px}
 .yt-hero .yt-play::before{margin-left:8px;border-width:16px 0 16px 27px}
 .yt-hero button>span:nth-of-type(2){font-size:clamp(1rem,2.2vw,1.3rem)}
 @media (max-width:640px){.yt-hero{max-width:100%;min-width:0}.yt-hero .yt-play{width:64px;height:64px}.yt-hero small{display:none}}
+.quick{margin:0 0 22px;display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;font-size:.95rem}
+.quick span{color:var(--muted)}
+.quick a{border:1px solid var(--rule);border-radius:999px;padding:6px 14px;color:var(--ink);text-decoration:none}
+.quick a:hover{background:var(--tint)}
 .fig{margin:34px 0 0;border:1px solid var(--rule);border-radius:6px;padding:20px 16px 14px}
 .fig figcaption{font-size:.92rem;color:var(--muted);margin-top:10px;text-align:center}
 .fig{margin-top:8px}
@@ -337,7 +341,7 @@ summary:hover h3{color:var(--accent)}
       <noscript><p style="padding:16px"><a href="https://youtu.be/YIxxDJMUAko" target="_blank" rel="noopener">Obejrzyj film na YouTube</a></p></noscript>
     </div>
     <p class="go"><a class="btn big" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
-    <p class="fine">Bezpłatna, na miejscu. Termin wybierasz w Kalendarzu Google. <a href="#oferta">Zobacz ofertę</a></p>
+    <p class="fine">To oferta dla każdego: osób prywatnych i firm. Bezpłatna rozmowa na miejscu w Zgierzu. Termin wybierasz w Kalendarzu Google. <a href="#oferta">Zobacz ofertę</a></p>
   </div>
 </section>
 
@@ -345,13 +349,14 @@ summary:hover h3{color:var(--accent)}
   <div class="wrap wide">
     <p class="label">Oferta · wybierz usługę</p>
     <h2 class="vh">Oferta</h2>
+    <!--offer:analiza:desc--><p class="quick"><span>Najczęściej szukasz:</span> <a href="#cena">Ile to kosztuje</a> <a href="#rozwiazanie">Co się dzieje z moimi dokumentami</a> <a href="#przyklady">Czy to dotyczy mojej sprawy</a></p><!--/offer:analiza:desc-->
     <div class="offer">
-      <!--offer:analiza:row--><a href="#analiza"><span class="t">Analiza spraw</span><span class="m">150 zł brutto / 50 stron dokumentów<br>fully private lub cloud</span></a><!--/offer:analiza:row-->
+      <!--offer:analiza:row--><a href="#analiza"><span class="t">Analiza spraw</span><span class="m">od 150 zł brutto / 50 stron dokumentów<br>raport + 3 rundy pytań · offline lub online</span></a><!--/offer:analiza:row-->
       <!--offer:pytanie:row--><a href="#pytanie"><span class="t">Szybkie pytanie</span><span class="m">100 zł brutto / pytanie<br>zawsze offline</span></a><!--/offer:pytanie:row-->
       <!--offer:gabinet:row--><a href="#firmy"><span class="t">Prywatna sztuczna inteligencja w Twoim gabinecie</span><span class="m">wycena po rozmowie<br>zawsze offline</span></a><!--/offer:gabinet:row-->
-      <!--offer:prototyp:row--><a href="#poc"><span class="t">Prototyp w tydzień</span><span class="m">wycena po rozmowie<br>fully private lub cloud</span></a><!--/offer:prototyp:row-->
-      <!--offer:ksiazka:row--><a href="#ksiazka"><span class="t">Książka na zamówienie</span><span class="m">wycena po rozmowie<br>fully private lub cloud</span></a><!--/offer:ksiazka:row-->
-      <!--offer:kontrakt:row--><a href="#kontrakt"><span class="t">Kontrakt programistyczny</span><span class="m">125–180 zł netto / godz.<br>fully private lub cloud</span></a><!--/offer:kontrakt:row-->
+      <!--offer:prototyp:row--><a href="#poc"><span class="t">Prototyp w tydzień</span><span class="m">wycena po rozmowie<br>offline lub online</span></a><!--/offer:prototyp:row-->
+      <!--offer:ksiazka:row--><a href="#ksiazka"><span class="t">Książka na zamówienie</span><span class="m">wycena po rozmowie<br>offline lub online</span></a><!--/offer:ksiazka:row-->
+      <!--offer:kontrakt:row--><a href="#kontrakt"><span class="t">Kontrakt programistyczny</span><span class="m">125–180 zł netto / godz.<br>offline lub online</span></a><!--/offer:kontrakt:row-->
     </div>
   </div>
 </section>
@@ -363,7 +368,7 @@ summary:hover h3{color:var(--accent)}
     <h2>Analiza spraw</h2>
     <p class="say">Lokalny model AI na mojej maszynie bez sieci. Dane i cały proces analizy nie opuszczają mojego biura.</p>
     <p class="go"><a class="btn big" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
-    <p class="fine">150 zł brutto za każde rozpoczęte 50 stron dokumentów. Rozmowa wstępna jest bezpłatna.</p>
+    <p class="fine">Od 150 zł brutto (online) albo 450 zł (offline) za każde rozpoczęte 50 stron dokumentów. W cenie raport i 3 rundy pytań, standardowo do 7 dni. Rozmowa wstępna jest bezpłatna.</p>
   </div>
 </section>
 <!--/offer:analiza:desc-->
@@ -386,7 +391,7 @@ summary:hover h3{color:var(--accent)}
       <li>
         <div>
           <h3>Rozmowa wstępna</h3>
-          <p>Spotykamy się na miejscu na bezpłatnej rozmowie wstępnej. Rozmawiamy o Twoim problemie: co się stało, czego potrzebujesz, jakie są terminy i co już wiesz. Ustalamy zakres analizy.</p>
+          <p>Spotykamy się na miejscu (w moim biurze w Zgierzu) na bezpłatnej rozmowie wstępnej. Rozmawiamy o Twoim problemie: co się stało, czego potrzebujesz, jakie są terminy i co już wiesz. Ustalamy zakres analizy.</p>
         </div>
       </li>
       <li>
@@ -460,7 +465,7 @@ summary:hover h3{color:var(--accent)}
     </figure>
     <div class="mores">
       <details class="more" id="diagram-cloud">
-        <summary><h3>Diagram: jak to wygląda w trybie cloud</h3></summary>
+        <summary><h3>Diagram: jak to wygląda w trybie online</h3></summary>
         <div class="body">
           <figure class="fig">
             <ol class="flow">
@@ -470,7 +475,7 @@ summary:hover h3{color:var(--accent)}
               <li><span class="box">Moja weryfikacja</span><span class="cap">sprawdzam analizę</span></li>
               <li><span class="box">Raport</span><span class="cap">PDF (wydruk lub zaszyfrowany) albo HTML</span></li>
             </ol>
-            <figcaption>Tak wygląda analiza spraw w trybie cloud, tylko dla dokumentów niewrażliwych. Treść trafia przez API do dostawcy modelu (Anthropic, USA), a zbędne dane osobowe usuwam wcześniej, o ile zakres na to pozwala. Dostawca domyślnie nie trenuje na niej modeli. Analizę sprawdzam sam, a materiał u siebie usuwam po zakończeniu. <a href="#cloud">Szczegóły w sekcji Tryb pracy</a>.</figcaption>
+            <figcaption>Tak wygląda analiza spraw w trybie online, tylko dla dokumentów niewrażliwych. Treść trafia przez API do dostawcy modelu (Anthropic, USA), a zbędne dane osobowe usuwam wcześniej, o ile zakres na to pozwala. Dostawca domyślnie nie trenuje na niej modeli. Analizę sprawdzam sam, a materiał u siebie usuwam po zakończeniu. <a href="#cloud">Szczegóły w sekcji Tryb pracy</a>.</figcaption>
           </figure>
         </div>
       </details>
@@ -513,9 +518,15 @@ summary:hover h3{color:var(--accent)}
   <div class="wrap">
     <h2>Ile to kosztuje</h2>
     <div class="price">
-      <p class="num"><b>150 zł</b> brutto za każde rozpoczęte 50 stron dokumentacji</p>
-      <p>Do 50 stron: 150 zł, 51–100 stron: 300 zł. Większe akta: wycena po rozmowie wstępnej. Rozmowa wstępna jest bezpłatna. Cena dotyczy trybu fully private. Tryb cloud: wycena po rozmowie wstępnej.</p>
-      <p class="muted small">Standardowy zakres to do 50 stron dokumentacji. Większe akta analizuję w kolejnych pakietach po 50 stron.</p>
+      <p class="num"><b>od 150 zł</b> brutto za każde rozpoczęte 50 stron dokumentacji</p>
+      <dl class="facts3">
+        <div><dt>Tryb online</dt><dd><strong>150 zł</strong> brutto za każde rozpoczęte 50 stron (51–100 stron: 300 zł). Tylko dla dokumentów niewrażliwych.</dd></div>
+        <div><dt>Tryb offline</dt><dd><strong>450 zł</strong> brutto za każde rozpoczęte 50 stron (51–100 stron: 900 zł). Wymaga o wiele większych nakładów pracy. Dla dokumentacji medycznej, tajemnicy zawodowej i danych wrażliwych.</dd></div>
+        <div><dt>W cenie</dt><dd>Wygenerowanie raportu oraz <strong>3 kolejne rundy</strong>: zadajesz pytanie do raportu, a ja go regeneruję.</dd></div>
+        <div><dt>Czas realizacji</dt><dd>Standardowo do 7 dni.</dd></div>
+        <div><dt>Tryb ekspresowy</dt><dd>Raport w ciągu 4 godzin od otrzymania dokumentów, za dopłatą (kwotę podaję w wycenie).</dd></div>
+      </dl>
+      <p class="muted small">Rozmowa wstępna jest bezpłatna. Większe akta niż 100 stron: wycena po rozmowie wstępnej.</p>
     </div>
   </div>
 </section>
@@ -653,7 +664,7 @@ summary:hover h3{color:var(--accent)}
     <h2>Czym to jest, a czym nie jest</h2>
       <p>To analiza i uporządkowanie Twojego materiału z odwołaniem do źródeł. To <strong>nie</strong> jest porada prawna, medyczna ani podatkowa. Model językowy może się mylić, dlatego wynik sprawdza człowiek, a raport wskazuje, co zweryfikować w źródle.</p>
       <p>W sprawach, w których potrzebny jest prawnik, lekarz lub doradca podatkowy, raport ma ułatwić Ci rozmowę z nim: pokazać, o co pytać i na co się powołać. Po zakończeniu usuwam z maszyny wszystkie dane cyfrowe, a Ty dostajesz swoje kopie z powrotem. Zasady ustalamy na piśmie, zanim cokolwiek zeskanuję.</p>
-      <p><strong>Tryb cloud nie jest usługą offline.</strong> Możesz go wybrać przy analizie spraw (poza dokumentacją medyczną i danymi objętymi tajemnicą zawodową), prototypie, książce i kontrakcie programistycznym. W tym trybie treść trafia do dostawcy modelu, na warunkach opisanych w sekcji <a href="#tryb">Tryb pracy</a>.</p>
+      <p><strong>Tryb online nie jest usługą offline.</strong> Możesz go wybrać przy analizie spraw (poza dokumentacją medyczną i danymi objętymi tajemnicą zawodową), prototypie, książce i kontrakcie programistycznym. W tym trybie treść trafia do dostawcy modelu, na warunkach opisanych w sekcji <a href="#tryb">Tryb pracy</a>.</p>
   </div>
 </section>
 <!--/offer:analiza:desc-->
@@ -675,7 +686,7 @@ summary:hover h3{color:var(--accent)}
         <li><strong>Analiza dzieje się gdzie indziej.</strong> Nie tylko dane, ale i sam proces wnioskowania odbywa się poza Twoim krajem.</li>
         <li><strong>Nie masz wglądu.</strong> Nie widzisz, gdzie dokładnie trafiła Twoja sprawa i jak długo tam zostaje.</li>
       </ul>
-      <p class="muted small">Dla porządku: przy analizie spraw, prototypach, książkach i kontrakcie programistycznym możesz wybrać tryb cloud. Wtedy treść także trafia do dostawcy modelu za granicą, ale na innych warunkach niż na prywatnym koncie. Opisuję je w sekcji <a href="#tryb">Tryb pracy</a>. Dokumentacja medyczna i dane objęte tajemnicą zawodową: wyłącznie offline.</p>
+      <p class="muted small">Dla porządku: przy analizie spraw, prototypach, książkach i kontrakcie programistycznym możesz wybrać tryb online. Wtedy treść także trafia do dostawcy modelu za granicą, ale na innych warunkach niż na prywatnym koncie. Opisuję je w sekcji <a href="#tryb">Tryb pracy</a>. Dokumentacja medyczna i dane objęte tajemnicą zawodową: wyłącznie offline.</p>
   </div>
 </section>
 <!--/offer:analiza:desc-->
@@ -701,7 +712,7 @@ summary:hover h3{color:var(--accent)}
         <li><div><h3>Odpowiedź offline</h3><p>Model lokalny odpowiada na maszynie offline, a ja sprawdzam wynik, zanim do Ciebie trafi.</p></div></li>
         <li><div><h3>Krótka odpowiedź</h3><p>Dostajesz krótką odpowiedź na piśmie. Po zakończeniu usuwam pytanie i odpowiedź z maszyny.</p></div></li>
       </ol>
-      <p class="note">Usługa dotyczy jednego pytania, bez dokumentacji sprawy; do analizy dokumentów służy <a href="#analiza">Analiza spraw</a>. Odpowiedź nie jest poradą prawną, medyczną ani podatkową: pomaga zrozumieć temat i przygotować się do rozmowy ze specjalistą. Szybkie pytanie jest zawsze offline, bez trybu cloud.</p>
+      <p class="note">Usługa dotyczy jednego pytania, bez dokumentacji sprawy; do analizy dokumentów służy <a href="#analiza">Analiza spraw</a>. Odpowiedź nie jest poradą prawną, medyczną ani podatkową: pomaga zrozumieć temat i przygotować się do rozmowy ze specjalistą. Szybkie pytanie jest zawsze offline, bez trybu online.</p>
   </div>
 </section>
 <!--/offer:pytanie:desc-->
@@ -779,7 +790,7 @@ summary:hover h3{color:var(--accent)}
     <h2>Prototyp w tydzień</h2>
     <p class="say">W tydzień dostajesz działający prototyp, kod, krótką dokumentację i rekomendację, co dalej.</p>
     <p class="go"><a class="btn big" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
-    <p class="fine">Wycena po rozmowie wstępnej. Tryb fully private lub cloud.</p>
+    <p class="fine">Wycena po rozmowie wstępnej. Tryb offline lub online.</p>
   </div>
 </section>
 <!--/offer:prototyp:desc-->
@@ -789,7 +800,7 @@ summary:hover h3{color:var(--accent)}
     <h2>Jak powstaje prototyp</h2>
       <p>Masz pomysł, którego nie da się ocenić na slajdach? W tydzień buduję działający prototyp: najważniejszą ścieżkę użytkownika, na prawdziwym kodzie i danych testowych. Widać na nim, czy kierunek ma sens, zanim wydasz budżet na pełny projekt.</p>
       <p>Pracuję metodą <strong>inżynierii augmentatywnej</strong>: architekturę, decyzje i odpowiedzialność za wynik biorę ja, a modele AI przyspieszają pisanie kodu i testy.</p>
-    <p class="note">Prototyp to dowód, że kierunek działa, a nie gotowy system produkcyjny. Na cenę wpływa <a href="#tryb">tryb pracy</a>: fully private albo cloud. Zakres i cenę ustalamy po rozmowie wstępnej, zanim zacznę.</p>
+    <p class="note">Prototyp to dowód, że kierunek działa, a nie gotowy system produkcyjny. Na cenę wpływa <a href="#tryb">tryb pracy</a>: offline albo online. Zakres i cenę ustalamy po rozmowie wstępnej, zanim zacznę.</p>
   </div>
 </section>
 <!--/offer:prototyp:desc-->
@@ -801,7 +812,7 @@ summary:hover h3{color:var(--accent)}
     <h2>Przygotuję i napiszę dowolną książkę</h2>
     <p class="say">Podajesz temat i czytelnika, a ja przygotowuję książkę od konspektu po wydruk.</p>
     <p class="go"><a class="btn big" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
-    <p class="fine">Wycena po rozmowie wstępnej. Tryb fully private lub cloud.</p>
+    <p class="fine">Wycena po rozmowie wstępnej. Tryb offline lub online.</p>
   </div>
 </section>
 <!--/offer:ksiazka:desc-->
@@ -813,7 +824,7 @@ summary:hover h3{color:var(--accent)}
         <a href="https://github.com/konradcinkusz/chaos-theory-for-dummies" rel="noopener">Chaos from Zero</a> oraz
         <a href="https://github.com/konradcinkusz/math-for-ai-engineers" rel="noopener">Mathematics from Zero for the AI Engineer</a>.</p>
       <p>Także tutaj pracuję metodą inżynierii augmentatywnej: modele AI przyspieszają zbieranie materiału i pisanie, a za układ, treść i sprawdzenie źródeł odpowiadam ja.</p>
-    <p class="note">Cena zależy od objętości, tematu i <a href="#tryb">trybu pracy</a>: fully private albo cloud. Wycenę przygotowuję po rozmowie wstępnej.</p>
+    <p class="note">Cena zależy od objętości, tematu i <a href="#tryb">trybu pracy</a>: offline albo online. Wycenę przygotowuję po rozmowie wstępnej.</p>
   </div>
 </section>
 <!--/offer:ksiazka:desc-->
@@ -838,7 +849,7 @@ summary:hover h3{color:var(--accent)}
     <h2>Kontrakt programistyczny</h2>
     <p class="say">Pracuję dla Ciebie jako programista, rozliczany godzinowo. Im dłuższy kontrakt, tym niższa stawka.</p>
     <p class="go"><a class="btn big" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
-    <p class="fine">125–180 zł netto za godzinę. Tryb fully private lub cloud.</p>
+    <p class="fine">125–180 zł netto za godzinę. Tryb offline lub online.</p>
   </div>
 </section>
 <!--/offer:kontrakt:desc-->
@@ -877,12 +888,12 @@ summary:hover h3{color:var(--accent)}
 <section class="view" id="tryb" data-title="Tryb pracy">
   <div class="wrap wide">
     <p class="label">Tryb pracy · dotyczy zleceń 01, 03, 04 i 05</p>
-    <h2>Tryb pracy: fully private albo cloud</h2>
+    <h2>Tryb pracy: offline albo online</h2>
     <p>Analizę spraw, prototyp, książkę i kontrakt programistyczny mogę realizować na dwa sposoby. Różnią się tym, gdzie przetwarzany jest Twój materiał, i ceną. Tryb wybierasz przed startem i zapisujemy go w umowie. Wyjątkiem jest wynajem urządzenia w gabinecie (02): działa zawsze offline i nie ma wyboru trybu.</p>
     <div class="modes">
       <article class="plan feat">
         <span class="tag">Pełna prywatność</span>
-        <h3>Fully private</h3>
+        <h3>Offline</h3>
         <p class="who">Kod objęty tajemnicą, dane wrażliwe, niepublikowane treści</p>
         <p class="lvl">Wyższa cena</p>
         <ul>
@@ -893,25 +904,25 @@ summary:hover h3{color:var(--accent)}
         </ul>
       </article>
       <article class="plan">
-        <h3>Cloud</h3>
+        <h3>Online</h3>
         <p class="who">Materiały bez danych wrażliwych, prototypy na danych testowych</p>
         <p class="lvl">Niższa cena</p>
         <ul>
-          <li>Pracuję z modelami chmurowymi (cloud)</li>
+          <li>Pracuję z modelami chmurowymi (online)</li>
           <li>Materiał jest przetwarzany na serwerach dostawcy modelu</li>
           <li>Ten sam zakres i ten sam człowiek odpowiedzialny za wynik</li>
           <li>Wiesz z góry, co wychodzi poza moje biuro</li>
         </ul>
       </article>
     </div>
-    <p class="muted small">Dokumentacja medyczna i dane objęte tajemnicą zawodową: wyłącznie fully private (zobacz: <a href="#cloud-kiedy-nie">kiedy nie cloud</a>).</p>
+    <p class="muted small">Dokumentacja medyczna i dane objęte tajemnicą zawodową: wyłącznie offline (zobacz: <a href="#cloud-kiedy-nie">kiedy nie online</a>).</p>
   </div>
 </section>
-<section class="view cloud" id="cloud" data-parent="tryb" data-title="Jak działa cloud">
+<section class="view cloud" id="cloud" data-parent="tryb" data-title="Jak działa online">
   <div class="wrap">
-    <h2>Jak dokładnie działa tryb cloud</h2>
-    <p class="note"><strong>Tryb cloud w skrócie:</strong> treść trafia przez API do Anthropic, firmy z USA. Domyślnie nie jest używana do trenowania modeli. U dostawcy jest przechowywana do 30 dni. Przetwarzanie w EOG nie jest gwarantowane.</p>
-      <p class="muted small">W trybie cloud korzystam z modeli Claude firmy Anthropic przez API, na warunkach komercyjnych. Używam modeli Claude Opus 5.5, Claude Sonnet 5.5 i Claude Haiku 5.5.</p>
+    <h2>Jak dokładnie działa tryb online</h2>
+    <p class="note"><strong>Tryb online w skrócie:</strong> treść trafia przez API do Anthropic, firmy z USA. Domyślnie nie jest używana do trenowania modeli. U dostawcy jest przechowywana do 30 dni. Przetwarzanie w EOG nie jest gwarantowane.</p>
+      <p class="muted small">W trybie online korzystam z modeli Claude firmy Anthropic przez API, na warunkach komercyjnych. Używam modeli Claude Opus 5.5, Claude Sonnet 5.5 i Claude Haiku 5.5.</p>
       <ol>
         <li>Dostaję od Ciebie materiał i ustalamy zakres na piśmie.</li>
         <li>Przed wysłaniem usuwam z materiału to, co nie jest potrzebne do zadania (dane osobowe, numery, nazwiska osób trzecich), o ile zakres na to pozwala.</li>
@@ -923,7 +934,7 @@ summary:hover h3{color:var(--accent)}
 </section>
 <section class="view cloud" id="cloud-warunki" data-parent="tryb" data-title="Warunki">
   <div class="wrap">
-    <h2>Tryb cloud: na jakich warunkach</h2>
+    <h2>Tryb online: na jakich warunkach</h2>
       <ul>
         <li>Korzystam z API na warunkach komercyjnych z umową powierzenia przetwarzania danych (DPA). Jest ona częścią <a href="https://www.anthropic.com/legal/commercial-terms" target="_blank" rel="noopener">warunków komercyjnych</a> dostawcy i obowiązuje od ich akceptacji.</li>
         <li>W umowie z Tobą dostawca modelu jest wskazany z nazwy jako podwykonawca przetwarzania, a Ty wyrażasz na to zgodę przed startem.</li>
@@ -933,28 +944,28 @@ summary:hover h3{color:var(--accent)}
       </ul>
   </div>
 </section>
-<section class="view cloud" id="cloud-porownanie" data-parent="tryb" data-title="Cloud a własny czat AI">
+<section class="view cloud" id="cloud-porownanie" data-parent="tryb" data-title="Online a własny czat AI">
   <div class="wrap wide">
     <h2>Czym to się różni od wklejenia dokumentów do własnego czatu AI</h2>
       <table class="cmp">
         <caption>Porównanie dotyczy planów jednego dostawcy, którego używam: Anthropic (Claude).</caption>
         <thead>
-          <tr><td></td><th scope="col">Indywidualne konto w czacie AI (Free, Pro, Max)</th><th scope="col">Tryb cloud w Inference Polska (API)</th></tr>
+          <tr><td></td><th scope="col">Indywidualne konto w czacie AI (Free, Pro, Max)</th><th scope="col">Tryb online w Inference Polska (API)</th></tr>
         </thead>
         <tbody>
-          <tr><th scope="row">Trening modeli</th><td data-label="Indywidualne konto">rozmowy mogą być używane do trenowania modeli, jeśli na koncie jest włączone to ustawienie</td><td data-label="Tryb cloud u mnie">domyślnie nie są używane</td></tr>
-          <tr><th scope="row">Przechowywanie</th><td data-label="Indywidualne konto">do 5 lat przy włączonym ustawieniu, 30 dni bez niego</td><td data-label="Tryb cloud u mnie">standardowo do 30 dni</td></tr>
-          <tr><th scope="row">Umowa powierzenia</th><td data-label="Indywidualne konto">warunki konsumenckie, pisane dla osób prywatnych</td><td data-label="Tryb cloud u mnie">warunki komercyjne z umową powierzenia</td></tr>
-          <tr><th scope="row">Kto odpowiada wobec Ciebie</th><td data-label="Indywidualne konto">nikt, robisz to sam</td><td data-label="Tryb cloud u mnie">ja, na podstawie umowy z Tobą</td></tr>
-          <tr><th scope="row">Weryfikacja wyniku</th><td data-label="Indywidualne konto">Twoja</td><td data-label="Tryb cloud u mnie">moja, przed oddaniem</td></tr>
+          <tr><th scope="row">Trening modeli</th><td data-label="Indywidualne konto">rozmowy mogą być używane do trenowania modeli, jeśli na koncie jest włączone to ustawienie</td><td data-label="Tryb online u mnie">domyślnie nie są używane</td></tr>
+          <tr><th scope="row">Przechowywanie</th><td data-label="Indywidualne konto">do 5 lat przy włączonym ustawieniu, 30 dni bez niego</td><td data-label="Tryb online u mnie">standardowo do 30 dni</td></tr>
+          <tr><th scope="row">Umowa powierzenia</th><td data-label="Indywidualne konto">warunki konsumenckie, pisane dla osób prywatnych</td><td data-label="Tryb online u mnie">warunki komercyjne z umową powierzenia</td></tr>
+          <tr><th scope="row">Kto odpowiada wobec Ciebie</th><td data-label="Indywidualne konto">nikt, robisz to sam</td><td data-label="Tryb online u mnie">ja, na podstawie umowy z Tobą</td></tr>
+          <tr><th scope="row">Weryfikacja wyniku</th><td data-label="Indywidualne konto">Twoja</td><td data-label="Tryb online u mnie">moja, przed oddaniem</td></tr>
         </tbody>
       </table>
       <p class="srcs">Źródła: <a href="https://privacy.claude.com/en/articles/7996868-is-my-data-used-for-model-training" target="_blank" rel="noopener">trenowanie modeli w usługach komercyjnych</a> oraz <a href="https://www.anthropic.com/news/updates-to-our-consumer-terms" target="_blank" rel="noopener">zmiany w warunkach konsumenckich</a>. Stan na listopad 2026.</p>
   </div>
 </section>
-<section class="view cloud" id="cloud-kiedy-nie" data-parent="tryb" data-title="Kiedy nie cloud">
+<section class="view cloud" id="cloud-kiedy-nie" data-parent="tryb" data-title="Kiedy nie wybierać online">
   <div class="wrap">
-    <h2>Kiedy nie cloud</h2>
+    <h2>Kiedy nie wybierać online</h2>
       <ul>
         <li>Dokumentacja medyczna, dane objęte tajemnicą zawodową (adwokacką, radcowską, lekarską, doradcy podatkowego) i dane szczególnych kategorii: wyłącznie tryb offline.</li>
         <li>„Prywatna sztuczna inteligencja w Twoim gabinecie” działa zawsze offline i nie ma wyboru trybu.</li>
@@ -1018,7 +1029,7 @@ summary:hover h3{color:var(--accent)}
 <section class="view hero" id="rozmowa" data-title="Kontakt">
   <div class="wrap">
     <div class="hero-mark light" aria-hidden="true"><img src="assets/google-calendar.png" alt="" width="68" height="74"></div>
-    <p class="label">Od 1 grudnia 2026 · stacjonarnie</p>
+    <p class="label">Od 1 grudnia 2026 · stacjonarnie, Zgierz</p>
     <h2>Darmowa rozmowa wstępna</h2>
     <p class="go"><a class="btn big" href="#rozmowa" target="_blank" rel="noopener" data-book id="book-btn"><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
     <p class="fine">Rezerwacja odbywa się w Kalendarzu Google, w nowej karcie. Podajesz tam imię i e-mail. Nie wpisuj treści dokumentów ani danych wrażliwych.</p>
