@@ -1,1 +1,11 @@
 _site/
+
+# LaTeX: PDF-y to wynik budowania (nie są commitowane); pliki pomocnicze
+docs/papers/*.pdf
+docs/papers/*.aux
+docs/papers/*.log
+docs/papers/*.out
+docs/papers/*.toc
+docs/papers/*.fdb_latexmk
+docs/papers/*.fls
+docs/papers/*.synctex.gz
