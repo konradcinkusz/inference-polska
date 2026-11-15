@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Inference Polska: analiza spraw przez prywatną sztuczną inteligencję</title>
-<meta name="description" content="Analiza spraw i dokumentów przez prywatną sztuczną inteligencję: lokalny model na maszynie bez sieci, dane i cały proces analizy nie opuszczają mojego biura. Rozmowa wstępna jest bezpłatna, analiza kosztuje od 150 zł brutto za każde rozpoczęte 50 stron (online; offline: 450 zł), raport standardowo do 7 dni, biuro w Zgierzu. Także: prywatna sztuczna inteligencja w gabinecie, prototyp w tydzień, kontrakt programistyczny i książki na zamówienie. Tryb pracy do wyboru: offline albo online.">
+<meta name="description" content="Analiza spraw i dokumentów przez prywatną sztuczną inteligencję: lokalny model na maszynie bez sieci, dane i cały proces analizy nie opuszczają mojego biura. Rozmowa wstępna jest bezpłatna, analiza kosztuje od 150 zł za każde rozpoczęte 50 stron (online; offline: 450 zł), raport standardowo do 7 dni, biuro w Zgierzu. Także: prywatna sztuczna inteligencja w gabinecie, prototyp w tydzień, kontrakt programistyczny i książki na zamówienie. Tryb pracy do wyboru: offline albo online.">
 <meta name="color-scheme" content="light dark">
 <meta property="og:title" content="Inference Polska: analiza spraw przez prywatną sztuczną inteligencję">
 <meta property="og:description" content="Analiza spraw i dokumentów przez prywatną sztuczną inteligencję: lokalny model na maszynie bez sieci, dane i cały proces analizy nie opuszczają mojego biura. Rozmowa wstępna bezpłatna. Biuro w Zgierzu. Tryb online jako tańsza opcja, na opisanych warunkach.">
@@ -152,7 +152,7 @@ p{margin:0 0 16px}
 .yt-hero .yt-play::before{margin-left:8px;border-width:16px 0 16px 27px}
 .yt-hero button>span:nth-of-type(2){font-size:clamp(1rem,2.2vw,1.3rem)}
 @media (max-width:640px){.yt-hero{max-width:100%;min-width:0}.yt-hero .yt-play{width:64px;height:64px}.yt-hero small{display:none}}
-.quick{margin:0 0 22px;display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;font-size:.95rem}
+.quick{margin:22px 0 0;display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;font-size:.95rem}
 .quick span{color:var(--muted)}
 .quick a{border:1px solid var(--rule);border-radius:999px;padding:6px 14px;color:var(--ink);text-decoration:none}
 .quick a:hover{background:var(--tint)}
@@ -288,6 +288,44 @@ summary:hover h3{color:var(--accent)}
 .toast .addr{font-family:var(--mono);font-size:clamp(1rem,2.6vw,1.6rem);color:var(--ink);margin:0 0 10px;word-break:break-all}
 .toast .hintx{font-size:.9rem;color:var(--muted);margin:0}
 
+
+/* okna z informacjami (popupy) */
+dialog.pop{padding:0;border:1px solid var(--rule);border-radius:12px;background:var(--paper);color:var(--text);width:min(760px,calc(100% - 24px));max-width:none;max-height:calc(100dvh - 24px);overflow:auto;box-shadow:0 24px 80px rgba(0,0,0,.4)}
+dialog.pop.wide{width:min(1040px,calc(100% - 24px))}
+dialog.pop::backdrop{background:rgba(8,12,10,.66);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
+html:has(dialog[open]){overflow:hidden}
+.pop-bar{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 16px 14px 28px;background:var(--paper);border-bottom:1px solid var(--rule)}
+.pop-bar h2{margin:0;font-size:clamp(1.25rem,2.4vw,1.6rem)}
+.pop-x{flex:none;width:40px;height:40px;border:1px solid var(--rule-strong);border-radius:8px;background:transparent;color:var(--ink);font:inherit;font-size:1.5rem;line-height:1;cursor:pointer}
+.pop-x:hover{border-color:var(--ink);background:var(--tint)}
+.pop-body{padding:24px 28px 32px}
+.pop-body>:first-child{margin-top:0}
+.pop-body>:last-child{margin-bottom:0}
+.pop-body p,.pop-body ul,.pop-body ol,.pop-body .note{max-width:68ch}
+.pop-body .yt{margin:0 auto}
+.pop-body h3.ph{font-size:1.3rem;margin:34px 0 12px;padding-top:22px;border-top:1px solid var(--rule)}
+.pop-body .price{margin:0}
+@media (max-width:640px){.pop-bar{padding:12px 12px 12px 18px}.pop-body{padding:18px 18px 26px}}
+/* przyciski otwierające popupy */
+.pops{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 12px;margin:22px 0 0}
+.pop-btn{font:inherit;font-size:1rem;font-weight:600;min-height:44px;padding:8px 20px;border:1px solid var(--rule-strong);border-radius:999px;background:transparent;color:var(--ink);cursor:pointer}
+.pop-btn:hover{border-color:var(--ink);background:var(--tint)}
+.quick button{font:inherit;border:1px solid var(--rule);border-radius:999px;padding:6px 14px;background:transparent;color:var(--ink);cursor:pointer}
+.quick button:hover{background:var(--tint)}
+.lnk{font:inherit;padding:0;border:0;background:none;color:var(--accent);text-decoration:underline;text-underline-offset:.18em;cursor:pointer}
+.lnk:hover{color:var(--accent-hover)}
+.more-info{display:flex;flex-wrap:wrap;gap:6px 18px;margin:36px 0 0;padding-top:18px;border-top:1px solid var(--rule);font-size:.95rem}
+.more-info span{color:var(--muted)}
+/* czytelność */
+.label{font-size:.8rem}
+.offer .m{font-family:var(--sans);font-size:.93rem;letter-spacing:0;text-transform:none;line-height:1.5}
+.view:not(.hero) .wrap>p,.view:not(.hero) .wrap>ul,.view:not(.hero) .wrap>ol,.view:not(.hero) .wrap>.note{max-width:66ch}
+.view:not(.hero) h2{margin-bottom:26px}
+.view:not(.hero) p{line-height:1.7}
+.steps li{padding:16px 0}
+.fine{line-height:1.6}
+.hero .wrap>p.fine{max-width:62ch;margin-left:auto;margin-right:auto}
+
 @media (max-width:640px){
   .bar{padding:8px 12px;gap:6px 8px}
   .brand-name{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
@@ -334,14 +372,13 @@ summary:hover h3{color:var(--accent)}
 
 <section class="view hero" id="top" data-title="Inference Polska">
   <div class="wrap">
-    <p class="label">Konrad Cinkusz · inżynier AI i programista</p>
     <h1>Analiza Twojej sprawy przez prywatną sztuczną inteligencję</h1>
     <div class="yt yt-hero" data-yt="YIxxDJMUAko">
       <button type="button" aria-label="Odtwórz film: Analiza spraw"><span class="yt-play" aria-hidden="true"></span><span>Obejrzyj film: jak analizuję Twoją sprawę</span><small>Po kliknięciu załaduje się odtwarzacz YouTube (tryb bez cookies). Do tego czasu strona nie łączy się z YouTube.</small></button>
       <noscript><p style="padding:16px"><a href="https://youtu.be/YIxxDJMUAko" target="_blank" rel="noopener">Obejrzyj film na YouTube</a></p></noscript>
     </div>
     <p class="go"><a class="btn big" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
-    <p class="fine">To oferta dla każdego: osób prywatnych i firm. Bezpłatna rozmowa na miejscu w Zgierzu. Termin wybierasz w Kalendarzu Google. <a href="#oferta">Zobacz ofertę</a></p>
+    <p class="fine">To oferta dla każdego: osób prywatnych i firm. Dokumentów mieć nie musisz: wystarczy szybki wywiad. Bezpłatna rozmowa na miejscu w Zgierzu. Termin wybierasz w Kalendarzu Google. <a href="#oferta">Zobacz ofertę</a></p>
   </div>
 </section>
 
@@ -349,15 +386,15 @@ summary:hover h3{color:var(--accent)}
   <div class="wrap wide">
     <p class="label">Oferta · wybierz usługę</p>
     <h2 class="vh">Oferta</h2>
-    <!--offer:analiza:desc--><p class="quick"><span>Najczęściej szukasz:</span> <a href="#cena">Ile to kosztuje</a> <a href="#rozwiazanie">Co się dzieje z moimi dokumentami</a> <a href="#przyklady">Czy to dotyczy mojej sprawy</a></p><!--/offer:analiza:desc-->
     <div class="offer">
-      <!--offer:analiza:row--><a href="#analiza"><span class="t">Analiza spraw</span><span class="m">od 150 zł brutto / 50 stron dokumentów<br>raport + 3 rundy pytań · offline lub online</span></a><!--/offer:analiza:row-->
-      <!--offer:pytanie:row--><a href="#pytanie"><span class="t">Szybkie pytanie</span><span class="m">100 zł brutto / pytanie<br>zawsze offline</span></a><!--/offer:pytanie:row-->
+      <!--offer:analiza:row--><a href="#analiza"><span class="t">Analiza spraw</span><span class="m">od 150 zł / 50 stron dokumentów<br>raport + 3 rundy pytań · offline lub online</span></a><!--/offer:analiza:row-->
+      <!--offer:pytanie:row--><a href="#pytanie"><span class="t">Szybkie pytanie</span><span class="m">100 zł / pytanie<br>zawsze offline</span></a><!--/offer:pytanie:row-->
       <!--offer:gabinet:row--><a href="#firmy"><span class="t">Prywatna sztuczna inteligencja w Twoim gabinecie</span><span class="m">wycena po rozmowie<br>zawsze offline</span></a><!--/offer:gabinet:row-->
       <!--offer:prototyp:row--><a href="#poc"><span class="t">Prototyp w tydzień</span><span class="m">wycena po rozmowie<br>offline lub online</span></a><!--/offer:prototyp:row-->
       <!--offer:ksiazka:row--><a href="#ksiazka"><span class="t">Książka na zamówienie</span><span class="m">wycena po rozmowie<br>offline lub online</span></a><!--/offer:ksiazka:row-->
-      <!--offer:kontrakt:row--><a href="#kontrakt"><span class="t">Kontrakt programistyczny</span><span class="m">125–180 zł netto / godz.<br>offline lub online</span></a><!--/offer:kontrakt:row-->
+      <!--offer:kontrakt:row--><a href="#kontrakt"><span class="t">Kontrakt programistyczny</span><span class="m">125–180 zł / godz.<br>offline lub online</span></a><!--/offer:kontrakt:row-->
     </div>
+    <!--offer:analiza:desc--><p class="quick"><span>Najczęściej szukasz:</span> <button type="button" data-open="p-cena" aria-haspopup="dialog">Ile to kosztuje</button> <button type="button" data-open="p-offline" aria-haspopup="dialog">Co się dzieje z moimi dokumentami</button> <button type="button" data-open="p-przyklady" aria-haspopup="dialog">Czy to dotyczy mojej sprawy</button></p><!--/offer:analiza:desc-->
   </div>
 </section>
 
@@ -368,94 +405,18 @@ summary:hover h3{color:var(--accent)}
     <h2>Analiza spraw</h2>
     <p class="say">Lokalny model AI na mojej maszynie bez sieci. Dane i cały proces analizy nie opuszczają mojego biura.</p>
     <p class="go"><a class="btn big" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
-    <p class="fine">Od 150 zł brutto (online) albo 450 zł (offline) za każde rozpoczęte 50 stron dokumentów. W cenie raport i 3 rundy pytań, standardowo do 7 dni. Rozmowa wstępna jest bezpłatna.</p>
+    <p class="pops"><button type="button" class="pop-btn" data-open="p-film" aria-haspopup="dialog">Film</button><button type="button" class="pop-btn" data-open="p-przyklady" aria-haspopup="dialog">Przykłady</button><button type="button" class="pop-btn" data-open="p-cena" aria-haspopup="dialog">Ile to kosztuje</button></p>
+    <p class="fine">Nie musisz mieć dokumentów: wystarczy szybki wywiad na rozmowie albo opis sprawy w e-mailu. Jeśli dokumenty masz, chętnie je przeanalizuję.</p>
   </div>
 </section>
 <!--/offer:analiza:desc-->
 <!--offer:analiza:desc-->
-<section class="view" id="film" data-parent="analiza" data-title="Film">
-  <div class="wrap">
-    <h2>Analiza spraw: film</h2>
-    <div class="yt" data-yt="YIxxDJMUAko">
-      <button type="button" aria-label="Odtwórz film: Analiza spraw"><span class="yt-play" aria-hidden="true"></span><span>Obejrzyj film o analizie spraw</span><small>Po kliknięciu załaduje się odtwarzacz YouTube (tryb bez cookies). Do tego czasu strona nie łączy się z YouTube.</small></button>
-      <noscript><p style="padding:16px"><a href="https://youtu.be/YIxxDJMUAko" target="_blank" rel="noopener">Obejrzyj film na YouTube</a></p></noscript>
-    </div>
-  </div>
-</section>
-<!--/offer:analiza:desc-->
-<!--offer:analiza:desc-->
-<section class="view" id="jak" data-parent="analiza" data-title="Jak to działa">
-  <div class="wrap">
-    <h2>Jak to działa: od rozmowy do skanu</h2>
-    <ol class="steps">
-      <li>
-        <div>
-          <h3>Rozmowa wstępna</h3>
-          <p>Spotykamy się na miejscu (w moim biurze w Zgierzu) na bezpłatnej rozmowie wstępnej. Rozmawiamy o Twoim problemie: co się stało, czego potrzebujesz, jakie są terminy i co już wiesz. Ustalamy zakres analizy.</p>
-        </div>
-      </li>
-      <li>
-        <div>
-          <h3>Skan lub e-mail</h3>
-          <p>Przekazujesz mi osobiście kopie dokumentów (kartki A4), więc nie oddawaj oryginałów. Skanuję je na urządzeniu offline. Możesz też przesłać materiał e-mailem, a ja załaduję go na maszynę offline. Wiadomość e-mail przechodzi przez serwery pocztowe. Do analizy materiał trafia wyłącznie na maszynę, która nie ma dostępu do sieci.</p>
-        </div>
-      </li>
-    </ol>
-  </div>
-</section>
-<!--/offer:analiza:desc-->
-<!--offer:analiza:desc-->
-<section class="view" id="jak-2" data-parent="analiza" data-title="Analiza i raport">
-  <div class="wrap">
-    <h2>Jak to działa: od analizy do raportu</h2>
-    <ol class="steps" style="counter-reset:s 2">
-      <li>
-        <div>
-          <h3>Analiza</h3>
-          <p>Analizuję materiał z pomocą lokalnej AI, w oparciu o bazy przepisów i literatury naukowej. Wynik sprawdzam ja, człowiek.</p>
-        </div>
-      </li>
-      <li>
-        <div>
-          <h3>Raport</h3>
-          <p>Przygotowuję raport w jednym z dwóch formatów: elegancki PDF (wydrukowany i odesłany razem z kopiami dokumentów albo wysłany jako zaszyfrowany plik) albo elegancki raport HTML w stylu Wikipedii. Ma wnioski i źródła, które możesz sprawdzić samodzielnie. Hasło do zaszyfrowanego PDF ustalamy osobno niż plik: na rozmowie wstępnej albo telefonicznie, nigdy w tej samej wiadomości co raport. Po zakończeniu usuwam z maszyny offline wszystkie dane cyfrowe: skany, pliki i wynik analizy, a ze skrzynki pocztowej wiadomość z materiałem i wysłany raport.</p>
-        </div>
-      </li>
-    </ol>
-    <p class="muted small">Pracuję jako inżynier augmentatywny: człowiek prowadzi rozmowę i odpowiada za wynik, a model przyspiesza przeszukiwanie i porządkowanie materiału.</p>
-  </div>
-</section>
-<!--/offer:analiza:desc-->
-<!--offer:analiza:desc-->
-<section class="view" id="rozwiazanie" data-parent="analiza" data-title="Co zostaje u mnie">
-  <div class="wrap">
-    <h2>Jak wygląda analiza offline</h2>
-    <p>Analizuję Twoją sprawę na lokalnym modelu językowym. Analiza opiera się na aktualnych bazach aktów prawnych i literatury naukowej, a wynik sprawdza człowiek. Wszystkie dane i cały proces wnioskowania są przetwarzane na maszynie, która stoi u mnie i nie ma dostępu do sieci.</p>
-      <dl class="facts3">
-        <div><dt>Wszystko lokalnie</dt><dd>Dokumenty i cały proces wnioskowania zostają na jednym urządzeniu w moim biurze.</dd></div>
-        <div><dt>Maszyna bez sieci</dt><dd>Pracuję na własnej maszynie z lokalną AI, odłączonej od internetu. Bez Wi-Fi i bez kabla sieciowego. Podłączona jest tylko drukarka ze skanerem. Materiał z e-maila i bazy przepisów ładuję na nią kontrolowanie.</dd></div>
-      </dl>
-  </div>
-</section>
-<!--/offer:analiza:desc-->
-<!--offer:analiza:desc-->
-<section class="view" id="rozwiazanie-2" data-parent="analiza" data-title="Po analizie">
-  <div class="wrap">
-    <h2>Po analizie</h2>
-      <dl class="facts3">
-        <div><dt>Po zakończeniu nic nie zostaje</dt><dd>Gdy oddaję raport, usuwam z maszyny wszystko: skany, wynik analizy, historię i ślady po pracy.</dd></div>
-        <div><dt>Sprawdza człowiek</dt><dd>Analiza opiera się na oficjalnych źródłach przepisów i wiedzy, a wynik zawsze sprawdzam sam.</dd></div>
-      </dl>
-  </div>
-</section>
-<!--/offer:analiza:desc-->
-<!--offer:analiza:desc-->
-<section class="view" id="diagram" data-parent="analiza" data-title="Droga materiału">
+<section class="view" id="diagram" data-title="Droga materiału" data-nav="oferta">
   <div class="wrap wide">
     <h2>Droga Twojego materiału</h2>
     <figure class="fig">
       <ol class="flow" aria-label="Droga materiału w trybie offline">
-        <li><span class="box">Twój materiał</span><span class="cap">kopie A4 albo e&#8209;mail</span></li>
+        <li><span class="box">Twój materiał</span><span class="cap">kopie A4, e&#8209;mail albo sam wywiad</span></li>
         <li><span class="box">Skan lub import</span><span class="cap">skanuję papier albo ładuję materiał z e-maila</span></li>
         <li class="safe"><span class="pill">Obcy serwer AI<span class="vh"> (brak połączenia)</span></span><span class="box">Maszyna offline</span><span class="cap">lokalna AI, bez dostępu do sieci</span></li>
         <li><span class="box">Moja weryfikacja</span><span class="cap">sprawdzam analizę</span></li>
@@ -469,7 +430,7 @@ summary:hover h3{color:var(--accent)}
         <div class="body">
           <figure class="fig">
             <ol class="flow">
-              <li><span class="box">Twój materiał</span><span class="cap">kopie A4 albo e&#8209;mail</span></li>
+              <li><span class="box">Twój materiał</span><span class="cap">kopie A4, e&#8209;mail albo sam wywiad</span></li>
               <li><span class="box">Mój komputer</span><span class="cap">usuwam zbędne dane osobowe</span></li>
               <li class="out"><span class="pill">Treść opuszcza biuro</span><span class="box">Model w chmurze</span><span class="cap">przez API, szyfrowane połączenie; przechowuje do 30 dni</span></li>
               <li><span class="box">Moja weryfikacja</span><span class="cap">sprawdzam analizę</span></li>
@@ -483,214 +444,6 @@ summary:hover h3{color:var(--accent)}
   </div>
 </section>
 <!--/offer:analiza:desc-->
-<!--offer:analiza:desc-->
-<section class="view" id="raport" data-parent="analiza" data-title="Raport">
-  <div class="wrap">
-    <h2>Raport: PDF lub HTML</h2>
-    <p>Raport nie jest zrzutem rozmowy z czatem. To złożony dokument w jednym z dwóch formatów. Elegancki PDF możesz wydrukować, położyć na biurku, podkreślić i pokazać swojemu prawnikowi lub lekarzowi; dostajesz go jako wydruk albo jako zaszyfrowany plik. Hasło do PDF ustalamy osobną drogą niż plik, na rozmowie wstępnej albo telefonicznie. Jest długie i jednorazowe: używam go tylko do jednego raportu. Drugi format to elegancki raport HTML w stylu Wikipedii, ze wszystkimi informacjami. Forma PDF jest taka sama jak w moich publikacjach:
-      <a href="https://github.com/konradcinkusz/chaos-theory-for-dummies" rel="noopener">Chaos from Zero</a> oraz
-      <a href="https://github.com/konradcinkusz/math-for-ai-engineers" rel="noopener">Mathematics from Zero for the AI Engineer</a>.</p>
-  </div>
-</section>
-<!--/offer:analiza:desc-->
-<!--offer:analiza:desc-->
-<section class="view" id="raport-uklad" data-parent="analiza" data-title="Układ raportu">
-  <div class="wrap">
-    <h2>Co jest w raporcie</h2>
-    <div class="toc">
-      <strong>Przykładowy układ raportu</strong>
-      <ol>
-        <li>Streszczenie problemu i pytania, na które odpowiadamy</li>
-        <li>Analiza dokumentów</li>
-        <li>Podstawy: przepisy i artykuły, z numerami i wskazaniem miejsca</li>
-        <li>Możliwe drogi postępowania</li>
-        <li>Czego nie udało się ustalić i co trzeba sprawdzić</li>
-        <li>Źródła oraz wersja i data baz, z których korzystano</li>
-      </ol>
-    </div>
-      <h4>Bazy da się aktualizować</h4>
-      <p>Maszyna nigdy nie łączy się z siecią, więc bazy wgrywam kontrolowanie, ze zweryfikowanych nośników: nowe i zmienione akty prawne oraz nowe publikacje naukowe. Każdy raport podaje, z jakiej wersji baz korzystał, żebyś wiedział, na jakim stanie prawnym opiera się analiza.</p>
-  </div>
-</section>
-<!--/offer:analiza:desc-->
-<!--offer:analiza:desc-->
-<section class="view" id="cena" data-parent="analiza" data-title="Cena">
-  <div class="wrap">
-    <h2>Ile to kosztuje</h2>
-    <div class="price">
-      <p class="num"><b>od 150 zł</b> brutto za każde rozpoczęte 50 stron dokumentacji</p>
-      <dl class="facts3">
-        <div><dt>Tryb online</dt><dd><strong>150 zł</strong> brutto za każde rozpoczęte 50 stron (51–100 stron: 300 zł). Tylko dla dokumentów niewrażliwych.</dd></div>
-        <div><dt>Tryb offline</dt><dd><strong>450 zł</strong> brutto za każde rozpoczęte 50 stron (51–100 stron: 900 zł). Wymaga o wiele większych nakładów pracy. Dla dokumentacji medycznej, tajemnicy zawodowej i danych wrażliwych.</dd></div>
-        <div><dt>W cenie</dt><dd>Wygenerowanie raportu oraz <strong>3 kolejne rundy</strong>: zadajesz pytanie do raportu, a ja go regeneruję.</dd></div>
-        <div><dt>Czas realizacji</dt><dd>Standardowo do 7 dni.</dd></div>
-        <div><dt>Tryb ekspresowy</dt><dd>Raport w ciągu 4 godzin od otrzymania dokumentów, za dopłatą (kwotę podaję w wycenie).</dd></div>
-      </dl>
-      <p class="muted small">Rozmowa wstępna jest bezpłatna. Większe akta niż 100 stron: wycena po rozmowie wstępnej.</p>
-    </div>
-  </div>
-</section>
-<!--/offer:analiza:desc-->
-<!--offer:analiza:desc-->
-<section class="view" id="przyklady" data-parent="analiza" data-title="Przykłady">
-  <div class="wrap wide">
-    <h2>Przykładowe sprawy</h2>
-    <p><strong>Dla kogo:</strong> dla osób prywatnych ze sprawą urzędową, medyczną, podatkową lub umową, a także dla małych firm, biur rachunkowych, gabinetów i kancelarii. Poniżej szesnaście przykładowych akt. Sprawdź, czy któraś sytuacja przypomina Twoją.</p>
-    <div class="cases">
-      <details>
-        <summary><h3>Zdrowie i ZUS</h3><span class="count">4 sprawy</span></summary>
-        <div class="case-grid">
-          <article class="case">
-            <h4>Odmowa renty z tytułu niezdolności do pracy</h4>
-            <p><strong>Z czym przychodzi klient:</strong> Klientka dostała z ZUS decyzję odmawiającą renty i pyta, czy da się z nią coś zrobić.</p>
-            <p><strong>Co dostaje w raporcie:</strong> Chronologię dokumentacji i orzeczeń, wskazany termin na odwołanie oraz pytania do prawnika i lekarza.</p>
-            <p class="pdf"><a href="assets/akta/MED-01-orzeczenie-zus.pdf" target="_blank" rel="noopener">Zobacz przykładowe akta<span>PDF, 280 kB</span></a></p>
-          </article>
-          <article class="case">
-            <h4>Zdarzenie medyczne po zabiegu</h4>
-            <p><strong>Z czym przychodzi klient:</strong> Po operacji kolana doszło do zakażenia i kolejnego zabiegu, a szpital odpisał, że nie popełnił błędu.</p>
-            <p><strong>Co dostaje w raporcie:</strong> Uporządkowany przebieg leczenia, sprzeczności w dokumentacji, wskazane terminy i pytania do specjalisty.</p>
-            <p class="pdf"><a href="assets/akta/MED-02-zdarzenie-medyczne.pdf" target="_blank" rel="noopener">Zobacz przykładowe akta<span>PDF, 335 kB</span></a></p>
-          </article>
-          <article class="case">
-            <h4>Zwolnienie lekarskie i kontrola ZUS</h4>
-            <p><strong>Z czym przychodzi klient:</strong> ZUS żąda zwrotu zasiłku chorobowego za okres, w którym klientka była na weselu.</p>
-            <p><strong>Co dostaje w raporcie:</strong> Zestawienie dat i kwot z pism, termin na odwołanie liczony od doręczenia oraz przywołane przepisy.</p>
-            <p class="pdf"><a href="assets/akta/MED-03-zwolnienie-kontrola-zus.pdf" target="_blank" rel="noopener">Zobacz przykładowe akta<span>PDF, 244 kB</span></a></p>
-          </article>
-          <article class="case">
-            <h4>Dostęp do dokumentacji zmarłego rodzica</h4>
-            <p><strong>Z czym przychodzi klient:</strong> Córka chce uzyskać dokumentację medyczną zmarłego ojca, mimo sprzeciwu brata i odmowy poradni.</p>
-            <p><strong>Co dostaje w raporcie:</strong> Przepisy o dostępie do dokumentacji, rozbieżności w danych i datach oraz pytania do prawnika.</p>
-            <p class="pdf"><a href="assets/akta/MED-04-dokumentacja-zmarlego.pdf" target="_blank" rel="noopener">Zobacz przykładowe akta<span>PDF, 312 kB</span></a></p>
-          </article>
-        </div>
-      </details>
-      <details>
-        <summary><h3>Prawo i umowy</h3><span class="count">4 sprawy</span></summary>
-        <div class="case-grid">
-          <article class="case">
-            <h4>Wypowiedzenie umowy o pracę „z powodu reorganizacji”</h4>
-            <p><strong>Z czym przychodzi klient:</strong> Pracownik dostał wypowiedzenie po powrocie z urlopu wychowawczego.</p>
-            <p><strong>Co dostaje w raporcie:</strong> Chronologię zdarzeń, ustaloną datę doręczenia i wynikający z niej termin oraz sprzeczności między pismami.</p>
-            <p class="pdf"><a href="assets/akta/LAW-01-wypowiedzenie-reorganizacja.pdf" target="_blank" rel="noopener">Zobacz przykładowe akta<span>PDF, 266 kB</span></a></p>
-          </article>
-          <article class="case">
-            <h4>Najem i wypowiedzenie z powodu zaległości</h4>
-            <p><strong>Z czym przychodzi klient:</strong> Najemczyni po utracie pracy ma zaległości, dostała upomnienie i wypowiedzenie, a wynajmujący wymienił zamek.</p>
-            <p><strong>Co dostaje w raporcie:</strong> Kolejność pism i wpłat, wskazane terminy, przywołane przepisy o najmie i pytania do prawnika.</p>
-            <p class="pdf"><a href="assets/akta/LAW-02-najem-zaleglosci.pdf" target="_blank" rel="noopener">Zobacz przykładowe akta<span>PDF, 292 kB</span></a></p>
-          </article>
-          <article class="case">
-            <h4>Reklamacja wadliwego samochodu od dealera</h4>
-            <p><strong>Z czym przychodzi klient:</strong> Po trzech miesiącach w kupionym samochodzie zepsuła się skrzynia biegów, a sprzedawca odmawia naprawy.</p>
-            <p><strong>Co dostaje w raporcie:</strong> Uporządkowane umowy i korespondencję, przywołane przepisy o prawach kupującego oraz terminy do sprawdzenia.</p>
-            <p class="pdf"><a href="assets/akta/LAW-03-reklamacja-samochodu.pdf" target="_blank" rel="noopener">Zobacz przykładowe akta<span>PDF, 315 kB</span></a></p>
-          </article>
-          <article class="case">
-            <h4>Spadek z długami</h4>
-            <p><strong>Z czym przychodzi klient:</strong> Spadkobierca pyta, czy przyjąć spadek obciążony pożyczką, hipoteką i wezwaniami windykacyjnymi, i jak liczyć termin.</p>
-            <p><strong>Co dostaje w raporcie:</strong> Zestawienie długów według dokumentów, sposób liczenia terminu, możliwe drogi postępowania i pytania do prawnika.</p>
-            <p class="pdf"><a href="assets/akta/LAW-04-spadek-z-dlugami.pdf" target="_blank" rel="noopener">Zobacz przykładowe akta<span>PDF, 329 kB</span></a></p>
-          </article>
-        </div>
-      </details>
-      <details>
-        <summary><h3>Podatki</h3><span class="count">4 sprawy</span></summary>
-        <div class="case-grid">
-          <article class="case">
-            <h4>Sprzedaż mieszkania przed upływem 5 lat</h4>
-            <p><strong>Z czym przychodzi klient:</strong> Klientka sprzedała odziedziczony lokal i dostała z urzędu skarbowego wezwanie do wyjaśnień.</p>
-            <p><strong>Co dostaje w raporcie:</strong> Zestawienie sprzecznych kwot z dokumentów, termin na odpowiedź i pytania do doradcy podatkowego, bez wyliczania podatku.</p>
-            <p class="pdf"><a href="assets/akta/TAX-01-sprzedaz-mieszkania-5-lat.pdf" target="_blank" rel="noopener">Zobacz przykładowe akta<span>PDF, 312 kB</span></a></p>
-          </article>
-          <article class="case">
-            <h4>Kryptowaluty i brak zeznań</h4>
-            <p><strong>Z czym przychodzi klient:</strong> Klient nigdy nie rozliczał kryptowalut i dostał wezwanie do złożenia wyjaśnień i zeznań za trzy lata.</p>
-            <p><strong>Co dostaje w raporcie:</strong> Uporządkowane wyciągi i pisma, wskazane terminy, przywołane przepisy oraz pytania do doradcy podatkowego.</p>
-            <p class="pdf"><a href="assets/akta/TAX-02-kryptowaluty.pdf" target="_blank" rel="noopener">Zobacz przykładowe akta<span>PDF, 301 kB</span></a></p>
-          </article>
-          <article class="case">
-            <h4>JDG, samochód i kontrola VAT</h4>
-            <p><strong>Z czym przychodzi klient:</strong> Przedsiębiorca dostał zawiadomienie o kontroli VAT od samochodu w leasingu, którego używa także prywatnie.</p>
-            <p><strong>Co dostaje w raporcie:</strong> Chronologię dokumentów, rozbieżności między ewidencją a fakturami, terminy i pytania do doradcy podatkowego.</p>
-            <p class="pdf"><a href="assets/akta/TAX-03-jdg-vat-samochod.pdf" target="_blank" rel="noopener">Zobacz przykładowe akta<span>PDF, 342 kB</span></a></p>
-          </article>
-          <article class="case">
-            <h4>Darowizna od rodziców z zagranicy</h4>
-            <p><strong>Z czym przychodzi klient:</strong> Klientka dostała 40 000 EUR od rodziców mieszkających w Niemczech i wezwanie z urzędu skarbowego.</p>
-            <p><strong>Co dostaje w raporcie:</strong> Termin liczony od daty doręczenia, rozbieżności w kwotach i datach oraz przywołane przepisy do sprawdzenia.</p>
-            <p class="pdf"><a href="assets/akta/TAX-04-darowizna-z-zagranicy.pdf" target="_blank" rel="noopener">Zobacz przykładowe akta<span>PDF, 259 kB</span></a></p>
-          </article>
-        </div>
-      </details>
-      <details>
-        <summary><h3>Sprawy publiczne</h3><span class="count">4 sprawy</span></summary>
-        <div class="case-grid">
-          <article class="case">
-            <h4>Kandydat na wójta i ulotki w trybie wyborczym</h4>
-            <p><strong>Z czym przychodzi klient:</strong> Kandydat uważa, że ulotka zawiera nieprawdę, i pyta, czy da się ją zatrzymać przed głosowaniem.</p>
-            <p><strong>Co dostaje w raporcie:</strong> Oś czasu z godzinami, terminy trybu wyborczego do potwierdzenia, przywołane przepisy i pytania do prawnika.</p>
-            <p class="pdf"><a href="assets/akta/POL-01-kandydat-ulotki-wyborcze.pdf" target="_blank" rel="noopener">Zobacz przykładowe akta<span>PDF, 327 kB</span></a></p>
-          </article>
-          <article class="case">
-            <h4>Wniosek o informację publiczną i milczenie gminy</h4>
-            <p><strong>Z czym przychodzi klient:</strong> Mieszkaniec złożył wniosek o informację publiczną, a gmina milczała, przedłużyła termin i odpowiedziała częściowo.</p>
-            <p><strong>Co dostaje w raporcie:</strong> Chronologię korespondencji, terminy ustawowe, zakres brakującej odpowiedzi i możliwe drogi postępowania.</p>
-            <p class="pdf"><a href="assets/akta/POL-02-informacja-publiczna.pdf" target="_blank" rel="noopener">Zobacz przykładowe akta<span>PDF, 280 kB</span></a></p>
-          </article>
-          <article class="case">
-            <h4>Zbiórka i finansowanie stowarzyszenia przed wyborami</h4>
-            <p><strong>Z czym przychodzi klient:</strong> Radny zarzuca stowarzyszeniu, że zbiórka i reklamy przed wyborami to finansowanie kampanii, a komisarz wezwał do odpowiedzi.</p>
-            <p><strong>Co dostaje w raporcie:</strong> Uporządkowane dokumenty zbiórki, termin na odpowiedź, przywołane przepisy i pytania do prawnika.</p>
-            <p class="pdf"><a href="assets/akta/POL-03-zbiorka-stowarzyszenie.pdf" target="_blank" rel="noopener">Zobacz przykładowe akta<span>PDF, 285 kB</span></a></p>
-          </article>
-          <article class="case">
-            <h4>Zwolnienie pracownika urzędu po wpisie w mediach społecznościowych</h4>
-            <p><strong>Z czym przychodzi klient:</strong> Pracownica urzędu dostała wypowiedzenie po wpisie na prywatnym profilu i pyta, czy i do kiedy może się odwołać.</p>
-            <p><strong>Co dostaje w raporcie:</strong> Kolejność zdarzeń, termin na odwołanie i przywołane przepisy, bez oceny poglądów.</p>
-            <p class="pdf"><a href="assets/akta/POL-04-zwolnienie-wpis-spolecznosciowy.pdf" target="_blank" rel="noopener">Zobacz przykładowe akta<span>PDF, 287 kB</span></a></p>
-          </article>
-        </div>
-      </details>
-    </div>
-    <p class="muted small">Wszystkie akta są w pełni fikcyjne. Służą do pokazania rodzaju spraw i do testów jakości. To dokumenty wejściowe, a nie gotowe raporty.</p>
-  </div>
-</section>
-<!--/offer:analiza:desc-->
-<!--offer:analiza:desc-->
-<section class="view" id="granice" data-parent="analiza" data-title="Granice usługi">
-  <div class="wrap">
-    <h2>Czym to jest, a czym nie jest</h2>
-      <p>To analiza i uporządkowanie Twojego materiału z odwołaniem do źródeł. To <strong>nie</strong> jest porada prawna, medyczna ani podatkowa. Model językowy może się mylić, dlatego wynik sprawdza człowiek, a raport wskazuje, co zweryfikować w źródle.</p>
-      <p>W sprawach, w których potrzebny jest prawnik, lekarz lub doradca podatkowy, raport ma ułatwić Ci rozmowę z nim: pokazać, o co pytać i na co się powołać. Po zakończeniu usuwam z maszyny wszystkie dane cyfrowe, a Ty dostajesz swoje kopie z powrotem. Zasady ustalamy na piśmie, zanim cokolwiek zeskanuję.</p>
-      <p><strong>Tryb online nie jest usługą offline.</strong> Możesz go wybrać przy analizie spraw (poza dokumentacją medyczną i danymi objętymi tajemnicą zawodową), prototypie, książce i kontrakcie programistycznym. W tym trybie treść trafia do dostawcy modelu, na warunkach opisanych w sekcji <a href="#tryb">Tryb pracy</a>.</p>
-  </div>
-</section>
-<!--/offer:analiza:desc-->
-<!--offer:analiza:desc-->
-<section class="view" id="problem" data-parent="analiza" data-title="Zwykły czat AI">
-  <div class="wrap">
-    <h2>Gdzie trafia treść Twojej sprawy w zwykłym czacie AI</h2>
-      <p>Popularne narzędzia AI, takie jak ChatGPT, przetwarzają to, co im wyślesz, na serwerach swojego dostawcy. Serwery te często stoją w USA. Razem z dokumentem poza kraj wyjeżdża więc cały proces wnioskowania, czyli sama analiza Twojej sprawy.</p>
-      <p>Nie musisz wiedzieć, czym jest chmura ani jak działa model językowy. Wystarczy jedno pytanie: czy treść mojej sprawy powinna opuszczać kraj i trafiać do firmy, która nie ma z nią nic wspólnego?</p>
-  </div>
-</section>
-<!--/offer:analiza:desc-->
-<!--offer:analiza:desc-->
-<section class="view" id="problem-2" data-parent="analiza" data-title="Co z tego wynika">
-  <div class="wrap">
-    <h2>Co to znaczy dla Twojej sprawy</h2>
-      <ul class="plain">
-        <li><strong>Treść wyjeżdża.</strong> Dokument trafia na cudzy serwer, często w innym kraju niż Twój.</li>
-        <li><strong>Analiza dzieje się gdzie indziej.</strong> Nie tylko dane, ale i sam proces wnioskowania odbywa się poza Twoim krajem.</li>
-        <li><strong>Nie masz wglądu.</strong> Nie widzisz, gdzie dokładnie trafiła Twoja sprawa i jak długo tam zostaje.</li>
-      </ul>
-      <p class="muted small">Dla porządku: przy analizie spraw, prototypach, książkach i kontrakcie programistycznym możesz wybrać tryb online. Wtedy treść także trafia do dostawcy modelu za granicą, ale na innych warunkach niż na prywatnym koncie. Opisuję je w sekcji <a href="#tryb">Tryb pracy</a>. Dokumentacja medyczna i dane objęte tajemnicą zawodową: wyłącznie offline.</p>
-  </div>
-</section>
-<!--/offer:analiza:desc-->
-
 <!--offer:pytanie:desc-->
 <section class="view hero" id="pytanie" data-title="Szybkie pytanie" data-nav="oferta">
   <div class="wrap">
@@ -698,7 +451,7 @@ summary:hover h3{color:var(--accent)}
     <h2>Szybkie pytanie</h2>
     <p class="say">Jedno pytanie, odpowiedź z lokalnej AI na maszynie bez sieci.</p>
     <p class="go"><a class="btn big" href="#rozmowa">Zadaj pytanie</a></p>
-    <p class="fine">100 zł brutto za pytanie. Zawsze offline.</p>
+    <p class="fine">100 zł za pytanie. Zawsze offline.</p>
   </div>
 </section>
 <!--/offer:pytanie:desc-->
@@ -723,66 +476,11 @@ summary:hover h3{color:var(--accent)}
     <h2>Prywatna sztuczna inteligencja w Twoim gabinecie</h2>
     <p class="say">Lokalne urządzenie z AI stoi w Twoim biurze i działa offline. Wynajmuję je, utrzymuję i szkolę Twój zespół.</p>
     <p class="go"><a class="btn big" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
-    <p class="fine">Wycena po rozmowie wstępnej. Ta usługa działa zawsze offline.</p>
-    <div class="yt" data-yt="Aim8UptLln0">
-      <button type="button" aria-label="Odtwórz film: Prywatna sztuczna inteligencja w Twoim biurze"><span class="yt-play" aria-hidden="true"></span><span>Obejrzyj film o prywatnej AI w biurze</span><small>Po kliknięciu załaduje się odtwarzacz YouTube (tryb bez cookies). Do tego czasu strona nie łączy się z YouTube.</small></button>
-      <noscript><p style="padding:16px"><a href="https://youtu.be/Aim8UptLln0" target="_blank" rel="noopener">Obejrzyj film na YouTube</a></p></noscript>
-    </div>
+    <p class="pops"><button type="button" class="pop-btn" data-open="p-firmy-film" aria-haspopup="dialog">Film</button><button type="button" class="pop-btn" data-open="p-firmy-dla" aria-haspopup="dialog">Dlaczego to dla Ciebie</button><button type="button" class="pop-btn" data-open="p-firmy-cena" aria-haspopup="dialog">Ile to kosztuje</button></p>
+    <p class="fine">Ta usługa działa zawsze offline.</p>
   </div>
 </section>
 <!--/offer:gabinet:desc-->
-<!--offer:gabinet:desc-->
-<section class="view" id="firmy-jak" data-parent="firmy" data-title="Dla kogo">
-  <div class="wrap">
-    <h2>Dla kogo jest AI w gabinecie</h2>
-    <p>Jeżeli pracujesz na cudzych danych (księgi, dokumentacja pacjentów), nie możesz ich wysyłać do publicznych usług AI na cudzych serwerach. Wynajmuję i utrzymuję lokalne urządzenie z oprogramowaniem, które stoi w Twoim biurze, działa offline i uczy Twój zespół pracować lokalnie. Nie musisz mieć własnego działu IT. Ta usługa działa zawsze offline.</p>
-  </div>
-</section>
-<!--/offer:gabinet:desc-->
-<!--offer:gabinet:desc-->
-<section class="view" id="pakiety" data-parent="firmy" data-title="Pakiety">
-  <div class="wrap wide">
-    <h2>Pakiety: Biuro, Gabinet, Pro</h2>
-    <div class="plans">
-      <article class="plan">
-        <h3>Pakiet Biuro</h3>
-        <p class="who">Biura rachunkowe, małe firmy</p>
-        <ul>
-          <li>Urządzenie u Ciebie, bez dostępu do sieci</li>
-          <li>Instalacja i konfiguracja</li>
-          <li>Aktualizacje oprogramowania i baz</li>
-          <li>Serwis i wymiana sprzętu</li>
-          <li>Szkolenie zespołu, 2 godziny</li>
-        </ul>
-      </article>
-      <article class="plan feat">
-        <span class="tag">Dane wrażliwe</span>
-        <h3>Pakiet Gabinet</h3>
-        <p class="who">Gabinety lekarskie i inne zawody zaufania</p>
-        <ul>
-          <li>Wszystko z Pakietu Biuro</li>
-          <li>Konfiguracja pod dokumentację wrażliwą</li>
-          <li>Umowa powierzenia przetwarzania danych</li>
-          <li>Szkolenie zespołu, 2 godziny</li>
-          <li>Procedura czyszczenia danych po sprawie</li>
-        </ul>
-      </article>
-      <article class="plan">
-        <h3>Pakiet Pro</h3>
-        <p class="who">Więcej użytkowników, większe modele</p>
-        <ul>
-          <li>Mocniejsza maszyna</li>
-          <li>Wielu użytkowników naraz</li>
-          <li>Integracja z Twoimi dokumentami</li>
-          <li>Zakres ustalamy po rozmowie wstępnej</li>
-        </ul>
-      </article>
-    </div>
-    <p class="muted small"><strong>Usługi dodatkowe:</strong> indeksowanie archiwum dokumentów firmy, dodatkowa baza branżowa, dodatkowe szkolenie zespołu, wizyta serwisowa na miejscu. Zakup urządzenia zamiast wynajmu wyceniam indywidualnie. Dokładną ofertę przygotowuję po rozmowie wstępnej.</p>
-  </div>
-</section>
-<!--/offer:gabinet:desc-->
-
 <!--offer:prototyp:desc-->
 <section class="view hero" id="poc" data-title="Prototyp w tydzień" data-nav="oferta">
   <div class="wrap">
@@ -849,7 +547,7 @@ summary:hover h3{color:var(--accent)}
     <h2>Kontrakt programistyczny</h2>
     <p class="say">Pracuję dla Ciebie jako programista, rozliczany godzinowo. Im dłuższy kontrakt, tym niższa stawka.</p>
     <p class="go"><a class="btn big" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
-    <p class="fine">125–180 zł netto za godzinę. Tryb offline lub online.</p>
+    <p class="fine">125–180 zł za godzinę. Tryb offline lub online.</p>
   </div>
 </section>
 <!--/offer:kontrakt:desc-->
@@ -860,12 +558,12 @@ summary:hover h3{color:var(--accent)}
     <p>Koszt tokenów jest po mojej stronie. Inferencja jest w pełni zgodna zarówno przez API, jak i lokalnie.</p>
 
     <div class="price rate-static">
-      <p class="num"><b>180 zł</b> netto za godzinę, kontrakt do 3 miesięcy</p>
-      <p class="num"><b>125 zł</b> netto za godzinę, kontrakt na 3 lata (maksymalna długość)</p>
+      <p class="num"><b>180 zł</b> za godzinę, kontrakt do 3 miesięcy</p>
+      <p class="num"><b>125 zł</b> za godzinę, kontrakt na 3 lata (maksymalna długość)</p>
     </div>
 
     <div class="price rate-calc" id="rate-calc">
-      <p class="num" aria-live="polite"><b id="rate-val">180 zł</b> netto za godzinę</p>
+      <p class="num" aria-live="polite"><b id="rate-val">180 zł</b> za godzinę</p>
       <label class="range-label" for="rate-months">Długość kontraktu: <strong id="rate-months-label">3 miesiące</strong></label>
       <input type="range" id="rate-months" min="1" max="36" step="1" value="3" aria-describedby="rate-note">
       <div class="range-scale" aria-hidden="true"><span>do 3 mies.</span><span>3 lata</span></div>
@@ -879,7 +577,7 @@ summary:hover h3{color:var(--accent)}
 <section class="view" id="stawka-zasady" data-parent="kontrakt" data-title="Zasady liczenia">
   <div class="wrap">
     <h2>Jak liczona jest stawka</h2>
-    <p class="muted small" id="rate-note">Stawka maleje liniowo od 180 zł netto za godzinę przy kontrakcie do 3 miesięcy do 125 zł netto za godzinę przy kontrakcie na 3 lata (maksymalna długość). Wyliczenie jest orientacyjne; stawkę dla Twojego kontraktu ustalamy po rozmowie wstępnej.</p>
+    <p class="muted small" id="rate-note">Stawka maleje liniowo od 180 zł za godzinę przy kontrakcie do 3 miesięcy do 125 zł za godzinę przy kontrakcie na 3 lata (maksymalna długość). Wyliczenie jest orientacyjne; stawkę dla Twojego kontraktu ustalamy po rozmowie wstępnej.</p>
     <p class="note">Tryb wybierasz przed startem. Jego szczegóły i warunki przetwarzania danych opisuje sekcja <a href="#tryb">Tryb pracy</a>.</p>
   </div>
 </section>
@@ -1034,12 +732,348 @@ summary:hover h3{color:var(--accent)}
     <p class="go"><a class="btn big" href="#rozmowa" target="_blank" rel="noopener" data-book id="book-btn"><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></p>
     <p class="fine">Rezerwacja odbywa się w Kalendarzu Google, w nowej karcie. Podajesz tam imię i e-mail. Nie wpisuj treści dokumentów ani danych wrażliwych.</p>
     <p class="mail-line" id="kontakt">Wolisz napisać? Kliknij adres, a skopiuje się do schowka: <a class="mail" href="mailto:konradcinkusz@gmail.com">konradcinkusz@gmail.com</a></p>
+    <!--offer:analiza:desc-->
+    <nav class="more-info" aria-label="Więcej o analizie spraw">
+      <span>Więcej o analizie spraw:</span>
+      <button type="button" class="lnk" data-open="p-jak" aria-haspopup="dialog">Jak to działa</button> <button type="button" class="lnk" data-open="p-offline" aria-haspopup="dialog">Analiza offline</button> <button type="button" class="lnk" data-open="p-raport" aria-haspopup="dialog">Raport</button> <button type="button" class="lnk" data-open="p-granice" aria-haspopup="dialog">Czym to jest, a czym nie jest</button> <button type="button" class="lnk" data-open="p-czat" aria-haspopup="dialog">Zwykły czat AI</button>
+    </nav>
+<!--/offer:analiza:desc-->
     <p class="fine">Dokumenty do pobrania (PDF): <a href="dokumenty/regulamin-inference-polska.pdf">Regulamin usług</a> · <a href="dokumenty/pilotaz-cennik-umowa.pdf">Pilotaż: cennik i wzór umowy</a></p>
     <p class="fine">Strona jest statyczna: bez cookies, bez zewnętrznych skryptów, czcionek i formularzy. © 2026 Konrad Cinkusz · <a href="filmy/">Filmy</a></p>
   </div>
 </section>
 
 </main>
+
+<!--offer:analiza:desc-->
+<dialog class="pop" id="p-film" aria-labelledby="p-film-h">
+  <div class="pop-bar"><h2 id="p-film-h">Analiza spraw: film</h2><button type="button" class="pop-x" data-close aria-label="Zamknij okno">&times;</button></div>
+  <div class="pop-body">
+
+    <div class="yt" data-yt="YIxxDJMUAko">
+      <button type="button" aria-label="Odtwórz film: Analiza spraw"><span class="yt-play" aria-hidden="true"></span><span>Obejrzyj film o analizie spraw</span><small>Po kliknięciu załaduje się odtwarzacz YouTube (tryb bez cookies). Do tego czasu strona nie łączy się z YouTube.</small></button>
+      <noscript><p style="padding:16px"><a href="https://youtu.be/YIxxDJMUAko" target="_blank" rel="noopener">Obejrzyj film na YouTube</a></p></noscript>
+    </div>
+  
+  </div>
+</dialog>
+<dialog class="pop wide" id="p-przyklady" aria-labelledby="p-przyklady-h">
+  <div class="pop-bar"><h2 id="p-przyklady-h">Przykładowe sprawy</h2><button type="button" class="pop-x" data-close aria-label="Zamknij okno">&times;</button></div>
+  <div class="pop-body">
+
+    <p><strong>Dla kogo:</strong> dla osób prywatnych ze sprawą urzędową, medyczną, podatkową lub umową, a także dla małych firm, biur rachunkowych, gabinetów i kancelarii. Poniżej szesnaście przykładowych akt. Sprawdź, czy któraś sytuacja przypomina Twoją.</p>
+    <div class="cases">
+      <details>
+        <summary><h3>Zdrowie i ZUS</h3><span class="count">4 sprawy</span></summary>
+        <div class="case-grid">
+          <article class="case">
+            <h4>Odmowa renty z tytułu niezdolności do pracy</h4>
+            <p><strong>Z czym przychodzi klient:</strong> Klientka dostała z ZUS decyzję odmawiającą renty i pyta, czy da się z nią coś zrobić.</p>
+            <p><strong>Co dostaje w raporcie:</strong> Chronologię dokumentacji i orzeczeń, wskazany termin na odwołanie oraz pytania do prawnika i lekarza.</p>
+            <p class="pdf"><a href="assets/akta/MED-01-orzeczenie-zus.pdf" target="_blank" rel="noopener">Zobacz przykładowe akta<span>PDF, 280 kB</span></a></p>
+          </article>
+          <article class="case">
+            <h4>Zdarzenie medyczne po zabiegu</h4>
+            <p><strong>Z czym przychodzi klient:</strong> Po operacji kolana doszło do zakażenia i kolejnego zabiegu, a szpital odpisał, że nie popełnił błędu.</p>
+            <p><strong>Co dostaje w raporcie:</strong> Uporządkowany przebieg leczenia, sprzeczności w dokumentacji, wskazane terminy i pytania do specjalisty.</p>
+            <p class="pdf"><a href="assets/akta/MED-02-zdarzenie-medyczne.pdf" target="_blank" rel="noopener">Zobacz przykładowe akta<span>PDF, 335 kB</span></a></p>
+          </article>
+          <article class="case">
+            <h4>Zwolnienie lekarskie i kontrola ZUS</h4>
+            <p><strong>Z czym przychodzi klient:</strong> ZUS żąda zwrotu zasiłku chorobowego za okres, w którym klientka była na weselu.</p>
+            <p><strong>Co dostaje w raporcie:</strong> Zestawienie dat i kwot z pism, termin na odwołanie liczony od doręczenia oraz przywołane przepisy.</p>
+            <p class="pdf"><a href="assets/akta/MED-03-zwolnienie-kontrola-zus.pdf" target="_blank" rel="noopener">Zobacz przykładowe akta<span>PDF, 244 kB</span></a></p>
+          </article>
+          <article class="case">
+            <h4>Dostęp do dokumentacji zmarłego rodzica</h4>
+            <p><strong>Z czym przychodzi klient:</strong> Córka chce uzyskać dokumentację medyczną zmarłego ojca, mimo sprzeciwu brata i odmowy poradni.</p>
+            <p><strong>Co dostaje w raporcie:</strong> Przepisy o dostępie do dokumentacji, rozbieżności w danych i datach oraz pytania do prawnika.</p>
+            <p class="pdf"><a href="assets/akta/MED-04-dokumentacja-zmarlego.pdf" target="_blank" rel="noopener">Zobacz przykładowe akta<span>PDF, 312 kB</span></a></p>
+          </article>
+        </div>
+      </details>
+      <details>
+        <summary><h3>Prawo i umowy</h3><span class="count">4 sprawy</span></summary>
+        <div class="case-grid">
+          <article class="case">
+            <h4>Wypowiedzenie umowy o pracę „z powodu reorganizacji”</h4>
+            <p><strong>Z czym przychodzi klient:</strong> Pracownik dostał wypowiedzenie po powrocie z urlopu wychowawczego.</p>
+            <p><strong>Co dostaje w raporcie:</strong> Chronologię zdarzeń, ustaloną datę doręczenia i wynikający z niej termin oraz sprzeczności między pismami.</p>
+            <p class="pdf"><a href="assets/akta/LAW-01-wypowiedzenie-reorganizacja.pdf" target="_blank" rel="noopener">Zobacz przykładowe akta<span>PDF, 266 kB</span></a></p>
+          </article>
+          <article class="case">
+            <h4>Najem i wypowiedzenie z powodu zaległości</h4>
+            <p><strong>Z czym przychodzi klient:</strong> Najemczyni po utracie pracy ma zaległości, dostała upomnienie i wypowiedzenie, a wynajmujący wymienił zamek.</p>
+            <p><strong>Co dostaje w raporcie:</strong> Kolejność pism i wpłat, wskazane terminy, przywołane przepisy o najmie i pytania do prawnika.</p>
+            <p class="pdf"><a href="assets/akta/LAW-02-najem-zaleglosci.pdf" target="_blank" rel="noopener">Zobacz przykładowe akta<span>PDF, 292 kB</span></a></p>
+          </article>
+          <article class="case">
+            <h4>Reklamacja wadliwego samochodu od dealera</h4>
+            <p><strong>Z czym przychodzi klient:</strong> Po trzech miesiącach w kupionym samochodzie zepsuła się skrzynia biegów, a sprzedawca odmawia naprawy.</p>
+            <p><strong>Co dostaje w raporcie:</strong> Uporządkowane umowy i korespondencję, przywołane przepisy o prawach kupującego oraz terminy do sprawdzenia.</p>
+            <p class="pdf"><a href="assets/akta/LAW-03-reklamacja-samochodu.pdf" target="_blank" rel="noopener">Zobacz przykładowe akta<span>PDF, 315 kB</span></a></p>
+          </article>
+          <article class="case">
+            <h4>Spadek z długami</h4>
+            <p><strong>Z czym przychodzi klient:</strong> Spadkobierca pyta, czy przyjąć spadek obciążony pożyczką, hipoteką i wezwaniami windykacyjnymi, i jak liczyć termin.</p>
+            <p><strong>Co dostaje w raporcie:</strong> Zestawienie długów według dokumentów, sposób liczenia terminu, możliwe drogi postępowania i pytania do prawnika.</p>
+            <p class="pdf"><a href="assets/akta/LAW-04-spadek-z-dlugami.pdf" target="_blank" rel="noopener">Zobacz przykładowe akta<span>PDF, 329 kB</span></a></p>
+          </article>
+        </div>
+      </details>
+      <details>
+        <summary><h3>Podatki</h3><span class="count">4 sprawy</span></summary>
+        <div class="case-grid">
+          <article class="case">
+            <h4>Sprzedaż mieszkania przed upływem 5 lat</h4>
+            <p><strong>Z czym przychodzi klient:</strong> Klientka sprzedała odziedziczony lokal i dostała z urzędu skarbowego wezwanie do wyjaśnień.</p>
+            <p><strong>Co dostaje w raporcie:</strong> Zestawienie sprzecznych kwot z dokumentów, termin na odpowiedź i pytania do doradcy podatkowego, bez wyliczania podatku.</p>
+            <p class="pdf"><a href="assets/akta/TAX-01-sprzedaz-mieszkania-5-lat.pdf" target="_blank" rel="noopener">Zobacz przykładowe akta<span>PDF, 312 kB</span></a></p>
+          </article>
+          <article class="case">
+            <h4>Kryptowaluty i brak zeznań</h4>
+            <p><strong>Z czym przychodzi klient:</strong> Klient nigdy nie rozliczał kryptowalut i dostał wezwanie do złożenia wyjaśnień i zeznań za trzy lata.</p>
+            <p><strong>Co dostaje w raporcie:</strong> Uporządkowane wyciągi i pisma, wskazane terminy, przywołane przepisy oraz pytania do doradcy podatkowego.</p>
+            <p class="pdf"><a href="assets/akta/TAX-02-kryptowaluty.pdf" target="_blank" rel="noopener">Zobacz przykładowe akta<span>PDF, 301 kB</span></a></p>
+          </article>
+          <article class="case">
+            <h4>JDG, samochód i kontrola VAT</h4>
+            <p><strong>Z czym przychodzi klient:</strong> Przedsiębiorca dostał zawiadomienie o kontroli VAT od samochodu w leasingu, którego używa także prywatnie.</p>
+            <p><strong>Co dostaje w raporcie:</strong> Chronologię dokumentów, rozbieżności między ewidencją a fakturami, terminy i pytania do doradcy podatkowego.</p>
+            <p class="pdf"><a href="assets/akta/TAX-03-jdg-vat-samochod.pdf" target="_blank" rel="noopener">Zobacz przykładowe akta<span>PDF, 342 kB</span></a></p>
+          </article>
+          <article class="case">
+            <h4>Darowizna od rodziców z zagranicy</h4>
+            <p><strong>Z czym przychodzi klient:</strong> Klientka dostała 40 000 EUR od rodziców mieszkających w Niemczech i wezwanie z urzędu skarbowego.</p>
+            <p><strong>Co dostaje w raporcie:</strong> Termin liczony od daty doręczenia, rozbieżności w kwotach i datach oraz przywołane przepisy do sprawdzenia.</p>
+            <p class="pdf"><a href="assets/akta/TAX-04-darowizna-z-zagranicy.pdf" target="_blank" rel="noopener">Zobacz przykładowe akta<span>PDF, 259 kB</span></a></p>
+          </article>
+        </div>
+      </details>
+      <details>
+        <summary><h3>Sprawy publiczne</h3><span class="count">4 sprawy</span></summary>
+        <div class="case-grid">
+          <article class="case">
+            <h4>Kandydat na wójta i ulotki w trybie wyborczym</h4>
+            <p><strong>Z czym przychodzi klient:</strong> Kandydat uważa, że ulotka zawiera nieprawdę, i pyta, czy da się ją zatrzymać przed głosowaniem.</p>
+            <p><strong>Co dostaje w raporcie:</strong> Oś czasu z godzinami, terminy trybu wyborczego do potwierdzenia, przywołane przepisy i pytania do prawnika.</p>
+            <p class="pdf"><a href="assets/akta/POL-01-kandydat-ulotki-wyborcze.pdf" target="_blank" rel="noopener">Zobacz przykładowe akta<span>PDF, 327 kB</span></a></p>
+          </article>
+          <article class="case">
+            <h4>Wniosek o informację publiczną i milczenie gminy</h4>
+            <p><strong>Z czym przychodzi klient:</strong> Mieszkaniec złożył wniosek o informację publiczną, a gmina milczała, przedłużyła termin i odpowiedziała częściowo.</p>
+            <p><strong>Co dostaje w raporcie:</strong> Chronologię korespondencji, terminy ustawowe, zakres brakującej odpowiedzi i możliwe drogi postępowania.</p>
+            <p class="pdf"><a href="assets/akta/POL-02-informacja-publiczna.pdf" target="_blank" rel="noopener">Zobacz przykładowe akta<span>PDF, 280 kB</span></a></p>
+          </article>
+          <article class="case">
+            <h4>Zbiórka i finansowanie stowarzyszenia przed wyborami</h4>
+            <p><strong>Z czym przychodzi klient:</strong> Radny zarzuca stowarzyszeniu, że zbiórka i reklamy przed wyborami to finansowanie kampanii, a komisarz wezwał do odpowiedzi.</p>
+            <p><strong>Co dostaje w raporcie:</strong> Uporządkowane dokumenty zbiórki, termin na odpowiedź, przywołane przepisy i pytania do prawnika.</p>
+            <p class="pdf"><a href="assets/akta/POL-03-zbiorka-stowarzyszenie.pdf" target="_blank" rel="noopener">Zobacz przykładowe akta<span>PDF, 285 kB</span></a></p>
+          </article>
+          <article class="case">
+            <h4>Zwolnienie pracownika urzędu po wpisie w mediach społecznościowych</h4>
+            <p><strong>Z czym przychodzi klient:</strong> Pracownica urzędu dostała wypowiedzenie po wpisie na prywatnym profilu i pyta, czy i do kiedy może się odwołać.</p>
+            <p><strong>Co dostaje w raporcie:</strong> Kolejność zdarzeń, termin na odwołanie i przywołane przepisy, bez oceny poglądów.</p>
+            <p class="pdf"><a href="assets/akta/POL-04-zwolnienie-wpis-spolecznosciowy.pdf" target="_blank" rel="noopener">Zobacz przykładowe akta<span>PDF, 287 kB</span></a></p>
+          </article>
+        </div>
+      </details>
+    </div>
+    <p class="muted small">Wszystkie akta są w pełni fikcyjne. Służą do pokazania rodzaju spraw i do testów jakości. To dokumenty wejściowe, a nie gotowe raporty.</p>
+  
+  </div>
+</dialog>
+<dialog class="pop" id="p-cena" aria-labelledby="p-cena-h">
+  <div class="pop-bar"><h2 id="p-cena-h">Ile to kosztuje</h2><button type="button" class="pop-x" data-close aria-label="Zamknij okno">&times;</button></div>
+  <div class="pop-body">
+
+    <div class="price">
+      <p class="num"><b>od 150 zł</b> za każde rozpoczęte 50 stron dokumentacji</p>
+      <dl class="facts3">
+        <div><dt>Tryb online</dt><dd><strong>150 zł</strong> za każde rozpoczęte 50 stron (51–100 stron: 300 zł). Tylko dla dokumentów niewrażliwych.</dd></div>
+        <div><dt>Tryb offline</dt><dd><strong>450 zł</strong> za każde rozpoczęte 50 stron (51–100 stron: 900 zł). Wymaga o wiele większych nakładów pracy. Dla dokumentacji medycznej, tajemnicy zawodowej i danych wrażliwych.</dd></div>
+        <div><dt>W cenie</dt><dd>Wygenerowanie raportu oraz <strong>3 kolejne rundy</strong>: zadajesz pytanie do raportu, a ja go regeneruję.</dd></div>
+        <div><dt>Czas realizacji</dt><dd>Standardowo do 7 dni.</dd></div>
+        <div><dt>Tryb ekspresowy</dt><dd>Raport w ciągu 4 godzin od otrzymania dokumentów, za dopłatą (kwotę podaję w wycenie).</dd></div>
+      </dl>
+      <p class="muted small">Rozmowa wstępna jest bezpłatna. Większe akta niż 100 stron: wycena po rozmowie wstępnej.</p>
+    </div>
+  
+  </div>
+</dialog>
+<dialog class="pop" id="p-jak" aria-labelledby="p-jak-h">
+  <div class="pop-bar"><h2 id="p-jak-h">Jak to działa</h2><button type="button" class="pop-x" data-close aria-label="Zamknij okno">&times;</button></div>
+  <div class="pop-body">
+
+    <ol class="steps">
+      <li>
+        <div>
+          <h3>Rozmowa wstępna</h3>
+          <p>Spotykamy się na miejscu (w moim biurze w Zgierzu) na bezpłatnej rozmowie wstępnej. Rozmawiamy o Twoim problemie: co się stało, czego potrzebujesz, jakie są terminy i co już wiesz. Ustalamy zakres analizy. Nie musisz mieć żadnych dokumentów: wystarczy szybki wywiad albo opis sprawy w e-mailu.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>Dokumenty, jeśli je masz</h3>
+          <p>Dokumenty nie są wymagane: wystarczy szybki wywiad albo opis sprawy w e-mailu. Jeśli je masz, przekazujesz mi osobiście kopie (kartki A4), więc nie oddawaj oryginałów. Skanuję je na urządzeniu offline. Możesz też przesłać materiał e-mailem, a ja załaduję go na maszynę offline. Wiadomość e-mail przechodzi przez serwery pocztowe. Do analizy materiał trafia wyłącznie na maszynę, która nie ma dostępu do sieci.</p>
+        </div>
+      </li>
+    </ol>
+  
+    <h3 class="ph">Jak to działa: od analizy do raportu</h3>
+    <ol class="steps" style="counter-reset:s 2">
+      <li>
+        <div>
+          <h3>Analiza</h3>
+          <p>Analizuję materiał z pomocą lokalnej AI, w oparciu o bazy przepisów i literatury naukowej. Wynik sprawdzam ja, człowiek.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>Raport</h3>
+          <p>Przygotowuję raport w jednym z dwóch formatów: elegancki PDF (wydrukowany i odesłany razem z kopiami dokumentów albo wysłany jako zaszyfrowany plik) albo elegancki raport HTML w stylu Wikipedii. Ma wnioski i źródła, które możesz sprawdzić samodzielnie. Hasło do zaszyfrowanego PDF ustalamy osobno niż plik: na rozmowie wstępnej albo telefonicznie, nigdy w tej samej wiadomości co raport. Po zakończeniu usuwam z maszyny offline wszystkie dane cyfrowe: skany, pliki i wynik analizy, a ze skrzynki pocztowej wiadomość z materiałem i wysłany raport.</p>
+        </div>
+      </li>
+    </ol>
+    <p class="muted small">Pracuję jako inżynier augmentatywny: człowiek prowadzi rozmowę i odpowiada za wynik, a model przyspiesza przeszukiwanie i porządkowanie materiału.</p>
+  
+  </div>
+</dialog>
+<dialog class="pop" id="p-offline" aria-labelledby="p-offline-h">
+  <div class="pop-bar"><h2 id="p-offline-h">Jak wygląda analiza offline</h2><button type="button" class="pop-x" data-close aria-label="Zamknij okno">&times;</button></div>
+  <div class="pop-body">
+
+    <p>Analizuję Twoją sprawę na lokalnym modelu językowym. Analiza opiera się na aktualnych bazach aktów prawnych i literatury naukowej, a wynik sprawdza człowiek. Wszystkie dane i cały proces wnioskowania są przetwarzane na maszynie, która stoi u mnie i nie ma dostępu do sieci.</p>
+      <dl class="facts3">
+        <div><dt>Wszystko lokalnie</dt><dd>Dokumenty i cały proces wnioskowania zostają na jednym urządzeniu w moim biurze.</dd></div>
+        <div><dt>Maszyna bez sieci</dt><dd>Pracuję na własnej maszynie z lokalną AI, odłączonej od internetu. Bez Wi-Fi i bez kabla sieciowego. Podłączona jest tylko drukarka ze skanerem. Materiał z e-maila i bazy przepisów ładuję na nią kontrolowanie.</dd></div>
+      </dl>
+  
+    <h3 class="ph">Po analizie</h3>
+      <dl class="facts3">
+        <div><dt>Po zakończeniu nic nie zostaje</dt><dd>Gdy oddaję raport, usuwam z maszyny wszystko: skany, wynik analizy, historię i ślady po pracy.</dd></div>
+        <div><dt>Sprawdza człowiek</dt><dd>Analiza opiera się na oficjalnych źródłach przepisów i wiedzy, a wynik zawsze sprawdzam sam.</dd></div>
+      </dl>
+  
+  </div>
+</dialog>
+<dialog class="pop" id="p-raport" aria-labelledby="p-raport-h">
+  <div class="pop-bar"><h2 id="p-raport-h">Raport: PDF lub HTML</h2><button type="button" class="pop-x" data-close aria-label="Zamknij okno">&times;</button></div>
+  <div class="pop-body">
+
+    <p>Raport nie jest zrzutem rozmowy z czatem. To złożony dokument w jednym z dwóch formatów. Elegancki PDF możesz wydrukować, położyć na biurku, podkreślić i pokazać swojemu prawnikowi lub lekarzowi; dostajesz go jako wydruk albo jako zaszyfrowany plik. Hasło do PDF ustalamy osobną drogą niż plik, na rozmowie wstępnej albo telefonicznie. Jest długie i jednorazowe: używam go tylko do jednego raportu. Drugi format to elegancki raport HTML w stylu Wikipedii, ze wszystkimi informacjami. Forma PDF jest taka sama jak w moich publikacjach:
+      <a href="https://github.com/konradcinkusz/chaos-theory-for-dummies" rel="noopener">Chaos from Zero</a> oraz
+      <a href="https://github.com/konradcinkusz/math-for-ai-engineers" rel="noopener">Mathematics from Zero for the AI Engineer</a>.</p>
+  
+    <h3 class="ph">Co jest w raporcie</h3>
+    <div class="toc">
+      <strong>Przykładowy układ raportu</strong>
+      <ol>
+        <li>Streszczenie problemu i pytania, na które odpowiadamy</li>
+        <li>Analiza dokumentów</li>
+        <li>Podstawy: przepisy i artykuły, z numerami i wskazaniem miejsca</li>
+        <li>Możliwe drogi postępowania</li>
+        <li>Czego nie udało się ustalić i co trzeba sprawdzić</li>
+        <li>Źródła oraz wersja i data baz, z których korzystano</li>
+      </ol>
+    </div>
+      <h4>Bazy da się aktualizować</h4>
+      <p>Maszyna nigdy nie łączy się z siecią, więc bazy wgrywam kontrolowanie, ze zweryfikowanych nośników: nowe i zmienione akty prawne oraz nowe publikacje naukowe. Każdy raport podaje, z jakiej wersji baz korzystał, żebyś wiedział, na jakim stanie prawnym opiera się analiza.</p>
+  
+  </div>
+</dialog>
+<dialog class="pop" id="p-granice" aria-labelledby="p-granice-h">
+  <div class="pop-bar"><h2 id="p-granice-h">Czym to jest, a czym nie jest</h2><button type="button" class="pop-x" data-close aria-label="Zamknij okno">&times;</button></div>
+  <div class="pop-body">
+
+      <p>To analiza i uporządkowanie Twojego materiału z odwołaniem do źródeł. To <strong>nie</strong> jest porada prawna, medyczna ani podatkowa. Model językowy może się mylić, dlatego wynik sprawdza człowiek, a raport wskazuje, co zweryfikować w źródle.</p>
+      <p>W sprawach, w których potrzebny jest prawnik, lekarz lub doradca podatkowy, raport ma ułatwić Ci rozmowę z nim: pokazać, o co pytać i na co się powołać. Po zakończeniu usuwam z maszyny wszystkie dane cyfrowe, a Ty dostajesz swoje kopie z powrotem. Zasady ustalamy na piśmie, zanim cokolwiek zeskanuję.</p>
+      <p><strong>Tryb online nie jest usługą offline.</strong> Możesz go wybrać przy analizie spraw (poza dokumentacją medyczną i danymi objętymi tajemnicą zawodową), prototypie, książce i kontrakcie programistycznym. W tym trybie treść trafia do dostawcy modelu, na warunkach opisanych w sekcji <a href="#tryb">Tryb pracy</a>.</p>
+  
+  </div>
+</dialog>
+<dialog class="pop" id="p-czat" aria-labelledby="p-czat-h">
+  <div class="pop-bar"><h2 id="p-czat-h">Gdzie trafia treść w zwykłym czacie AI</h2><button type="button" class="pop-x" data-close aria-label="Zamknij okno">&times;</button></div>
+  <div class="pop-body">
+
+      <p>Popularne narzędzia AI, takie jak ChatGPT, przetwarzają to, co im wyślesz, na serwerach swojego dostawcy. Serwery te często stoją w USA. Razem z dokumentem poza kraj wyjeżdża więc cały proces wnioskowania, czyli sama analiza Twojej sprawy.</p>
+      <p>Nie musisz wiedzieć, czym jest chmura ani jak działa model językowy. Wystarczy jedno pytanie: czy treść mojej sprawy powinna opuszczać kraj i trafiać do firmy, która nie ma z nią nic wspólnego?</p>
+  
+    <h3 class="ph">Co to znaczy dla Twojej sprawy</h3>
+      <ul class="plain">
+        <li><strong>Treść wyjeżdża.</strong> Dokument trafia na cudzy serwer, często w innym kraju niż Twój.</li>
+        <li><strong>Analiza dzieje się gdzie indziej.</strong> Nie tylko dane, ale i sam proces wnioskowania odbywa się poza Twoim krajem.</li>
+        <li><strong>Nie masz wglądu.</strong> Nie widzisz, gdzie dokładnie trafiła Twoja sprawa i jak długo tam zostaje.</li>
+      </ul>
+      <p class="muted small">Dla porządku: przy analizie spraw, prototypach, książkach i kontrakcie programistycznym możesz wybrać tryb online. Wtedy treść także trafia do dostawcy modelu za granicą, ale na innych warunkach niż na prywatnym koncie. Opisuję je w sekcji <a href="#tryb">Tryb pracy</a>. Dokumentacja medyczna i dane objęte tajemnicą zawodową: wyłącznie offline.</p>
+  
+  </div>
+</dialog>
+<!--/offer:analiza:desc-->
+<!--offer:gabinet:desc-->
+<dialog class="pop" id="p-firmy-film" aria-labelledby="p-firmy-film-h">
+  <div class="pop-bar"><h2 id="p-firmy-film-h">Prywatna sztuczna inteligencja w Twoim gabinecie: film</h2><button type="button" class="pop-x" data-close aria-label="Zamknij okno">&times;</button></div>
+  <div class="pop-body">
+
+<div class="yt" data-yt="Aim8UptLln0">
+      <button type="button" aria-label="Odtwórz film: Prywatna sztuczna inteligencja w Twoim biurze"><span class="yt-play" aria-hidden="true"></span><span>Obejrzyj film o prywatnej AI w biurze</span><small>Po kliknięciu załaduje się odtwarzacz YouTube (tryb bez cookies). Do tego czasu strona nie łączy się z YouTube.</small></button>
+      <noscript><p style="padding:16px"><a href="https://youtu.be/Aim8UptLln0" target="_blank" rel="noopener">Obejrzyj film na YouTube</a></p></noscript>
+    </div>
+  </div>
+</dialog>
+<dialog class="pop" id="p-firmy-dla" aria-labelledby="p-firmy-dla-h">
+  <div class="pop-bar"><h2 id="p-firmy-dla-h">Dlaczego to dla Ciebie</h2><button type="button" class="pop-x" data-close aria-label="Zamknij okno">&times;</button></div>
+  <div class="pop-body">
+
+    <p>Jeżeli pracujesz na cudzych danych (księgi, dokumentacja pacjentów), nie możesz ich wysyłać do publicznych usług AI na cudzych serwerach. Wynajmuję i utrzymuję lokalne urządzenie z oprogramowaniem, które stoi w Twoim biurze, działa offline i uczy Twój zespół pracować lokalnie. Nie musisz mieć własnego działu IT. Ta usługa działa zawsze offline.</p>
+  
+  </div>
+</dialog>
+<dialog class="pop wide" id="p-firmy-cena" aria-labelledby="p-firmy-cena-h">
+  <div class="pop-bar"><h2 id="p-firmy-cena-h">Ile to kosztuje</h2><button type="button" class="pop-x" data-close aria-label="Zamknij okno">&times;</button></div>
+  <div class="pop-body">
+<p class="lead">Cenę ustalam po rozmowie wstępnej (bezpłatnej). Zależy od pakietu, liczby użytkowników i zakresu usług.</p>
+    <div class="plans">
+      <article class="plan">
+        <h3>Pakiet Biuro</h3>
+        <p class="who">Biura rachunkowe, małe firmy</p>
+        <ul>
+          <li>Urządzenie u Ciebie, bez dostępu do sieci</li>
+          <li>Instalacja i konfiguracja</li>
+          <li>Aktualizacje oprogramowania i baz</li>
+          <li>Serwis i wymiana sprzętu</li>
+          <li>Szkolenie zespołu, 2 godziny</li>
+        </ul>
+      </article>
+      <article class="plan feat">
+        <span class="tag">Dane wrażliwe</span>
+        <h3>Pakiet Gabinet</h3>
+        <p class="who">Gabinety lekarskie i inne zawody zaufania</p>
+        <ul>
+          <li>Wszystko z Pakietu Biuro</li>
+          <li>Konfiguracja pod dokumentację wrażliwą</li>
+          <li>Umowa powierzenia przetwarzania danych</li>
+          <li>Szkolenie zespołu, 2 godziny</li>
+          <li>Procedura czyszczenia danych po sprawie</li>
+        </ul>
+      </article>
+      <article class="plan">
+        <h3>Pakiet Pro</h3>
+        <p class="who">Więcej użytkowników, większe modele</p>
+        <ul>
+          <li>Mocniejsza maszyna</li>
+          <li>Wielu użytkowników naraz</li>
+          <li>Integracja z Twoimi dokumentami</li>
+          <li>Zakres ustalamy po rozmowie wstępnej</li>
+        </ul>
+      </article>
+    </div>
+    <p class="muted small"><strong>Usługi dodatkowe:</strong> indeksowanie archiwum dokumentów firmy, dodatkowa baza branżowa, dodatkowe szkolenie zespołu, wizyta serwisowa na miejscu. Zakup urządzenia zamiast wynajmu wyceniam indywidualnie. Dokładną ofertę przygotowuję po rozmowie wstępnej.</p>
+  
+  </div>
+</dialog>
+<!--/offer:gabinet:desc-->
 
 <template id="book-tpl"><a class="btn" href="#rozmowa" target="_blank" rel="noopener" data-book><img class="gi" src="assets/google-calendar.png" alt="" width="22" height="24">Umów darmową rozmowę wstępną<span class="vh"> (otwiera Kalendarz Google w nowej karcie)</span></a></template>
 
@@ -1268,24 +1302,47 @@ const CONFIG = {
     var m = +range.value, r = rate(m, local.checked);
     val.textContent = r + " zł";
     lab.textContent = describe(m);
-    range.setAttribute("aria-valuetext", describe(m) + ", " + r + " zł netto za godzinę");
+    range.setAttribute("aria-valuetext", describe(m) + ", " + r + " zł za godzinę");
   }
   range.addEventListener("input", update);
   local.addEventListener("change", update);
   update();
 })();
 
-// Film YouTube: odtwarzacz ładuje się dopiero po kliknięciu (youtube-nocookie.com)
-document.querySelectorAll('.yt[data-yt]').forEach(function(box){
-  var b=box.querySelector('button'); if(!b) return;
-  b.addEventListener('click',function(){
-    var f=document.createElement('iframe');
-    f.src='https://www.youtube-nocookie.com/embed/'+box.dataset.yt+'?autoplay=1&rel=0';
-    f.title='Analiza spraw: film';
-    f.allow='accelerometer; autoplay; encrypted-media; picture-in-picture; fullscreen';
-    f.allowFullscreen=true; f.referrerPolicy='strict-origin-when-cross-origin';
-    box.replaceChildren(f);
+/* ---- popupy: otwieranie, zamykanie, odnośniki wewnątrz ---- */
+(function () {
+  function closeAll() { document.querySelectorAll("dialog[open]").forEach(function (d) { d.close(); }); }
+  document.addEventListener("click", function (e) {
+    var o = e.target.closest && e.target.closest("[data-open]");
+    if (o) {
+      var d = document.getElementById(o.getAttribute("data-open"));
+      if (d && d.showModal) { closeAll(); d.showModal(); d.scrollTop = 0; }
+      return;
+    }
+    if (e.target.closest && e.target.closest("[data-close]")) { closeAll(); return; }
+    if (e.target.tagName === "DIALOG") { e.target.close(); return; }
+    var a = e.target.closest && e.target.closest('dialog a[href^="#"]');
+    if (a) closeAll();
   });
+  // zamknięcie okna zatrzymuje film (przywraca przycisk odtwarzania)
+  document.querySelectorAll("dialog").forEach(function (d) {
+    d.addEventListener("close", function () {
+      d.querySelectorAll(".yt[data-yt]").forEach(function (box) { if (box._orig != null) box.innerHTML = box._orig; });
+    });
+  });
+})();
+
+// Film YouTube: odtwarzacz ładuje się dopiero po kliknięciu (youtube-nocookie.com)
+document.querySelectorAll('.yt[data-yt]').forEach(function(box){ box._orig = box.innerHTML; });
+document.addEventListener('click', function(e){
+  var b = e.target.closest && e.target.closest('.yt[data-yt] button'); if(!b) return;
+  var box = b.closest('.yt');
+  var f=document.createElement('iframe');
+  f.src='https://www.youtube-nocookie.com/embed/'+box.dataset.yt+'?autoplay=1&rel=0';
+  f.title='Film Inference Polska';
+  f.allow='accelerometer; autoplay; encrypted-media; picture-in-picture; fullscreen';
+  f.allowFullscreen=true; f.referrerPolicy='strict-origin-when-cross-origin';
+  box.replaceChildren(f);
 });
 </script>
 </body>

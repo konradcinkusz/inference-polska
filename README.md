@@ -1,6 +1,6 @@
 # Inference Polska
 
-Strona internetowa usługi **Inference Polska**: analiza spraw i wrażliwych dokumentów przez prywatną sztuczną inteligencję: lokalny model na maszynie bez dostępu do sieci. Klient dostaje raport w jednym z dwóch formatów: elegancki PDF (wydrukowany albo wysłany zaszyfrowany) lub elegancki HTML w stylu Wikipedii. Po zakończeniu wszystkie dane cyfrowe są usuwane z maszyny. Rozmowa wstępna jest bezpłatna, a analiza spraw kosztuje 150 zł brutto za każde rozpoczęte 50 stron dokumentów. Analizę spraw, prototypy i książki na zamówienie można zlecić także w trybie cloud; strona opisuje, jak ten tryb działa i na jakich warunkach przetwarzane są dane.
+Strona internetowa usługi **Inference Polska**: analiza spraw i wrażliwych dokumentów przez prywatną sztuczną inteligencję: lokalny model na maszynie bez dostępu do sieci. Klient dostaje raport w jednym z dwóch formatów: elegancki PDF (wydrukowany albo wysłany zaszyfrowany) lub elegancki HTML w stylu Wikipedii. Po zakończeniu wszystkie dane cyfrowe są usuwane z maszyny. Rozmowa wstępna jest bezpłatna, a analiza spraw kosztuje 150 zł za każde rozpoczęte 50 stron dokumentów. Analizę spraw, prototypy i książki na zamówienie można zlecić także w trybie cloud; strona opisuje, jak ten tryb działa i na jakich warunkach przetwarzane są dane.
 
 ## Szablony strony
 
@@ -23,11 +23,12 @@ Na komputerze strona ma stałą lewą kolumnę (nazwa, jedno zdanie opisu, menu,
 
 W jednej chwili widać jeden ekran z jedną informacją. Na górze jest delikatny pasek: nazwa, cztery pozycje menu (Oferta, Tryb pracy, O mnie, Kontakt) i przełącznik motywu. Ekrany leżą jeden pod drugim, każdy na całą wysokość okna, a przewijanie (kółko, gest, klawiatura, strzałka ↓ na dole ekranu) przeskakuje do następnego ekranu (CSS `scroll-snap`). Menu i adres w pasku przeglądarki podążają za bieżącym ekranem, więc można podać odnośnik do konkretnego ekranu (`#analiza`, `#cena`).
 
-Są trzy rodzaje ekranów:
+Są cztery rodzaje ekranów (plus okna informacyjne, patrz niżej):
 
 - **Ekran z jednym przyciskiem** (strona główna, każda usługa, kontakt): nagłówek, najwyżej jedno zdanie i jeden duży przycisk „Umów darmową rozmowę wstępną”. Pod spodem drobnym drukiem cena i delikatne odnośniki do szczegółów.
 - **Ekran ze szczegółem** (np. „Jak to działa”, „Cena”): jeden temat. Na górze powrót do usługi, na dole przycisk rezerwacji. Najdłuższe tematy są podzielone na części (np. `#jak` i `#jak-2`), tak że na komputerze (okno o wysokości 800 px) każdy ekran mieści się w oknie. Na niższych oknach i na telefonie część ekranów jest wyższa: przewija się wewnątrz, a przewijanie klawiaturą zatrzymuje się także na dole takiego ekranu (znacznik `.end`), więc nic się nie pomija.
-- **Ekran wyboru** (`#oferta`): lista usług.
+- **Ekran wyboru** (`#oferta`): lista usług, a pod nią szybkie odnośniki „Najczęściej szukasz”.
+- **Okna informacyjne (popupy)**: „Analiza spraw” i „Prywatna sztuczna inteligencja w Twoim gabinecie” mają na ekranie tylko trzy przyciski otwierające okno (`<dialog class="pop">`): Film, Przykłady / Dlaczego to dla Ciebie, Ile to kosztuje. Cena nie jest widoczna, dopóki ktoś nie kliknie „Ile to kosztuje”. Pozostałe tematy analizy (jak to działa, analiza offline, raport, granice usługi, zwykły czat AI) są dostępne z linków w stopce ekranu „Kontakt”. Przycisk otwiera okno atrybutem `data-open="id-okna"`. Diagram „Droga Twojego materiału” (`#diagram`) pozostaje osobnym ekranem tuż pod usługą.
 
 Powrót, przycisk na dole, strzałki i lista szczegółów pod usługą powstają w skrypcie z atrybutów `data-parent` i `data-title` ekranu, w kolejności z pliku. Nowy ekran ze szczegółem to nowy `<section class="view" id="..." data-parent="..." data-title="...">`. Ekran usługi trzeba objąć tym samym znacznikiem `<!--offer:KLUCZ:desc-->` … `<!--/offer:KLUCZ:desc-->` co jej pozostałe ekrany, bo od niego zależy ukrywanie zmiennymi `SHOW_*`. Bez JavaScriptu ekrany są widoczne jeden pod drugim.
 
@@ -37,9 +38,9 @@ Powrót, przycisk na dole, strzałki i lista szczegółów pod usługą powstaj�
 |---|---|
 | Strona główna (`#top`) | |
 | Oferta (`#oferta`) | sześć usług z ceną lub „wycena po rozmowie” |
-| Analiza spraw (`#analiza`) | `#jak`, `#jak-2`, `#rozwiazanie`, `#rozwiazanie-2`, `#diagram`, `#raport`, `#raport-uklad`, `#cena`, `#przyklady`, `#granice`, `#problem`, `#problem-2` |
+| Analiza spraw (`#analiza`) | ekran `#diagram`; okna: `p-film`, `p-przyklady`, `p-cena`, `p-jak`, `p-offline`, `p-raport`, `p-granice`, `p-czat` |
 | Szybkie pytanie (`#pytanie`) | `#pytanie-jak` |
-| Prywatna sztuczna inteligencja w Twoim gabinecie (`#firmy`) | `#firmy-jak`, `#pakiety` |
+| Prywatna sztuczna inteligencja w Twoim gabinecie (`#firmy`) | okna: `p-firmy-film`, `p-firmy-dla`, `p-firmy-cena` |
 | Prototyp w tydzień (`#poc`) | `#poc-jak` |
 | Książka na zamówienie (`#ksiazka`) | `#ksiazka-opis`, `#ksiazka-kroki` |
 | Kontrakt programistyczny (`#kontrakt`) | `#stawka`, `#stawka-zasady` |
@@ -48,7 +49,7 @@ Powrót, przycisk na dole, strzałki i lista szczegółów pod usługą powstaj�
 | Kontakt (`#rozmowa`) | |
 
 - **Przykładowe sprawy** (`#przyklady`): 16 fikcyjnych akt w czterech grupach, z linkami do PDF-ów w `assets/akta/`. Pliki są kopią wydania `pdfs` z repozytorium `iference-polska-use-cases`; po zmianie akt trzeba je skopiować ponownie.
-- **Kontrakt programistyczny** (`#stawka`): praca godzinowa, 180 zł netto za godzinę przy kontrakcie do 3 miesięcy, 125 zł netto przy kontrakcie na 3 lata (maksymalna długość), długość kontraktu wybiera się suwakiem (1–36 miesięcy), a stawka maleje liniowo między tymi punktami (orientacyjnie; dokładną ustala się po rozmowie wstępnej). Koszt tokenów ponosi wykonawca. Pole „Inferencja lokalna” dolicza 15% (słabsze modele, większy wkład programisty w weryfikację, dłuższe generowanie, zużycie energii). Stałe stawek są na początku skryptu kontraktu w szablonie (`RATE_SHORT`, `RATE_LONG`, `LOCAL_SURCHARGE`).
+- **Kontrakt programistyczny** (`#stawka`): praca godzinowa, 180 zł za godzinę przy kontrakcie do 3 miesięcy, 125 zł przy kontrakcie na 3 lata (maksymalna długość), długość kontraktu wybiera się suwakiem (1–36 miesięcy), a stawka maleje liniowo między tymi punktami (orientacyjnie; dokładną ustala się po rozmowie wstępnej). Koszt tokenów ponosi wykonawca. Pole „Inferencja lokalna” dolicza 15% (słabsze modele, większy wkład programisty w weryfikację, dłuższe generowanie, zużycie energii). Stałe stawek są na początku skryptu kontraktu w szablonie (`RATE_SHORT`, `RATE_LONG`, `LOCAL_SURCHARGE`).
 - **Tryb pracy** (`#tryb`): droższy *fully private* na modelach lokalnych i tańszy *cloud*, dla analizy spraw, prototypu, książki i kontraktu programistycznego (nie dla wynajmu urządzenia w gabinecie). Ekrany `#cloud…`: kroki, warunki przetwarzania, porównanie z kontem indywidualnym, kiedy nie cloud.
 - **Kontakt** (`#rozmowa`): duży przycisk do rezerwacji w Kalendarzu Google i adres e-mail. Każdy przycisk „Umów darmową rozmowę wstępną” na stronie prowadzi wprost do rezerwacji (nowa karta, ikona Kalendarza Google). Kliknięcie adresu e-mail nie otwiera programu pocztowego, tylko kopiuje adres do schowka i pokazuje duży napis.
 
@@ -91,7 +92,7 @@ Każdą usługę z oferty można ukryć bez zmiany kodu, zmiennymi repozytorium 
 |---|---|
 | `SHOW_ANALIZA` | wiersz „Analiza spraw” na liście oferty |
 | `SHOW_ANALIZA_OPIS` | ekran „Analiza spraw” (`#analiza`) i wszystkie jego ekrany szczegółów, w tym „Przykładowe sprawy” (`#przyklady`) |
-| `SHOW_PYTANIE`, `SHOW_PYTANIE_OPIS` | wiersz i ekrany „Szybkie pytanie” (`#pytanie`): odpowiedź na jedno pytanie, 100 zł brutto, zawsze offline |
+| `SHOW_PYTANIE`, `SHOW_PYTANIE_OPIS` | wiersz i ekrany „Szybkie pytanie” (`#pytanie`): odpowiedź na jedno pytanie, 100 zł, zawsze offline |
 | `SHOW_GABINET`, `SHOW_GABINET_OPIS` | wiersz i ekrany „Prywatna sztuczna inteligencja w Twoim gabinecie” (`#firmy`) |
 | `SHOW_PROTOTYP`, `SHOW_PROTOTYP_OPIS` | wiersz i ekrany „Prototyp w tydzień” (`#poc`) |
 | `SHOW_KSIAZKA`, `SHOW_KSIAZKA_OPIS` | wiersz i ekrany „Książka na zamówienie” (`#ksiazka`) |
