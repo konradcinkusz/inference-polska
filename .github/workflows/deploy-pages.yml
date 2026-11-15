@@ -4,12 +4,6 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
-  # Sprawdzenie, że dokumenty (docs/papers) się budują, zanim trafią na stronę.
-  # Ścieżka ogranicza koszt: LaTeX uruchamia się tylko przy zmianie dokumentów.
-  pull_request:
-    paths:
-      - 'docs/papers/**'
-      - '.github/workflows/deploy-pages.yml'
 
 permissions:
   contents: read
@@ -21,29 +15,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # PDF-y dokumentów (regulamin, pilotaż) budowane z .tex w docs/papers.
-  # Nic nie jest commitowane: PDF powstaje w każdym przebiegu.
-  pdf:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: xu-cheng/latex-action@v4
-        with:
-          root_file: regulamin-inference-polska.tex
-          working_directory: docs/papers
-      - uses: xu-cheng/latex-action@v4
-        with:
-          root_file: pilotaz-cennik-umowa.tex
-          working_directory: docs/papers
-      - uses: actions/upload-artifact@v4
-        with:
-          name: dokumenty-pdf
-          path: docs/papers/*.pdf
-          if-no-files-found: error
-
   deploy:
-    if: github.event_name != 'pull_request'
-    needs: pdf
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -66,10 +38,14 @@ jobs:
           SHOW_KONTRAKT: ${{ vars.SHOW_KONTRAKT }}
           SHOW_KONTRAKT_OPIS: ${{ vars.SHOW_KONTRAKT_OPIS }}
         run: python3 scripts/build-site.py _site
-      - uses: actions/download-artifact@v4
-        with:
-          name: dokumenty-pdf
-          path: _site/dokumenty
+      - name: Pobierz PDF-y dokumentów z wydania docs-latest
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          mkdir -p _site/dokumenty
+          gh release download docs-latest --pattern '*.pdf' --dir _site/dokumenty \
+            || echo "::warning::Brak wydania docs-latest: linki do PDF-ów nie zadziałają. Uruchom ręcznie: Build docs PDF."
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

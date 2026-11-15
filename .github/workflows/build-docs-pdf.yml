@@ -1,0 +1,53 @@
+name: Build docs PDF
+
+# Ręczne budowanie PDF-ów dokumentów (docs/papers) z LaTeX-a.
+# Uruchamia się tylko przez Actions -> Build docs PDF -> Run workflow.
+# Wynik idzie do wydania GitHub "docs-latest" (załączniki *.pdf), skąd
+# deploy strony pobiera PDF-y. Deploy sam PDF-ów nie buduje.
+# Uwaga: budowanie nie działa przy każdym commicie, więc błąd w LaTeX-u
+# wychodzi dopiero przy ręcznym uruchomieniu.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: xu-cheng/latex-action@v4
+        with:
+          root_file: regulamin-inference-polska.tex
+          working_directory: docs/papers
+      - uses: xu-cheng/latex-action@v4
+        with:
+          root_file: pilotaz-cennik-umowa.tex
+          working_directory: docs/papers
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dokumenty-pdf
+          path: docs/papers/*.pdf
+          if-no-files-found: error
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dokumenty-pdf
+          path: pdf
+      - name: Opublikuj PDF-y w wydaniu docs-latest
+        run: |
+          gh release view docs-latest >/dev/null 2>&1 || \
+            gh release create docs-latest --latest=false \
+              --title "Dokumenty (ostatnia wersja PDF)" \
+              --notes "Wydanie techniczne: PDF-y dokumentów, pobierane przez deploy strony. Aktualizowane przez workflow Build docs PDF."
+          gh release upload docs-latest pdf/*.pdf --clobber
