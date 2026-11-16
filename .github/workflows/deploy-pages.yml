@@ -25,6 +25,13 @@ jobs:
       - name: Prepare site
         env:
           SITE_TEMPLATE: ${{ vars.SITE_TEMPLATE }}
+          SITE_URL: ${{ vars.SITE_URL }}
+          FIRMA_NAZWA_CEIDG: ${{ vars.FIRMA_NAZWA_CEIDG }}
+          NIP: ${{ vars.NIP }}
+          REGON: ${{ vars.REGON }}
+          ADRES_BIURA: ${{ vars.ADRES_BIURA }}
+          TELEFON: ${{ vars.TELEFON }}
+          EMAIL_KONTAKT: ${{ vars.EMAIL_KONTAKT }}
           SHOW_ANALIZA: ${{ vars.SHOW_ANALIZA }}
           SHOW_ANALIZA_OPIS: ${{ vars.SHOW_ANALIZA_OPIS }}
           SHOW_PYTANIE: ${{ vars.SHOW_PYTANIE }}
@@ -46,6 +53,8 @@ jobs:
           mkdir -p _site/dokumenty
           gh release download docs-latest --pattern '*.pdf' --dir _site/dokumenty \
             || echo "::warning::Brak wydania docs-latest: linki do PDF-ów nie zadziałają. Uruchom ręcznie: Build docs PDF."
+      - name: Sprawdź odnośniki lokalne (przerywa wdrożenie przy brakującym pliku)
+        run: python3 scripts/check-links.py _site
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
