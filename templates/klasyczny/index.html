@@ -200,6 +200,19 @@ summary:hover h3{color:var(--accent)}
 .toc ol{margin:0;padding-left:1.4em}
 .toc li{padding:2px 0}
 
+
+/* popupy */
+dialog.pop{width:calc(100% - 24px);max-width:760px;max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);overflow:auto;padding:18px 22px 24px;border:1px solid var(--rule-strong);border-radius:8px;background:var(--paper);color:var(--text)}
+dialog.pop::backdrop{background:rgba(0,0,0,.55)}
+.pop-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px}
+.pop-head h3{font-size:1.2rem}
+.pop-x{flex:none;font:inherit;font-size:1.6rem;line-height:1;width:42px;height:42px;border:1px solid var(--rule-strong);border-radius:6px;background:transparent;color:var(--ink);cursor:pointer}
+.pop-x:hover{border-color:var(--ink)}
+.pop-row{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;margin:22px 0 0}
+.pop-row .btn{min-height:40px;padding:6px 14px;font-size:.95rem}
+html:not(.js) dialog.pop{display:block;position:static;margin:16px 0;max-width:none;max-height:none}
+html:not(.js) .pop-x,html:not(.js) .pop-row{display:none}
+
 /* przykładowe sprawy */
 .case-tag{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
 .case-tag b{color:var(--warn)}
@@ -385,6 +398,7 @@ footer p{margin:0 0 6px}
     <p class="note"><strong>Granice usługi.</strong> To analiza i uporządkowanie Twojego materiału ze wskazaniem źródeł. To nie jest porada prawna, medyczna ani podatkowa.</p>
 <!--/offer:analiza:desc-->
 <!--offer:analiza:desc-->
+    <p class="pop-row"><strong>Tryb online:</strong> <button type="button" class="btn ghost" data-open="online-jak">Jak działa</button> <button type="button" class="btn ghost" data-open="online-warunki">Warunki</button> <button type="button" class="btn ghost" data-open="online-porownanie">Porównanie z czatem AI</button> <button type="button" class="btn ghost" data-open="online-kiedy-nie">Kiedy nie online</button></p>
     <div class="mores" id="tryb">
       <details class="more" id="diagram-online">
         <summary><h3>Droga materiału w trybie online (diagram)</h3></summary>
@@ -397,13 +411,11 @@ footer p{margin:0 0 6px}
               <li><span class="box">Moja weryfikacja</span><span class="cap">sprawdzam analizę</span></li>
               <li><span class="box">Raport</span><span class="cap">PDF (wydruk lub zaszyfrowany) albo HTML</span></li>
             </ol>
-            <figcaption>Tak wygląda analiza w trybie online, tylko dla dokumentów niewrażliwych. Treść trafia przez API do dostawcy modelu (Anthropic, USA), a zbędne dane osobowe usuwam wcześniej, o ile zakres na to pozwala. Dostawca domyślnie nie trenuje na niej modeli. Materiał u siebie usuwam po zakończeniu. <a href="#online-jak">Jak dokładnie działa tryb online</a>.</figcaption>
+            <figcaption>Tak wygląda analiza w trybie online, tylko dla dokumentów niewrażliwych. Treść trafia przez API do dostawcy modelu (Anthropic, USA), a zbędne dane osobowe usuwam wcześniej, o ile zakres na to pozwala. Dostawca domyślnie nie trenuje na niej modeli. Materiał u siebie usuwam po zakończeniu. <a href="#online-jak">Jak działa tryb online</a>.</figcaption>
           </figure>
         </div>
       </details>
-      <details class="more online-body" id="online-jak">
-        <summary><h3>Jak dokładnie działa tryb online</h3></summary>
-        <div class="body">
+      <dialog class="pop online-body" id="online-jak" aria-labelledby="online-jak-t"><div class="pop-head"><h3 id="online-jak-t">Jak dokładnie działa tryb online</h3><button type="button" class="pop-x" data-close aria-label="Zamknij">&times;</button></div><div class="body pop-body">
       <p class="muted small" style="margin:0">W trybie online korzystam z modeli Claude firmy Anthropic przez API, na warunkach komercyjnych. Używam modeli Claude Opus 5.5, Claude Sonnet 5.5 i Claude Haiku 5.5.</p>
       <ol>
         <li>Dostaję od Ciebie materiał i ustalamy zakres na piśmie.</li>
@@ -411,11 +423,8 @@ footer p{margin:0 0 6px}
         <li>Moje oprogramowanie wysyła treść szyfrowanym połączeniem do modelu językowego przez API dostawcy. Nie wklejam materiału do okna czatu na prywatnym koncie.</li>
         <li>Po zakończeniu usuwam materiał u siebie. U dostawcy treść jest usuwana zgodnie z jego standardowym okresem retencji w API: do 30 dni.</li>
       </ol>
-        </div>
-      </details>
-      <details class="more online-body" id="online-warunki">
-        <summary><h3>Warunki przetwarzania danych w trybie online</h3></summary>
-        <div class="body">
+      </div></dialog>
+      <dialog class="pop online-body" id="online-warunki" aria-labelledby="online-warunki-t"><div class="pop-head"><h3 id="online-warunki-t">Warunki przetwarzania danych w trybie online</h3><button type="button" class="pop-x" data-close aria-label="Zamknij">&times;</button></div><div class="body pop-body">
       <ul>
         <li>Korzystam z API na warunkach komercyjnych z umową powierzenia przetwarzania danych (DPA). Jest ona częścią <a href="https://www.anthropic.com/legal/commercial-terms" target="_blank" rel="noopener">warunków komercyjnych</a> dostawcy i obowiązuje od ich akceptacji.</li>
         <li>W umowie z Tobą dostawca modelu jest wskazany z nazwy jako podwykonawca przetwarzania, a Ty wyrażasz na to zgodę przed startem.</li>
@@ -424,11 +433,8 @@ footer p{margin:0 0 6px}
         <li>Zakres, okres przechowywania i sposób usunięcia danych dostajesz na piśmie.</li>
       </ul>
       <p class="srcs">Pozostałe źródła: <a href="https://privacy.claude.com/en/articles/9267385-does-anthropic-act-as-a-data-processor-or-controller" target="_blank" rel="noopener">rola dostawcy jako podmiotu przetwarzającego</a>, <a href="https://privacy.claude.com/en/articles/7996862-how-do-i-view-and-sign-your-data-processing-addendum-dpa" target="_blank" rel="noopener">umowa powierzenia (DPA) do warunków komercyjnych</a>, <a href="https://support.claude.com/en/articles/15707726-using-claude-for-legal-work-privilege-confidentiality-and-how-to-think-about-configuration" target="_blank" rel="noopener">retencja w API</a>, <a href="https://platform.claude.com/docs/en/manage-claude/api-and-data-retention" target="_blank" rel="noopener">retencja danych w dokumentacji API</a>, <a href="https://platform.claude.com/docs/en/manage-claude/data-residency" target="_blank" rel="noopener">regiony przetwarzania</a>, <a href="https://www.anthropic.com/legal/data-processing-addendum" target="_blank" rel="noopener">treść DPA</a>.</p>
-        </div>
-      </details>
-      <details class="more online-body" id="online-porownanie">
-        <summary><h3>Czym to się różni od wklejenia dokumentów do własnego czatu AI</h3></summary>
-        <div class="body">
+      </div></dialog>
+      <dialog class="pop online-body" id="online-porownanie" aria-labelledby="online-porownanie-t"><div class="pop-head"><h3 id="online-porownanie-t">Czym to się różni od wklejenia dokumentów do własnego czatu AI</h3><button type="button" class="pop-x" data-close aria-label="Zamknij">&times;</button></div><div class="body pop-body">
       <p>Konsumenckie czaty AI, takie jak ChatGPT, przetwarzają to, co im wyślesz, na serwerach swojego dostawcy, często w USA. Nie wklejaj tam dokumentów swojej sprawy. Poniżej porównanie mojego trybu online z indywidualnym kontem w czacie.</p>
       <table class="cmp">
         <caption>Porównanie dotyczy planów jednego dostawcy, którego używam: Anthropic (Claude).</caption>
@@ -444,18 +450,14 @@ footer p{margin:0 0 6px}
         </tbody>
       </table>
       <p class="srcs">Źródła: <a href="https://privacy.claude.com/en/articles/7996868-is-my-data-used-for-model-training" target="_blank" rel="noopener">trenowanie modeli w usługach komercyjnych</a> oraz <a href="https://www.anthropic.com/news/updates-to-our-consumer-terms" target="_blank" rel="noopener">zmiany w warunkach konsumenckich</a>. Stan na listopad 2026.</p>
-        </div>
-      </details>
-      <details class="more online-body" id="online-kiedy-nie">
-        <summary><h3>Kiedy nie wybierać trybu online</h3></summary>
-        <div class="body">
+      </div></dialog>
+      <dialog class="pop online-body" id="online-kiedy-nie" aria-labelledby="online-kiedy-nie-t"><div class="pop-head"><h3 id="online-kiedy-nie-t">Kiedy nie wybierać trybu online</h3><button type="button" class="pop-x" data-close aria-label="Zamknij">&times;</button></div><div class="body pop-body">
       <ul>
         <li>Dokumentacja medyczna, dane objęte tajemnicą zawodową (adwokacką, radcowską, lekarską, doradcy podatkowego) i dane szczególnych kategorii: wyłącznie tryb offline.</li>
         <!--offer:gabinet:desc--><li>„Prywatna sztuczna inteligencja w Twoim gabinecie” działa zawsze offline i nie ma wyboru trybu.</li><!--/offer:gabinet:desc-->
         <li>Jeśli nie chcesz, żeby treść opuściła Polskę: tryb offline.</li>
       </ul>
-        </div>
-      </details>
+      </div></dialog>
       <details class="more" id="offline">
         <summary><h3>Analiza offline: jak wygląda i dla kogo</h3></summary>
         <div class="body">
@@ -788,13 +790,7 @@ footer p{margin:0 0 6px}
           <div class="fact"><b>3</b><span>recenzowane publikacje naukowe o LLM i agentach</span></div>
           <div class="fact"><b>mgr inż.</b><span>Politechnika Warszawska</span></div>
         </div>
-        <details class="more"><summary><h3>Publikacje</h3></summary><div class="body">
-        <ul class="pubs">
-          <li>Cognitive Agents Powered by Large Language Models for Agile Software Project Management<span>Electronics, vol. 14, nr 1, 2025 · DOI: [[TODO: doi_publikacja_1]]</span></li>
-          <li>Towards LLM-augmented Multiagent Systems for Agile Software Engineering<span>IEEE/ACM ASE ’24, Sacramento, 2024 · DOI: [[TODO: doi_publikacja_2]]</span></li>
-          <li>Communicative Agents for Software Project Management and System Development<span>MDAI 2024, Tokio, 2024 · DOI: [[TODO: doi_publikacja_3]]</span></li>
-        </ul>
-        </div></details>
+        <p class="pop-row"><button type="button" class="btn ghost" data-open="o-mnie-film">Film o mnie</button><button type="button" class="btn ghost" data-open="o-mnie-publikacje">Publikacje</button></p>
         <div class="links">
           <a href="https://konradcinkusz.github.io" rel="noopener">Strona osobista</a>
           <a href="https://www.linkedin.com/in/konrad-cinkusz-378127227/" rel="noopener">LinkedIn</a>
@@ -804,6 +800,17 @@ footer p{margin:0 0 6px}
       </div>
     </div>
   </div>
+    <dialog class="pop" id="o-mnie-film" aria-labelledby="o-mnie-film-t"><div class="pop-head"><h3 id="o-mnie-film-t">Konrad Cinkusz o sobie</h3><button type="button" class="pop-x" data-close aria-label="Zamknij">&times;</button></div>
+      <div class="yt" data-yt="GKZ-sEoiG9I">
+        <button type="button" aria-label="Odtwórz film: Konrad Cinkusz - o mnie"><span class="yt-play" aria-hidden="true"></span><span>Obejrzyj film: Konrad Cinkusz o sobie</span><small>Po kliknięciu załaduje się odtwarzacz YouTube (tryb bez cookies). Do tego czasu strona nie łączy się z YouTube.</small></button>
+        <noscript><p style="padding:16px"><a href="https://youtu.be/GKZ-sEoiG9I" target="_blank" rel="noopener">Obejrzyj film na YouTube</a></p></noscript>
+      </div></dialog>
+    <dialog class="pop" id="o-mnie-publikacje" aria-labelledby="o-mnie-publikacje-t"><div class="pop-head"><h3 id="o-mnie-publikacje-t">Publikacje</h3><button type="button" class="pop-x" data-close aria-label="Zamknij">&times;</button></div>
+      <ul class="pubs">
+          <li>Cognitive Agents Powered by Large Language Models for Agile Software Project Management<span>Electronics, vol. 14, nr 1, 2025 · DOI: [[TODO: doi_publikacja_1]]</span></li>
+          <li>Towards LLM-augmented Multiagent Systems for Agile Software Engineering<span>IEEE/ACM ASE ’24, Sacramento, 2024 · DOI: [[TODO: doi_publikacja_2]]</span></li>
+          <li>Communicative Agents for Software Project Management and System Development<span>MDAI 2024, Tokio, 2024 · DOI: [[TODO: doi_publikacja_3]]</span></li>
+        </ul></dialog>
 </section>
 
 <section id="rozmowa">
@@ -959,6 +966,8 @@ const CONFIG = {
     var id = decodeURIComponent(location.hash.slice(1));
     var el = id && document.getElementById(id);
     if (!el) return;
+    var dlg = el.closest("dialog");
+    if (dlg && dlg.showModal) { if (!dlg.open) dlg.showModal(); return; }
     var d = el.closest("details"), opened = false;
     while (d) { if (!d.open) { d.open = true; opened = true; } d = d.parentElement && d.parentElement.closest("details"); }
     if (opened) el.scrollIntoView();
@@ -971,18 +980,42 @@ const CONFIG = {
   reveal();
 })();
 
-// Film YouTube: odtwarzacz ładuje się dopiero po kliknięciu (youtube-nocookie.com)
-document.querySelectorAll('.yt[data-yt]').forEach(function(box){
+/* popupy: przyciski [data-open], zamykanie krzyżykiem, klawiszem Esc i kliknięciem w tło */
+(function () {
+  document.addEventListener("click", function (e) {
+    var t = e.target;
+    var o = t.closest && t.closest("[data-open]");
+    if (o) { var d = document.getElementById(o.getAttribute("data-open")); if (d && d.showModal && !d.open) d.showModal(); return; }
+    var c = t.closest && t.closest("[data-close]");
+    if (c) { c.closest("dialog").close(); return; }
+    if (t.tagName === "DIALOG" && t.classList.contains("pop")) {
+      var r = t.getBoundingClientRect();
+      if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) t.close();
+    }
+  });
+  document.querySelectorAll("dialog.pop").forEach(function (d) {
+    d.addEventListener("close", function () {
+      var y = d.querySelector(".yt[data-yt]");
+      if (y && y._reset) { y._reset(); y._reset = null; }
+    });
+  });
+})();
+
+// Film YouTube: odtwarzacz ładuje się dopiero po kliknięciu (youtube-nocookie.com); zamknięcie popupu przywraca przycisk
+function initYt(box){
   var b=box.querySelector('button'); if(!b) return;
+  var orig=box.innerHTML;
   b.addEventListener('click',function(){
     var f=document.createElement('iframe');
     f.src='https://www.youtube-nocookie.com/embed/'+box.dataset.yt+'?autoplay=1&rel=0';
     f.title=b.getAttribute('aria-label')||'Film';
     f.allow='accelerometer; autoplay; encrypted-media; picture-in-picture; fullscreen';
     f.allowFullscreen=true; f.referrerPolicy='strict-origin-when-cross-origin';
+    box._reset=function(){ box.innerHTML=orig; initYt(box); };
     box.replaceChildren(f);
   });
-});
+}
+document.querySelectorAll('.yt[data-yt]').forEach(initYt);
 </script>
 </body>
 </html>
