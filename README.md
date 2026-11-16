@@ -1,120 +1,73 @@
 # Inference Polska
 
-Strona internetowa usługi **Inference Polska**: analiza spraw i wrażliwych dokumentów przez prywatną sztuczną inteligencję: lokalny model na maszynie bez dostępu do sieci. Klient dostaje raport w jednym z dwóch formatów: elegancki PDF (wydrukowany albo wysłany zaszyfrowany) lub elegancki HTML w stylu Wikipedii. Po zakończeniu wszystkie dane cyfrowe są usuwane z maszyny. Rozmowa wstępna jest bezpłatna, a analiza spraw kosztuje 150 zł za każde rozpoczęte 50 stron dokumentów. Analizę spraw, prototypy i książki na zamówienie można zlecić także w trybie cloud; strona opisuje, jak ten tryb działa i na jakich warunkach przetwarzane są dane.
+Strona internetowa usługi **Inference Polska**: gotowy raport z analizy sprawy na podstawie dokumentów, zamawiany zdalnie. Domyślnie analiza odbywa się w **trybie online** (treść trafia szyfrowanym połączeniem przez API do dostawcy modelu, Anthropic, USA; domyślnie nie służy do trenowania modeli, u dostawcy jest przechowywana do 30 dni). **Tryb offline**, bez wysyłania czegokolwiek poza biuro, jest dostępny jako opcja i jest jedyny dla dokumentacji medycznej, danych objętych tajemnicą zawodową i danych szczególnych kategorii. Rozmowa wstępna jest bezpłatna i zdalna (Google Meet). Ceny: 150 zł brutto (online) albo 450 zł brutto (offline) za każde rozpoczęte 50 stron, w cenie raport i 3 rundy pytań, standardowo do 7 dni.
 
-## Szablony strony
+## Szablon i układ
 
-Ta sama treść jest dostępna w dwóch układach. Wybiera się go zmienną repozytorium `SITE_TEMPLATE` (**Settings → Secrets and variables → Actions → Variables**):
+Jest jeden szablon: `templates/klasyczny/index.html` (HTML, CSS i JavaScript w jednym pliku, bez zależności). Układ: stała lewa kolumna (nazwa, menu, przycisk rezerwacji), po prawej treść: nagłówek z ceną i zdaniem o trybie domyślnym, oferta i cena, krótka granica usługi, zwijane szczegóły, przykładowy raport (ukryty, patrz niżej), trzy kroki, cztery przykłady spraw, usługi dodatkowe (według zmiennych `SHOW_*`), „Kim jestem”, kontakt. Szczegóły (droga materiału online, jak działa tryb online, warunki, porównanie z własnym czatem AI, kiedy nie online, analiza offline, układ raportu, granice usługi) są w zwijanych blokach `<details>`; odnośnik do kotwicy wewnątrz zwiniętego bloku sam go otwiera. Drugi szablon („ekrany”) został usunięty; zmienna `SITE_TEMPLATE`, jeśli jest ustawiona, musi mieć wartość `klasyczny`.
 
-| Wartość | Układ | Plik |
-|---|---|---|
-| `klasyczny` (domyślnie, także gdy zmiennej nie ma) | stała lewa kolumna i długa strona z sekcjami oraz zwijanymi blokami | `templates/klasyczny/index.html` |
-| `ekrany` | jeden ekran z jedną informacją w jednej chwili; przewijanie przechodzi do następnego ekranu | `templates/ekrany/index.html` |
+Sekcja „Przykładowy raport” jest w szablonie ukryta komentarzem HTML (znacznik `[[TODO: przykładowy_raport_pdf]]`). Aby ją odkryć: dodaj prawdziwe raporty PDF do `assets/raporty/`, usuń komentarz i wpisz nazwy plików. Nie generuj fikcyjnych raportów.
 
-Inna wartość (np. literówka) przerywa publikację z komunikatem w logu. Zmiana zmiennej **nie uruchamia** publikacji: po zmianie uruchom ręcznie **Actions → Deploy to GitHub Pages → Run workflow**. Zmienne `SHOW_*` (niżej) działają w obu szablonach.
-
-Treść jest w obu plikach osobno. Zmiana tekstu, ceny, `CONFIG` (e-mail, adres rezerwacji) albo stawek kontraktu wymaga edycji obu szablonów.
-
-## Układ szablonu „klasyczny”
-
-Na komputerze strona ma stałą lewą kolumnę (nazwa, jedno zdanie opisu, menu, przycisk rozmowy wstępnej) i treść po prawej. Na telefonie kolumna staje się górnym paskiem z rozwijanym menu. Jeden krój pisma, cienkie linie zamiast kart, bez cieni i ikon. Szczegóły (kroki, układ raportu, granice usługi, warunki trybu cloud, publikacje) są w zwijanych blokach; odnośnik do kotwicy wewnątrz zwiniętego bloku sam go otwiera.
-
-## Układ szablonu „ekrany”
-
-W jednej chwili widać jeden ekran z jedną informacją. Na górze jest delikatny pasek: nazwa, cztery pozycje menu (Oferta, Tryb pracy, O mnie, Kontakt) i przełącznik motywu. Ekrany leżą jeden pod drugim, każdy na całą wysokość okna, a przewijanie (kółko, gest, klawiatura, strzałka ↓ na dole ekranu) przeskakuje do następnego ekranu (CSS `scroll-snap`). Menu i adres w pasku przeglądarki podążają za bieżącym ekranem, więc można podać odnośnik do konkretnego ekranu (`#analiza`, `#cena`).
-
-Są cztery rodzaje ekranów (plus okna informacyjne, patrz niżej):
-
-- **Ekran z jednym przyciskiem** (strona główna, każda usługa, kontakt): nagłówek, najwyżej jedno zdanie i jeden duży przycisk „Umów darmową rozmowę wstępną”. Pod spodem drobnym drukiem cena i delikatne odnośniki do szczegółów.
-- **Ekran ze szczegółem** (np. „Jak to działa”, „Cena”): jeden temat. Na górze powrót do usługi, na dole przycisk rezerwacji. Najdłuższe tematy są podzielone na części (np. `#jak` i `#jak-2`), tak że na komputerze (okno o wysokości 800 px) każdy ekran mieści się w oknie. Na niższych oknach i na telefonie część ekranów jest wyższa: przewija się wewnątrz, a przewijanie klawiaturą zatrzymuje się także na dole takiego ekranu (znacznik `.end`), więc nic się nie pomija.
-- **Ekran wyboru** (`#oferta`): lista usług, a pod nią szybkie odnośniki „Najczęściej szukasz”.
-- **Okna informacyjne (popupy)**: „Analiza spraw” i „Prywatna sztuczna inteligencja w Twoim gabinecie” mają na ekranie tylko trzy przyciski otwierające okno (`<dialog class="pop">`): Film, Przykłady / Dlaczego to dla Ciebie, Ile to kosztuje. Cena nie jest widoczna, dopóki ktoś nie kliknie „Ile to kosztuje”. Pozostałe tematy analizy (jak to działa, analiza offline, raport, granice usługi, zwykły czat AI) są dostępne z linków w stopce ekranu „Kontakt”. Przycisk otwiera okno atrybutem `data-open="id-okna"`. Diagram „Droga Twojego materiału” (`#diagram`) pozostaje osobnym ekranem tuż pod usługą.
-
-Powrót, przycisk na dole, strzałki i lista szczegółów pod usługą powstają w skrypcie z atrybutów `data-parent` i `data-title` ekranu, w kolejności z pliku. Nowy ekran ze szczegółem to nowy `<section class="view" id="..." data-parent="..." data-title="...">`. Ekran usługi trzeba objąć tym samym znacznikiem `<!--offer:KLUCZ:desc-->` … `<!--/offer:KLUCZ:desc-->` co jej pozostałe ekrany, bo od niego zależy ukrywanie zmiennymi `SHOW_*`. Bez JavaScriptu ekrany są widoczne jeden pod drugim.
-
-## Zawartość (ekrany i sekcje)
-
-| Ekran lub sekcja | Szczegóły (ekrany podrzędne; w szablonie „klasycznym” to zwijane bloki) |
-|---|---|
-| Strona główna (`#top`) | |
-| Oferta (`#oferta`) | sześć usług z ceną lub „wycena po rozmowie” |
-| Analiza spraw (`#analiza`) | ekran `#diagram`; okna: `p-film`, `p-przyklady`, `p-cena`, `p-jak`, `p-offline`, `p-raport`, `p-granice`, `p-czat` |
-| Szybkie pytanie (`#pytanie`) | `#pytanie-jak` |
-| Prywatna sztuczna inteligencja w Twoim gabinecie (`#firmy`) | okna: `p-firmy-film`, `p-firmy-dla`, `p-firmy-cena` |
-| Prototyp w tydzień (`#poc`) | `#poc-jak` |
-| Książka na zamówienie (`#ksiazka`) | `#ksiazka-opis`, `#ksiazka-kroki` |
-| Kontrakt programistyczny (`#kontrakt`) | `#stawka`, `#stawka-zasady` |
-| Tryb pracy (`#tryb`) | `#cloud`, `#cloud-warunki`, `#cloud-porownanie`, `#cloud-kiedy-nie` |
-| Kim jestem (`#o-mnie`) | `#o-mnie-2` (publikacje i odnośniki; w menu nadal „O mnie”) |
-| Kontakt (`#rozmowa`) | |
-
-- **Przykładowe sprawy** (`#przyklady`): 16 fikcyjnych akt w czterech grupach, z linkami do PDF-ów w `assets/akta/`. Pliki są kopią wydania `pdfs` z repozytorium `iference-polska-use-cases`; po zmianie akt trzeba je skopiować ponownie.
-- **Kontrakt programistyczny** (`#stawka`): praca godzinowa, 180 zł za godzinę przy kontrakcie do 3 miesięcy, 125 zł przy kontrakcie na 3 lata (maksymalna długość), długość kontraktu wybiera się suwakiem (1–36 miesięcy), a stawka maleje liniowo między tymi punktami (orientacyjnie; dokładną ustala się po rozmowie wstępnej). Koszt tokenów ponosi wykonawca. Pole „Inferencja lokalna” dolicza 15% (słabsze modele, większy wkład programisty w weryfikację, dłuższe generowanie, zużycie energii). Stałe stawek są na początku skryptu kontraktu w szablonie (`RATE_SHORT`, `RATE_LONG`, `LOCAL_SURCHARGE`).
-- **Tryb pracy** (`#tryb`): droższy *fully private* na modelach lokalnych i tańszy *cloud*, dla analizy spraw, prototypu, książki i kontraktu programistycznego (nie dla wynajmu urządzenia w gabinecie). Ekrany `#cloud…`: kroki, warunki przetwarzania, porównanie z kontem indywidualnym, kiedy nie cloud.
-- **Kontakt** (`#rozmowa`): duży przycisk do rezerwacji w Kalendarzu Google i adres e-mail. Każdy przycisk „Umów darmową rozmowę wstępną” na stronie prowadzi wprost do rezerwacji (nowa karta, ikona Kalendarza Google). Kliknięcie adresu e-mail nie otwiera programu pocztowego, tylko kopiuje adres do schowka i pokazuje duży napis.
+Dodatkowe strony: `prywatnosc/index.html` (szkielet informacji o przetwarzaniu danych z Załącznika nr 1 regulaminu, źródło: `pages/prywatnosc/index.html`) oraz `filmy/index.html` (pięć interaktywnych prezentacji).
 
 ## Co jest w repozytorium
 
 | Plik | Opis |
 |---|---|
-| `templates/klasyczny/index.html`, `templates/ekrany/index.html` | Szablony strony: HTML, CSS i JavaScript w jednym pliku, bez zależności. |
-| `.nojekyll` | Wyłącza przetwarzanie Jekyll na GitHub Pages. |
-| `.github/workflows/deploy-pages.yml` | Akcja wdrażająca stronę na GitHub Pages. |
-| `filmy/index.html` | Osobna strona z pięcioma interaktywnymi filmami (prezentacje: analiza spraw, prywatna AI w gabinecie, kim jestem, przykład „akta z pułapkami” na bazie MIX-02, „Dlaczego warto rozwiązywać problemy na prywatnej AI”: wycieki danych w Polsce oraz przypadek Palantira i MON (co potwierdzone, czego nikt z zewnątrz nie zweryfikował, dokąd to może prowadzić), każdy fakt oznaczony jako potwierdzony albo hipotetyczny, stan na 15.11.2026, z listą źródeł). Skróty klawiszowe 1–5 uruchamiają film z menu. Jedyne wejście do niej to odnośnik „Filmy” w stopce strony głównej (w szablonie „ekrany” w drobnym druku na ekranie kontaktu); nie ma jej w menu ani w ofercie. Zdjęcie bierze z `assets/konrad-cinkusz.jpg`. |
-| `scripts/build-site.py` | Skrypt budujący stronę: wybiera szablon (`SITE_TEMPLATE`) i usuwa elementy oferty wyłączone zmiennymi repozytorium. |
-| `assets/` | Zdjęcie do sekcji „Kim jestem”, `akta/` (16 fikcyjnych akt w PDF do sekcji „Przykładowe sprawy”) oraz `google-calendar.png` (ikona Kalendarza Google z przycisków rezerwacji, pomniejszona kopia pliku z Wikimedia Commons; znak towarowy Google). |
-| `README.md` | Ten plik. |
+| `templates/klasyczny/index.html` | Szablon strony głównej. |
+| `pages/prywatnosc/index.html` | Szkielet strony z informacją o przetwarzaniu danych (pola `[[TODO: ...]]` do uzupełnienia). |
+| `filmy/index.html` | Pięć interaktywnych prezentacji: analiza spraw, prywatna AI w gabinecie, kim jestem, „akta z pułapkami” (MIX-02), „Dlaczego warto rozwiązywać problemy na prywatnej AI” (wycieki danych w Polsce, każdy fakt oznaczony jako potwierdzony albo hipotetyczny, stan na 15.11.2026). Skróty klawiszowe 1–5 uruchamiają film z menu. Jedyne wejście to odnośnik „Filmy” w stopce. |
+| `scripts/build-site.py` | Buduje stronę: usuwa elementy oferty wyłączone zmiennymi `SHOW_*`, sprawdza, czy frazy ukrytych usług nie zostały poza blokami ofert, podstawia dane firmy, generuje `sitemap.xml`, `robots.txt` i JSON-LD. |
+| `scripts/check-links.py` | Sprawdza, czy każdy lokalny `href` i `src` (oraz kotwica) w zbudowanej stronie istnieje. Uruchamiany w workflow wdrożenia, przerywa je przy braku pliku. |
+| `.github/workflows/deploy-pages.yml` | Wdraża stronę na GitHub Pages. |
+| `.github/workflows/build-docs-pdf.yml` | Ręczne budowanie PDF-ów z `docs/papers/*.tex` (regulamin). Uruchom dopiero po ukończeniu regulaminu. |
+| `assets/` | Zdjęcie, `akta/` (16 fikcyjnych akt wejściowych w PDF, na stronie są cztery), `google-calendar.png`, `og-image.svg` i `og-image.png` (grafika 1200×630 do podglądów linków). |
 
-Strona ma jasny i ciemny motyw: domyślnie zgodny z ustawieniem systemu, z przełącznikiem w górnym pasku (wybór zapamiętywany w przeglądarce).
-
-Strona jest statyczna: bez cookies, bez zewnętrznych skryptów, czcionek i formularzy. Rezerwacja terminu odbywa się poza stroną, w Kalendarzu Google. Jedyny element zewnętrzny to trzy filmy YouTube (sekcje „Analiza spraw”, „Prywatna AI w gabinecie” i „Kim jestem”) (`youtube-nocookie.com`, identyfikator filmu w atrybucie `data-yt`): odtwarzacz ładuje się dopiero po kliknięciu, więc do tego czasu strona nie łączy się z YouTube.
+Strona ma jasny i ciemny motyw (domyślnie zgodny z systemem, przełącznik w pasku). Strona jest statyczna: bez cookies, bez zewnętrznych skryptów, czcionek i formularzy. Rezerwacja odbywa się poza stroną, w Kalendarzu Google. Jedyny element zewnętrzny to filmy YouTube (`youtube-nocookie.com`, identyfikator w `data-yt`), których odtwarzacz ładuje się dopiero po kliknięciu.
 
 ## Publikacja (GitHub Pages + GitHub Actions)
 
-Workflow `.github/workflows/deploy-pages.yml` publikuje stronę zbudowaną z wybranego szablonu przy każdym pushu do `main` (oraz ręcznie przez *Run workflow*).
+Workflow `deploy-pages.yml` publikuje stronę przy każdym pushu do `main` (oraz ręcznie przez *Run workflow*). Jednorazowo: **Settings → Pages → Build and deployment → Source → GitHub Actions**. Zmiana zmiennej repozytorium **nie uruchamia** publikacji: po zmianie uruchom ręcznie **Actions → Deploy to GitHub Pages → Run workflow**.
 
-Jednorazowo: **Settings → Pages → Build and deployment → Source → GitHub Actions**.
+## Konfiguracja (zmienne repozytorium)
 
-Strona będzie dostępna pod `https://konradcinkusz.github.io/inference-polska/`.
+**Settings → Secrets and variables → Actions → Variables.** Dane firmy i adres strony (puste pole daje na stronie widoczny znacznik `[[TODO: nazwa]]`, a w JSON-LD jest pomijane):
 
-## Konfiguracja
+| Zmienna | Znaczenie |
+|---|---|
+| `EMAIL_KONTAKT` | adres kontaktowy (docelowo we własnej domenie); używany w stopce, w kontakcie i w przycisku „Kopiuj adres” |
+| `FIRMA_NAZWA_CEIDG`, `NIP`, `REGON`, `ADRES_BIURA`, `TELEFON` | dane firmy ze stopki i JSON-LD |
+| `SITE_URL` | adres strony z `https://` (canonical, `og:url`, sitemap); domyślnie adres github.io |
 
-Ustawienia są w obiekcie `CONFIG` na początku skryptu w każdym szablonie (`templates/*/index.html`, zmieniaj w obu):
+Adres rezerwacji w Kalendarzu Google jest w obiekcie `CONFIG` (`BOOKING_URL`) na początku skryptu szablonu; `CONFIG.EMAIL` jest podstawiany ze zmiennej `EMAIL_KONTAKT`.
 
-- `EMAIL`: adres kontaktowy,
-- `BOOKING_URL`: adres strony rezerwacji z Kalendarza Google (terminarz spotkań); używają go wszystkie przyciski „Umów darmową rozmowę wstępną”.
+## Widoczność oferty
 
-## Widoczność oferty (zmienne repozytorium)
-
-Każdą usługę z oferty można ukryć bez zmiany kodu, zmiennymi repozytorium GitHub: **Settings → Secrets and variables → Actions → Variables → New repository variable**. Każda usługa ma dwie zmienne: jedną dla jej wiersza na liście oferty i jedną dla opisu (ekran usługi razem z ekranami szczegółów).
+Każdą usługę można ukryć bez zmiany kodu: wiersz na liście oferty (`SHOW_*`) i opis (`SHOW_*_OPIS`).
 
 | Zmienna | Co ukrywa |
 |---|---|
-| `SHOW_ANALIZA` | wiersz „Analiza spraw” na liście oferty |
-| `SHOW_ANALIZA_OPIS` | ekran „Analiza spraw” (`#analiza`) i wszystkie jego ekrany szczegółów, w tym „Przykładowe sprawy” (`#przyklady`) |
-| `SHOW_PYTANIE`, `SHOW_PYTANIE_OPIS` | wiersz i ekrany „Szybkie pytanie” (`#pytanie`): odpowiedź na jedno pytanie, 100 zł, zawsze offline |
-| `SHOW_GABINET`, `SHOW_GABINET_OPIS` | wiersz i ekrany „Prywatna sztuczna inteligencja w Twoim gabinecie” (`#firmy`) |
-| `SHOW_PROTOTYP`, `SHOW_PROTOTYP_OPIS` | wiersz i ekrany „Prototyp w tydzień” (`#poc`) |
-| `SHOW_KSIAZKA`, `SHOW_KSIAZKA_OPIS` | wiersz i ekrany „Książka na zamówienie” (`#ksiazka`) |
-| `SHOW_KONTRAKT`, `SHOW_KONTRAKT_OPIS` | wiersz i ekrany „Kontrakt programistyczny” (`#kontrakt`) |
+| `SHOW_ANALIZA`, `SHOW_ANALIZA_OPIS` | wiersz i cała sekcja głównej usługi: oferta, zwijane bloki, kroki, przykłady |
+| `SHOW_PYTANIE`, `SHOW_PYTANIE_OPIS` | „Szybkie pytanie” (100 zł brutto, zawsze offline) |
+| `SHOW_GABINET`, `SHOW_GABINET_OPIS` | „Prywatna sztuczna inteligencja w Twoim gabinecie” (zawsze offline) |
+| `SHOW_PROTOTYP`, `SHOW_PROTOTYP_OPIS` | „Prototyp w tydzień” |
+| `SHOW_KSIAZKA`, `SHOW_KSIAZKA_OPIS` | „Książka na zamówienie” |
+| `SHOW_KONTRAKT`, `SHOW_KONTRAKT_OPIS` | „Kontrakt programistyczny” razem z kalkulatorem stawek |
 
-- Zmienna ma wartość `true` (widoczne) albo `false` (niewidoczne); wielkość liter nie ma znaczenia. Brak zmiennej oznacza, że element jest widoczny. Inna wartość (np. literówka `flase`) przerywa publikację z komunikatem w logu, żeby element, który miał być ukryty, nie został po cichu na stronie.
-- Ukryty element w ogóle nie trafia do opublikowanej strony (ani HTML, ani ceny). Wiersz oferty bez ukrytego opisu zostaje jako zwykły tekst bez odnośnika, a odnośniki do usuniętych ekranów w tekście zamieniają się w zwykły tekst.
-- Zmiana zmiennej **nie uruchamia** publikacji. Po zmianie uruchom ręcznie workflow: **Actions → Deploy to GitHub Pages → Run workflow**.
-- Przełączane są tylko wiersze oferty i ekrany usług (`scripts/build-site.py`). Wzmianki w zwykłym tekście (`<meta>`, ekran „Tryb pracy”) pozostają bez zmian.
-- Podgląd z flagami: `SHOW_KONTRAKT=false python3 scripts/build-site.py _site`.
+Wartość `true` albo `false`; brak zmiennej oznacza widoczne; inna wartość przerywa publikację. Wszystkie wzmianki o danej usłudze (też w menu, tekście i skryptach) są w blokach `<!--offer:KLUCZ:row|desc-->`. Build przerywa się, jeśli frazy ukrytych usług zostały poza takimi blokami.
 
 ## Podgląd lokalny
 
 ```bash
-SITE_TEMPLATE=ekrany python3 scripts/build-site.py _site
+SHOW_PYTANIE=false SHOW_PYTANIE_OPIS=false SHOW_PROTOTYP=false SHOW_PROTOTYP_OPIS=false SHOW_KSIAZKA=false SHOW_KSIAZKA_OPIS=false SHOW_KONTRAKT=false SHOW_KONTRAKT_OPIS=false python3 scripts/build-site.py _site
+python3 scripts/check-links.py _site
 python3 -m http.server 8000 -d _site
 ```
 
-Następnie otwórz `http://localhost:8000`. Bez `SITE_TEMPLATE` powstaje szablon „klasyczny”; katalog `_site/` jest w `.gitignore`.
+Katalog `_site/` jest w `.gitignore`.
 
 ## Autor
 
-Konrad Cinkusz · konradcinkusz@gmail.com
+Konrad Cinkusz
 
 © 2026 Konrad Cinkusz
