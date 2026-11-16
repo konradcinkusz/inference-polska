@@ -2,7 +2,7 @@
 """Buduje stronę do publikacji.
 
 1. Bierze szablon templates/klasyczny/index.html (jedyny szablon; zmienna
-   SITE_TEMPLATE, jeśli jest ustawiona, musi mieć wartość "klasyczny").
+   SITE_TEMPLATE jest ignorowana).
 2. Usuwa z szablonu elementy oferty wyłączone zmiennymi SHOW_* (GitHub: Settings ->
    Secrets and variables -> Actions -> Variables). Zmienna ma wartość true
    (widoczne) lub false (niewidoczne), wielkość liter nie ma znaczenia. Brak
@@ -167,9 +167,8 @@ def process(html, v, hide):
 
 
 def main(dst):
-    requested = os.environ.get("SITE_TEMPLATE", "").strip().lower()
-    if requested and requested != TEMPLATE:
-        sys.exit("Zmienna SITE_TEMPLATE ma wartość %r, ale istnieje tylko szablon %r. Usuń zmienną albo ustaw %s." % (requested, TEMPLATE, TEMPLATE))
+    if os.environ.get("SITE_TEMPLATE", "").strip():
+        print("Uwaga: zmienna SITE_TEMPLATE jest ignorowana (istnieje tylko szablon %s). Możesz ją usunąć." % TEMPLATE)
     v = site_values()
     src = ROOT / "templates" / TEMPLATE / "index.html"
     template = src.read_text(encoding="utf-8")
