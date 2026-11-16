@@ -24,7 +24,6 @@ jobs:
       - uses: actions/checkout@v4
       - name: Prepare site
         env:
-          SITE_TEMPLATE: ${{ vars.SITE_TEMPLATE }}
           SITE_URL: ${{ vars.SITE_URL }}
           FIRMA_NAZWA_CEIDG: ${{ vars.FIRMA_NAZWA_CEIDG }}
           NIP: ${{ vars.NIP }}
