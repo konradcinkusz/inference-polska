@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Buduje stronę do publikacji.
 
-1. Bierze szablon templates/klasyczny/index.html (jedyny szablon; zmienna
-   SITE_TEMPLATE jest ignorowana).
+1. Wybiera szablon strony: zmienna SITE_TEMPLATE (nazwa katalogu w templates/:
+   klasyczny albo ekrany). Brak zmiennej oznacza "klasyczny". Nieznana nazwa
+   przerywa budowanie.
 2. Usuwa z szablonu elementy oferty wyłączone zmiennymi SHOW_* (GitHub: Settings ->
    Secrets and variables -> Actions -> Variables). Zmienna ma wartość true
    (widoczne) lub false (niewidoczne), wielkość liter nie ma znaczenia. Brak
@@ -28,7 +29,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-TEMPLATE = "klasyczny"
+DEFAULT_TEMPLATE = "klasyczny"
 
 # Dane firmy i adresu. Wartość można podać zmienną środowiskową o tej samej
 # nazwie (w workflow: zmienna repozytorium, Settings -> Secrets and variables ->
@@ -166,9 +167,16 @@ def process(html, v, hide):
     return substitute(html, v)
 
 
+def choose_template():
+    names = sorted(p.parent.name for p in (ROOT / "templates").glob("*/index.html"))
+    value = os.environ.get("SITE_TEMPLATE", "").strip().lower() or DEFAULT_TEMPLATE
+    if value not in names:
+        sys.exit("Zmienna SITE_TEMPLATE ma niedozwoloną wartość %r (dozwolone: %s)." % (value, ", ".join(names)))
+    return value
+
+
 def main(dst):
-    if os.environ.get("SITE_TEMPLATE", "").strip():
-        print("Uwaga: zmienna SITE_TEMPLATE jest ignorowana (istnieje tylko szablon %s). Możesz ją usunąć." % TEMPLATE)
+    TEMPLATE = choose_template()
     v = site_values()
     src = ROOT / "templates" / TEMPLATE / "index.html"
     template = src.read_text(encoding="utf-8")
