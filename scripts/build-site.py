@@ -35,12 +35,13 @@ TEMPLATE = "klasyczny"
 # Actions -> Variables) albo wpisać tutaj. Puste pole = znacznik [[TODO: ...]].
 SITE = {
     "SITE_URL": "https://konradcinkusz.github.io/inference-polska/",  # DOMENA: gdy jest własna, ustaw zmienną SITE_URL
-    "FIRMA_NAZWA_CEIDG": "",
-    "NIP": "",
-    "REGON": "",
-    "ADRES_BIURA": "",
-    "TELEFON": "",
-    "EMAIL_KONTAKT": "",  # docelowo adres we własnej domenie
+    # Dane stałe (CEIDG), zahardkodowane. Zmienna środowiskowa o tej samej nazwie je nadpisuje.
+    "FIRMA_NAZWA_CEIDG": "Inżynieria Oprogramowania Konrad Cinkusz",
+    "NIP": "7322050993",
+    "REGON": "364549089",
+    "ADRES_BIURA": "ul. 1 Maja 30/40/6, 95-100 Zgierz",
+    "TELEFON": "+48 732 582 477",
+    "EMAIL_KONTAKT": "konradcinkusz@gmail.com",  # docelowo adres we własnej domenie
 }
 TODO_FIELDS = ("FIRMA_NAZWA_CEIDG", "NIP", "REGON", "ADRES_BIURA", "TELEFON", "EMAIL_KONTAKT")
 
