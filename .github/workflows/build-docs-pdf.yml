@@ -22,10 +22,6 @@ jobs:
         with:
           root_file: regulamin-inference-polska.tex
           working_directory: docs/papers
-      - uses: xu-cheng/latex-action@v4
-        with:
-          root_file: pilotaz-cennik-umowa.tex
-          working_directory: docs/papers
       - uses: actions/upload-artifact@v4
         with:
           name: dokumenty-pdf
