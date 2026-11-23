@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2714%27 fill=%27%231c5a48%27/%3E%3Ctext x=%2732%27 y=%2744%27 font-family=%27Arial,sans-serif%27 font-size=%2732%27 font-weight=%27700%27 text-anchor=%27middle%27 fill=%27%23fff%27%3EIP%3C/text%3E%3C/svg%3E">
+<title>Aplikacja dla przedsiębiorcy: Inference Polska</title>
+<meta name="description" content="Aplikacja na komputer z Windowsem: analiza dokumentów firmy z długami, rejestry wierzycieli i majątku, raport dopasowany do formy działalności. Dane zostają na Twoim komputerze.">
+<meta name="robots" content="{{APP_ROBOTS}}">
+<link rel="canonical" href="{{SITE_URL}}aplikacja/">
+<meta name="color-scheme" content="light dark">
+<style>
+:root{--paper:#f7f6f3;--ink:#14171a;--text:#272b2e;--muted:#5a6065;--rule:#d9d6ce;--tint:#eceee8;--card:#fff;--accent:#1c5a48;--accent-hover:#144637;--accent-ink:#fff;--warn:#a12a2a;--warn-soft:#fbeaea}
+@media (prefers-color-scheme:dark){:root{--paper:#101412;--ink:#f1f0ea;--text:#dddbd4;--muted:#a2a7a0;--rule:#2b322e;--tint:#18201c;--card:#171d1a;--accent:#86d3b6;--accent-hover:#a5e0c9;--accent-ink:#0b1814;--warn:#f09a9a;--warn-soft:#2e1d1f}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important}}
+body{margin:0;background:var(--paper);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:1.0625rem;line-height:1.65}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+.skip{position:absolute;left:-9999px;top:8px;background:var(--accent);color:var(--accent-ink);padding:10px 16px;border-radius:4px;font-weight:600;z-index:10}
+.skip:focus{left:8px}
+
+/* pierwszy ekran: tylko logo, przycisk i strzałka */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:56px;padding:32px 16px 110px;text-align:center}
+.logo{display:flex;align-items:center;gap:20px;color:var(--ink);text-decoration:none}
+.logo svg{width:84px;height:84px;flex:none}
+.logo span{font-size:clamp(1.9rem,6vw,3rem);font-weight:650;letter-spacing:-.02em;line-height:1.1}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;font:inherit;font-size:1.05rem;font-weight:650;padding:12px 26px;border-radius:8px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);text-decoration:none}
+.btn:hover{background:var(--accent-hover);border-color:var(--accent-hover);color:var(--accent-ink)}
+.btn.big{min-height:58px;font-size:1.2rem;padding:14px 34px}
+.btn.off{background:transparent;color:var(--muted);border:1px dashed var(--rule);cursor:default}
+.down{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);display:flex;width:56px;height:56px;align-items:center;justify-content:center;border-radius:50%;color:var(--accent);animation:bob 2.4s ease-in-out infinite}
+.down svg{width:30px;height:30px}
+.down:hover{background:var(--tint)}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,9px)}}
+
+/* opis */
+main{max-width:820px;margin:0 auto;padding:40px 16px 24px}
+h2{color:var(--ink);font-size:1.5rem;line-height:1.2;margin:56px 0 14px}
+h2:first-child{margin-top:0}
+h3{color:var(--ink);font-size:1.1rem;margin:0 0 6px}
+.muted{color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:18px 0}
+.card{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:18px 20px}
+.card p{margin:0}
+.steps{counter-reset:s;list-style:none;padding:0;margin:18px 0;display:grid;gap:14px}
+.steps li{counter-increment:s;display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start}
+.steps li::before{content:counter(s);display:flex;width:40px;height:40px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-weight:700;align-items:center;justify-content:center}
+.note{border-left:4px solid var(--warn);background:var(--warn-soft);border-radius:0 8px 8px 0;padding:14px 18px;margin:18px 0}
+.note p{margin:0}
+.tbl{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.98rem}
+th,td{text-align:left;vertical-align:top;padding:10px 12px 10px 0;border-top:1px solid var(--rule)}
+th{color:var(--ink)}
+.film{position:relative;aspect-ratio:16/9;width:100%;border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:#12261f}
+.film iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.film-actions{display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-top:10px}
+.price{font-size:2.6rem;font-weight:700;color:var(--ink);line-height:1}
+.dl{background:var(--tint);border:1px solid var(--rule);border-radius:14px;padding:28px 22px;text-align:center;margin:22px 0}
+.dl .meta{margin:14px 0 0;font-size:.95rem;color:var(--muted)}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;word-break:break-all}
+details{border-top:1px solid var(--rule);padding:12px 0}
+summary{cursor:pointer;font-weight:600;color:var(--ink)}
+details p{margin:10px 0 0}
+footer{max-width:820px;margin:0 auto;padding:24px 16px 48px;font-size:.92rem}
+</style>
+</head>
+<body>
+<a class="skip" href="#opis">Przejdź do opisu</a>
+
+<header class="hero">
+  <a class="logo" href="../" aria-label="Inference Polska, strona główna">
+    <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#1c5a48"/><text x="32" y="44" font-family="Arial,sans-serif" font-size="32" font-weight="700" text-anchor="middle" fill="#fff">IP</text></svg>
+    <span>Inference Polska</span>
+  </a>
+  <!--installer:ready--><a class="btn big" href="{{INSTALLER_URL}}" download>Pobierz instalator</a><!--/installer:ready-->
+  <!--installer:soon--><span class="btn big off" role="note">Instalator wkrótce</span><!--/installer:soon-->
+  <a class="down" href="#opis" aria-label="Przewiń do opisu">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 9l7 7 7-7"/></svg>
+  </a>
+</header>
+
+<main id="opis">
+<h2>Co to jest</h2>
+<p>Aplikacja na komputer z Windowsem dla przedsiębiorcy, który ma długi i chce uporządkować sytuację firmy, zanim zdecyduje, co dalej. Prowadzi z Tobą rozmowę, czyta Twoje dokumenty, pomaga uzupełnić rejestry wierzycieli i majątku i przygotowuje raport dopasowany do formy działalności: jednoosobowej firmy, spółki cywilnej (osobno dla każdego wspólnika) albo spółki z o.o. Cała analiza odbywa się na Twoim komputerze.</p>
+<div class="cards">
+  <div class="card"><h3>Rozmowa i dokumenty</h3><p>Asystent AI zadaje pytania i wczytuje pisma, wezwania i decyzje.</p></div>
+  <div class="card"><h3>Rejestry</h3><p>Wierzyciele i majątek w jednym miejscu, z kontrolą spójności.</p></div>
+  <div class="card"><h3>Raport</h3><p>Ocena przesłanek, możliwe drogi, kolejne kroki i terminy pomocnicze, ze wskazaniem przepisów.</p></div>
+</div>
+
+<h2>Czego aplikacja nie robi</h2>
+<div class="note"><p><strong>To nie jest porada prawna i nie zastępuje prawnika.</strong> Raport ocenia przesłanki i pokazuje możliwe drogi, ale niczego nie rekomenduje. Terminy są pomocnicze i warunkowe. Zanim powstanie raport, potwierdzasz, że dane wpisałeś Ty i że trzeba je sprawdzić. Asystent jest programem, nie człowiekiem ani prawnikiem.</p></div>
+
+<h2>Jak wygląda instalacja</h2>
+<p>Pobierasz jeden plik. Resztę instalator robi za Ciebie, ale nic nie kupujesz, dopóki nie zobaczysz wyniku.</p>
+<ol class="steps">
+  <li><div><h3>Sprawdza komputer</h3><p>Pamięć, procesor, dysk, karta graficzna i środowisko Windows. Krótki test szybkości.</p></div></li>
+  <li><div><h3>Mówi wprost, czego się spodziewać</h3><p>Jakiej jakości analizy możesz oczekiwać na tym komputerze i ile mniej więcej potrwa każde zadanie. To szacunek, a nie obietnica.</p></div></li>
+  <li><div><h3>Licencja</h3><p>Jeśli komputer spełnia minimum, możesz kupić licencję. Jeśli nie, wersji lokalnej Ci nie sprzedamy.</p></div></li>
+  <li><div><h3>Instalacja</h3><p>Instalator pobiera i weryfikuje potrzebne składniki (kilkanaście do kilkudziesięciu gigabajtów, w tym model AI) i uruchamia aplikację. Pobieranie można przerwać i wznowić.</p></div></li>
+</ol>
+<p class="muted">Przy pierwszej instalacji Windows może poprosić o uprawnienia administratora i o ponowne uruchomienie komputera (włączenie wymaganego składnika systemu). Jeśli w komputerze wyłączona jest wirtualizacja, instalator pokaże, co włączyć.</p>
+
+<h2>Twoje dane</h2>
+<div class="cards">
+  <div class="card"><h3>Lokalnie</h3><p>Dokumenty i analiza zostają na Twoim komputerze. Aplikacja nie wysyła treści sprawy do chmury.</p></div>
+  <div class="card"><h3>Szyfrowane</h3><p>Sprawy są zapisane w postaci zaszyfrowanej i odblokowujesz je hasłem. Kod odzyskiwania pokazujemy raz: bez hasła i kodu danych nie da się odzyskać.</p></div>
+  <div class="card"><h3>Pod Twoją kontrolą</h3><p>Opcja „Zakończ i usuń dane” usuwa sprawę. Zaszyfrowaną kopię możesz wyeksportować i przenieść na inny komputer.</p></div>
+</div>
+<p class="muted">Instalator i aktualizacje łączą się z internetem tylko po to, by pobrać podpisane pliki. Każdy pobrany plik jest weryfikowany podpisem cyfrowym, zanim zostanie użyty. Aplikacja nie zbiera telemetrii.</p>
+
+<h2>Wymagania</h2>
+<p class="muted">Wartości orientacyjne dla wersji lokalnej. Potwierdzimy je po testach na prawdziwych komputerach; instalator sprawdzi Twój komputer i powie, jak jest naprawdę.</p>
+<div class="tbl"><table>
+<thead><tr><th scope="col">Element</th><th scope="col">Minimum</th><th scope="col">Zalecane</th></tr></thead>
+<tbody>
+<tr><th scope="row">System</th><td colspan="2">Windows 10 lub 11 (64-bit), wirtualizacja włączona w komputerze</td></tr>
+<tr><th scope="row">Pamięć</th><td>32 GB</td><td>64 GB</td></tr>
+<tr><th scope="row">Dysk</th><td>40 GB wolnego miejsca (SSD)</td><td>SSD z zapasem na kolejne sprawy</td></tr>
+<tr><th scope="row">Procesor</th><td colspan="2">z obsługą AVX2 i FMA</td></tr>
+<tr><th scope="row">Karta graficzna</th><td>niewymagana (analiza trwa wtedy dłużej)</td><td>NVIDIA z co najmniej 24 GB pamięci</td></tr>
+</tbody>
+</table></div>
+
+<h2 id="prezentacja">Prezentacja</h2>
+<p>Krótka prezentacja pokazuje, co robi aplikacja i jak wygląda instalacja. Kliknij w ramkę albo użyj strzałek, aby przejść dalej.</p>
+<div class="film"><iframe id="film" title="Prezentacja aplikacji" data-src="../filmy/#aplikacja" loading="lazy" allowfullscreen></iframe></div>
+<noscript><p>Prezentacja wymaga włączonego JavaScriptu. <a href="../filmy/">Otwórz prezentacje</a> i wybierz „Aplikacja dla przedsiębiorcy”.</p></noscript>
+<div class="film-actions"><a id="film-full" href="../filmy/">Otwórz na cały ekran</a></div>
+
+<h2>Cena i licencja</h2>
+<p><span class="price">299 zł</span></p>
+<p>Sprawdzenie komputera jest bezpłatne i odbywa się przed zakupem. Licencję wydajemy ręcznie po zaksięgowaniu płatności; instalator pokaże numer zamówienia i będzie czekał na licencję, także po ponownym uruchomieniu.</p>
+<p class="muted">[[TODO: warunki licencji (okres, aktualizacje, liczba komputerów), prawo odstąpienia od umowy, zwrot przy zbyt wolnej pracy; przegląd prawnika]]</p>
+
+<h2 id="pobierz">Pobierz instalator</h2>
+<div class="dl">
+  <!--installer:ready--><a class="btn big" href="{{INSTALLER_URL}}" download>Pobierz instalator dla Windows</a>
+  <p class="meta">Wersja {{INSTALLER_VERSION}}{{INSTALLER_SIZE_TEXT}}</p>
+  <p class="meta">Suma kontrolna SHA-256: <code>{{INSTALLER_SHA256}}</code></p><!--/installer:ready-->
+  <!--installer:soon--><span class="btn big off" role="note">Instalator wkrótce</span>
+  <p class="meta">Napisz na <a href="mailto:{{EMAIL_KONTAKT}}">{{EMAIL_KONTAKT}}</a>, a damy znać, gdy instalator będzie gotowy.</p><!--/installer:soon-->
+</div>
+
+<h2>Pytania</h2>
+<details><summary>Czy potrzebuję internetu?</summary><p>Do pobrania instalatora, składników i aktualizacji tak. Sama analiza na Twoim komputerze internetu nie potrzebuje.</p></details>
+<details><summary>Co się dzieje, gdy zamknę okno aplikacji?</summary><p>Jeśli nic nie liczy, aplikacja zamyka się i zwalnia pamięć komputera. Jeśli trwa analiza, zapyta, czy kontynuować w tle (da znać po zakończeniu), czy przerwać. Wyłączenie Windowsa zapisuje dane i zatrzymuje aplikację automatycznie.</p></details>
+<details><summary>Czy moje pliki i inne programy są bezpieczne?</summary><p>Aplikacja działa w osobnym, izolowanym środowisku i nie ma dostępu do Twoich dysków. Inne środowiska Linuksa w Windowsie (jeśli ich używasz) zostają nietknięte.</p></details>
+<details><summary>Co, jeśli mój komputer jest za słaby?</summary><p>Instalator powie to przed zakupem. Wersji lokalnej nie sprzedajemy komputerom poniżej minimum, bo wyniki byłyby zbyt wolne lub zbyt słabe, żeby były użyteczne.</p></details>
+<details><summary>Co z moimi sprawami po odinstalowaniu?</summary><p>Dezinstalator pyta, czy zostawić sprawy (domyślnie tak), czy usunąć wszystko. Przed usunięciem proponuje eksport zaszyfrowanej kopii.</p></details>
+</main>
+
+<footer class="muted">
+<p><a href="../">&larr; Inference Polska</a> · <a href="../prywatnosc/">Informacja o przetwarzaniu danych</a> · <a href="../filmy/">Filmy</a></p>
+<p>{{FIRMA_NAZWA_CEIDG}}, NIP {{NIP}}, {{ADRES_BIURA}}, <a href="mailto:{{EMAIL_KONTAKT}}">{{EMAIL_KONTAKT}}</a></p>
+</footer>
+<script>
+(function(){
+  var f=document.getElementById("film"),a=document.getElementById("film-full");
+  if(f)f.src=f.getAttribute("data-src");
+  if(a)a.href="../filmy/#aplikacja";
+})();
+</script>
+</body>
+</html>
