@@ -1,0 +1,8 @@
+{
+  "_opis": "Ustawienia strony aplikacja/. Zmiana wymaga commita do main (strona wdraża się sama). url: adres instalatora (https), pusty = przycisk pokazuje 'Instalator wkrótce'. Przy ustawionym url wersja i sha256 są wymagane (build przerywa się bez nich). widoczna: false = strona jest zbudowana, ale bez odnośnika w menu, bez wpisu w sitemap i z noindex.",
+  "widoczna": false,
+  "url": "",
+  "wersja": "",
+  "rozmiar": "",
+  "sha256": ""
+}

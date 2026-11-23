@@ -8,7 +8,7 @@ Jest jeden szablon: `templates/klasyczny/index.html` (HTML, CSS i JavaScript w j
 
 Sekcja „Przykładowy raport” jest w szablonie ukryta komentarzem HTML (znacznik `[[TODO: przykładowy_raport_pdf]]`). Aby ją odkryć: dodaj prawdziwe raporty PDF do `assets/raporty/`, usuń komentarz i wpisz nazwy plików. Nie generuj fikcyjnych raportów.
 
-Dodatkowe strony: `prywatnosc/index.html` (szkielet informacji o przetwarzaniu danych z Załącznika nr 1 regulaminu, źródło: `pages/prywatnosc/index.html`) oraz `filmy/index.html` (pięć interaktywnych prezentacji).
+Dodatkowe strony: `prywatnosc/index.html` (szkielet informacji o przetwarzaniu danych z Załącznika nr 1 regulaminu, źródło: `pages/prywatnosc/index.html`) `aplikacja/index.html` (strona aplikacji dla przedsiębiorcy: pierwszy ekran z logo, przyciskiem pobrania i strzałką do opisu; źródło: `pages/aplikacja/index.html`, ustawienia w `pages/aplikacja/instalator.json`) oraz `filmy/index.html` (sześć interaktywnych prezentacji).
 
 ## Co jest w repozytorium
 
@@ -16,7 +16,8 @@ Dodatkowe strony: `prywatnosc/index.html` (szkielet informacji o przetwarzaniu d
 |---|---|
 | `templates/klasyczny/index.html` | Szablon strony głównej. |
 | `pages/prywatnosc/index.html` | Szkielet strony z informacją o przetwarzaniu danych (pola `[[TODO: ...]]` do uzupełnienia). |
-| `filmy/index.html` | Pięć interaktywnych prezentacji: analiza spraw, prywatna AI w gabinecie, kim jestem, „akta z pułapkami” (MIX-02), „Dlaczego warto rozwiązywać problemy na prywatnej AI” (wycieki danych w Polsce, każdy fakt oznaczony jako potwierdzony albo hipotetyczny, stan na 15.11.2026). Skróty klawiszowe 1–5 uruchamiają film z menu. Jedyne wejście to odnośnik „Filmy” w stopce. |
+| `pages/aplikacja/` | Strona `aplikacja/` i jej ustawienia `instalator.json`: `widoczna` (false = strona jest zbudowana, ale bez odnośnika w menu i w sitemap, z `noindex`), `url` (https adres instalatora; pusty = przycisk „Instalator wkrótce”), `wersja`, `rozmiar`, `sha256` (przy ustawionym `url` wersja i suma kontrolna są wymagane, build przerywa się bez nich). Aby opublikować: wgraj instalator (np. do wydania w repozytorium albo na hosting plików), wpisz `url`, `wersja`, `sha256`, ustaw `widoczna: true`, uzupełnij znacznik `[[TODO: warunki licencji ...]]` i zrób commit do `main`. |
+| `filmy/index.html` | Sześć interaktywnych prezentacji: analiza spraw, prywatna AI w gabinecie, kim jestem, „akta z pułapkami” (MIX-02), „Dlaczego warto rozwiązywać problemy na prywatnej AI” (wycieki danych w Polsce, każdy fakt oznaczony jako potwierdzony albo hipotetyczny, stan na 15.11.2026). Film 6 „Aplikacja dla przedsiębiorcy” opisuje instalator i licencję (tekst lektora: klawisz N). Skróty klawiszowe 1–6 uruchamiają film z menu. Jedyne wejście to odnośnik „Filmy” w stopce. |
 | `scripts/build-site.py` | Buduje stronę: usuwa elementy oferty wyłączone zmiennymi `SHOW_*`, sprawdza, czy frazy ukrytych usług nie zostały poza blokami ofert, podstawia dane firmy, generuje `sitemap.xml`, `robots.txt` i JSON-LD. |
 | `scripts/check-links.py` | Sprawdza, czy każdy lokalny `href` i `src` (oraz kotwica) w zbudowanej stronie istnieje. Uruchamiany w workflow wdrożenia, przerywa je przy braku pliku. |
 | `.github/workflows/deploy-pages.yml` | Wdraża stronę na GitHub Pages. |

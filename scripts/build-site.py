@@ -15,8 +15,12 @@
 4. Podstawia dane firmy i adres strony (zmienne środowiskowe albo wartości
    domyślne poniżej). Puste pole zamienia się w widoczny znacznik [[TODO: pole]],
    a w danych strukturalnych (JSON-LD) jest pomijane.
-5. Zapisuje index.html, prywatnosc/, assets/, filmy/, sitemap.xml, robots.txt
-   i .nojekyll w podanym katalogu.
+5. Buduje stronę aplikacja/ (pages/aplikacja/index.html) z ustawieniami z
+   pages/aplikacja/instalator.json: przycisk pobierania działa dopiero, gdy podano
+   url (wtedy wersja i sha256 są wymagane); "widoczna": false ukrywa odnośnik w
+   menu i w sitemap i ustawia noindex.
+6. Zapisuje index.html, prywatnosc/, aplikacja/, assets/, filmy/, sitemap.xml,
+   robots.txt i .nojekyll w podanym katalogu.
 
 Użycie: build-site.py _site
 """
@@ -126,6 +130,40 @@ def substitute(text, v):
     return out
 
 
+INSTALLER_BLOCK = re.compile(r"<!--installer:(ready|soon)-->(.*?)<!--/installer:\1-->", re.S)
+APP_LINK = re.compile(r"<!--app:link-->(.*?)<!--/app:link-->", re.S)
+SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
+
+
+def load_app_config():
+    """Ustawienia strony aplikacja/ z pages/aplikacja/instalator.json (z walidacją)."""
+    cfg = json.loads((ROOT / "pages" / "aplikacja" / "instalator.json").read_text(encoding="utf-8"))
+    url, version, sha = (cfg.get(k, "").strip() for k in ("url", "wersja", "sha256"))
+    if not isinstance(cfg.get("widoczna"), bool):
+        sys.exit("instalator.json: pole widoczna musi być true albo false.")
+    if url and not url.startswith("https://"):
+        sys.exit("instalator.json: url instalatora musi zaczynać się od https:// (jest: %r)." % url)
+    if url and not (version and sha):
+        sys.exit("instalator.json: przy ustawionym url wersja i sha256 są wymagane.")
+    if sha and not SHA256_RE.match(sha):
+        sys.exit("instalator.json: sha256 musi mieć 64 znaki szesnastkowe małymi literami.")
+    cfg["url"], cfg["wersja"], cfg["sha256"] = url, version, sha
+    cfg["rozmiar"] = cfg.get("rozmiar", "").strip()
+    return cfg
+
+
+def app_page(text, v, cfg):
+    """Podstawia ustawienia instalatora i wybiera blok ready albo soon."""
+    ready = bool(cfg["url"])
+    text = INSTALLER_BLOCK.sub(lambda m: m.group(2) if (m.group(1) == "ready") == ready else "", text)
+    size = (", " + cfg["rozmiar"]) if cfg["rozmiar"] else ""
+    for key, value in (("APP_ROBOTS", "index,follow" if cfg["widoczna"] else "noindex,nofollow"),
+                       ("INSTALLER_URL", cfg["url"]), ("INSTALLER_VERSION", cfg["wersja"]),
+                       ("INSTALLER_SIZE_TEXT", size), ("INSTALLER_SHA256", cfg["sha256"])):
+        text = text.replace("{{%s}}" % key, htmllib.escape(value, quote=True))
+    return substitute(text, v)
+
+
 def check_hidden_phrases(html, src):
     """Frazy ukrytych usług poza blokami ofert są błędem (przeciekają mimo SHOW_*=false)."""
     bare = html
@@ -183,9 +221,13 @@ def main(dst):
     check_hidden_phrases(template, src)
 
     hide = []
-    pages = {"index.html": process(template, v, hide)}
+    app = load_app_config()
+    index = process(template, v, hide)
+    index = APP_LINK.sub(lambda m: m.group(1) if app["widoczna"] else "", index)
+    pages = {"index.html": index}
     priv = ROOT / "pages" / "prywatnosc" / "index.html"
     pages["prywatnosc/index.html"] = substitute(priv.read_text(encoding="utf-8"), v)
+    pages["aplikacja/index.html"] = app_page((ROOT / "pages" / "aplikacja" / "index.html").read_text(encoding="utf-8"), v, app)
 
     out = Path(dst)
     out.mkdir(parents=True, exist_ok=True)
@@ -196,9 +238,15 @@ def main(dst):
     shutil.copytree(ROOT / "assets", out / "assets", dirs_exist_ok=True)
     if (ROOT / "filmy").is_dir():
         shutil.copytree(ROOT / "filmy", out / "filmy", dirs_exist_ok=True)
+        # film o aplikacji jest w menu dopiero, gdy aplikacja jest widoczna (inaczej tylko po adresie #aplikacja)
+        films = out / "filmy" / "index.html"
+        text = films.read_text(encoding="utf-8")
+        if text.count("/*APP_HIDDEN*/true") != 1:
+            sys.exit("filmy/index.html: brak znacznika /*APP_HIDDEN*/true (dokładnie jeden).")
+        films.write_text(text.replace("/*APP_HIDDEN*/true", "false" if app["widoczna"] else "true"), encoding="utf-8")
 
     base = v["SITE_URL"]
-    urls = [base, base + "prywatnosc/", base + "filmy/"]
+    urls = [base, base + "prywatnosc/", base + "filmy/"] + ([base + "aplikacja/"] if app["widoczna"] else [])
     sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     sitemap += "".join("  <url><loc>%s</loc></url>\n" % u for u in urls) + "</urlset>\n"
     (out / "sitemap.xml").write_text(sitemap, encoding="utf-8")
@@ -206,6 +254,7 @@ def main(dst):
     (out / ".nojekyll").touch()
 
     print("Szablon: " + TEMPLATE)
+    print("Aplikacja: " + ("widoczna" if app["widoczna"] else "ukryta (noindex, bez menu)") + ", instalator " + ("podany" if app["url"] else "jeszcze nie"))
     print("Ukryte: " + (", ".join(sorted(set(hide))) if hide else "nic"))
     todos = sorted({t for text in pages.values() for t in TODO_RE.findall(text)})
     print("Znaczniki do uzupełnienia: " + (", ".join(todos) if todos else "brak"))

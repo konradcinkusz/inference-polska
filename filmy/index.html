@@ -192,6 +192,16 @@ const S = {
      ${V(3, P(520,205,1.1,I.lock))}
      ${V(3, pill(320,600,"online albo offline","g"), "up", .2)}
    </svg>`}),
+ ap1: f => ({cls:"panel dark side", html:`
+   <div class="col" style="flex:1"><p class="eyebrow base">${esc(f.e)}</p><h1 class="base">${f.h}</h1><p class="it" data-s="3">${esc(f.p)}</p></div>
+   <svg class="sq" viewBox="0 0 640 640">
+     <rect x="40" y="90" width="560" height="460" rx="40" class="zone"/>
+     ${P(430,320,1.7,I.chip)}
+     ${V(1, MV(2,270,0,P(160,320,1.5,I.doc)))}
+     ${V(2, P(322,150,1,I.gear)+P(380,112,.7,`<g class="spin rev">${I.gear.replace('class="spin"','')}</g>`), "", 1.2)}
+     ${V(3, P(520,205,1.1,I.lock))}
+     ${V(3, pill(320,600,f.pill,"g"), "up", .2)}
+   </svg>`}),
  a2: f => ({cls:"", html: head(f)+dg(`
    <rect x="20" y="60" width="700" height="540" rx="36" class="zone"/>${T(60,112,"Polska","zl")}
    ${P(170,330,1.6,I.person)}${T(170,470,"Ty")}
@@ -459,7 +469,15 @@ const N = {
     "Co z tego wynika dla sztucznej inteligencji? Dokument wklejony do publicznego czatu to kolejna kopia poza Twoją kontrolą: nie wiesz, gdzie leży, jak długo i kto ma do niej dostęp. A wycieki, jak widać, dotykają także ogromnych systemów. Lokalna AI bez internetu usuwa jedną klasę ryzyka: nie ma serwera dostawcy, z którego dane mogłyby wyciec, i nie ma kopii po zakończeniu pracy. Nie rozwiązuje wszystkich problemów z bezpieczeństwem, ale zmniejsza to, co sam możesz zmniejszyć. Przy lokalnej AI wiesz dokładnie, co przekazujesz, bo nic nie opuszcza maszyny.",
     "Z tego wynikają trzy zasady. Po pierwsze, mniej danych: wysyłaj tylko to, co konieczne, i usuwaj dane osobowe, zanim materiał opuści komputer. Po drugie, dokumentacja medyczna i dane objęte tajemnicą zawodową zostają lokalnie, czyli w trybie offline. Po trzecie, po analizie dane są usuwane, bo kopia, której nie ma, nie może wyciec.",
     "Co możesz zrobić już dziś, niezależnie od AI. Sprawdź swój PESEL na bezpiecznedane.gov.pl. Rozważ jego zastrzeżenie, do czego wzywa Gawkowski. I ostrożnie traktuj wiadomości, które powołują się na Twoje prawdziwe wizyty i recepty: przed takim phishingiem ostrzega ESET.",
-    "Źródła to publikacje RMF24, Gazety Prawnej, CyberDefence24, ESET, Rzeczpospolitej, money.pl i innych, a także komunikaty UODO i Ministerstwa Cyfryzacji. Pełne odnośniki są w opisie filmu. Dziękuję za uwagę."]
+    "Źródła to publikacje RMF24, Gazety Prawnej, CyberDefence24, ESET, Rzeczpospolitej, money.pl i innych, a także komunikaty UODO i Ministerstwa Cyfryzacji. Pełne odnośniki są w opisie filmu. Dziękuję za uwagę."],
+ f:["Prowadzisz firmę, masz długi i terminy, a dokumenty leżą w kilku miejscach? Pokażę Ci aplikację Inference Polska dla przedsiębiorcy. Instalujesz ją na własnym komputerze z Windowsem, a Twoje dokumenty nie opuszczają tego komputera.",
+    "Co robi aplikacja. Asystent AI prowadzi z Tobą rozmowę i pyta o to, co potrzebne. Wczytujesz pisma, wezwania i decyzje. Uzupełniasz rejestry wierzycieli i majątku. Na końcu dostajesz raport dopasowany do Twojej formy działalności: jednoosobowej firmy, spółki cywilnej albo spółki z ograniczoną odpowiedzialnością.",
+    "Czego aplikacja nie robi. To nie jest porada prawna i nie zastępuje prawnika. Raport ocenia przesłanki, pokazuje możliwe drogi i kolejne kroki, ale niczego Ci nie rekomenduje. Terminy są pomocnicze i warunkowe. Zanim powstanie raport, potwierdzasz, że dane wpisałeś Ty i że trzeba je sprawdzić.",
+    "Twoje dane. Analiza odbywa się lokalnie, na modelu AI uruchomionym na Twoim komputerze. Sprawy są zapisane w postaci zaszyfrowanej i odblokowujesz je hasłem. Kod odzyskiwania dostajesz raz, więc zapisz go w bezpiecznym miejscu: bez hasła i kodu nie odzyskasz danych. Gdy skończysz, jedna opcja w menu usuwa sprawę wraz z danymi.",
+    "Jak wygląda instalacja. Pobierasz jeden plik. Instalator najpierw sprawdza Twój komputer. Potem mówi wprost, jakiej jakości analizy i jakich mniej więcej czasów możesz się spodziewać. To szacunek, nie obietnica. Dopiero wtedy decydujesz o zakupie licencji, a po zakupie instalator sam pobiera i instaluje resztę.",
+    "Wymagania. Orientacyjnie: trzydzieści dwa gigabajty pamięci, czterdzieści gigabajtów wolnego miejsca na dysku i procesor z obsługą AVX2. Najlepiej karta NVIDIA z dwudziestoma czterema gigabajtami pamięci. Bez niej analiza trwa dłużej. Jeśli komputer nie spełni minimum, instalator Ci o tym powie, a wersji lokalnej nie sprzeda.",
+    "Licencja kosztuje dwieście dziewięćdziesiąt dziewięć złotych. Sprawdzenie komputera jest bezpłatne i odbywa się przed zakupem. Licencję wydaję ręcznie po zaksięgowaniu płatności, więc po zakupie instalator poczeka na nią i wznowi pracę nawet po ponownym uruchomieniu komputera.",
+    "Pobierz instalator ze strony Inference Polska, sprawdź swój komputer i zdecyduj, czy aplikacja jest dla Ciebie. Dziękuję za uwagę."]
 };
 
 const FILMS = [
@@ -551,6 +569,32 @@ const FILMS = [
     {k:"none", big:"2", h:"Rozważ zastrzeżenie", p:"Do zastrzeżenia PESEL wzywa Gawkowski."},
     {k:"none", big:"3", h:"Uważaj na wiadomości", p:"Wiadomość powołująca się na Twoje prawdziwe wizyty i recepty może być phishingiem (ostrzega ESET)."}]},
   {t:"src", e:"Źródła", h:"Skąd to wiem", list:["RMF24","GazetaPrawna","CyberDefence24","ITwiz","CEO.com.pl","ESET","Superbiz","Money.pl","Tabletowo","Infor","Legiscope","Rzeczpospolita","Akademia LTCA","Poradnik Przedsiębiorcy","Bank.pl / BIK","Antyweb","Instalki","OKO.press","Wprost","WNP","XYZ","PAP"], note:"Pełne odnośniki w opisie filmu. Stan wiedzy na 15.11.2026."}
+]},
+{ id:"aplikacja", tag:"Film 6", name:"Aplikacja dla przedsiębiorcy", desc:"Instalator na Windows: sprawdzenie komputera, licencja, instalacja", k:"f", hidden:/*APP_HIDDEN*/true, frames:[
+  {t:"ap1", e:"Inference Polska", h:"Aplikacja dla przedsiębiorcy", p:"Na Twoim komputerze z Windowsem.", pill:"dokumenty zostają u Ciebie"},
+  {t:"cards", e:"Co robi", h:"Od dokumentów do raportu", cards:[
+    {k:"none", h:"Rozmowa i dokumenty", p:"Asystent AI pyta o to, co potrzebne, i wczytuje pisma, wezwania i decyzje."},
+    {k:"none", h:"Rejestry", p:"Wierzyciele i majątek w jednym miejscu, z kontrolą spójności."},
+    {k:"none", h:"Raport", p:"Dopasowany do formy: jednoosobowa firma, spółka cywilna, spółka z o.o."}]},
+  {t:"cards", e:"Granice", h:"To nie jest porada prawna", foot:"Asystent jest programem, nie człowiekiem ani prawnikiem.", cards:[
+    {k:"none", h:"Nie rekomenduje", p:"Ocenia przesłanki i pokazuje możliwe drogi oraz kolejne kroki."},
+    {k:"none", h:"Terminy pomocnicze", p:"Są warunkowe i wymagają sprawdzenia."},
+    {k:"none", h:"Ty sprawdzasz dane", p:"Przed raportem potwierdzasz, że dane wpisałeś Ty i trzeba je zweryfikować."}]},
+  {t:"cards", e:"Twoje dane", h:"Lokalnie, szyfrowane, pod Twoją kontrolą", cards:[
+    {k:"none", h:"Lokalnie", p:"Analiza na modelu AI uruchomionym na Twoim komputerze."},
+    {k:"none", h:"Szyfrowane", p:"Hasło i kod odzyskiwania. Bez nich danych nie odzyskasz."},
+    {k:"none", h:"Usuwanie", p:"„Zakończ i usuń dane” usuwa sprawę. Zaszyfrowany eksport zrobisz sam."}]},
+  {t:"line4", e:"Instalacja", h:"Cztery kroki, jeden plik", nodes:[
+    {icon:I.scan,t:"Sprawdzenie",d:"komputer i test szybkości"},{icon:I.report,t:"Wynik",d:"jakość i szacowany czas"},
+    {icon:I.offer,t:"Licencja",d:"po wyniku, nie przed"},{icon:I.gear,t:"Instalacja",d:"pobieranie i weryfikacja"}]},
+  {t:"cards", e:"Wymagania orientacyjne", h:"Czego potrzebuje komputer", foot:"Instalator sprawdzi komputer przed zakupem i powie, jak jest naprawdę.", cards:[
+    {k:"none", big:"32 GB", h:"Pamięć", p:"64 GB jest lepsze."},
+    {k:"none", big:"40 GB", h:"Wolny dysk", p:"SSD, procesor z AVX2 i FMA."},
+    {k:"none", big:"24 GB", h:"Karta NVIDIA", p:"Zalecana. Bez niej analiza trwa dłużej."}]},
+  {t:"cards", e:"Licencja", h:"Sprawdzasz za darmo, płacisz po wyniku", cards:[
+    {k:"none", big:"0 zł", h:"Sprawdzenie komputera", p:"Bezpłatne, przed zakupem."},
+    {k:"none", big:"299 zł", h:"Licencja", p:"Wydawana ręcznie po zaksięgowaniu płatności. Instalator czeka na nią i wznawia pracę."}]},
+  {t:"cta", e:"Zacznij", h:"Pobierz instalator", a:"Sprawdź komputer za darmo"}
 ]}
 ];
 FILMS.forEach(f=>{ if(N[f.k].length!==f.frames.length) console.error("lektor: zła liczba tekstów", f.id); f.frames.forEach((fr,i)=>fr.n=N[f.k][i]); });
@@ -622,7 +666,8 @@ function start(i){
 }
 function toMenu(){ film=null; menu.classList.remove("hide"); bar.style.width=0; try{history.replaceState(null,"","#");}catch(e){} }
 
-document.getElementById("films").innerHTML = FILMS.map((f,i)=>`<button data-i="${i}"><span>${f.tag} · klawisz ${i+1}</span><b>${f.name}</b><i>${f.desc}</i></button>`).join("");
+/* film z hidden:true nie ma przycisku ani skrótu; działa tylko po adresie #id (strona aplikacja/ osadza go w ramce). build-site.py ustawia hidden na false, gdy aplikacja jest widoczna */
+document.getElementById("films").innerHTML = FILMS.map((f,i)=>f.hidden?"":`<button data-i="${i}"><span>${f.tag} · klawisz ${i+1}</span><b>${f.name}</b><i>${f.desc}</i></button>`).join("");
 menu.addEventListener("click", e=>{ const b=e.target.closest("button"); if(b){ e.stopPropagation(); start(+b.dataset.i); } });
 document.getElementById("stage").addEventListener("click", next);
 let wheelAt = 0;
@@ -637,7 +682,7 @@ addEventListener("wheel", e=>{
 addEventListener("contextmenu", e=>{ if(film){ e.preventDefault(); prev(); } });
 addEventListener("keydown", e=>{
   const k = e.key;
-  if(!film){ if(k>="1"&&k<="5") start(+k-1); return; }
+  if(!film){ if(k>="1"&&k<="6"&&FILMS[+k-1]&&!FILMS[+k-1].hidden) start(+k-1); return; }
   if(k===" "||k==="ArrowRight"||k==="Enter"||k==="PageDown"){ e.preventDefault(); next(); }
   else if(k==="ArrowLeft"||k==="Backspace"||k==="PageUp"){ e.preventDefault(); prev(); }
   else if(k==="Escape") toMenu();
