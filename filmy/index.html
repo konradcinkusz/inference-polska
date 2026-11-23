@@ -570,7 +570,7 @@ const FILMS = [
     {k:"none", big:"3", h:"Uważaj na wiadomości", p:"Wiadomość powołująca się na Twoje prawdziwe wizyty i recepty może być phishingiem (ostrzega ESET)."}]},
   {t:"src", e:"Źródła", h:"Skąd to wiem", list:["RMF24","GazetaPrawna","CyberDefence24","ITwiz","CEO.com.pl","ESET","Superbiz","Money.pl","Tabletowo","Infor","Legiscope","Rzeczpospolita","Akademia LTCA","Poradnik Przedsiębiorcy","Bank.pl / BIK","Antyweb","Instalki","OKO.press","Wprost","WNP","XYZ","PAP"], note:"Pełne odnośniki w opisie filmu. Stan wiedzy na 15.11.2026."}
 ]},
-{ id:"aplikacja", tag:"Film 6", name:"Aplikacja dla przedsiębiorcy", desc:"Instalator na Windows: sprawdzenie komputera, licencja, instalacja", k:"f", frames:[
+{ id:"aplikacja", tag:"Film 6", name:"Aplikacja dla przedsiębiorcy", desc:"Instalator na Windows: sprawdzenie komputera, licencja, instalacja", k:"f", hidden:/*APP_HIDDEN*/true, frames:[
   {t:"ap1", e:"Inference Polska", h:"Aplikacja dla przedsiębiorcy", p:"Na Twoim komputerze z Windowsem.", pill:"dokumenty zostają u Ciebie"},
   {t:"cards", e:"Co robi", h:"Od dokumentów do raportu", cards:[
     {k:"none", h:"Rozmowa i dokumenty", p:"Asystent AI pyta o to, co potrzebne, i wczytuje pisma, wezwania i decyzje."},
@@ -666,7 +666,8 @@ function start(i){
 }
 function toMenu(){ film=null; menu.classList.remove("hide"); bar.style.width=0; try{history.replaceState(null,"","#");}catch(e){} }
 
-document.getElementById("films").innerHTML = FILMS.map((f,i)=>`<button data-i="${i}"><span>${f.tag} · klawisz ${i+1}</span><b>${f.name}</b><i>${f.desc}</i></button>`).join("");
+/* film z hidden:true nie ma przycisku ani skrótu; działa tylko po adresie #id (strona aplikacja/ osadza go w ramce). build-site.py ustawia hidden na false, gdy aplikacja jest widoczna */
+document.getElementById("films").innerHTML = FILMS.map((f,i)=>f.hidden?"":`<button data-i="${i}"><span>${f.tag} · klawisz ${i+1}</span><b>${f.name}</b><i>${f.desc}</i></button>`).join("");
 menu.addEventListener("click", e=>{ const b=e.target.closest("button"); if(b){ e.stopPropagation(); start(+b.dataset.i); } });
 document.getElementById("stage").addEventListener("click", next);
 let wheelAt = 0;
@@ -681,7 +682,7 @@ addEventListener("wheel", e=>{
 addEventListener("contextmenu", e=>{ if(film){ e.preventDefault(); prev(); } });
 addEventListener("keydown", e=>{
   const k = e.key;
-  if(!film){ if(k>="1"&&k<="6") start(+k-1); return; }
+  if(!film){ if(k>="1"&&k<="6"&&FILMS[+k-1]&&!FILMS[+k-1].hidden) start(+k-1); return; }
   if(k===" "||k==="ArrowRight"||k==="Enter"||k==="PageDown"){ e.preventDefault(); next(); }
   else if(k==="ArrowLeft"||k==="Backspace"||k==="PageUp"){ e.preventDefault(); prev(); }
   else if(k==="Escape") toMenu();

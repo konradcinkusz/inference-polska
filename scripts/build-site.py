@@ -238,6 +238,12 @@ def main(dst):
     shutil.copytree(ROOT / "assets", out / "assets", dirs_exist_ok=True)
     if (ROOT / "filmy").is_dir():
         shutil.copytree(ROOT / "filmy", out / "filmy", dirs_exist_ok=True)
+        # film o aplikacji jest w menu dopiero, gdy aplikacja jest widoczna (inaczej tylko po adresie #aplikacja)
+        films = out / "filmy" / "index.html"
+        text = films.read_text(encoding="utf-8")
+        if text.count("/*APP_HIDDEN*/true") != 1:
+            sys.exit("filmy/index.html: brak znacznika /*APP_HIDDEN*/true (dokładnie jeden).")
+        films.write_text(text.replace("/*APP_HIDDEN*/true", "false" if app["widoczna"] else "true"), encoding="utf-8")
 
     base = v["SITE_URL"]
     urls = [base, base + "prywatnosc/", base + "filmy/"] + ([base + "aplikacja/"] if app["widoczna"] else [])
